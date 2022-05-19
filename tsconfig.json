@@ -1,0 +1,32 @@
+{
+  "compilerOptions": {
+      "outDir": "./dist",
+      "module": "es6",
+      "target": "es6",
+      "lib": ["es6", "dom", "ES2018.Promise"],
+      "sourceMap": true,
+      "allowJs": true,
+      "jsx": "react",
+      "moduleResolution": "node",
+      "resolveJsonModule": true,
+      "noImplicitReturns": true,
+      "noImplicitThis": true,
+      "noImplicitAny": true,
+      "strictNullChecks": true,
+      "baseUrl": "./",
+      "rootDir": "./",
+      "typeRoots": ["./node_modules/@types", "./src/@types"],
+      "paths": {
+          "@src/*": ["src/*"],
+          "@images/*": ["src/images/*"],
+          "@styles/*": ["src/styles/*"],
+          "@components/*": ["src/components/*"]
+      },
+      "allowSyntheticDefaultImports": true,
+      "esModuleInterop": true,
+      "importsNotUsedAsValues": "preserve",
+      "incremental": true
+  },
+  "include": ["src"],
+  "exclude": ["**/node_modules", "**/.*/"]
+}
