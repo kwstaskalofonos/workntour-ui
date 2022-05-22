@@ -20,7 +20,7 @@
           "@src/*": ["src/*"],
           "@images/*": ["src/images/*"],
           "@styles/*": ["src/styles/*"],
-          "@components/*": ["src/components/*"]
+          "@components/*": ["src/views/*"]
       },
       "allowSyntheticDefaultImports": true,
       "esModuleInterop": true,

@@ -48,7 +48,18 @@ export default {
                 use:{
                     loader:"css-loader"
                 }
-            }
+            },
+            {
+                test: /\.s[ac]ss$/i,
+                use: [
+                  // Creates `style` nodes from JS strings
+                  "style-loader",
+                  // Translates CSS into CommonJS
+                  "css-loader",
+                  // Compiles Sass to CSS
+                  "sass-loader",
+                ],
+              }
         ],
     },
     resolve: {
@@ -62,7 +73,7 @@ export default {
     ],
     devServer:{
         allowedHosts:['*'],
-        port:8080,
+        port:8083,
         compress:true,
         headers:{'Access-Control-Allow-Origin':'*'},
         historyApiFallback:true,
