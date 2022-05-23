@@ -7,7 +7,7 @@ import SecuredSiteRouter from "./SecureSiteRouter";
 
 const PrivateRoute: React.FunctionComponent<RouteProps> = ({children,...properties})=>{
 
-    const isAuthenticated=true;
+    const isAuthenticated=false;
 
     return(
         <React.Fragment>

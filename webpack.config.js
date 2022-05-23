@@ -59,7 +59,14 @@ export default {
                   // Compiles Sass to CSS
                   "sass-loader",
                 ],
-              }
+              },
+              {
+                test: /\.(png|svg|jpg|jpeg|gif)$/i,
+                use: [{
+                    loader: 'file-loader',
+                    options: {}
+                }],
+              },
         ],
     },
     resolve: {
