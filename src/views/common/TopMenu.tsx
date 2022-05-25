@@ -5,9 +5,9 @@ const TopMenu: React.FunctionComponent = () =>{
 
     return(
         <nav className="navbar" role="navigation" aria-label="main-navigation">
-            <div className="navbar-brand">
+            <div className="navbar-brand" style={{position:"relative",left:"+4%"}}>
                 <a className="navbar-item" href="https://bulma.io">
-                <img src={logo} width="212" height="28"/>
+                <img src={logo} width="190" height="28"/>
                 </a>
 
                 <a role="button" className="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
