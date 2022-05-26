@@ -1,13 +1,17 @@
 import * as path from 'path';
-import * as webpack from 'webpack';
+//import * as webpack from 'webpack';
+import webpack from 'webpack';
 import {fileURLToPath} from 'url';
-import {URL} from 'url';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
-import {isDevServer} from './webpack/env.js';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
+
+const API_URL = {
+    production:"",
+    development:"http://localhost:8080"
+}
+
 export default {
-    //entry: new URL('./src/index.tsx', import.meta.url).pathname,
     entry: path.join(__dirname,'./src/index.tsx'),
     output: {
         filename:"bundle.js",
@@ -74,9 +78,11 @@ export default {
       },
     plugins:[
         new HtmlWebpackPlugin({
-            //template: new URL('./src/index.html', import.meta.url).pathname,
             template:path.join(__dirname,'/src/index.html')
         }),
+        new webpack.DefinePlugin({
+            __API_URL__:JSON.stringify(API_URL[process.env.NODE_ENV]),
+            __CONTEXT__:JSON.stringify("/workntour")}),
     ],
     devServer:{
         allowedHosts:['*'],

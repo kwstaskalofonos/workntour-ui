@@ -13,24 +13,24 @@ const HostStepsSection: React.FunctionComponent = () =>{
     return(
         <React.Fragment>
             {/* STEP 1 */}
-            <div className="columns is-vcentered">
-                <div className="column has-text-right"><img src={one} width={210} height={122}/></div>
-                <div className="column has-text-left"><img src={joinTheCom} width={371} height={371}/></div>
+            <div className="columns is-vcentered is-centered">
+                <div className="column is-narrow has-text-right"><img src={one} width={210} height={122}/></div>
+                <div className="column is-narrow has-text-left"><img src={joinTheCom} width={271} height={271}/></div>
             </div>
             {/* STEP 2 */}
-            <div className="columns is-vcentered">
-                <div className="column has-text-right"><img src={conWithHosts} width={371} height={371}/></div>
-                <div className="column  has-text-left"><img src={two} width={210} height={122}/></div>
+            <div className="columns is-vcentered is-centered">
+                <div className="column is-narrow has-text-right"><img src={conWithHosts} width={271} height={271}/></div>
+                <div className="column is-narrow has-text-left"><img src={two} width={210} height={122}/></div>
             </div>
             {/* STEP 3 */}
-            <div className="columns is-vcentered">
-                <div className="column has-text-right"><img src={three} width={210} height={122}/></div>
-                <div className="column  has-text-left"><img src={liveLikeALocal} width={371} height={371}/></div>
+            <div className="columns is-vcentered is-centered">
+                <div className="column is-narrow has-text-right"><img src={three} width={210} height={122}/></div>
+                <div className="column is-narrow has-text-left"><img src={liveLikeALocal} width={271} height={271}/></div>
             </div>
             {/* STEP 4 */}
-            <div className="columns is-vcentered">
-                <div className="column has-text-right"><img src={review} width={371} height={371}/></div>
-                <div className="column  has-text-left"><img src={four} width={210} height={122}/></div>
+            <div className="columns is-vcentered is-centered">
+                <div className="column is-narrow has-text-right"><img src={review} width={271} height={271}/></div>
+                <div className="column is-narrow has-text-left"><img src={four} width={210} height={122}/></div>
             </div>
         </React.Fragment>
     )

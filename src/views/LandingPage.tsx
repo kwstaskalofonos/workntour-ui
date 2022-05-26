@@ -1,14 +1,19 @@
-import React, {useState} from "react"
+import React, {useEffect, useState} from "react"
 import TopMenu from "./common/TopMenu";
 import mainSection from "../assets/mainBanner.png";
 import appBanner from "../assets/appBanner.png";
 import LandPageTopMenu from "../views/common/LandPageTopMenu";
 import HostStepsSection from "./common/HostStepsSection";
-import TravelerStepsSection from "./common/TravelerStepsSection";
+import TravelerStepsSection from "../views/common/TravelerStepsSection";
+import {Constants} from "../utilities/constants";
 
 export const LandingPage: React.FunctionComponent = () =>{
 
     const [selectedTab,setSelectedTab] = useState<string>("HOSTS");
+
+    useEffect(()=>{
+        console.log("__API_URL__ : "+Constants.getApiUrl())
+    },[])
 
     return(
         <React.Fragment>
@@ -19,7 +24,7 @@ export const LandingPage: React.FunctionComponent = () =>{
             </div>
             <section className="section" style={{"background":"rgba(185, 179, 223, 0.1)"}}>
                     <div className="columns is-vcentered is-centered py-6">
-                        <div className="column is-narrow has-text-center">
+                        <div className="column is-narrow-desktop has-text-center">
                             <p className="is-size-2 has-text-weight-bold mb-4" style={{"color":"#6455BB"}}>Work. Travel. Connect.</p>
                             <p className="is-size-4 has-text-weight-medium" style={{"color":"#03D0BC"}}>Workntour is a platform that promotes working</p>
                             <p className="is-size-4 has-text-weight-medium mb-4" style={{"color":"#03D0BC"}}>holidays in Creece!</p>
@@ -38,14 +43,14 @@ export const LandingPage: React.FunctionComponent = () =>{
             <section className="section"  style={{"background":"rgba(182, 255, 251, 0.1)"}}>
                 <div className="container has-text-centered">
                     <p className="is-size-3 has-text-weight-bold has-text-dark">How it works</p>
-                        <div className={"is-flex is-justify-content-center"}>
+                        <div className={"is-flex is-justify-content-center mt-6"}>
                             <a className={"button is-primary "+(selectedTab=="TRAVELERS"?'is-underlined':'is-inverted')} onClick={()=>setSelectedTab("TRAVELERS")}>Travelers</a>
                             <a className={"button is-primary "+(selectedTab=="HOSTS"?'is-underlined':'is-inverted')} onClick={()=>setSelectedTab("HOSTS")}>Hosts</a>
                         </div>
-                    {selectedTab == "HOSTS"?
-                        <HostStepsSection/>:<TravelerStepsSection/>
-                    }
                 </div>
+                {selectedTab == "HOSTS"?
+                    <HostStepsSection/>:<TravelerStepsSection/>
+                }
             </section>
             <section className={"hero is-large"} style={{backgroundImage: `url(${appBanner})`,backgroundSize:"cover",backgroundRepeat:"no-repeat",backgroundPosition:'center'}}>
                 <div className={"hero-body"}></div>
