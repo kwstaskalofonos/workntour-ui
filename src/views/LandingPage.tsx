@@ -1,11 +1,13 @@
 import React, {useEffect, useState} from "react"
 import TopMenu from "./common/TopMenu";
-import mainSection from "../assets/mainBanner.png";
-import appBanner from "../assets/appBanner.png";
-import LandPageTopMenu from "../views/common/LandPageTopMenu";
+// @ts-ignore
+import mainSection from "@src/assets/mainBanner.png";
+// @ts-ignore
+import appBanner from "@src/assets/appBanner.png";
 import HostStepsSection from "./common/HostStepsSection";
 import TravelerStepsSection from "../views/common/TravelerStepsSection";
 import {Constants} from "../utilities/constants";
+import LandPageTopMenu from "@src/views/common/LandPageTopMenu";
 
 export const LandingPage: React.FunctionComponent = () =>{
 

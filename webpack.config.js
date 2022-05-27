@@ -75,6 +75,9 @@ export default {
     },
     resolve: {
         extensions: ['.tsx', '.ts', '.js','.jsx'],
+        alias:{
+            '@src':path.resolve(__dirname,'src')
+        }
       },
     plugins:[
         new HtmlWebpackPlugin({
