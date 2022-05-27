@@ -1,11 +1,14 @@
 import React, {useEffect, useState} from "react"
-import TopMenu from "./common/TopMenu";
-import mainSection from "../assets/mainBanner.png";
-import appBanner from "../assets/appBanner.png";
+// @ts-ignore
+import mainSection from "@src/assets/mainBanner.png";
+// @ts-ignore
+import appBanner from "@src/assets/appBanner.png";
 import LandPageTopMenu from "../views/common/LandPageTopMenu";
 import HostStepsSection from "./common/HostStepsSection";
 import TravelerStepsSection from "../views/common/TravelerStepsSection";
 import {Constants} from "../utilities/constants";
+import TopMenu from "@src/views/common/TopMenu";
+import Footer from "@src/views/common/Footer";
 
 export const LandingPage: React.FunctionComponent = () =>{
 
@@ -19,7 +22,7 @@ export const LandingPage: React.FunctionComponent = () =>{
         <React.Fragment>
             <div className="columns mb-0" style={{"boxShadow":"0px 4px 18px rgba(0, 0, 0, 0.15)"}}>
                 <div className="column container">
-                    <LandPageTopMenu/>
+                    <TopMenu/>
                 </div>
             </div>
             <section className="section" style={{"background":"rgba(185, 179, 223, 0.1)"}}>
@@ -77,12 +80,7 @@ export const LandingPage: React.FunctionComponent = () =>{
                     <hr className={"mt-6"} style={{"border":"1px solid #7E6FD8"}}/>
                 </div>
             </section>
-            <footer className="footer has-background-white pt-0">
-                <div className="content has-text-centered">
-                    <p>© Copyright Workntour 2022. All Rights Reserved
-                    </p>
-                </div>
-            </footer>
+            <Footer/>
         </React.Fragment>
     )
 };

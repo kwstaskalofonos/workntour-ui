@@ -17,10 +17,10 @@ const SecuredSiteRouter: React.FunctionComponent = () =>{
             }
              {userType.valueOf()==UserType.INIVIDUAL &&
                 <IndividualRouter/>
-            }
+             }
              {userType.valueOf()===UserType.TRAVELER &&
                 <TravelerRouter/>
-            }
+             }
         </React.Fragment>
     )
 };

@@ -5,6 +5,7 @@ import {isDevServer} from "../../../webpack/env";
 import {store} from "../../state/store";
 import LandingPage from "../LandingPage";
 import PrivateRoute from "./PrivateRoute";
+import TravelerRegisterPage from "@src/views/auth/TravelerRegisterPage";
 
 const AppRouter :React.FunctionComponent = () =>{
 
@@ -15,7 +16,7 @@ const AppRouter :React.FunctionComponent = () =>{
        <Provider store={store}>
          <Router>
             <Routes>
-              <Route path="/register"></Route>
+              <Route path="/registerAsTraveler" element={<TravelerRegisterPage/>}></Route>
               <Route path="/guest-dashboard" element={<LandingPage/>}/>
               <Route path="/" element={<PrivateRoute/>}/>
               {/* <Route path="/secured" element={isAuthenticated?<Test/>:<LandingPage/>}/> */}
