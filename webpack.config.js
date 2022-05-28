@@ -85,7 +85,7 @@ export default {
         }),
         new webpack.DefinePlugin({
             __API_URL__:JSON.stringify(API_URL[process.env.NODE_ENV]),
-            __CONTEXT__:JSON.stringify("/workntour")}),
+            __CONTEXT__:JSON.stringify("/")}),
     ],
     devServer:{
         allowedHosts:['*'],

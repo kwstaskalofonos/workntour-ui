@@ -6,6 +6,7 @@ import {store} from "../../state/store";
 import LandingPage from "../LandingPage";
 import PrivateRoute from "./PrivateRoute";
 import TravelerRegisterPage from "@src/views/auth/TravelerRegisterPage";
+import CheckInboxPage from "@src/views/auth/CheckInboxPage";
 
 const AppRouter :React.FunctionComponent = () =>{
 
@@ -17,6 +18,7 @@ const AppRouter :React.FunctionComponent = () =>{
          <Router>
             <Routes>
               <Route path="/registerAsTraveler" element={<TravelerRegisterPage/>}></Route>
+              <Route path="/check-inbox" element={<CheckInboxPage/>}></Route>
               <Route path="/guest-dashboard" element={<LandingPage/>}/>
               <Route path="/" element={<PrivateRoute/>}/>
               {/* <Route path="/secured" element={isAuthenticated?<Test/>:<LandingPage/>}/> */}
