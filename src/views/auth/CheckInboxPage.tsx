@@ -5,16 +5,13 @@ import Footer from "@src/views/common/Footer";
 import checkInbox from "@src/assets/checkInboxPng.png";
 // @ts-ignore
 import checkInboxSvg from "@src/assets/checkInbox.svg";
+import Header from "@src/views/common/Header";
 
 const CheckInboxPage:React.FunctionComponent = () =>{
 
     return(
         <React.Fragment>
-            <div className="columns mb-0" style={{"boxShadow":"0px 4px 18px rgba(0, 0, 0, 0.15)"}}>
-                <div className="column container">
-                    <TopMenu/>
-                </div>
-            </div>
+            <Header/>
             <section className={"section"}>
                 <div className={"columns is-centered"}>
                     <div className={"column is-4"}>

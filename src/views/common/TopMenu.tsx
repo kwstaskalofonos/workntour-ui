@@ -7,7 +7,7 @@ const TopMenu: React.FunctionComponent = () =>{
     return(
         <nav className="navbar" role="navigation" aria-label="main-navigation">
             <div className="navbar-brand" style={{position:"relative",left:"+4%"}}>
-                <a className="navbar-item" href="https://bulma.io">
+                <a className="navbar-item" href="/">
                 <img src={logo} width="190" height="28"/>
                 </a>
 
@@ -28,6 +28,8 @@ const TopMenu: React.FunctionComponent = () =>{
                     <div className="navbar-item">
                     <div className="buttons">
                     <a className="button is-outlined" style={{"border":"1px solid #7E6FD8","color":"#7E6FD8"}}>Log in</a>
+                    <a className="button is-outlined" href={'/registerAsTraveler'}
+                       style={{"border":"1px solid #7E6FD8","color":"#7E6FD8"}}>Sign Up</a>
                     </div>
                 </div>
                 </div>

@@ -8,6 +8,8 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {useForm} from "react-hook-form";
 import {Traveler} from "@src/state/stores/user/models";
 import {registerAsTraveler} from "@src/state/stores/user/operations";
+import {useNavigate} from "react-router";
+import Header from "@src/views/common/Header";
 
 const TravelerRegisterPage:React.FunctionComponent = () =>{
 
@@ -16,29 +18,29 @@ const TravelerRegisterPage:React.FunctionComponent = () =>{
     const [selectedDate,setSelectedDate] = useState<Date|null>();
     const [isLoading,setIsLoading] = useState<boolean>(false);
     const [showHiddenFields,setShowHiddenFields] = useState<boolean>(false);
+    const navigate = useNavigate();
 
     const onSubmit:any=(data:Traveler)=>{
 
-        console.log(data);
         if(selectedDate){
-            data.birthday=selectedDate.toISOString();
+            let tempDate = selectedDate.toISOString();
+            let idx = tempDate.indexOf('T');
+            data.birthday=tempDate.substring(0,idx);
         }
         data.role='TRAVELER';
-        data.birthday="2022-05-27";
-
-
         setIsLoading(true);
         registerAsTraveler(data,setIsLoading)
-            .then(()=>form.reset());
+            .then(()=>{
+                form.reset();
+                navigate('/check-inbox');
+            }).catch((error)=>{
+
+        });
     }
 
     return(
         <React.Fragment>
-            <div className="columns mb-0" style={{"boxShadow":"0px 4px 18px rgba(0, 0, 0, 0.15)"}}>
-                <div className="column container">
-                    <TopMenu/>
-                </div>
-            </div>
+            <Header/>
             <form>
                 <section className={"section"}>
                     <div className={"columns is-centered"}>

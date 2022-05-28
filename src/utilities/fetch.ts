@@ -54,8 +54,9 @@ function parseResponse(response:Response): Promise<GenericResponse>{
                         data:json,
                         ok:response.ok,
                     })
-                }else{
-
+                }else if (response.status === 400){
+                    document.location.href='/not-found';
+                } else{
                     document.location.href='/';
                 }
             })
