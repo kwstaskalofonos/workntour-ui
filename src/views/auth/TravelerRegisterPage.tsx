@@ -1,5 +1,4 @@
 import React, {useState} from "react";
-import TopMenu from "@src/views/common/TopMenu";
 import Footer from "@src/views/common/Footer";
 import ReactDatePicker from "react-datepicker";
 import {faAngleUp} from "@fortawesome/free-solid-svg-icons/faAngleUp";
@@ -155,7 +154,7 @@ const TravelerRegisterPage:React.FunctionComponent = () =>{
                             <div className="field">
                                 <button className={"button is-primary is-fullwidth "+(isLoading?"is-loading":"")}
                                         onClick={handleSubmit(onSubmit)} type={"button"}>
-                                    Create Account</button>
+                                    Sign Up</button>
                             </div>
                         </div>
                     </div>

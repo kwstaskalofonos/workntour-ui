@@ -8,6 +8,7 @@ import PrivateRoute from "./PrivateRoute";
 import TravelerRegisterPage from "@src/views/auth/TravelerRegisterPage";
 import CheckInboxPage from "@src/views/auth/CheckInboxPage";
 import ErrorPage from "@src/views/common/ErrorPage";
+import HostRegisterPage from "@src/views/auth/HostRegisterPage";
 
 const AppRouter :React.FunctionComponent = () =>{
 
@@ -19,6 +20,7 @@ const AppRouter :React.FunctionComponent = () =>{
          <Router>
             <Routes>
               <Route path="/registerAsTraveler" element={<TravelerRegisterPage/>}></Route>
+              <Route path="/registerAsHost" element={<HostRegisterPage/>}></Route>
               <Route path="/check-inbox" element={<CheckInboxPage/>}></Route>
               <Route path="/not-found" element={<ErrorPage/>}></Route>
               <Route path="/guest-dashboard" element={<LandingPage/>}/>

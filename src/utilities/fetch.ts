@@ -65,8 +65,6 @@ function parseResponse(response:Response): Promise<GenericResponse>{
 
 function headers(method:string,data?:any):RequestInit{
     const customHeaders = new Headers();
-    customHeaders.append('Content-Type','application/json');
-    customHeaders.append('Accept','application/json');
     return {
         body:JSON.stringify(data),
         headers:new Headers(
