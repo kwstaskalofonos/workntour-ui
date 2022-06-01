@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import {useForm} from "react-hook-form";
 import ReactDatePicker from "react-datepicker";
+import ReactCountryFlag from "react-country-flag";
 
 const IndividualRegisterTab:React.FunctionComponent = () =>{
 
@@ -67,13 +68,15 @@ const IndividualRegisterTab:React.FunctionComponent = () =>{
                 <div className="control">
                     <div className="field has-addons">
                         <p className="control">
-                                                <span className="select">
-                                                  <select {...register("countryCodeMobileNum")} defaultValue={"+30"}>
-                                                    <option>+30</option>
-                                                    <option>+185</option>
-                                                    <option>+70</option>
-                                                  </select>
-                                                </span>
+                            <span className="select">
+                                <select {...register("countryCodeMobileNum")} defaultValue={"+30"}>
+                                    <option>+30</option>
+                                    <option>
+                                        <ReactCountryFlag countryCode="US" svg />
+                                    </option>
+                                    <option>+70</option>
+                                </select>
+                            </span>
                         </p>
                         <p className="control is-expanded">
                             <input className="input" type="text"

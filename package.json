@@ -21,6 +21,7 @@
     "bulma": "^0.9.4",
     "cross-env": "^7.0.3",
     "font-awesome": "^4.7.0",
+    "react-country-flag": "^3.0.2",
     "react-datepicker": "^4.8.0",
     "react-dom": "^18.1.0",
     "react-hook-form": "^7.31.3",
