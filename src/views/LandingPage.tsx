@@ -3,7 +3,7 @@ import TopMenu from "./common/TopMenu";
 // @ts-ignore
 import mainSection from "@src/assets/mainBanner.png";
 // @ts-ignore
-import appBanner from "@src/assets/appBanner.png";
+import appBanner from "@src/assets/Bannerworkntour.png";
 import HostStepsSection from "./common/HostStepsSection";
 import TravelerStepsSection from "../views/common/TravelerStepsSection";
 import {Constants} from "../utilities/constants";
@@ -54,7 +54,8 @@ export const LandingPage: React.FunctionComponent = () =>{
                     <HostStepsSection/>:<TravelerStepsSection/>
                 }
             </section>
-            <section className={"hero is-large"} style={{backgroundImage: `url(${appBanner})`,backgroundSize:"cover",backgroundRepeat:"no-repeat",backgroundPosition:'center'}}>
+            <section className={"hero is-large"} style={{backgroundImage: `url(${appBanner})`,
+                backgroundSize:"cover",backgroundRepeat:"no-repeat",backgroundPosition:'center 35%'}}>
                 <div className={"hero-body"}></div>
             </section>
             <section className={"section px-0"}>

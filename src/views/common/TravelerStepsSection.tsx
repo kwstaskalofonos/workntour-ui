@@ -1,12 +1,20 @@
 import React from "react";
-import one from "../../assets/traveler/1.png";
-import bePartOf from "../../assets/traveler/bePartOf.png";
-import two from "../../assets/traveler/2.png";
-import findYourPref from "../../assets/traveler/findYourPref.png";
-import three from "../../assets/traveler/3.png";
-import bookYourStay from "../../assets/traveler/bookYourStay.png";
-import four from "../../assets/traveler/4.png";
-import review from "../../assets/traveler/review.png";
+// @ts-ignore
+import one from "@src/assets/traveler/1.png";
+// @ts-ignore
+import bePartOf from "@src/assets/traveler/bePartOf.png";
+// @ts-ignore
+import two from "@src/assets/traveler/2.png";
+// @ts-ignore
+import findYourPref from "@src/assets/traveler/findYourPref.png";
+// @ts-ignore
+import three from "@src/assets/traveler/3.png";
+// @ts-ignore
+import bookYourStay from "@src/assets/traveler/bookYourStay.png";
+// @ts-ignore
+import four from "@src/assets/traveler/4.png";
+// @ts-ignore
+import review from "@src/assets/traveler/review.png";
 
 const TravelerStepsSection: React.FunctionComponent = () =>{
 
