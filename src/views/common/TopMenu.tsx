@@ -1,6 +1,6 @@
 import React, {useRef} from "react";
 // @ts-ignore
-import logo from "@src/assets/Frame.png";
+import logo from "@src/assets/Frame.svg";
 
 const TopMenu: React.FunctionComponent = () =>{
 

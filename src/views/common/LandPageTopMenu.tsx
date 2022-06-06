@@ -1,5 +1,6 @@
 import React from "react";
-import logo from "../../assets/Frame.png";
+// @ts-ignore
+import logo from "@src/assets/Frame.svg";
 
 const LandPageTopMenu: React.FunctionComponent = () =>{
 
