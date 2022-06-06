@@ -2,7 +2,7 @@ import React from "react";
 import { Provider } from "react-redux";
 import { BrowserRouter as Router,Route,Routes } from "react-router-dom";
 import {isDevServer} from "../../../webpack/env";
-import {store} from "../../state/store";
+import {store} from "@src/state/store";
 import LandingPage from "../LandingPage";
 import PrivateRoute from "./PrivateRoute";
 import TravelerRegisterPage from "@src/views/auth/TravelerRegisterPage";

@@ -1,7 +1,11 @@
 import React, {useState} from "react";
 import {useForm} from "react-hook-form";
 import ReactDatePicker from "react-datepicker";
-import ReactCountryFlag from "react-country-flag";
+import Flag from "react-flagkit";
+import Select from "react-select";
+import {PropsValue} from "react-select";
+import {countries} from "@src/utilities/countries";
+import CustomSelectCountry from "@src/views/common/CustomSelectCountry";
 
 const IndividualRegisterTab:React.FunctionComponent = () =>{
 
@@ -9,6 +13,7 @@ const IndividualRegisterTab:React.FunctionComponent = () =>{
     const {register,handleSubmit,reset} = form;
     const [selectedDate,setSelectedDate] = useState<Date|null>();
     const [isLoading,setIsLoading] = useState<boolean>(false);
+    const [selected,setSelected] = useState<PropsValue<{value:string,label:JSX.Element}>>({value:'GR',label:<Flag country="GR" />});
 
     return(
         <React.Fragment>
@@ -67,17 +72,8 @@ const IndividualRegisterTab:React.FunctionComponent = () =>{
                 <label className="label">Phone Number</label>
                 <div className="control">
                     <div className="field has-addons">
-                        <p className="control">
-                            <span className="select">
-                                <select {...register("countryCodeMobileNum")} defaultValue={"+30"}>
-                                    <option>+30</option>
-                                    <option>
-                                        <ReactCountryFlag countryCode="US" svg />
-                                    </option>
-                                    <option>+70</option>
-                                </select>
-                            </span>
-                        </p>
+                        <CustomSelectCountry
+                            value={selected} setValue={setSelected}/>
                         <p className="control is-expanded">
                             <input className="input" type="text"
                                    {...register("mobileNum")} placeholder="Amount of money"/>

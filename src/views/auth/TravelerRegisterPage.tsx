@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import Footer from "@src/views/common/Footer";
 import ReactDatePicker from "react-datepicker";
 import {faAngleUp} from "@fortawesome/free-solid-svg-icons/faAngleUp";
@@ -9,6 +9,9 @@ import {Traveler} from "@src/state/stores/user/models";
 import {registerAsTraveler} from "@src/state/stores/user/operations";
 import {useNavigate} from "react-router";
 import Header from "@src/views/common/Header";
+import CustomSelectCountry from "@src/views/common/CustomSelectCountry";
+import Flag from "react-flagkit";
+import {toast} from "react-toastify";
 
 const TravelerRegisterPage:React.FunctionComponent = () =>{
 
@@ -18,6 +21,15 @@ const TravelerRegisterPage:React.FunctionComponent = () =>{
     const [isLoading,setIsLoading] = useState<boolean>(false);
     const [showHiddenFields,setShowHiddenFields] = useState<boolean>(false);
     const navigate = useNavigate();
+    const [selected,setSelected] =
+        useState<{value:string,label:JSX.Element}>({value:'GR',label:<Flag country="GR" />});
+
+    useEffect(()=>{
+        console.log("here");
+        toast.error("Error Notification !", {
+            position: toast.POSITION.TOP_LEFT
+        });
+    },[]);
 
     const onSubmit:any=(data:Traveler)=>{
 
@@ -27,6 +39,7 @@ const TravelerRegisterPage:React.FunctionComponent = () =>{
             data.birthday=tempDate.substring(0,idx);
         }
         data.role='TRAVELER';
+        data.countryCodeMobileNum=selected.value;
         setIsLoading(true);
         registerAsTraveler(data,setIsLoading)
             .then(()=>{
@@ -125,15 +138,7 @@ const TravelerRegisterPage:React.FunctionComponent = () =>{
                                         <label className="label">Phone Number</label>
                                         <div className="control">
                                             <div className="field has-addons">
-                                                <p className="control">
-                                                <span className="select">
-                                                  <select {...register("countryCodeMobileNum")} defaultValue={"+30"}>
-                                                    <option>+30</option>
-                                                    <option>+185</option>
-                                                    <option>+70</option>
-                                                  </select>
-                                                </span>
-                                                </p>
+                                                <CustomSelectCountry value={selected} setValue={setSelected}/>
                                                 <p className="control is-expanded">
                                                     <input className="input" type="text"
                                                            {...register("mobileNum")} placeholder="Amount of money"/>
