@@ -1,8 +1,10 @@
-import React from "react";
+import React, {useState} from "react";
 // @ts-ignore
 import logo from "@src/assets/Frame.svg";
 
 const LandPageTopMenu: React.FunctionComponent = () =>{
+
+    const [isActive,setIsActive] = useState<boolean>();
 
     const scrollToBottom = () =>{
         // @ts-ignore
@@ -16,14 +18,15 @@ const LandPageTopMenu: React.FunctionComponent = () =>{
                     <img src={logo} width="190" height="28"/>
                 </a>
 
-                <a role="button" className="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+                <a role="button" className={"navbar-burger "+(isActive?"is-active":"")} onClick={()=>setIsActive(!isActive)}
+                   aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
                     <span aria-hidden="true"></span>
                     <span aria-hidden="true"></span>
                     <span aria-hidden="true"></span>
                 </a>
             </div>
 
-            <div id="navbarBasicExample" className="navbar-menu">
+            <div id="navbarBasicExample" className={"navbar-menu "+(isActive?"is-active":"")}>
                 <div className="navbar-end">
                     <div className="navbar-item">
                         <div className="buttons">

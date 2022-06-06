@@ -13,9 +13,14 @@ export const LandingPage: React.FunctionComponent = () =>{
 
     const [selectedTab,setSelectedTab] = useState<string>("HOSTS");
 
-    useEffect(()=>{
-        console.log("__API_URL__ : "+Constants.getApiUrl())
-    },[])
+    // useEffect(()=>{
+    //     console.log("__API_URL__ : "+Constants.getApiUrl())
+    // },[])
+
+    const scrollToSection = () =>{
+        // @ts-ignore
+        document.getElementById("description").scrollIntoView({behavior:'smooth'});
+    }
 
     return(
         <React.Fragment>
@@ -33,7 +38,7 @@ export const LandingPage: React.FunctionComponent = () =>{
                             <p className="is-size-5 has-text-weight-normal" style={{"color":"#8B9389","opacity":"0.7"}}>The travelers work for a fiew hours a day in exchange for food</p>
                             <p className="is-size-5 has-text-weight-normal" style={{"color":"#8B9389","opacity":"0.7"}}>and accomodation, while the hosts make use of their skills and</p>
                             <p className="is-size-5 has-text-weight-normal mb-6" style={{"color":"#8B9389","opacity":"0.7"}}>time during their stay.</p>
-                            <button className="button is-info has-text-dark">Learn More</button>
+                            <button className="button is-info has-text-dark" onClick={()=>scrollToSection()}>Learn More</button>
                         </div>
                         <div className={"column is-1"}></div>
                         <div className="column is-narrow">
@@ -42,7 +47,7 @@ export const LandingPage: React.FunctionComponent = () =>{
                     </div>
             </section>
 
-            <section className="section"  style={{"background":"rgba(182, 255, 251, 0.1)"}}>
+            <section className="section" id={"description"}  style={{"background":"rgba(182, 255, 251, 0.1)"}}>
                 <div className="container has-text-centered">
                     <p className="is-size-3 has-text-weight-bold has-text-dark">How it works</p>
                         <div className={"is-flex is-justify-content-center mt-6"}>
