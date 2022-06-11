@@ -1,9 +1,13 @@
 
-$primary:#7E6FD8;
-$info:#24DDDD;
+$primary:#8970FA;
+//$primary:#7E6FD8;
+$info: rgba(36, 221, 193, 0.73);
 $radius:8px;
+$checkbox-background-color:#7E6FD8;
+$checkbox-border:.4rem solid red;
 
 @import "/node_modules/bulma/bulma.sass";
 @import"/node_modules/react-datepicker/dist/react-datepicker.css";
 @import "./custom.css";
 @import "react-toastify/dist/ReactToastify.css";
+@import "/node_modules/bulma-checkradio/dist/css/bulma-checkradio.min.css";

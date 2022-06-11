@@ -6,6 +6,9 @@ import Select from "react-select";
 import {PropsValue} from "react-select";
 import {countries} from "@src/utilities/countries";
 import CustomSelectCountry from "@src/views/common/CustomSelectCountry";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faAngleUp} from "@fortawesome/free-solid-svg-icons/faAngleUp";
+import {faAngleDown} from "@fortawesome/free-solid-svg-icons/faAngleDown";
 
 const IndividualRegisterTab:React.FunctionComponent = () =>{
 
@@ -13,75 +16,99 @@ const IndividualRegisterTab:React.FunctionComponent = () =>{
     const {register,handleSubmit,reset} = form;
     const [selectedDate,setSelectedDate] = useState<Date|null>();
     const [isLoading,setIsLoading] = useState<boolean>(false);
-    const [selected,setSelected] = useState<PropsValue<{value:string,label:JSX.Element}>>({value:'GR',label:<Flag country="GR" />});
+    const [showHiddenFields,setShowHiddenFields] = useState<boolean>(false);
+    const [selected,setSelected] =
+        useState<{value:string,label:JSX.Element}>({value:'GR',label:<Flag country="GR" />});
 
     return(
         <React.Fragment>
             <div className="field">
-                <label className="label">Fullname</label>
+                <label className="label has-text-primary has-text-weight-medium">Name*</label>
                 <div className="control">
-                    <input className="input" type="text"
+                    <input className="input border-linear" type="text"
                            {...register("name",{required:true})}
                            placeholder="Enter your name"/>
                 </div>
             </div>
             <div className="field">
-                <label className="label">Surname</label>
+                <label className="label has-text-primary has-text-weight-medium">Surname*</label>
                 <div className="control">
-                    <input className="input" type="text"
+                    <input className="input border-linear" type="text"
                            {...register("surname",{required:true})}
                            placeholder="Enter your surname"/>
                 </div>
             </div>
             <div className="field">
-                <label className="label">Email</label>
+                <label className="label has-text-primary has-text-weight-medium">Email*</label>
                 <div className="control">
-                    <input className="input" type="text"
+                    <input className="input border-linear" type="text"
                            {...register("email",{required:true})}
                            placeholder="Enter your email"/>
                 </div>
             </div>
             <div className="field">
-                <label className="label">Password</label>
+                <label className="label has-text-primary has-text-weight-medium">Password*</label>
                 <div className="control">
-                    <input className="input" type="password"
+                    <input className="input border-linear" type="password"
                            {...register("password",{required:true})}
                            placeholder="Enter your password"/>
                 </div>
-                <p className="help has-text-grey-light">Must be at least 8 characters.</p>
+                <p className="help has-text-grey-light">Mixture of both uppercase and lowercase letters.
+                    A mixture of letters and numbers. Inclusion of at least one special character,
+                    (, ! @ # ? ]).</p>
             </div>
             <div className="field">
-                <label className="label">Password Confirm</label>
+                <label className="label has-text-primary has-text-weight-medium">Password Confirm*</label>
                 <div className="control">
-                    <input className="input" type="password" placeholder="Enter your password"/>
+                    <input className="input border-linear" type="password" placeholder="Enter your password"/>
                 </div>
             </div>
             <div className="field">
-                <label className="label">Age</label>
+                <label className="label has-text-primary has-text-weight-medium">What is your date of birthday?</label>
                 <div className="control">
                     <ReactDatePicker
-                        className={"input"}
+                        className={"input border-linear"}
+                        showYearDropdown={true}
+                        showMonthDropdown={true}
                         selected={selectedDate}
                         {...register("birthday")}
                         dateFormat={"yyyy-MM-dd"}
-                        placeholderText={"Select your Birthday Date"}
                         onChange={(date)=>setSelectedDate(date)}/>
                 </div>
             </div>
-            <div className={"field"}>
-                <label className="label">Phone Number</label>
-                <div className="control">
-                    <div className="field has-addons">
-                        <CustomSelectCountry
-                            value={selected} setValue={setSelected}/>
-                        <p className="control is-expanded">
-                            <input className="input" type="text"
-                                   {...register("mobileNum")} placeholder="Amount of money"/>
-                        </p>
-                    </div>
-                </div>
-                <p className="help has-text-grey-light">For delivery/collection notifications.</p>
+            <div className={"is-flex is-justify-content-space-between is-align-items-center mt-5"}
+                 onClick={()=>setShowHiddenFields(!showHiddenFields)}>
+                <p>Optional Fields</p>
+                {showHiddenFields?
+                    <FontAwesomeIcon className={"is-right"} icon={faAngleUp}/>:
+                    <FontAwesomeIcon className={"is-right"} icon={faAngleDown}/>
+                }
             </div>
+            <hr className={"mt-2"}/>
+            {showHiddenFields &&
+                <React.Fragment>
+                    <div className={"field"}>
+                        <label className="label has-text-primary has-text-weight-medium">Phone Number</label>
+                        <div className="control">
+                            <div className="field has-addons">
+                                <CustomSelectCountry value={selected} setValue={setSelected}/>
+                                <p className="control is-expanded">
+                                    <input className="input border-linear-no-left" type="text"
+                                           {...register("mobileNum")} placeholder="+30 694 435 8945"/>
+                                </p>
+                            </div>
+                        </div>
+                        <p className="help has-text-grey-light">For delivery/collection notifications.</p>
+                    </div>
+                    <div className={"field"}>
+                        <label className="label has-text-primary has-text-weight-medium">Nationality</label>
+                        <div className="control">
+                            <input className="input border-linear" type="text"
+                                   {...register("nationality")} placeholder="Enter your nationality"/>
+                        </div>
+                    </div>
+                </React.Fragment>
+            }
             <div className="field">
                 <button className={"button is-primary is-fullwidth "+(isLoading?"is-loading":"")}
                          type={"button"}>

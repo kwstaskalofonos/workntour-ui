@@ -1,8 +1,23 @@
-.button-linear{
-    border: 50px solid transparent;
-    border-image: linear-gradient(90deg, #7E6FD8 0%, #0EE5D0 98.01%) !important;
-    border-image-slice: 4 !important;
-    -webkit-border-radius:10%;
-    -moz-border-radius:10%;
-    border-radius:10%;
+
+.border-linear{
+    background: linear-gradient(white,white) padding-box,linear-gradient(90deg,#7E6FD8,#0EE5D0) border-box !important;
+    border-style: solid !important;
+    border-width: 1px !important;
+    border-color: transparent !important;
+}
+
+.border-linear-no-left{
+    background: linear-gradient(white,white) padding-box,linear-gradient(90deg,#7E6FD8,#0EE5D0) border-box !important;
+    border-style: solid !important;
+    border-width: 1px !important;
+    border-color: transparent !important;
+    border-left-style: none !important;
+}
+
+.border-linear-no-right{
+    background: linear-gradient(white,white) padding-box,linear-gradient(90deg,#7E6FD8,#0EE5D0) border-box !important;
+    border-style: solid !important;
+    border-width: 1px !important;
+    border-color: transparent !important;
+    border-right-style: none !important;
 }

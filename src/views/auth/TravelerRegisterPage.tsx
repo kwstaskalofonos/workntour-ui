@@ -12,6 +12,8 @@ import Header from "@src/views/common/Header";
 import CustomSelectCountry from "@src/views/common/CustomSelectCountry";
 import Flag from "react-flagkit";
 import {toast} from "react-toastify";
+// @ts-ignore
+import illustration from "@src/assets/signUpAsTrav.svg";
 
 const TravelerRegisterPage:React.FunctionComponent = () =>{
 
@@ -24,12 +26,12 @@ const TravelerRegisterPage:React.FunctionComponent = () =>{
     const [selected,setSelected] =
         useState<{value:string,label:JSX.Element}>({value:'GR',label:<Flag country="GR" />});
 
-    useEffect(()=>{
-        console.log("here");
-        toast.error("Error Notification !", {
-            position: toast.POSITION.TOP_LEFT
-        });
-    },[]);
+    // useEffect(()=>{
+    //     console.log("here");
+    //     toast.error("Error Notification !", {
+    //         position: toast.POSITION.TOP_LEFT
+    //     });
+    // },[]);
 
     const onSubmit:any=(data:Traveler)=>{
 
@@ -56,40 +58,41 @@ const TravelerRegisterPage:React.FunctionComponent = () =>{
             <form>
                 <section className={"section"}>
                     <div className={"columns is-centered"}>
+                        <div className={"column is-1"}/>
                         <div className={"column is-3"}>
                             <div className="field mb-5">
-                                <h1 className={"title has-text-weight-bold"}>Sign up</h1>
-                                <h2 className={"subtitle has-text-weight-bold has-text-primary"}>as a Traveler</h2>
+                                <h1 className={"title has-text-weight-bold has-text-primary"}>Hello!</h1>
+                                <h2 className={"subtitle has-text-weight-bold has-text-info"}>Sign up and start you journey!</h2>
                             </div>
                             <div className="field">
-                                <label className="label">Name</label>
+                                <label className="label has-text-primary has-text-weight-medium">Name*</label>
                                 <div className="control">
-                                    <input className="input" type="text"
+                                    <input className="input border-linear" type="text"
                                            {...register("name",{required:true})}
                                            placeholder="Enter your name"/>
                                 </div>
                             </div>
                             <div className="field">
-                                <label className="label">Surname</label>
+                                <label className="label has-text-primary has-text-weight-medium">Surname*</label>
                                 <div className="control">
-                                    <input className="input" type="text"
+                                    <input className="input border-linear" type="text"
                                            {...register("surname",{required:true})}
                                            placeholder="Enter your surname"/>
                                 </div>
                             </div>
                             <div className="field">
-                                <label className="label">Email</label>
+                                <label className="label has-text-primary has-text-weight-medium">Email*</label>
                                 <div className="control">
-                                    <input className="input" type="text"
+                                    <input className="input border-linear" type="text"
                                            {...register("email",{required:true})}
                                            placeholder="Enter your email"/>
                                 </div>
                             </div>
                             <div className="field">
-                                <label className="label">Sex</label>
+                                <label className="label has-text-primary has-text-weight-medium">Sex*</label>
                                 <div className="control">
                                     <div className="select is-fullwidth">
-                                        <select {...register("sex")} defaultValue={"Other"}>
+                                        <select {...register("sex")} className={"border-linear"} defaultValue={"Other"}>
                                             <option value={"FEMALE"}>Female</option>
                                             <option value={"MALE"}>Male</option>
                                             <option value={"OTHER"}>Other</option>
@@ -98,25 +101,29 @@ const TravelerRegisterPage:React.FunctionComponent = () =>{
                                 </div>
                             </div>
                             <div className="field">
-                                <label className="label">Password</label>
+                                <label className="label has-text-primary has-text-weight-medium">Password*</label>
                                 <div className="control">
-                                    <input className="input" type="password"
+                                    <input className="input border-linear" type="password"
                                            {...register("password",{required:true})}
                                            placeholder="Enter your password"/>
                                 </div>
-                                <p className="help has-text-grey-light">Must be at least 8 characters.</p>
+                                <p className="help has-text-grey-light">Mixture of both uppercase and lowercase letters.
+                                    A mixture of letters and numbers. Inclusion of at least one special character,
+                                    (, ! @ # ? ]).</p>
                             </div>
                             <div className="field">
-                                <label className="label">Password Confirm</label>
+                                <label className="label has-text-primary has-text-weight-medium">Password Confirm*</label>
                                 <div className="control">
-                                    <input className="input" type="password" placeholder="Enter your password"/>
+                                    <input className="input border-linear" type="password" placeholder="Enter your password"/>
                                 </div>
                             </div>
                             <div className="field">
-                                <label className="label">What is your date of birthday?</label>
+                                <label className="label has-text-primary has-text-weight-medium">What is your date of birthday?</label>
                                 <div className="control">
                                     <ReactDatePicker
-                                        className={"input"}
+                                        className={"input border-linear"}
+                                        showYearDropdown={true}
+                                        showMonthDropdown={true}
                                         selected={selectedDate}
                                         {...register("birthday")}
                                         dateFormat={"yyyy-MM-dd"}
@@ -135,22 +142,22 @@ const TravelerRegisterPage:React.FunctionComponent = () =>{
                             {showHiddenFields &&
                                 <React.Fragment>
                                     <div className={"field"}>
-                                        <label className="label">Phone Number</label>
+                                        <label className="label has-text-primary has-text-weight-medium">Phone Number</label>
                                         <div className="control">
                                             <div className="field has-addons">
                                                 <CustomSelectCountry value={selected} setValue={setSelected}/>
                                                 <p className="control is-expanded">
-                                                    <input className="input" type="text"
-                                                           {...register("mobileNum")} placeholder="Amount of money"/>
+                                                    <input className="input border-linear-no-left" type="text"
+                                                           {...register("mobileNum")} placeholder="+30 694 435 8945"/>
                                                 </p>
                                             </div>
                                         </div>
                                         <p className="help has-text-grey-light">For delivery/collection notifications.</p>
                                     </div>
                                     <div className={"field"}>
-                                        <label className="label">Nationality</label>
+                                        <label className="label has-text-primary has-text-weight-medium">Nationality</label>
                                         <div className="control">
-                                            <input className="input" type="text"
+                                            <input className="input border-linear" type="text"
                                                    {...register("nationality")} placeholder="Enter your nationality"/>
                                         </div>
                                     </div>
@@ -161,6 +168,12 @@ const TravelerRegisterPage:React.FunctionComponent = () =>{
                                         onClick={handleSubmit(onSubmit)} type={"button"}>
                                     Sign Up</button>
                             </div>
+                        </div>
+                        <div className={"column is-2"}/>
+                        <div className={"column is-4"}>
+                            <figure className={"image is-4by5"}>
+                                <img src={illustration}/>
+                            </figure>
                         </div>
                     </div>
                 </section>

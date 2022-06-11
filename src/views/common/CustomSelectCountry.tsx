@@ -23,7 +23,7 @@ const CustomSelectCountry:React.FunctionComponent<Props> = ({value,setValue}) =>
     }
 
     return(
-        <Select
+        <Select className={"border-linear-no-right"}
             options={options()}
             value={value}
             onChange={(value)=>onChange(value)}/>
