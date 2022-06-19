@@ -48,11 +48,15 @@ const SelectRegistrationModal:React.FunctionComponent<Props>
                 </header>
                 <section className="modal-card-body">
                     <p className={"subtitle"}>Choose your option to sing up</p>
-                    <div className={"buttons is-flex is-justify-content-center"}>
-                        <button className="button is-primary" onClick={()=>goToTravelerRegPage()}>
-                            Individual</button>
-                        <button className="button is-primary" onClick={()=>goToHostRegPage()}>
-                            Company</button>
+                    <div className={"columns is-centered"}>
+                        <div className={"column is-4"}>
+                            <button className="button is-primary is-fullwidth" onClick={()=>goToTravelerRegPage()}>
+                                Traveler</button>
+                        </div>
+                        <div className={"column is-4"}>
+                            <button className="button is-primary is-fullwidth" onClick={()=>goToHostRegPage()}>
+                                Host</button>
+                        </div>
                     </div>
                 </section>
             </div>

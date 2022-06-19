@@ -13,7 +13,7 @@ const HostRegisterPage:React.FunctionComponent = () =>{
     return(
         <React.Fragment>
             <Header/>
-            <section className={"section"}>
+            <section className={"section has-background-primary-light"}>
                 <div className={"columns is-centered"}>
                     <div className={"column is-1"}/>
                     <div className={"column is-3"}>

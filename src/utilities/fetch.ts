@@ -8,6 +8,7 @@ interface GenericResponse{
         total:number,
         errors:string[]
     },
+    error?:string
 }
 
 const networkErrorResponse = (error:any)=>{
@@ -26,7 +27,7 @@ export function get<T>(uri: string):Promise<T | any>{
                 return resolve(response.data);
             }
 
-            return reject(response.exceptions);
+            return reject(response.error);
         }).catch((error)=>reject(networkErrorResponse(error)))
     )
 }
@@ -38,8 +39,7 @@ export async function post<T>(uri: string,data:any): Promise<T | any>{
             if(response.ok){
                 return resolve(response.data);
             }
-
-            return reject(response.exceptions);
+            return reject(response.error);
         }).catch((error)=>reject(networkErrorResponse(error)))
     )
 }
@@ -55,9 +55,38 @@ function parseResponse(response:Response): Promise<GenericResponse>{
                         ok:response.ok,
                     })
                 }else if (response.status === 400){
-                    document.location.href='/not-found';
-                } else{
-                    document.location.href='/';
+                    resolve({
+                        status:response.status,
+                        data:"",
+                        ok:false,
+                        exceptions:json.exceptions,
+                        error:json.exceptions.errors[0].title
+                    })
+                } else if(response.status === 500){
+                    resolve({
+                        status:response.status,
+                        data:"",
+                        ok:false,
+                        exceptions:json.exceptions,
+                        error:json.exceptions.errors[0].title
+                    })
+                }
+                else if (response.status === 409){
+                    resolve({
+                        status:response.status,
+                        data:"",
+                        ok:false,
+                        exceptions:json.exceptions,
+                        error:json.exceptions.errors[0].title
+                    })
+                }else{
+                    resolve({
+                        status:response.status,
+                        data:"",
+                        ok:false,
+                        exceptions:json.exceptions,
+                        error:json.exceptions.errors[0].title
+                    })
                 }
             })
     })

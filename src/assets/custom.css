@@ -6,6 +6,14 @@
     border-color: transparent !important;
 }
 
+.border-linear-radius{
+    background: linear-gradient(white,white) padding-box,linear-gradient(90deg,#7E6FD8,#0EE5D0) border-box !important;
+    border-style: solid !important;
+    border-width: 1px !important;
+    border-color: transparent !important;
+    border-radius: 8px;
+}
+
 .border-linear-no-left{
     background: linear-gradient(white,white) padding-box,linear-gradient(90deg,#7E6FD8,#0EE5D0) border-box !important;
     border-style: solid !important;
@@ -20,4 +28,5 @@
     border-width: 1px !important;
     border-color: transparent !important;
     border-right-style: none !important;
+    border-radius: 8px;
 }

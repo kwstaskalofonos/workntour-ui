@@ -1,12 +1,20 @@
 import React from "react";
-import conWithHosts from "../../assets/hosts/connectWithHosts.png";
-import joinTheCom from "../../assets/hosts/joinTheCommunity.png";
-import liveLikeALocal from "../../assets/hosts/liveLikeALocal.png";
-import review from "../../assets/hosts/review.png";
-import one from "../../assets/hosts/Group1.png";
-import two from "../../assets/hosts/Group2.png";
-import three from "../../assets/hosts/Group3.png";
-import four from "../../assets/hosts/Group4.png";
+// @ts-ignore
+import conWithHosts from "@src/assets/hosts/connectWithHosts.png";
+// @ts-ignore
+import joinTheCom from "@src/assets/hosts/joinTheCommunity.png";
+// @ts-ignore
+import liveLikeALocal from "@src/assets/hosts/liveLikeALocal.png";
+// @ts-ignore
+import review from "@src/assets/hosts/review.png";
+// @ts-ignore
+import one from "@src/assets/hosts/Group1.png";
+// @ts-ignore
+import two from "@src/assets/hosts/Group2.png";
+// @ts-ignore
+import three from "@src/assets/hosts/Group3.png";
+// @ts-ignore
+import four from "@src/assets/hosts/Group4.png";
 
 const HostStepsSection: React.FunctionComponent = () =>{
 

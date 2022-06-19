@@ -5,6 +5,7 @@ $info: rgba(36, 221, 193, 0.73);
 $radius:8px;
 $checkbox-background-color:#7E6FD8;
 $checkbox-border:.4rem solid red;
+$primary-light:hsla(0, 0%, 90%,0.2);
 
 @import "/node_modules/bulma/bulma.sass";
 @import"/node_modules/react-datepicker/dist/react-datepicker.css";

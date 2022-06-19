@@ -9,19 +9,43 @@ import CustomSelectCountry from "@src/views/common/CustomSelectCountry";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faAngleUp} from "@fortawesome/free-solid-svg-icons/faAngleUp";
 import {faAngleDown} from "@fortawesome/free-solid-svg-icons/faAngleDown";
+import CustomDateInput from "@src/views/common/CustomDateInput";
+import {Individual} from "@src/state/stores/user/models";
+import {constructDate} from "@src/utilities/ui";
+import {registerAsIndividual} from "@src/state/stores/user/operations";
+import {useNavigate} from "react-router";
 
 const IndividualRegisterTab:React.FunctionComponent = () =>{
 
     const form = useForm();
-    const {register,handleSubmit,reset} = form;
-    const [selectedDate,setSelectedDate] = useState<Date|null>();
+    const {register,handleSubmit,getValues} = form;
     const [isLoading,setIsLoading] = useState<boolean>(false);
     const [showHiddenFields,setShowHiddenFields] = useState<boolean>(false);
+    const navigate = useNavigate();
     const [selected,setSelected] =
         useState<{value:string,label:JSX.Element}>({value:'GR',label:<Flag country="GR" />});
 
+    const [day,setDay] = useState<string>("");
+    const [month,setMonth] = useState<string>("");
+    const [year,setYear] = useState<string>("");
+
+    const onSubmit:any=(data:Individual)=>{
+        if(day&&month&&year){
+            data.birthday=constructDate(day,month,year);
+        }
+        data.countryCodeMobileNum=selected.value;
+        setIsLoading(true);
+        registerAsIndividual(data,setIsLoading)
+            .then(()=>{
+                form.reset();
+                navigate('/check-inbox',{state:{
+                    email:data.email
+                    }});
+            });
+    }
+
     return(
-        <React.Fragment>
+        <form>
             <div className="field">
                 <label className="label has-text-primary has-text-weight-medium">Name*</label>
                 <div className="control">
@@ -60,22 +84,12 @@ const IndividualRegisterTab:React.FunctionComponent = () =>{
             <div className="field">
                 <label className="label has-text-primary has-text-weight-medium">Password Confirm*</label>
                 <div className="control">
-                    <input className="input border-linear" type="password" placeholder="Enter your password"/>
+                    <input className="input border-linear" type="password" placeholder="Confirm your password"
+                           {...register("confirmPassword",{required:true,validate:value => value === getValues("password")})}/>
                 </div>
             </div>
-            <div className="field">
-                <label className="label has-text-primary has-text-weight-medium">What is your date of birthday?</label>
-                <div className="control">
-                    <ReactDatePicker
-                        className={"input border-linear"}
-                        showYearDropdown={true}
-                        showMonthDropdown={true}
-                        selected={selectedDate}
-                        {...register("birthday")}
-                        dateFormat={"yyyy-MM-dd"}
-                        onChange={(date)=>setSelectedDate(date)}/>
-                </div>
-            </div>
+            <CustomDateInput day={day} month={month} year={year} setDay={setDay}
+                setMonth={setMonth} setYear={setYear}/>
             <div className={"is-flex is-justify-content-space-between is-align-items-center mt-5"}
                  onClick={()=>setShowHiddenFields(!showHiddenFields)}>
                 <p>Optional Fields</p>
@@ -84,7 +98,7 @@ const IndividualRegisterTab:React.FunctionComponent = () =>{
                     <FontAwesomeIcon className={"is-right"} icon={faAngleDown}/>
                 }
             </div>
-            <hr className={"mt-2"}/>
+            <hr className={"mt-2"} style={{backgroundColor:"#E0E0E0",height:"1px"}}/>
             {showHiddenFields &&
                 <React.Fragment>
                     <div className={"field"}>
@@ -111,10 +125,10 @@ const IndividualRegisterTab:React.FunctionComponent = () =>{
             }
             <div className="field">
                 <button className={"button is-primary is-fullwidth "+(isLoading?"is-loading":"")}
-                         type={"button"}>
+                         type={"button"} onClick={handleSubmit(onSubmit)}>
                     Sign Up</button>
             </div>
-        </React.Fragment>
+        </form>
     )
 };
 

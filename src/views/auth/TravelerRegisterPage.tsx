@@ -14,31 +14,27 @@ import Flag from "react-flagkit";
 import {toast} from "react-toastify";
 // @ts-ignore
 import illustration from "@src/assets/signUpAsTrav.svg";
+import CustomDateInput from "@src/views/common/CustomDateInput";
+import {constructDate} from "@src/utilities/ui";
 
 const TravelerRegisterPage:React.FunctionComponent = () =>{
 
     const form = useForm();
-    const {register,handleSubmit,reset} = form;
-    const [selectedDate,setSelectedDate] = useState<Date|null>();
+    const {register,handleSubmit,getValues} = form;
     const [isLoading,setIsLoading] = useState<boolean>(false);
     const [showHiddenFields,setShowHiddenFields] = useState<boolean>(false);
     const navigate = useNavigate();
     const [selected,setSelected] =
         useState<{value:string,label:JSX.Element}>({value:'GR',label:<Flag country="GR" />});
 
-    // useEffect(()=>{
-    //     console.log("here");
-    //     toast.error("Error Notification !", {
-    //         position: toast.POSITION.TOP_LEFT
-    //     });
-    // },[]);
+    const [day,setDay] = useState<string>("");
+    const [month,setMonth] = useState<string>("");
+    const [year,setYear] = useState<string>("");
 
     const onSubmit:any=(data:Traveler)=>{
 
-        if(selectedDate){
-            let tempDate = selectedDate.toISOString();
-            let idx = tempDate.indexOf('T');
-            data.birthday=tempDate.substring(0,idx);
+        if(day&&month&&year){
+            data.birthday=constructDate(day,month,year);
         }
         data.role='TRAVELER';
         data.countryCodeMobileNum=selected.value;
@@ -46,17 +42,17 @@ const TravelerRegisterPage:React.FunctionComponent = () =>{
         registerAsTraveler(data,setIsLoading)
             .then(()=>{
                 form.reset();
-                navigate('/check-inbox');
-            }).catch((error)=>{
-
-        });
+                navigate('/check-inbox',{
+                    state:{email:data.email}
+                });
+            });
     }
 
     return(
         <React.Fragment>
             <Header/>
             <form>
-                <section className={"section"}>
+                <section className={"section has-background-primary-light"}>
                     <div className={"columns is-centered"}>
                         <div className={"column is-1"}/>
                         <div className={"column is-3"}>
@@ -114,22 +110,12 @@ const TravelerRegisterPage:React.FunctionComponent = () =>{
                             <div className="field">
                                 <label className="label has-text-primary has-text-weight-medium">Password Confirm*</label>
                                 <div className="control">
-                                    <input className="input border-linear" type="password" placeholder="Enter your password"/>
+                                    <input className="input border-linear" type="password" placeholder="Confirm your password"
+                                        {...register("confirmPassword",{required:true,validate:value => value === getValues("password")})}/>
                                 </div>
                             </div>
-                            <div className="field">
-                                <label className="label has-text-primary has-text-weight-medium">What is your date of birthday?</label>
-                                <div className="control">
-                                    <ReactDatePicker
-                                        className={"input border-linear"}
-                                        showYearDropdown={true}
-                                        showMonthDropdown={true}
-                                        selected={selectedDate}
-                                        {...register("birthday")}
-                                        dateFormat={"yyyy-MM-dd"}
-                                        onChange={(date)=>setSelectedDate(date)}/>
-                                </div>
-                            </div>
+                            <CustomDateInput day={day} month={month} year={year}
+                                setDay={setDay} setMonth={setMonth} setYear={setYear}/>
                             <div className={"is-flex is-justify-content-space-between is-align-items-center mt-5"}
                                  onClick={()=>setShowHiddenFields(!showHiddenFields)}>
                                 <p>Optional Fields</p>
@@ -138,7 +124,7 @@ const TravelerRegisterPage:React.FunctionComponent = () =>{
                                     <FontAwesomeIcon className={"is-right"} icon={faAngleDown}/>
                                 }
                             </div>
-                            <hr className={"mt-2"}/>
+                            <hr className={"mt-2"} style={{backgroundColor:"#E0E0E0",height:"1px"}}/>
                             {showHiddenFields &&
                                 <React.Fragment>
                                     <div className={"field"}>
