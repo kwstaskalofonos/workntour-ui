@@ -1,11 +1,12 @@
-import React, {forwardRef, useImperativeHandle, useState} from 'react';
+import React, {forwardRef, useEffect, useImperativeHandle, useState} from 'react';
 import {useNavigate} from "react-router";
 import {useForm} from "react-hook-form";
 import {faEyeSlash} from "@fortawesome/free-solid-svg-icons/faEyeSlash";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {LoginForm, LoginResponse} from "@src/state/stores/user/models";
-import {login} from "@src/utilities/fetch";
+import {GenericResponse, login} from "@src/utilities/fetch";
 import {toast} from "react-toastify";
+import {setCookie} from "@src/utilities/cookies";
 
 export interface Props{
     ref:any
@@ -36,13 +37,17 @@ const LoginModal:React.FunctionComponent<Props>=forwardRef<LoginModalHandler>((p
    })
 
     const onSubmit:any=(data:LoginForm)=>{
+       setIsLoading(true);
        login(data.email,data.password)
-           .then((response:LoginResponse)=>{
+           .then((response:GenericResponse)=>{
+               // @ts-ignore
+               setCookie(response.data.memberId);
                toast.success("Logged in succesfully",{position:toast.POSITION.TOP_RIGHT});
            })
            .catch((error)=>{
                toast.error(error,{position:toast.POSITION.TOP_RIGHT});
            })
+           .finally(()=>setIsLoading(false))
     }
 
     return(
@@ -104,7 +109,7 @@ const LoginModal:React.FunctionComponent<Props>=forwardRef<LoginModalHandler>((p
                     </div>
                 </section>
                 <footer className="modal-card-foot">
-                    <button className="button">Cancel</button>
+                    <button className="button" onClick={()=>setIsActive(false)}>Cancel</button>
                 </footer>
             </div>
         </div>

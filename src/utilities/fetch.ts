@@ -1,7 +1,7 @@
 import {Constants} from "@src/utilities/constants";
 import {LoginResponse} from "@src/state/stores/user/models";
 
-interface GenericResponse{
+export interface GenericResponse{
     ok:boolean,
     status:number,
     data:string,

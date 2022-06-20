@@ -2,11 +2,12 @@ import React from "react";
 import { Route, RouteProps, Navigate,Outlet } from "react-router-dom"
 import LandingPage from "../LandingPage";
 import SecuredSiteRouter from "./SecureSiteRouter";
+import {hasCookie} from "@src/utilities/cookies";
 
 
 const PrivateRoute: React.FunctionComponent<RouteProps> = ({children,...properties})=>{
 
-    const isAuthenticated=false;
+    const isAuthenticated=hasCookie();
 
     return(
         <React.Fragment>

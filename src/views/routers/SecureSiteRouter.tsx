@@ -15,7 +15,7 @@ const SecuredSiteRouter: React.FunctionComponent = () =>{
             {userType.valueOf()===UserType.COMPANY &&
                 <CompanyRouter/>
             }
-             {userType.valueOf()==UserType.INIVIDUAL &&
+             {userType.valueOf()==UserType.INDIVIDUAL &&
                 <IndividualRouter/>
              }
              {userType.valueOf()===UserType.TRAVELER &&
