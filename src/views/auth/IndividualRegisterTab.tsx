@@ -1,10 +1,6 @@
 import React, {useState} from "react";
 import {useForm} from "react-hook-form";
-import ReactDatePicker from "react-datepicker";
 import Flag from "react-flagkit";
-import Select from "react-select";
-import {PropsValue} from "react-select";
-import {countries} from "@src/utilities/countries";
 import CustomSelectCountry from "@src/views/common/CustomSelectCountry";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faAngleUp} from "@fortawesome/free-solid-svg-icons/faAngleUp";

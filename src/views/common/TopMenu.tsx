@@ -2,10 +2,12 @@ import React, {useRef} from "react";
 // @ts-ignore
 import logo from "@src/assets/Frame.svg";
 import SelectRegistrationModal, {SelectRegistrationModalHandler} from "@src/views/auth/SelectRegistrationModal";
+import LoginModal, {LoginModalHandler} from "@src/views/auth/LoginModal";
 
 const TopMenu: React.FunctionComponent = () =>{
 
-    const loginModalHandler = useRef<SelectRegistrationModalHandler>();
+    const registrationModalHandler = useRef<SelectRegistrationModalHandler>();
+    const loginModalHandler = useRef<LoginModalHandler>();
 
     return(
         <React.Fragment>
@@ -31,16 +33,19 @@ const TopMenu: React.FunctionComponent = () =>{
                         <a className="navbar-item">Contact Us</a>
                         <div className="navbar-item">
                             <div className="buttons">
-                                <a className="button is-outlined" style={{"border":"1px solid #7E6FD8","color":"#7E6FD8"}}>Log in</a>
                                 <a className="button is-outlined"
                                    style={{"border":"1px solid #7E6FD8","color":"#7E6FD8"}}
-                                   onClick={()=>loginModalHandler.current?.open()}>Sign Up</a>
+                                   onClick={()=>loginModalHandler.current?.open()}>Log in</a>
+                                <a className="button is-outlined"
+                                   style={{"border":"1px solid #7E6FD8","color":"#7E6FD8"}}
+                                   onClick={()=>registrationModalHandler.current?.open()}>Sign Up</a>
                             </div>
                         </div>
                     </div>
                 </div>
             </nav>
-            <SelectRegistrationModal ref={loginModalHandler}/>
+            <SelectRegistrationModal ref={registrationModalHandler}/>
+            <LoginModal ref={loginModalHandler}/>
         </React.Fragment>
     )
 };

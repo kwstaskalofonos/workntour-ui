@@ -29,6 +29,16 @@ export interface Company extends RegistrationDto{
     companyId:string
 }
 
+export interface LoginResponse{
+    memberId:string,
+    role:string
+}
+
+export interface LoginForm{
+    email:string,
+    password:string
+}
+
 export enum UserType{
     TRAVELER="TRAVELER",
     INDIVIDUAL="INDIVIDUAL",
