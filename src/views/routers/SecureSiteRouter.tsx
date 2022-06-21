@@ -4,21 +4,22 @@ import { UserType } from "../../state/stores/user/models";
 import CompanyRouter from "./CompanyRouter";
 import IndividualRouter from "./IndividualRouter";
 import TravelerRouter from "./TravelerRouter";
+import {getCookie} from "@src/utilities/cookies";
 
 const SecuredSiteRouter: React.FunctionComponent = () =>{
 
-    const userType:UserType=UserType.COMPANY;
+    const userRole:string|undefined = getCookie("role");
 
     return(
         <React.Fragment>
 
-            {userType.valueOf()===UserType.COMPANY &&
+            {userRole===UserType.COMPANY.valueOf() &&
                 <CompanyRouter/>
             }
-             {userType.valueOf()==UserType.INDIVIDUAL &&
+             {userRole==UserType.INDIVIDUAL.valueOf() &&
                 <IndividualRouter/>
              }
-             {userType.valueOf()===UserType.TRAVELER &&
+             {userRole===UserType.TRAVELER.valueOf() &&
                 <TravelerRouter/>
              }
         </React.Fragment>

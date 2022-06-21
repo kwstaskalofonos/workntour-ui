@@ -41,7 +41,6 @@ export interface LoginForm{
 
 export enum UserType{
     TRAVELER="TRAVELER",
-    INDIVIDUAL="INDIVIDUAL",
-    COMPANY="COMPANY",
-    GUEST="GUEST"
+    INDIVIDUAL="INDIVIDUAL_HOST",
+    COMPANY="COMPANY_HOST"
 }

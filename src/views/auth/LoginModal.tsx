@@ -42,12 +42,16 @@ const LoginModal:React.FunctionComponent<Props>=forwardRef<LoginModalHandler>((p
            .then((response:GenericResponse)=>{
                // @ts-ignore
                setCookie(response.data.memberId);
+               // @ts-ignore
+               setCookie(response.data.role,15,"role");
                toast.success("Logged in succesfully",{position:toast.POSITION.TOP_RIGHT});
            })
            .catch((error)=>{
                toast.error(error,{position:toast.POSITION.TOP_RIGHT});
            })
-           .finally(()=>setIsLoading(false))
+           .finally(()=>{
+               setIsLoading(false);
+           })
     }
 
     return(

@@ -20,9 +20,9 @@ export function setCookie(value:string,days:number | 15, key:string = AUTH_TOKEN
 }
 
 export function deleteCookie(){
-    Cookies.expire(AUTH_TOKEN,{domain:_cookie_domain});
+    Cookies.expire(AUTH_TOKEN,{path:_cookie_domain});
 }
 
 export function deleteSpecificCookie(key:string){
-    Cookies.expire(key,{domain:_cookie_domain});
+    Cookies.expire(key,{path:_cookie_domain});
 }
