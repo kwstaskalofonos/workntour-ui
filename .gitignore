@@ -38,3 +38,4 @@ node_modules
 # Ignore build files
 public
 node_modules
+dist
