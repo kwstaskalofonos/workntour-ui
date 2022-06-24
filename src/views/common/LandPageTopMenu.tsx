@@ -14,7 +14,7 @@ const LandPageTopMenu: React.FunctionComponent = () =>{
     return(
         <nav className="navbar" role="navigation" aria-label="main-navigation">
             <div className="navbar-brand" style={{position:"relative",left:"+4%"}}>
-                <a className="navbar-item" href="https://bulma.io">
+                <a className="navbar-item" href="/">
                     <img src={logo} width="190" height="28"/>
                 </a>
 
