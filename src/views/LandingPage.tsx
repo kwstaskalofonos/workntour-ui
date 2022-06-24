@@ -54,8 +54,7 @@ export const LandingPage: React.FunctionComponent = () =>{
                     <HostStepsSection/>:<TravelerStepsSection/>
                 }
             </section>
-            <section className={"hero is-large"} style={{backgroundImage: `url(${appBanner})`,
-                backgroundSize:"cover",backgroundRepeat:"no-repeat",backgroundPosition:'center 35%'}}>
+            <section className={"hero is-large main-banner"}>
                 <div className={"hero-body"}></div>
             </section>
             <section className={"section px-0"}>

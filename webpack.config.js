@@ -66,10 +66,7 @@ export default {
               },
               {
                 test: /\.(png|svg|jpg|jpeg|gif)$/i,
-                use: [{
-                    loader: 'file-loader',
-                    options: {}
-                }],
+                type: 'asset/resource'
               },
         ],
     },
