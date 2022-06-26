@@ -38,6 +38,7 @@ export const LandingPage: React.FunctionComponent = () =>{
             setEmail("");
         }).catch((error)=>{
             toast.error(error,{position:toast.POSITION.TOP_RIGHT});
+            setEmail("");
         });
     }
 
@@ -89,7 +90,7 @@ export const LandingPage: React.FunctionComponent = () =>{
                         <div className={"column is-half is-offset-one-quarter"}>
                             <div className="field is-grouped">
                                 <p className="control is-expanded mr-1">
-                                    <input id={"langPageEmail"} className="input" type="text" placeholder="Please type your email here..."
+                                    <input id={"langPageEmail"} className="input" value={email} type="text" placeholder="Please type your email here..."
                                     onChange={(event)=>setEmail(event.target.value)}/>
                                 </p>
                                 <p className="control">
