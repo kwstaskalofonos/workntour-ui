@@ -4,8 +4,6 @@ import mainSection from "@src/assets/mainBanner.png";
 // @ts-ignore
 import appBanner from "@src/assets/appBanner.png";
 import LandPageTopMenu from "../views/common/LandPageTopMenu";
-import HostStepsSection from "./common/HostStepsSection";
-import TravelerStepsSection from "../views/common/TravelerStepsSection";
 import {Constants} from "../utilities/constants";
 import TopMenu from "@src/views/common/TopMenu";
 import Footer from "@src/views/common/Footer";
@@ -41,44 +39,6 @@ export const LandingPage: React.FunctionComponent = () =>{
                             <img src={mainSection} width="487" height="384.96"/>
                         </div>
                     </div>
-            </section>
-
-            <section className="section"  style={{"background":"rgba(182, 255, 251, 0.1)"}}>
-                <div className="container has-text-centered">
-                    <p className="is-size-3 has-text-weight-bold has-text-dark">How it works</p>
-                        <div className={"is-flex is-justify-content-center mt-6"}>
-                            <a className={"button is-primary "+(selectedTab=="TRAVELERS"?'is-underlined':'is-inverted')} onClick={()=>setSelectedTab("TRAVELERS")}>Travelers</a>
-                            <a className={"button is-primary "+(selectedTab=="HOSTS"?'is-underlined':'is-inverted')} onClick={()=>setSelectedTab("HOSTS")}>Hosts</a>
-                        </div>
-                </div>
-                {selectedTab == "HOSTS"?
-                    <HostStepsSection/>:<TravelerStepsSection/>
-                }
-            </section>
-            <section className={"hero is-large"} style={{backgroundImage: `url(${appBanner})`,backgroundSize:"cover",backgroundRepeat:"no-repeat",backgroundPosition:'center'}}>
-                <div className={"hero-body"}></div>
-            </section>
-            <section className={"section px-0"}>
-                <div className={"container is-max-desktop has-text-centered mt-5"}>
-                    <p className="is-size-2 has-text-weight-bold">Find out when we launch &</p>
-                    <p className="is-size-2 has-text-weight-bold">get an early bird discount</p>
-                    <h2 className="subtitle mt-3">Get on the waiting list of hosts and travelers</h2>
-                    <div className={"columns"}>
-                        <div className={"column is-half is-offset-one-quarter"}>
-                            <div className="field is-grouped">
-                                <p className="control is-expanded mr-1">
-                                    <input id={"langPageEmail"} className="input" type="text" placeholder="Please type your email here..."/>
-                                </p>
-                                <p className="control">
-                                    <a className="button is-primary">
-                                        Subscribe
-                                    </a>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <hr className={"mt-6"} style={{"border":"1px solid #7E6FD8"}}/>
-                </div>
             </section>
             <Footer/>
         </React.Fragment>

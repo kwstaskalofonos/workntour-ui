@@ -1,4 +1,4 @@
-import {Company, Individual, Traveler} from "@src/state/stores/user/models";
+import {Company, Individual, LoginForm, Traveler} from "@src/state/stores/user/models";
 import {post} from "@src/utilities/fetch";
 import {toast} from "react-toastify";
 

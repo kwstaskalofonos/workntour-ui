@@ -1,5 +1,6 @@
 import {Constants} from "@src/utilities/constants";
 import {LoginResponse} from "@src/state/stores/user/models";
+import {toast} from "react-toastify";
 
 export interface GenericResponse{
     ok:boolean,
@@ -50,6 +51,7 @@ export function login<T>(email:string,password:string):Promise<T | any>{
         .then(parseResponse)
         .then((response:GenericResponse)=>{
             if(response.ok){
+                toast.success("Logged in succesfully",{position:toast.POSITION.TOP_RIGHT});
                 return resolve(response.data);
             }
             return reject(response.error);

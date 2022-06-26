@@ -2,6 +2,7 @@ import React, {forwardRef, useEffect, useImperativeHandle, useState} from 'react
 import {useNavigate} from "react-router";
 import {useForm} from "react-hook-form";
 import {faEyeSlash} from "@fortawesome/free-solid-svg-icons/faEyeSlash";
+import {faEye} from "@fortawesome/free-solid-svg-icons/faEye";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {LoginForm, LoginResponse} from "@src/state/stores/user/models";
 import {GenericResponse, login} from "@src/utilities/fetch";
@@ -44,16 +45,15 @@ const LoginModal:React.FunctionComponent<Props>=forwardRef<LoginModalHandler>((p
                setCookie(response.data.memberId);
                // @ts-ignore
                setCookie(response.data.role,15,"role");
-               toast.success("Logged in succesfully",{position:toast.POSITION.TOP_RIGHT});
+               setTimeout(()=>{
+                   window.location.replace("/");
+                   setIsLoading(false);
+               },1000);
            })
            .catch((error)=>{
                toast.error(error,{position:toast.POSITION.TOP_RIGHT});
            })
-           .finally(()=>{
-               setIsLoading(false);
-           })
     }
-
     return(
         <div className={"modal "+(isActive?"is-active":'')}>
             <div className="modal-background"></div>

@@ -16,10 +16,9 @@ const TopMenu: React.FunctionComponent = () =>{
     const navigate = useNavigate();
 
     const logout = () =>{
-        console.log("Trying to log out");
         deleteCookie();
         deleteSpecificCookie("role");
-        navigate("/");
+        window.location.replace("/");
     }
 
     return(
