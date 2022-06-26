@@ -7,7 +7,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 
 const API_URL = {
-    production:"https://work-n-tour.herokuapp.com/",
+    production:"https://work-n-tour.herokuapp.com",
     development:"http://localhost:8090"
 }
 
