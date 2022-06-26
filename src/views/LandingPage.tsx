@@ -8,14 +8,24 @@ import HostStepsSection from "./common/HostStepsSection";
 import TravelerStepsSection from "../views/common/TravelerStepsSection";
 import {Constants} from "../utilities/constants";
 import LandPageTopMenu from "@src/views/common/LandPageTopMenu";
+import {subscribe} from "@src/utilities/fetch";
+import {response} from "express";
+import {toast} from "react-toastify";
 
 export const LandingPage: React.FunctionComponent = () =>{
 
     const [selectedTab,setSelectedTab] = useState<string>("HOSTS");
+    const [isLoading,setIsLoading] = useState<boolean>(false);
+    const [email,setEmail] = useState<string>("");
 
     const scrollToSection = () =>{
         // @ts-ignore
         document.getElementById("description").scrollIntoView({behavior:'smooth'});
+    }
+
+    const earlySubscribe = () =>{
+        setIsLoading(true);
+        subscribe(email,setIsLoading);
     }
 
     return(
@@ -66,10 +76,11 @@ export const LandingPage: React.FunctionComponent = () =>{
                         <div className={"column is-half is-offset-one-quarter"}>
                             <div className="field is-grouped">
                                 <p className="control is-expanded mr-1">
-                                    <input id={"langPageEmail"} className="input" type="text" placeholder="Please type your email here..."/>
+                                    <input id={"langPageEmail"} className="input" type="text" placeholder="Please type your email here..."
+                                    onChange={(event)=>setEmail(event.target.value)}/>
                                 </p>
                                 <p className="control">
-                                    <a className="button is-primary">
+                                    <a className={"button is-primary "+(isLoading?"is-loading":"")} onClick={()=>earlySubscribe()}>
                                         Subscribe
                                     </a>
                                 </p>
