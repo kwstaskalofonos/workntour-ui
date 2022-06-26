@@ -8,14 +8,37 @@ import HostStepsSection from "./common/HostStepsSection";
 import TravelerStepsSection from "../views/common/TravelerStepsSection";
 import {Constants} from "../utilities/constants";
 import LandPageTopMenu from "@src/views/common/LandPageTopMenu";
+import {GenericResponse, subscribe} from "@src/utilities/fetch";
+import {toast} from "react-toastify";
 
 export const LandingPage: React.FunctionComponent = () =>{
 
     const [selectedTab,setSelectedTab] = useState<string>("HOSTS");
+    const [email,setEmail] = useState<string>("");
+    const [isLoading,setIsLoading] = useState<boolean>(false);
 
     const scrollToSection = () =>{
         // @ts-ignore
         document.getElementById("description").scrollIntoView({behavior:'smooth'});
+    }
+
+    const isEmail = () =>{
+        const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(email);
+    }
+
+    const doSubscribe = () =>{
+        if(!isEmail()){
+            toast.error("Input is not valid email address.",{position:toast.POSITION.TOP_RIGHT});
+            return;
+        }
+        setIsLoading(true);
+        subscribe(email,setIsLoading).then((response:GenericResponse)=>{
+            toast.success("Subscribed successfully",{position:toast.POSITION.TOP_RIGHT});
+            setEmail("");
+        }).catch((error)=>{
+            toast.error(error,{position:toast.POSITION.TOP_RIGHT});
+        });
     }
 
     return(
@@ -66,10 +89,11 @@ export const LandingPage: React.FunctionComponent = () =>{
                         <div className={"column is-half is-offset-one-quarter"}>
                             <div className="field is-grouped">
                                 <p className="control is-expanded mr-1">
-                                    <input id={"langPageEmail"} className="input" type="text" placeholder="Please type your email here..."/>
+                                    <input id={"langPageEmail"} className="input" type="text" placeholder="Please type your email here..."
+                                    onChange={(event)=>setEmail(event.target.value)}/>
                                 </p>
                                 <p className="control">
-                                    <a className="button is-primary">
+                                    <a className={"button is-primary "+(isLoading?"is-loading":"")} onClick={()=>doSubscribe()}>
                                         Subscribe
                                     </a>
                                 </p>

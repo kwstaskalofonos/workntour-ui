@@ -7,8 +7,8 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 
 const API_URL = {
-    production:"",
-    development:"http://localhost:8080"
+    production:"https://work-n-tour.herokuapp.com/",
+    development:"http://localhost:8090"
 }
 
 export default {
@@ -82,7 +82,7 @@ export default {
         }),
         new webpack.DefinePlugin({
             __API_URL__:JSON.stringify(API_URL[process.env.NODE_ENV]),
-            __CONTEXT__:JSON.stringify("/workntour")}),
+            __CONTEXT__:JSON.stringify("/")}),
     ],
     devServer:{
         allowedHosts:['*'],
