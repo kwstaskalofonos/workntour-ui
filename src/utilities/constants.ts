@@ -2,7 +2,7 @@
 class System{
 
     // @ts-ignore
-    private _apiUrl:string = __API_URL__;
+    private _apiUrl:string = __API_URL__+__CONTEXT__;
 
     getUrl():string{
         return this._apiUrl;
