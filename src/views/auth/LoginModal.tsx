@@ -1,13 +1,16 @@
-import React, {forwardRef, useEffect, useImperativeHandle, useState} from 'react';
-import {useNavigate} from "react-router";
+import React, {forwardRef, useImperativeHandle, useState} from 'react';
 import {useForm} from "react-hook-form";
 import {faEyeSlash} from "@fortawesome/free-solid-svg-icons/faEyeSlash";
-import {faEye} from "@fortawesome/free-solid-svg-icons/faEye";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {LoginForm, LoginResponse} from "@src/state/stores/user/models";
+import {LoginForm, Role} from "@src/state/stores/user/models";
 import {GenericResponse, login} from "@src/utilities/fetch";
 import {toast} from "react-toastify";
 import {setCookie} from "@src/utilities/cookies";
+import {
+    retrieveCompanyProfile,
+    retrieveIndividualProfile,
+    retrieveTravelerProfile
+} from "@src/state/stores/user/operations";
 
 export interface Props{
     ref:any
@@ -18,10 +21,10 @@ export interface LoginModalHandler{
     close:()=>void
 }
 
-const LoginModal:React.FunctionComponent<Props>=forwardRef<LoginModalHandler>((props,ref:React.Ref<LoginModalHandler>)=>{
+const LoginModal:React.FunctionComponent<Props>=
+    forwardRef<LoginModalHandler>(( props,ref:React.Ref<LoginModalHandler>)=>{
 
     const [isActive,setIsActive] = useState<boolean>(false);
-    const navigate = useNavigate();
     const form = useForm();
     const {register,handleSubmit,getValues} = form;
     const [isLoading,setIsLoading] = useState<boolean>(false);
@@ -45,15 +48,35 @@ const LoginModal:React.FunctionComponent<Props>=forwardRef<LoginModalHandler>((p
                setCookie(response.data.memberId);
                // @ts-ignore
                setCookie(response.data.role,15,"role");
-               setTimeout(()=>{
-                   window.location.replace("/");
-                   setIsLoading(false);
-               },1000);
+               // @ts-ignore
+               switch (response.data.role){
+                   case Role.TRAVELER.valueOf():{
+                       // @ts-ignore
+                       retrieveTravelerProfile(response.data.memberId);
+                       break;
+                   }
+                   case Role.COMPANY.valueOf():{
+                       // @ts-ignore
+                       retrieveCompanyProfile(response.data.memberId);
+                       break;
+                   }
+                   case Role.INDIVIDUAL.valueOf():{
+                       // @ts-ignore
+                       retrieveIndividualProfile(response.data.memberId);
+                       break;
+                   }
+               }
+               setIsLoading(false);
+               window.location.replace("/");
            })
            .catch((error)=>{
                toast.error(error,{position:toast.POSITION.TOP_RIGHT});
-           })
+           }).finally(()=> setIsLoading(false))
     }
+
+    const openRegisterModal = () =>{
+    }
+
     return(
         <div className={"modal "+(isActive?"is-active":'')}>
             <div className="modal-background"></div>
@@ -106,7 +129,8 @@ const LoginModal:React.FunctionComponent<Props>=forwardRef<LoginModalHandler>((p
                                 </div>
                                 <div className={"field has-text-centered mt-5"}>
                                     <label className={"label has-text-weight-normal"}>New Member?
-                                        <a className={"has-text-info"}> Register here</a></label>
+                                        <a className={"has-text-info"} onClick={()=>openRegisterModal()}>
+                                            Register here</a></label>
                                 </div>
                             </form>
                         </div>

@@ -25,7 +25,6 @@ const AppRouter :React.FunctionComponent = () =>{
               <Route path="/not-found" element={<ErrorPage/>}></Route>
               <Route path="/guest-dashboard" element={<LandingPage/>}/>
               <Route path="/" element={<PrivateRoute/>}/>
-              {/* <Route path="/secured" element={isAuthenticated?<Test/>:<LandingPage/>}/> */}
             </Routes>
          </Router>
        </Provider>

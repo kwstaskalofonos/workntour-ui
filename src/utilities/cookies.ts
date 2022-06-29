@@ -4,7 +4,7 @@ const AUTH_TOKEN='workntour';
 // @ts-ignore
 const _cookie_domain = __COOKIE_DOMAIN__;
 
-export function getCookie(key:string=AUTH_TOKEN):string|undefined{
+export function getCookie(key:string=AUTH_TOKEN):string{
     return Cookies.get(key);
 }
 
@@ -26,3 +26,4 @@ export function deleteCookie(){
 export function deleteSpecificCookie(key:string){
     Cookies.expire(key,{path:_cookie_domain});
 }
+

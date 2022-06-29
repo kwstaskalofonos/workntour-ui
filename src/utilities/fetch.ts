@@ -1,6 +1,7 @@
 import {Constants} from "@src/utilities/constants";
 import {LoginResponse} from "@src/state/stores/user/models";
 import {toast} from "react-toastify";
+import {getCookie, hasCookie} from "@src/utilities/cookies";
 
 export interface GenericResponse{
     ok:boolean,
@@ -108,14 +109,16 @@ function parseResponse(response:Response): Promise<GenericResponse>{
 }
 
 function headers(method:string,data?:any,email?:string,password?:string):RequestInit{
-    const customHeaders = new Headers();
+    const customHeaders = new Headers({'content-type':'application/json',
+        'accept':'application/json',
+        'email':email?email:'',
+        'password':password?password:''});
+    if(hasCookie('workntour')){
+        console.log("MemberId is ------> "+getCookie('workntour'));
+        customHeaders.set('memberId',getCookie('workntour'))}
     return {
         body:JSON.stringify(data),
-        headers:new Headers(
-            {'content-type':'application/json',
-                'accept':'application/json',
-                'email':email?email:'',
-                'password':password?password:''}),
+        headers:customHeaders,
         method:method,
         mode:'cors',
     }

@@ -4,7 +4,7 @@ export interface Session{
 }
 
 export interface Profile{
-    userType:UserType
+    userType:Role
 }
 
 export interface RegistrationDto{
@@ -39,7 +39,44 @@ export interface LoginForm{
     password:string
 }
 
-export enum UserType{
+export interface CompanyHostProfile{
+    memberId:string,
+    role:string,
+    companyName:string,
+    companyId:string
+    email:string,
+    headquartersCounty:string,
+    mobileNum:string,
+    profileImage:string,
+    description:string
+}
+
+export interface IndividualHostProfile{
+    memberId:string,
+    role:string,
+    name:string,
+    surname:string,
+    email:string,
+    country:string,
+    mobileNum:string,
+    nationality:string,
+    profileImage:string,
+    description:string
+}
+
+export interface TravelerProfile{
+    memberId:string,
+    role:string,
+    name:string,
+    surname:string,
+    email:string,
+    mobileNum:string,
+    nationality:string,
+    profileImage:string,
+    description:string
+}
+
+export enum Role{
     TRAVELER="TRAVELER",
     INDIVIDUAL="INDIVIDUAL_HOST",
     COMPANY="COMPANY_HOST"

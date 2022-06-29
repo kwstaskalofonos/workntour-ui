@@ -6,18 +6,17 @@ import LoginModal, {LoginModalHandler} from "@src/views/auth/LoginModal";
 import {deleteCookie, deleteSpecificCookie, hasCookie} from "@src/utilities/cookies";
 import {faUserCircle} from "@fortawesome/free-solid-svg-icons/faUserCircle";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {useNavigate} from "react-router";
 
 const TopMenu: React.FunctionComponent = () =>{
 
     const registrationModalHandler = useRef<SelectRegistrationModalHandler>();
     const loginModalHandler = useRef<LoginModalHandler>();
     const isAuthenticated=hasCookie();
-    const navigate = useNavigate();
 
     const logout = () =>{
         deleteCookie();
         deleteSpecificCookie("role");
+        deleteSpecificCookie("profile");
         window.location.replace("/");
     }
 

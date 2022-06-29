@@ -1,16 +1,14 @@
-import React, {useEffect, useState} from "react"
+import React, {useEffect} from "react"
 // @ts-ignore
 import mainSection from "@src/assets/mainBanner.png";
 // @ts-ignore
 import appBanner from "@src/assets/appBanner.png";
-import LandPageTopMenu from "../views/common/LandPageTopMenu";
 import {Constants} from "../utilities/constants";
 import TopMenu from "@src/views/common/TopMenu";
 import Footer from "@src/views/common/Footer";
 
 export const LandingPage: React.FunctionComponent = () =>{
 
-    const [selectedTab,setSelectedTab] = useState<string>("HOSTS");
 
     useEffect(()=>{
         console.log("__API_URL__ : "+Constants.getApiUrl())
