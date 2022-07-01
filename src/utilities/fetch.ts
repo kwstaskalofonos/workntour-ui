@@ -114,7 +114,6 @@ function headers(method:string,data?:any,email?:string,password?:string):Request
         'email':email?email:'',
         'password':password?password:''});
     if(hasCookie('workntour')){
-        console.log("MemberId is ------> "+getCookie('workntour'));
         customHeaders.set('memberId',getCookie('workntour'))}
     return {
         body:JSON.stringify(data),

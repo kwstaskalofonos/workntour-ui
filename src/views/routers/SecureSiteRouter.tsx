@@ -1,5 +1,5 @@
 import React from "react";
-import { Role } from "../../state/stores/user/models";
+import { Role } from "@src/state/stores/user/models";
 import CompanyRouter from "./CompanyRouter";
 import IndividualRouter from "./IndividualRouter";
 import TravelerRouter from "./TravelerRouter";
@@ -11,16 +11,16 @@ const SecuredSiteRouter: React.FunctionComponent = () =>{
 
     return(
         <React.Fragment>
-
+            <h1>Welcome</h1>
             {userRole===Role.COMPANY.valueOf() &&
                 <CompanyRouter/>
             }
-             {userRole==Role.INDIVIDUAL.valueOf() &&
+            {userRole==Role.INDIVIDUAL.valueOf() &&
                 <IndividualRouter/>
-             }
-             {userRole===Role.TRAVELER.valueOf() &&
+            }
+            {userRole===Role.TRAVELER.valueOf() &&
                 <TravelerRouter/>
-             }
+            }
         </React.Fragment>
     )
 };

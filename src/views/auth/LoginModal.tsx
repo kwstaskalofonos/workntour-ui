@@ -45,27 +45,9 @@ const LoginModal:React.FunctionComponent<Props>=
        login(data.email,data.password)
            .then((response:GenericResponse)=>{
                // @ts-ignore
-               setCookie(response.data.memberId);
+               setCookie(response.data.memberId,15);
                // @ts-ignore
                setCookie(response.data.role,15,"role");
-               // @ts-ignore
-               switch (response.data.role){
-                   case Role.TRAVELER.valueOf():{
-                       // @ts-ignore
-                       retrieveTravelerProfile(response.data.memberId);
-                       break;
-                   }
-                   case Role.COMPANY.valueOf():{
-                       // @ts-ignore
-                       retrieveCompanyProfile(response.data.memberId);
-                       break;
-                   }
-                   case Role.INDIVIDUAL.valueOf():{
-                       // @ts-ignore
-                       retrieveIndividualProfile(response.data.memberId);
-                       break;
-                   }
-               }
                setIsLoading(false);
                window.location.replace("/");
            })

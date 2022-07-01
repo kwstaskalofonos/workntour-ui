@@ -2,13 +2,13 @@ import {
     Company,
     CompanyHostProfile,
     Individual, IndividualHostProfile,
-    LoginForm,
+    LoginForm, Role,
     Traveler,
     TravelerProfile
 } from "@src/state/stores/user/models";
 import {get, post} from "@src/utilities/fetch";
 import {toast} from "react-toastify";
-import {setCookie} from "@src/utilities/cookies";
+import {getCookie, setCookie} from "@src/utilities/cookies";
 
 export const registerAsTraveler = (form:Traveler,setIsLoading:any):Promise<Traveler>=>{
     return new Promise<Traveler>((resolve,reject)=>
@@ -46,7 +46,7 @@ export const registerAsCompany = (form:Company,setIsLoading:any):Promise<Company
     )
 };
 
-export const retrieveTravelerProfile = (memberId:string):Promise<TravelerProfile>=>{
+export const retrieveTravelerProfile = ():Promise<TravelerProfile>=>{
     return new Promise<TravelerProfile>((resolve,reject)=>{
         get('retrieveProfile/traveler')
             .then((response:TravelerProfile)=>{
@@ -59,7 +59,7 @@ export const retrieveTravelerProfile = (memberId:string):Promise<TravelerProfile
     })
 }
 
-export const retrieveIndividualProfile = (memberId:string):Promise<IndividualHostProfile>=>{
+export const retrieveIndividualProfile = ():Promise<IndividualHostProfile>=>{
     return new Promise<IndividualHostProfile>((resolve,reject)=>{
         get('retrieveProfile/individualHost')
             .then((response:IndividualHostProfile)=>{
@@ -72,7 +72,7 @@ export const retrieveIndividualProfile = (memberId:string):Promise<IndividualHos
     })
 }
 
-export const retrieveCompanyProfile = (memberId:string):Promise<CompanyHostProfile>=>{
+export const retrieveCompanyProfile = ():Promise<CompanyHostProfile>=>{
     return new Promise<CompanyHostProfile>((resolve,reject)=>{
         get('retrieveProfile/companyHost')
             .then((response:CompanyHostProfile)=>{
@@ -82,5 +82,30 @@ export const retrieveCompanyProfile = (memberId:string):Promise<CompanyHostProfi
             toast.error(error,{position:toast.POSITION.TOP_RIGHT});
             reject(error);
         })
+    })
+}
+
+export const retrieveUserProfile = ():Promise<void>=>{
+    return new Promise<void>(()=>{
+        switch (getCookie('role')){
+            case Role.TRAVELER.valueOf():{
+                console.log("TRAVELER");
+                // @ts-ignore
+                retrieveTravelerProfile();
+                break;
+            }
+            case Role.COMPANY.valueOf():{
+                console.log("COMPANY");
+                // @ts-ignore
+                retrieveCompanyProfile();
+                break;
+            }
+            case Role.INDIVIDUAL.valueOf():{
+                console.log("INDIVIDUAL");
+                // @ts-ignore
+                retrieveIndividualProfile();
+                break;
+            }
+        }
     })
 }

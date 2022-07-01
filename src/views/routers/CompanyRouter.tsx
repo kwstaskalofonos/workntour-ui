@@ -1,15 +1,15 @@
-import React from "react";
-import TopMenu from "../common/TopMenu";
+import React, {useEffect} from "react";
+import Header from "@src/views/common/Header";
+import {Route, Routes} from "react-router-dom";
+import TestComponent from "@src/views/host/TestComponent";
 
 const CompanyRouter: React.FunctionComponent = () =>{
 
+
     return(
         <React.Fragment>
-            <div className="columns mb-0" style={{"boxShadow":"0px 4px 18px rgba(0, 0, 0, 0.15)"}}>
-                <div className="column container">
-                    <TopMenu/>
-                </div>
-            </div>
+            <Header/>
+            <h1>Company Router</h1>
         </React.Fragment>
     )
 };
