@@ -1,13 +1,12 @@
 import React from "react";
-import Header from "@src/views/common/Header";
+import {Route, Routes} from "react-router-dom";
 
 const IndividualRouter: React.FunctionComponent = () =>{
 
     return(
-        <React.Fragment>
-            <Header/>
-            <h1>Individual Router</h1>
-        </React.Fragment>
+        <Routes>
+            <Route path="/" element={<h1>Comp Individual</h1>}/>
+        </Routes>
     )
 };
 

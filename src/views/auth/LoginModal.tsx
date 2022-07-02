@@ -6,11 +6,6 @@ import {LoginForm, Role} from "@src/state/stores/user/models";
 import {GenericResponse, login} from "@src/utilities/fetch";
 import {toast} from "react-toastify";
 import {setCookie} from "@src/utilities/cookies";
-import {
-    retrieveCompanyProfile,
-    retrieveIndividualProfile,
-    retrieveTravelerProfile
-} from "@src/state/stores/user/operations";
 
 export interface Props{
     ref:any

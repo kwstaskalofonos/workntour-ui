@@ -1,13 +1,13 @@
 import React from "react";
-import TopMenu from "@src/views/common/TopMenu";
+import { Route, Routes} from "react-router-dom";
 
 const TravelerRouter: React.FunctionComponent = () =>{
 
-    return(<div className="columns">
-        <div className="column is-four-fifths is-offset-1">
-            <TopMenu/>
-        </div>
-    </div>)
+    return(
+        <Routes>
+            <Route path="/" element={<h1>Comp Traveler</h1>}/>
+        </Routes>
+    )
 };
 
 export default TravelerRouter;

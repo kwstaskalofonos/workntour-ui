@@ -8,12 +8,15 @@ import TravelerRegisterPage from "@src/views/auth/TravelerRegisterPage";
 import CheckInboxPage from "@src/views/auth/CheckInboxPage";
 import ErrorPage from "@src/views/common/ErrorPage";
 import HostRegisterPage from "@src/views/auth/HostRegisterPage";
+// @ts-ignore
 import {retrieveUserProfile} from "@src/state/stores/user/operations";
-import {hasCookie} from "@src/utilities/cookies";
+import {getCookie, hasCookie} from "@src/utilities/cookies";
 import LandingPage from "@src/views/LandingPage";
 import SecuredSiteRouter from "@src/views/routers/SecureSiteRouter";
 
 const AppRouter :React.FunctionComponent = () =>{
+
+    const userRole:string|undefined = getCookie("role");
 
     useEffect(()=>{
         if(!hasCookie('profile')){
@@ -29,11 +32,12 @@ const AppRouter :React.FunctionComponent = () =>{
               <Route path="/registerAsHost" element={<HostRegisterPage/>}></Route>
               <Route path="/check-inbox" element={<CheckInboxPage/>}></Route>
               <Route path="/not-found" element={<ErrorPage/>}></Route>
-              {/*<Route path="/" element={<PrivateRoute/>}/>*/}
-               <PrivateRoute path={"/"}>
-                   <SecuredSiteRouter/>
-               </PrivateRoute>
               <Route path="/home" element={<LandingPage/>}/>
+              <Route path="*" element={
+                  <PrivateRoute>
+                      <SecuredSiteRouter/>
+                  </PrivateRoute>
+              }/>
             </Routes>
          </Router>
        </Provider>
