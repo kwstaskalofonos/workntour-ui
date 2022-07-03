@@ -6,6 +6,7 @@ import TravelerRouter from "./TravelerRouter";
 import {getCookie} from "@src/utilities/cookies";
 import Header from "@src/views/common/Header";
 import Footer from "@src/views/common/Footer";
+import InterCom from "@src/views/common/InterCom";
 
 const SecuredSiteRouter: React.FunctionComponent = () =>{
 
@@ -13,16 +14,19 @@ const SecuredSiteRouter: React.FunctionComponent = () =>{
 
     return(
         <React.Fragment>
+            <InterCom/>
             <Header/>
-                {userRole===Role.COMPANY.valueOf() &&
-                    <CompanyRouter/>
-                }
-                {userRole===Role.INDIVIDUAL.valueOf() &&
-                    <IndividualRouter/>
-                }
-                {userRole===Role.TRAVELER.valueOf() &&
-                    <TravelerRouter/>
-                }
+                <div className="container is-fluid mt-4">
+                    {userRole===Role.COMPANY.valueOf() &&
+                        <CompanyRouter/>
+                    }
+                    {userRole===Role.INDIVIDUAL.valueOf() &&
+                        <IndividualRouter/>
+                    }
+                    {userRole===Role.TRAVELER.valueOf() &&
+                        <TravelerRouter/>
+                    }
+                </div>
             <Footer/>
         </React.Fragment>
     )

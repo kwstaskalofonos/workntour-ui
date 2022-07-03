@@ -6,6 +6,8 @@ import appBanner from "@src/assets/appBanner.png";
 import {Constants} from "../utilities/constants";
 import TopMenu from "@src/views/common/TopMenu";
 import Footer from "@src/views/common/Footer";
+import Header from "@src/views/common/Header";
+import InterCom from "@src/views/common/InterCom";
 
 export const LandingPage: React.FunctionComponent = () =>{
 
@@ -16,11 +18,8 @@ export const LandingPage: React.FunctionComponent = () =>{
 
     return(
         <React.Fragment>
-            <div className="columns mb-0" style={{"boxShadow":"0px 4px 18px rgba(0, 0, 0, 0.15)"}}>
-                <div className="column container">
-                    <TopMenu/>
-                </div>
-            </div>
+            <InterCom/>
+            <Header/>
             <section className="section" style={{"background":"rgba(185, 179, 223, 0.1)"}}>
                     <div className="columns is-vcentered is-centered py-6">
                         <div className="column is-narrow-desktop has-text-center">

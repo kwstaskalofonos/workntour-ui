@@ -1,4 +1,4 @@
-import React, {useRef} from "react";
+import React, {useEffect, useRef} from "react";
 // @ts-ignore
 import logo from "@src/assets/Frame.svg";
 import SelectRegistrationModal, {SelectRegistrationModalHandler} from "@src/views/auth/SelectRegistrationModal";
@@ -6,12 +6,14 @@ import LoginModal, {LoginModalHandler} from "@src/views/auth/LoginModal";
 import {deleteCookie, deleteSpecificCookie, hasCookie} from "@src/utilities/cookies";
 import {faUserCircle} from "@fortawesome/free-solid-svg-icons/faUserCircle";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {getUserDisplayName, isHost} from "@src/utilities/ui";
 
 const TopMenu: React.FunctionComponent = () =>{
 
     const registrationModalHandler = useRef<SelectRegistrationModalHandler>();
     const loginModalHandler = useRef<LoginModalHandler>();
     const isAuthenticated=hasCookie();
+    const isProfileRetrieved=hasCookie('profile');
 
     const logout = () =>{
         deleteCookie();
@@ -37,10 +39,17 @@ const TopMenu: React.FunctionComponent = () =>{
 
                 <div id="navbarBasicExample" className="navbar-menu">
                     <div className="navbar-end">
-                        <a className="navbar-item">Home</a>
-                        <a className="navbar-item">About Us</a>
-                        <a className="navbar-item">Price</a>
-                        <a className="navbar-item">Blog</a>
+                        {!isAuthenticated &&
+                            <React.Fragment>
+                                <a className="navbar-item">Home</a>
+                                <a className="navbar-item">About Us</a>
+                                <a className="navbar-item">Price</a>
+                                <a className="navbar-item">Blog</a>
+                            </React.Fragment>
+                        }
+                        {isHost() &&
+                            <a className="navbar-item" href={'opportunities'}>Opportunities</a>
+                        }
                         <a className="navbar-item">Contact Us</a>
                         {!isAuthenticated ?
                             <div className="navbar-item">
@@ -60,14 +69,18 @@ const TopMenu: React.FunctionComponent = () =>{
                                     </span>
                                 </a>
 
-                                <div className="navbar-dropdown">
+                                <div className="navbar-dropdown is-right">
+                                    <a className="navbar-item">
+                                        Singed in as {isProfileRetrieved&&getUserDisplayName()}
+                                    </a>
+                                    <hr className="navbar-divider"/>
                                     <a className="navbar-item">
                                         Profile
                                     </a>
                                     <hr className="navbar-divider"/>
-                                        <a className="navbar-item" onClick={()=>logout()}>
-                                            Log out
-                                        </a>
+                                    <a className="navbar-item" onClick={()=>logout()}>
+                                        Log out
+                                    </a>
                                 </div>
                             </div>
                         }

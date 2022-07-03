@@ -5,6 +5,7 @@ import IndividualRegisterTab from "@src/views/auth/IndividualRegisterTab";
 import CompanyRegisterTab from "@src/views/auth/CompanyRegisterTab";
 // @ts-ignore
 import illustration from "@src/assets/signUpAsHost.svg";
+import InterCom from "@src/views/common/InterCom";
 
 const HostRegisterPage:React.FunctionComponent = () =>{
 
@@ -12,6 +13,7 @@ const HostRegisterPage:React.FunctionComponent = () =>{
 
     return(
         <React.Fragment>
+            <InterCom/>
             <Header/>
             <section className={"section has-background-primary-light"}>
                 <div className={"columns is-centered"}>

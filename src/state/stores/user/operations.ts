@@ -6,7 +6,7 @@ import {
     Traveler,
     TravelerProfile
 } from "@src/state/stores/user/models";
-import {get, post} from "@src/utilities/fetch";
+import {GenericResponse, get, post} from "@src/utilities/fetch";
 import {toast} from "react-toastify";
 import {getCookie, setCookie} from "@src/utilities/cookies";
 
@@ -46,11 +46,11 @@ export const registerAsCompany = (form:Company,setIsLoading:any):Promise<Company
     )
 };
 
-export const retrieveTravelerProfile = ():Promise<TravelerProfile>=>{
-    return new Promise<TravelerProfile>((resolve,reject)=>{
+export const retrieveTravelerProfile = ():Promise<GenericResponse>=>{
+    return new Promise<GenericResponse>((resolve,reject)=>{
         get('retrieveProfile/traveler')
-            .then((response:TravelerProfile)=>{
-                setCookie(JSON.stringify(response),15,'profile');
+            .then((response:GenericResponse)=>{
+                setCookie(JSON.stringify(response.data),15,'profile');
                 resolve(response);
             }).catch((error)=>{
             toast.error(error,{position:toast.POSITION.TOP_RIGHT});
@@ -59,11 +59,11 @@ export const retrieveTravelerProfile = ():Promise<TravelerProfile>=>{
     })
 }
 
-export const retrieveIndividualProfile = ():Promise<IndividualHostProfile>=>{
-    return new Promise<IndividualHostProfile>((resolve,reject)=>{
+export const retrieveIndividualProfile = ():Promise<GenericResponse>=>{
+    return new Promise<GenericResponse>((resolve,reject)=>{
         get('retrieveProfile/individualHost')
-            .then((response:IndividualHostProfile)=>{
-                setCookie(JSON.stringify(response),15,'profile');
+            .then((response:GenericResponse)=>{
+                setCookie(JSON.stringify(response.data),15,'profile');
                 resolve(response);
             }).catch((error)=>{
             toast.error(error,{position:toast.POSITION.TOP_RIGHT});
@@ -72,11 +72,11 @@ export const retrieveIndividualProfile = ():Promise<IndividualHostProfile>=>{
     })
 }
 
-export const retrieveCompanyProfile = ():Promise<CompanyHostProfile>=>{
-    return new Promise<CompanyHostProfile>((resolve,reject)=>{
+export const retrieveCompanyProfile = ():Promise<GenericResponse>=>{
+    return new Promise<GenericResponse>((resolve,reject)=>{
         get('retrieveProfile/companyHost')
-            .then((response:CompanyHostProfile)=>{
-                setCookie(JSON.stringify(response),15,'profile');
+            .then((response:GenericResponse)=>{
+                setCookie(JSON.stringify(response.data),15,'profile');
                 resolve(response);
             }).catch((error)=>{
             toast.error(error,{position:toast.POSITION.TOP_RIGHT});

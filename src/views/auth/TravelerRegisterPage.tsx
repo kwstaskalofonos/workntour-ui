@@ -16,6 +16,7 @@ import {toast} from "react-toastify";
 import illustration from "@src/assets/signUpAsTrav.svg";
 import CustomDateInput from "@src/views/common/CustomDateInput";
 import {constructDate} from "@src/utilities/ui";
+import InterCom from "@src/views/common/InterCom";
 
 const TravelerRegisterPage:React.FunctionComponent = () =>{
 
@@ -50,6 +51,7 @@ const TravelerRegisterPage:React.FunctionComponent = () =>{
 
     return(
         <React.Fragment>
+            <InterCom/>
             <Header/>
             <form>
                 <section className={"section has-background-primary-light"}>
