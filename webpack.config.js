@@ -8,7 +8,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const API_URL = {
     production:"",
-    development:"http://localhost:8090"
+    development:"http://localhost:8080"
 }
 
 const COOKIE_DOMAIN = {

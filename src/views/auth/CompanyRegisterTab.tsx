@@ -92,7 +92,7 @@ const CompanyRegisterTab:React.FunctionComponent = () =>{
                                     <span className="file-cta">
                                       <FontAwesomeIcon className={"has-text-primary"} icon={faCloudUpload}/>
                                       <span className="file-label has-text-primary has-text-centered is-size-5 has-text-weight-semibold">
-                                        Click to upload you file</span>
+                                        Click to upload your file</span>
                                         <p className="file-label has-text-primary has-text-centered is-size-6 has-text-weight-light">
                                         SVG,PNG,JPG or GIF (max. 800x400px)
                                       </p>

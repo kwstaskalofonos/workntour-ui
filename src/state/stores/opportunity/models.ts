@@ -1,61 +1,69 @@
 import {Role} from "@src/state/stores/user/models";
 
 export enum OpportunityCategory{
-     hostel,
-     hotel,
-     guestHouse,
-     farm,
-     ecoVillage,
-     skiCenter,
-     camping,
-     ngo,
-     localCommunity,
-     animalShelter,
-     surfClub,
-     winery,
-     boat,
-     homeStay,
-     individual,
-     privateProject
+     hostel="hostel",
+     hotel="hotel",
+     guestHouse="guestHouse",
+     farm="farm",
+     ecoVillage="ecoVillage",
+     skiCenter="skiCenter",
+     camping="camping",
+     ngo="ngo",
+     localCommunity="localCommunity",
+     animalShelter="animalShelter",
+     surfClub="surfClub",
+     winery="winery",
+     boat="boat",
+     homeStay="homeStay",
+     individual="individual",
+     privateProject="privateProject"
 }
 
 export enum TypeOfHelpNeeded{
-     reception,
-     cleaning,
-     houseKeeping,
-     administrativeTasks,
-     tourGuide,
-     babysitter,
-     vet,
-     animalCare,
-     languages,
-     sportsTeacher,
-     surfing,
-     personalTrainer,
-     farming,
-     painting,
-     handyman,
-     socialMedia,
-     photography,
-     videography,
-     webDevelopment,
-     cooking,
-     bartending,
-     service
+     reception="reception",
+     cleaning="cleaning",
+     houseKeeping="houseKeeping",
+     administrativeTasks="administrativeTasks",
+     tourGuide="tourGuide",
+     babysitter="babysitter",
+     vet="vet",
+     animalCare="animalCare",
+     languages="languages",
+     sportsTeacher="sportsTeacher",
+     surfing="surfing",
+     personalTrainer="personalTrainer",
+     farming="farming",
+     painting="painting",
+     handyman="handyman",
+     socialMedia="socialMedia",
+     photography="photography",
+     videography="videography",
+     webDevelopment="webDevelopment",
+     cooking="cooking",
+     bartending="bartending",
+     service="service"
 }
 
 export enum Accomodation{
-     privateRoom,
-     sharedRoom,
-     dorm,
-     tent
+     privateRoom="privateRoom",
+     sharedRoom="sharedRoom",
+     dorm="dorm",
+     tent="tent"
 }
 
 export enum Meal{
-     breakfast,
-     lunch,
-     dinner,
-     useSharedKitchen
+     breakfast="breakfast",
+     lunch="lunch",
+     dinner="dinner",
+     useSharedKitchen="useSharedKitchen"
+}
+
+export enum Languages{
+     greek="greek",
+     english="english",
+     spanish="spanish",
+     italian="italian",
+     german="german"
 }
 
 export interface Opportunity{
