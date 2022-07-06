@@ -2,7 +2,14 @@ import React, {useState} from "react";
 import {useForm} from "react-hook-form";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCloudUpload} from "@fortawesome/free-solid-svg-icons/faCloudUpload";
-import {Languages, Meal, OpportunityCategory, TypeOfHelpNeeded} from "@src/state/stores/opportunity/models";
+import {
+    Accommodation,
+    Languages,
+    LearningOpportunities,
+    Meal,
+    OpportunityCategory,
+    TypeOfHelpNeeded
+} from "@src/state/stores/opportunity/models";
 import CustomSelectMultiple from "@src/views/common/CustomSelectMultiple";
 
 const AddOpportunityTab:React.FunctionComponent = () =>{
@@ -14,6 +21,7 @@ const AddOpportunityTab:React.FunctionComponent = () =>{
     const [languagesRequired,setLanguagesRequired] = useState<Languages[]>([]);
     const [languagesSpoken,setLanguagesSpoken] = useState<Languages[]>([]);
     const [selectedMeals,setSelectedMeals] = useState<Meal[]>([]);
+    const [selectedLearningOpps,setSelectedLearningOpps] = useState<LearningOpportunities[]>([]);
 
     const renderCategories = () =>{
         let array:any[]=[];
@@ -51,6 +59,24 @@ const AddOpportunityTab:React.FunctionComponent = () =>{
         return array;
     }
 
+    const renderLearningOpportunities = () =>{
+        let array:any[]=[];
+        array.push(<option key={"learn-opps-option-empty"}/>)
+        for(const item in LearningOpportunities){
+            array.push(<option key={"learn-opps-option-"+item} value={item} label={item}/>)
+        }
+        return array;
+    }
+
+    const renderAccommodation = () =>{
+        let array:any[]=[];
+        array.push(<option key={"accommodation-option-empty"}/>)
+        for(const item in Accommodation){
+            array.push(<option key={"accommodation-option-"+item} value={item} label={item}/>)
+        }
+        return array;
+    }
+
     return(
         <form>
             <div className="columns">
@@ -84,17 +110,16 @@ const AddOpportunityTab:React.FunctionComponent = () =>{
                         <input className="input border-linear" type="text"
                                placeholder="Select Opportunity Category"/>
                     </div>
-                    {/*Languages Spoken*/}
-                    <div className="field">
-                        <label className="label has-text-primary has-text-weight-medium">Languages Spoken*</label>
-                        <input className="input border-linear" type="text"
-                               placeholder="Select Opportunity Category"/>
-                    </div>
                     {/*Accommodation Provided*/}
                     <div className="field">
                         <label className="label has-text-primary has-text-weight-medium">Accommodation Provided*</label>
-                        <input className="input border-linear" type="text"
-                               placeholder="Select Opportunity Category"/>
+                        <div className="control">
+                            <div className="select is-fullwidth">
+                                <select className={"border-linear"} defaultValue={renderAccommodation()[0]}>
+                                    {renderAccommodation()}
+                                </select>
+                            </div>
+                        </div>
                     </div>
                     {/*Additional Offerings*/}
                     <div className="field">
@@ -108,11 +133,23 @@ const AddOpportunityTab:React.FunctionComponent = () =>{
                         <input className="input border-linear" type="text"
                                placeholder="Select Opportunity Category"/>
                     </div>
-                    {/*Smoking Allowed*/}
-                    <div className="field">
-                        <label className="label has-text-primary has-text-weight-medium">Smoking Allowed*</label>
-                        <input className="input border-linear" type="text"
-                               placeholder="Select Opportunity Category"/>
+
+                    <div className="field is-grouped is-grouped-centered">
+                        {/*Smoking Allowed*/}
+                        <div className="control">
+                            <label className="checkbox label has-text-primary has-text-weight-medium">
+                                <input type="checkbox"/>&nbsp;Smoking Allowed</label>
+                        </div>
+                        {/*Wifi*/}
+                        <div className="control">
+                            <label className="checkbox label has-text-primary has-text-weight-medium">
+                                <input type="checkbox"/>&nbsp;Wifi</label>
+                        </div>
+                        {/*Pets allowed*/}
+                        <div className="control">
+                            <label className="checkbox label has-text-primary has-text-weight-medium">
+                                <input type="checkbox"/>&nbsp;Pets allowed</label>
+                        </div>
                     </div>
 
                 </div>
@@ -160,20 +197,9 @@ const AddOpportunityTab:React.FunctionComponent = () =>{
                     {/*Learning Opportunities*/}
                     <div className="field">
                         <label className="label has-text-primary has-text-weight-medium">Learning Opportunities*</label>
-                        <input className="input border-linear" type="text"
-                               placeholder="Select Opportunity Category"/>
-                    </div>
-                    {/*Wifi*/}
-                    <div className="field">
-                        <label className="label has-text-primary has-text-weight-medium">Wifi*</label>
-                        <input className="input border-linear" type="text"
-                               placeholder="Select Opportunity Category"/>
-                    </div>
-                    {/*Pets allowed*/}
-                    <div className="field">
-                        <label className="label has-text-primary has-text-weight-medium">Pets allowed*</label>
-                        <input className="input border-linear" type="text"
-                               placeholder="Select Opportunity Category"/>
+                        <CustomSelectMultiple placeholder={"Select learning opportunities"} field={"learningOpportunities"}
+                                              register={register} options={renderLearningOpportunities()}
+                                              selectedValues={selectedLearningOpps} setSelectedValues={setSelectedLearningOpps}/>
                     </div>
 
                 </div>
@@ -197,6 +223,18 @@ const AddOpportunityTab:React.FunctionComponent = () =>{
                         </div>
                     </div>
                 </div>
+            </div>
+            <div className="field is-grouped is-grouped-centered">
+                <p className="control">
+                    <a className="button is-primary">
+                        Submit
+                    </a>
+                </p>
+                <p className="control">
+                    <a className="button is-light">
+                        Cancel
+                    </a>
+                </p>
             </div>
         </form>
     )

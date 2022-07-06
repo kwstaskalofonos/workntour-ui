@@ -44,7 +44,7 @@ export enum TypeOfHelpNeeded{
      service="service"
 }
 
-export enum Accomodation{
+export enum Accommodation{
      privateRoom="privateRoom",
      sharedRoom="sharedRoom",
      dorm="dorm",
@@ -66,6 +66,43 @@ export enum Languages{
      german="german"
 }
 
+export enum LearningOpportunities{
+     hospitality="hospitality",
+     languages="languages",
+     animalWelfare="animalWelfare",
+     volunteering="volunteering",
+     cultureExchange="cultureExchange",
+     charityWork="charityWork",
+     farming="farming",
+     photography="photography",
+     videography="videography",
+     technology="technology",
+     nonProfit="nonProfit",
+     art="art",
+     waterSports="waterSports",
+     nature="nature",
+     writing="writing",
+     yoga="yoga",
+     fitness="fitness",
+     dancing="dancing",
+     gardening="gardening",
+     cycling="cycling",
+     books="books",
+     babysitting="babysitting",
+     cooking="cooking",
+     computers="computers",
+     programming="programming",
+     selfDevelopment="selfDevelopment",
+     sustainability="sustainability",
+     hitchhiking="hitchhiking",
+     sailing="sailing",
+     music="music",
+     movies="movies",
+     fashion="fashion",
+     history="history",
+     architecture="architecture"
+}
+
 export interface Opportunity{
      opportunityId:string,
      memberId:string,
@@ -82,7 +119,7 @@ export interface Opportunity{
      daysOff:number,
      // languagesRequired:any,
      // languagesSpoken:any,
-     accommodation:Accomodation,
+     accommodation:Accommodation,
      meals:Meal[],
      additionalOfferings:string,
      // learningOpportunities:any,
