@@ -7,7 +7,7 @@ import {
     Languages, LanguagesType,
     LearningOpportunities, LearningOpportunitiesType,
     Meal, MealType, Opportunity,
-    OpportunityCategory, OpportunityCategoryType,
+    OpportunityCategory, OpportunityCategoryType, OpportunityLocation,
     TypeOfHelpNeeded, TypeOfHelpNeededType
 } from "@src/state/stores/opportunity/models";
 import CustomSelectMultiple from "@src/views/common/CustomSelectMultiple";
@@ -23,6 +23,7 @@ const AddOpportunityTab:React.FunctionComponent = () =>{
     const [languagesSpoken,setLanguagesSpoken] = useState<Languages[]>([]);
     const [selectedMeals,setSelectedMeals] = useState<Meal[]>([]);
     const [selectedLearningOpps,setSelectedLearningOpps] = useState<LearningOpportunities[]>([]);
+    const [opportunityLocation,setOpportunityLocation] = useState<OpportunityLocation>();
 
     const renderCategories = () =>{
         let array:any[]=[];
@@ -90,6 +91,9 @@ const AddOpportunityTab:React.FunctionComponent = () =>{
         data.languagesSpoken = languagesSpoken;
         data.meals = selectedMeals;
         data.learningOpportunities = selectedLearningOpps;
+        if(opportunityLocation){
+            data.opportunityLocation = opportunityLocation;
+        }
         console.log(data);
     }
 
@@ -165,7 +169,7 @@ const AddOpportunityTab:React.FunctionComponent = () =>{
                     {/*location*/}
                     <div className="field">
                         <label className="label has-text-primary has-text-weight-medium">5.Select Location*</label>
-                        <CustomMap/>
+                        <CustomMap setOpportunityLocation={setOpportunityLocation}/>
                     </div>
 
                 </div>
