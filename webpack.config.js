@@ -16,6 +16,11 @@ const COOKIE_DOMAIN = {
     development: "'http://127.0.0.1:8083'"
 }
 
+const GOOGLE_MAPS_KEY = {
+    production:"AIzaSyB6loP2yYIkJeQX477L_Tj16tDFKaQ4ar0",
+    development:"AIzaSyB6loP2yYIkJeQX477L_Tj16tDFKaQ4ar0"
+}
+
 export default {
     entry: path.join(__dirname,'./src/index.tsx'),
     output: {
@@ -92,7 +97,8 @@ export default {
         new webpack.DefinePlugin({
             __API_URL__:JSON.stringify(API_URL[process.env.NODE_ENV]),
             __CONTEXT__:JSON.stringify("/"),
-            __COOKIE_DOMAIN__:JSON.stringify(COOKIE_DOMAIN[process.env.NODE_ENV])})
+            __COOKIE_DOMAIN__:JSON.stringify(COOKIE_DOMAIN[process.env.NODE_ENV]),
+            __API_KEY__:JSON.stringify(GOOGLE_MAPS_KEY[process.env.NODE_ENV])})
     ],
     devServer:{
         allowedHosts:['*'],

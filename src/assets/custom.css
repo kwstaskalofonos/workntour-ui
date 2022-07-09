@@ -31,6 +31,13 @@
     border-radius: 8px;
 }
 
+.border-linear:focus{
+    background: linear-gradient(white,white) padding-box,linear-gradient(90deg,#7E6FD8,#0EE5D0) border-box !important;
+    border-style: solid !important;
+    border-width: 2px !important;
+    border-color: transparent !important;
+}
+
 .opportunities{
     background-image: url("./hosts/hostBackground.png");
     background-repeat: no-repeat;

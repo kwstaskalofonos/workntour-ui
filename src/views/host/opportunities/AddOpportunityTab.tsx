@@ -3,19 +3,20 @@ import {useForm} from "react-hook-form";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCloudUpload} from "@fortawesome/free-solid-svg-icons/faCloudUpload";
 import {
-    Accommodation,
-    Languages,
-    LearningOpportunities,
-    Meal,
-    OpportunityCategory,
-    TypeOfHelpNeeded
+    Accommodation, AccommodationType,
+    Languages, LanguagesType,
+    LearningOpportunities, LearningOpportunitiesType,
+    Meal, MealType, Opportunity,
+    OpportunityCategory, OpportunityCategoryType,
+    TypeOfHelpNeeded, TypeOfHelpNeededType
 } from "@src/state/stores/opportunity/models";
 import CustomSelectMultiple from "@src/views/common/CustomSelectMultiple";
+import CustomMap from "@src/views/host/opportunities/CustomMap";
 
 const AddOpportunityTab:React.FunctionComponent = () =>{
 
     const form = useForm();
-    const {register,handleSubmit,getValues} = form;
+    const {register,handleSubmit,getValues,formState: { errors }} = form;
 
     const [selectedHelps,setSelectedHelps] = useState<TypeOfHelpNeeded[]>([]);
     const [languagesRequired,setLanguagesRequired] = useState<Languages[]>([]);
@@ -27,7 +28,8 @@ const AddOpportunityTab:React.FunctionComponent = () =>{
         let array:any[]=[];
         array.push(<option key={"category-option-empty"}/>)
         for(const item in OpportunityCategory){
-            array.push(<option key={"category-option-"+item} value={item} label={item}/>)
+            array.push(<option key={"category-option-"+item}
+                               value={OpportunityCategory[item as OpportunityCategoryType]} label={item}/>)
         }
         return array;
     }
@@ -36,7 +38,8 @@ const AddOpportunityTab:React.FunctionComponent = () =>{
         let array:any[]=[];
         array.push(<option key={"type-of-help-option-empty"}/>)
         for(const item in TypeOfHelpNeeded){
-            array.push(<option key={"type-of-help-option-"+item} value={item} label={item}/>)
+            array.push(<option key={"type-of-help-option-"+item}
+                               value={TypeOfHelpNeeded[item as TypeOfHelpNeededType]} label={item}/>)
         }
         return array;
     }
@@ -45,7 +48,8 @@ const AddOpportunityTab:React.FunctionComponent = () =>{
         let array:any[]=[];
         array.push(<option key={"language-option-empty"}/>)
         for(const item in Languages){
-            array.push(<option key={"language-option-"+item} value={item} label={item}/>)
+            array.push(<option key={"language-option-"+item}
+                               value={Languages[item as LanguagesType]} label={item}/>)
         }
         return array;
     }
@@ -54,7 +58,8 @@ const AddOpportunityTab:React.FunctionComponent = () =>{
         let array:any[]=[];
         array.push(<option key={"meal-option-empty"}/>)
         for(const item in Meal){
-            array.push(<option key={"meal-option-"+item} value={item} label={item}/>)
+            array.push(<option key={"meal-option-"+item}
+                               value={Meal[item as MealType]} label={item}/>)
         }
         return array;
     }
@@ -63,7 +68,8 @@ const AddOpportunityTab:React.FunctionComponent = () =>{
         let array:any[]=[];
         array.push(<option key={"learn-opps-option-empty"}/>)
         for(const item in LearningOpportunities){
-            array.push(<option key={"learn-opps-option-"+item} value={item} label={item}/>)
+            array.push(<option key={"learn-opps-option-"+item}
+                               value={LearningOpportunities[item as LearningOpportunitiesType]} label={item}/>)
         }
         return array;
     }
@@ -72,142 +78,69 @@ const AddOpportunityTab:React.FunctionComponent = () =>{
         let array:any[]=[];
         array.push(<option key={"accommodation-option-empty"}/>)
         for(const item in Accommodation){
-            array.push(<option key={"accommodation-option-"+item} value={item} label={item}/>)
+            array.push(<option key={"accommodation-option-"+item}
+                               value={Accommodation[item as AccommodationType]} label={item}/>)
         }
         return array;
     }
 
+    const onSubmit = (data:Opportunity) =>{
+        data.typeOfHelpNeeded = selectedHelps;
+        data.languagesRequired = languagesRequired;
+        data.languagesSpoken = languagesSpoken;
+        data.meals = selectedMeals;
+        data.learningOpportunities = selectedLearningOpps;
+        console.log(data);
+    }
+
     return(
         <form>
-            <div className="columns">
+            <div className="columns is-centered">
                 <div className="column is-4">
                     {/*Category*/}
                     <div className="field">
-                        <label className="label has-text-primary has-text-weight-medium">Category*</label>
+                        <label className="label has-text-primary has-text-weight-medium">1.Category*</label>
                         <div className="control">
                             <div className="select is-fullwidth">
-                                <select className={"border-linear"} defaultValue={renderCategories()[0]}>
+                                <select className={"border-linear has-text-primary"}
+                                        {...register("opportunityCategory",{required:true})}>
                                     {renderCategories()}
                                 </select>
                             </div>
+                            {errors.opportunityCategory &&
+                                <p className={"help is-danger"}>Category is required</p>
+                            }
                         </div>
+                    </div>
+                    {/*Job Title*/}
+                    <div className="field">
+                        <label className="label has-text-primary has-text-weight-medium">2.Job Title*</label>
+                        <input className="input border-linear has-text-primary" type="text"
+                               {...register("jobTitle",{required:true})}
+                               placeholder="Type Job Title"/>
+                        {errors.jobTitle &&
+                            <p className={"help is-danger"}>
+                                Job Title is required.</p>}
                     </div>
                     {/*Job Description*/}
                     <div className="field">
-                        <label className="label has-text-primary has-text-weight-medium">Job Description*</label>
-                        <input className="input border-linear" type="text"
-                               placeholder="Select Opportunity Category"/>
+                        <label className="label has-text-primary has-text-weight-medium">Job Description</label>
+                        <textarea className="textarea border-linear has-text-primary"
+                                  {...register("jobDescription",{maxLength:20})}
+                                  placeholder="Make it easy for the travelers to understand their role, what is expected from them and their key responsibilities.Indicate the day-to-day activities so that they understand how they will be able to become part of the local lifestyle."/>
+                        {errors.jobDescription &&
+                            <p className={"help is-danger"}>
+                                Job description exceeds limit.</p>}
                     </div>
-                    {/*Opportunity Dates*/}
-                    <div className="field">
-                        <label className="label has-text-primary has-text-weight-medium">Opportunity Dates*</label>
-                        <input className="input border-linear" type="text"
-                               placeholder="Select Opportunity Category"/>
-                    </div>
-                    {/*Days Off*/}
-                    <div className="field">
-                        <label className="label has-text-primary has-text-weight-medium">Days Off*</label>
-                        <input className="input border-linear" type="text"
-                               placeholder="Select Opportunity Category"/>
-                    </div>
-                    {/*Accommodation Provided*/}
-                    <div className="field">
-                        <label className="label has-text-primary has-text-weight-medium">Accommodation Provided*</label>
-                        <div className="control">
-                            <div className="select is-fullwidth">
-                                <select className={"border-linear"} defaultValue={renderAccommodation()[0]}>
-                                    {renderAccommodation()}
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    {/*Additional Offerings*/}
-                    <div className="field">
-                        <label className="label has-text-primary has-text-weight-medium">Additional Offerings*</label>
-                        <input className="input border-linear" type="text"
-                               placeholder="Select Opportunity Category"/>
-                    </div>
-                    {/*Adventures Offered*/}
-                    <div className="field">
-                        <label className="label has-text-primary has-text-weight-medium">Adventures Offered*</label>
-                        <input className="input border-linear" type="text"
-                               placeholder="Select Opportunity Category"/>
-                    </div>
-
-                    <div className="field is-grouped is-grouped-centered">
-                        {/*Smoking Allowed*/}
-                        <div className="control">
-                            <label className="checkbox label has-text-primary has-text-weight-medium">
-                                <input type="checkbox"/>&nbsp;Smoking Allowed</label>
-                        </div>
-                        {/*Wifi*/}
-                        <div className="control">
-                            <label className="checkbox label has-text-primary has-text-weight-medium">
-                                <input type="checkbox"/>&nbsp;Wifi</label>
-                        </div>
-                        {/*Pets allowed*/}
-                        <div className="control">
-                            <label className="checkbox label has-text-primary has-text-weight-medium">
-                                <input type="checkbox"/>&nbsp;Pets allowed</label>
-                        </div>
-                    </div>
-
-                </div>
-                <div className="column is-4">
-                    {/*Job Title*/}
-                    <div className="field">
-                        <label className="label has-text-primary has-text-weight-medium">Job Title*</label>
-                        <input className="input border-linear" type="text"
-                               placeholder="Select Opportunity Category"/>
-                    </div>
-                    {/*Type of help*/}
-                    <div className="field">
-                        <label className="label has-text-primary has-text-weight-medium">Type of help*</label>
-                        <CustomSelectMultiple placeholder={"Select types of help"} field={"typeOfHelp"}
-                                              register={register} options={renderTypesOfHelp()}
-                                                selectedValues={selectedHelps} setSelectedValues={setSelectedHelps}/>
-                    </div>
-                    {/*Total working hours*/}
-                    <div className="field">
-                        <label className="label has-text-primary has-text-weight-medium">Total working hours*</label>
-                        <input className="input border-linear" type="text"
-                               placeholder="Select Opportunity Category"/>
-                    </div>
-                    {/*Languages Required*/}
-                    <div className="field">
-                        <label className="label has-text-primary has-text-weight-medium">Languages Required*</label>
-                        <CustomSelectMultiple placeholder={"Select languages required"} field={"languagesRequired"}
-                                              register={register} options={renderLanguages()}
-                                              selectedValues={languagesRequired} setSelectedValues={setLanguagesRequired}/>
-                    </div>
-                    {/*Languages Spoken*/}
-                    <div className="field">
-                        <label className="label has-text-primary has-text-weight-medium">Languages Spoken*</label>
-                        <CustomSelectMultiple placeholder={"Select languages spoken"} field={"languagesSpoken"}
-                                              register={register} options={renderLanguages()}
-                                              selectedValues={languagesSpoken} setSelectedValues={setLanguagesSpoken}/>
-                    </div>
-                    {/*Meals*/}
-                    <div className="field">
-                        <label className="label has-text-primary has-text-weight-medium">Meals*</label>
-                        <CustomSelectMultiple placeholder={"Select meals"} field={"meals"}
-                                              register={register} options={renderMeals()}
-                                              selectedValues={selectedMeals} setSelectedValues={setSelectedMeals}/>
-                    </div>
-                    {/*Learning Opportunities*/}
-                    <div className="field">
-                        <label className="label has-text-primary has-text-weight-medium">Learning Opportunities*</label>
-                        <CustomSelectMultiple placeholder={"Select learning opportunities"} field={"learningOpportunities"}
-                                              register={register} options={renderLearningOpportunities()}
-                                              selectedValues={selectedLearningOpps} setSelectedValues={setSelectedLearningOpps}/>
-                    </div>
-
-                </div>
-                <div className="column is-4">
+                    {/*images*/}
                     <div className="field">
                         <label className="label has-text-primary has-text-weight-medium">
-                            Images
+                            3.Images*
                         </label>
+                        <p className="help is-primary mb-2">The images you upload should be in high resolution.Like that your traveler will be willing to approach
+                         you! It is important to include photos of your property, the accommodation that you will be providing to travelers and anything else
+                         that will make your opportunity attractive to travelers.<br/>Please do not include pictures that show the name of your Business or Property,
+                        as they will be removed.</p>
                         <div className="file is-large is-boxed is-fullwidth">
                             <label className="file-label border-linear-radius">
                                 <input className="file-input" type="file" name="resume" multiple={true}/>
@@ -222,19 +155,148 @@ const AddOpportunityTab:React.FunctionComponent = () =>{
                             </label>
                         </div>
                     </div>
+                    {/*Type of help*/}
+                    <div className="field">
+                        <label className="label has-text-primary has-text-weight-medium">4.Type of help*</label>
+                        <CustomSelectMultiple placeholder={"Select types of help"} field={"typeOfHelpNeeded"}
+                                              register={register} options={renderTypesOfHelp()} enumType={TypeOfHelpNeeded}
+                                              selectedValues={selectedHelps} setSelectedValues={setSelectedHelps}/>
+                    </div>
+                    {/*location*/}
+                    <div className="field">
+                        <label className="label has-text-primary has-text-weight-medium">5.Select Location*</label>
+                        <CustomMap/>
+                    </div>
+
                 </div>
-            </div>
-            <div className="field is-grouped is-grouped-centered">
-                <p className="control">
-                    <a className="button is-primary">
-                        Submit
-                    </a>
-                </p>
-                <p className="control">
-                    <a className="button is-light">
-                        Cancel
-                    </a>
-                </p>
+                <div className="column is-1"/>
+                <div className="column is-4">
+                    {/*Opportunity Dates*/}
+                    <div className="field">
+                        <label className="label has-text-primary has-text-weight-medium">6.Available Dates*</label>
+                        <input className="input border-linear" type="text"
+                               placeholder="Select Opportunity Category"/>
+                    </div>
+                    {/*Total working hours*/}
+                    <div className="field">
+                        <label className="label has-text-primary has-text-weight-medium">7.Setup working days & hours pes week* max(32)</label>
+                        <div className="is-flex is-justify-content-space-between">
+                            <input className="input border-linear has-text-primary mx-2" type="number"
+                                   placeholder="Min Days" {...register("minimumDays",{required:true,min:1})}/>
+                            <input className="input border-linear has-text-primary mx-2" type="number"
+                                   placeholder="Max Days" {...register("maximumDays",{required:true,min:1})}/>
+                            <input className="input border-linear has-text-primary mx-2" type="number"
+                                   placeholder="Total hours" {...register("totalWorkingHours",{required:true,min:1})}/>
+                        </div>
+                        {errors.minimumDays && <p className={"help is-danger"}>Not valid minimum days.</p>}
+                        {errors.maximumDays && <p className={"help is-danger"}>Not valid maximum days.</p>}
+                        {errors.totalWorkingHours && <p className={"help is-danger"}>Not valid total working hours days.</p>}
+                    </div>
+                    {/*Languages Required*/}
+                    <div className="field">
+                        <label className="label has-text-primary has-text-weight-medium">8.Languages Required*</label>
+                        <CustomSelectMultiple placeholder={"Select languages required"} field={"languagesRequired"}
+                                              register={register} options={renderLanguages()} enumType={Languages}
+                                              selectedValues={languagesRequired} setSelectedValues={setLanguagesRequired}/>
+                    </div>
+                    {/*Languages Spoken*/}
+                    <div className="field">
+                        <label className="label has-text-primary has-text-weight-medium">Languages Spoken*</label>
+                        <CustomSelectMultiple placeholder={"Select languages spoken"} field={"languagesSpoken"}
+                                              register={register} options={renderLanguages()} enumType={Languages}
+                                              selectedValues={languagesSpoken} setSelectedValues={setLanguagesSpoken}/>
+                    </div>
+                    {/*Accommodation Provided*/}
+                    <div className="field">
+                        <label className="label has-text-primary has-text-weight-medium">9.Accommodation Provided*</label>
+                        <div className="control">
+                            <div className="select is-fullwidth">
+                                <select className={"border-linear has-text-primary"}
+                                        {...register("accommodation",{required:true})}>
+                                    {renderAccommodation()}
+                                </select>
+                            </div>
+                        </div>
+                        {errors.accommodation &&
+                            <p className={"help is-danger"}>
+                                Accommodation is required.</p>}
+                    </div>
+                    {/*Meals*/}
+                    <div className="field">
+                        <label className="label has-text-primary has-text-weight-medium">10.Meals*</label>
+                        <CustomSelectMultiple placeholder={"Select meals"} field={"meals"}
+                                              register={register} options={renderMeals()} enumType={Meal}
+                                              selectedValues={selectedMeals} setSelectedValues={setSelectedMeals}/>
+
+                    </div>
+                    {/*Learning Opportunities*/}
+                    <div className="field">
+                        <label className="label has-text-primary has-text-weight-medium">11.Add the learning opportunities* that the travelers
+                         will benefit from while working and living with you.</label>
+                        <CustomSelectMultiple placeholder={"Select learning opportunities"} field={"learningOpportunities"}
+                                              register={register} options={renderLearningOpportunities()} enumType={LearningOpportunities}
+                                              selectedValues={selectedLearningOpps} setSelectedValues={setSelectedLearningOpps}/>
+                    </div>
+                    {/*Days Off*/}
+                    <div className="field">
+                        <label className="label has-text-primary has-text-weight-medium">Days Off*</label>
+                        <input className="input border-linear has-text-primary"
+                               {...register("daysOff",{min:0})} type="number"
+                               placeholder="Select Opportunity Category"/>
+                        {errors.daysOff &&
+                            <p className={"help is-danger"}>
+                                Days off should be positive number.</p>}
+                    </div>
+                    {/*Additional Offerings*/}
+                    {/*<div className="field">*/}
+                    {/*    <label className="label has-text-primary has-text-weight-medium">Additional Offerings*</label>*/}
+                    {/*    <input className="input border-linear" type="text"*/}
+                    {/*           placeholder="Select Opportunity Category"/>*/}
+                    {/*</div>*/}
+                    {/*Adventures Offered*/}
+                    <div className="field">
+                        <label className="label has-text-primary has-text-weight-medium">Adventures Offered*</label>
+                        <textarea className="textarea border-linear has-text-primary"
+                                  {...register("adventuresOffered",{maxLength:100})}
+                                  placeholder="Type Adventures offered"/>
+                        {errors.adventuresOffered &&
+                            <p className={"help is-danger"}>
+                                Adventures description exceeds limit.</p>}
+                    </div>
+
+                    <div className="field is-grouped is-grouped-centered mb-6">
+                        {/*Smoking Allowed*/}
+                        <div className="control">
+                            <label className="checkbox label has-text-primary has-text-weight-medium">
+                                <input type="checkbox" {...register("smokingAllowed")}/>&nbsp;Smoking Allowed</label>
+                        </div>
+                        {/*Wifi*/}
+                        <div className="control">
+                            <label className="checkbox label has-text-primary has-text-weight-medium">
+                                <input type="checkbox" {...register("wifi")}/>&nbsp;Wifi</label>
+                        </div>
+                        {/*Pets allowed*/}
+                        <div className="control">
+                            <label className="checkbox label has-text-primary has-text-weight-medium">
+                                <input type="checkbox" {...register("petsAllowed")}/>&nbsp;Pets allowed</label>
+                        </div>
+                    </div>
+                    <div className="field is-grouped is-grouped-centered mt-6">
+                        <p className="control">
+                            <a className="button is-primary" type={"button"} onClick={handleSubmit(onSubmit)}>
+                                Submit
+                            </a>
+                        </p>
+                        <p className="control">
+                            <a className="button is-light">
+                                Cancel
+                            </a>
+                        </p>
+                    </div>
+                </div>
+                {/*<div className="column is-4">*/}
+
+                {/*</div>*/}
             </div>
         </form>
     )

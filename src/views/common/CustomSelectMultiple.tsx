@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from "react";
+import {TypeOfHelpNeeded, TypeOfHelpNeededType} from "@src/state/stores/opportunity/models";
 
 interface Props{
     field:string,
@@ -6,11 +7,12 @@ interface Props{
     register:any,
     placeholder:string,
     selectedValues:any[],
-    setSelectedValues:any
+    setSelectedValues:any,
+    enumType:any,
 }
 
 const CustomSelectMultiple:React.FunctionComponent<Props> = ({field,options,register,placeholder,
-                                                             selectedValues,setSelectedValues}) =>{
+                                                             selectedValues,setSelectedValues,enumType}) =>{
 
     const [value,setValue] = useState<any>();
 
@@ -38,7 +40,8 @@ const CustomSelectMultiple:React.FunctionComponent<Props> = ({field,options,regi
         let array:any[]=[];
         for(const selected of selectedValues){
             array.push(<React.Fragment key={"selected-prop-"+selected}>
-                <span className="tag is-primary m-1">{selected}</span>
+                <span className="tag is-primary m-1">
+                    {Object.keys(enumType).filter(x => enumType[x] == selected)}</span>
                 <a className="tag is-delete" onClick={()=>removeFromSelected(selected)}></a>
             </React.Fragment>)
         }
@@ -50,7 +53,7 @@ const CustomSelectMultiple:React.FunctionComponent<Props> = ({field,options,regi
             <div className="select is-fullwidth">
                 <select
                     {...register(field)}
-                    className={"border-linear"}
+                    className={"border-linear has-text-primary"}
                     placeholder={placeholder}
                     value={value?value:''}
                     onChange={(event)=>onSelect(event.target.value)}>

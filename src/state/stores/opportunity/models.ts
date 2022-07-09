@@ -1,106 +1,137 @@
 import {Role} from "@src/state/stores/user/models";
 
 export enum OpportunityCategory{
-     hostel="hostel",
-     hotel="hotel",
-     guestHouse="guestHouse",
-     farm="farm",
-     ecoVillage="ecoVillage",
-     skiCenter="skiCenter",
-     camping="camping",
-     ngo="ngo",
-     localCommunity="localCommunity",
-     animalShelter="animalShelter",
-     surfClub="surfClub",
-     winery="winery",
-     boat="boat",
-     homeStay="homeStay",
-     individual="individual",
-     privateProject="privateProject"
+     Hostel="hostel",
+     Hotel="hotel",
+     GuestHouse="guestHouse",
+     Farm="farm",
+     EcoVillage="ecoVillage",
+     SkiCenter="skiCenter",
+     Camping="camping",
+     Ngo="ngo",
+     LocalCommunity="localCommunity",
+     AnimalShelter="animalShelter",
+     SurfClub="surfClub",
+     Winery="winery",
+     Boat="boat",
+     HomeStay="homeStay",
+     Individual="individual",
+     PrivateProject="privateProject"
 }
+
+export type OpportunityCategoryType = keyof typeof OpportunityCategory;
 
 export enum TypeOfHelpNeeded{
-     reception="reception",
-     cleaning="cleaning",
-     houseKeeping="houseKeeping",
-     administrativeTasks="administrativeTasks",
-     tourGuide="tourGuide",
-     babysitter="babysitter",
-     vet="vet",
-     animalCare="animalCare",
-     languages="languages",
-     sportsTeacher="sportsTeacher",
-     surfing="surfing",
-     personalTrainer="personalTrainer",
-     farming="farming",
-     painting="painting",
-     handyman="handyman",
-     socialMedia="socialMedia",
-     photography="photography",
-     videography="videography",
-     webDevelopment="webDevelopment",
-     cooking="cooking",
-     bartending="bartending",
-     service="service"
+     Reception="reception",
+     Cleaning="cleaning",
+     HouseKeeping="houseKeeping",
+     AdministrativeTasks="administrativeTasks",
+     TourGuide="tourGuide",
+     Babysitter="babysitter",
+     Vet="vet",
+     AnimalCare="animalCare",
+     Languages="languages",
+     SportsTeacher="sportsTeacher",
+     Surfing="surfing",
+     PersonalTrainer="personalTrainer",
+     Farming="farming",
+     Painting="painting",
+     Handyman="handyman",
+     SocialMedia="socialMedia",
+     Photography="photography",
+     Videography="videography",
+     WebDevelopment="webDevelopment",
+     Cooking="cooking",
+     Bartending="bartending",
+     Service="service"
 }
+
+export type TypeOfHelpNeededType = keyof typeof TypeOfHelpNeeded;
 
 export enum Accommodation{
-     privateRoom="privateRoom",
-     sharedRoom="sharedRoom",
-     dorm="dorm",
-     tent="tent"
+     PrivateRoom="privateRoom",
+     SharedRoom="sharedRoom",
+     Dorm="dorm",
+     Tent="tent"
 }
+
+export type AccommodationType = keyof typeof Accommodation;
 
 export enum Meal{
-     breakfast="breakfast",
-     lunch="lunch",
-     dinner="dinner",
-     useSharedKitchen="useSharedKitchen"
+     Breakfast="breakfast",
+     Lunch="lunch",
+     Dinner="dinner",
+     UseSharedKitchen="useSharedKitchen"
 }
+
+export type MealType = keyof typeof Meal;
 
 export enum Languages{
-     greek="greek",
-     english="english",
-     spanish="spanish",
-     italian="italian",
-     german="german"
+     Greek="greek",
+     English="english",
+     Spanish="spanish",
+     Italian="italian",
+     German="german"
 }
 
+export type LanguagesType = keyof typeof Languages;
+
 export enum LearningOpportunities{
-     hospitality="hospitality",
-     languages="languages",
-     animalWelfare="animalWelfare",
-     volunteering="volunteering",
-     cultureExchange="cultureExchange",
-     charityWork="charityWork",
-     farming="farming",
-     photography="photography",
-     videography="videography",
-     technology="technology",
-     nonProfit="nonProfit",
-     art="art",
-     waterSports="waterSports",
-     nature="nature",
-     writing="writing",
-     yoga="yoga",
-     fitness="fitness",
-     dancing="dancing",
-     gardening="gardening",
-     cycling="cycling",
-     books="books",
-     babysitting="babysitting",
-     cooking="cooking",
-     computers="computers",
-     programming="programming",
-     selfDevelopment="selfDevelopment",
-     sustainability="sustainability",
-     hitchhiking="hitchhiking",
-     sailing="sailing",
-     music="music",
-     movies="movies",
-     fashion="fashion",
-     history="history",
-     architecture="architecture"
+     Hospitality="hospitality",
+     Languages="languages",
+     AnimalWelfare="animalWelfare",
+     Volunteering="volunteering",
+     CultureExchange="cultureExchange",
+     CharityWork="charityWork",
+     Farming="farming",
+     Photography="photography",
+     Videography="videography",
+     Technology="technology",
+     NonProfit="nonProfit",
+     Art="art",
+     WaterSports="waterSports",
+     Nature="nature",
+     Writing="writing",
+     Yoga="yoga",
+     Fitness="fitness",
+     Dancing="dancing",
+     Gardening="gardening",
+     Cycling="cycling",
+     Books="books",
+     Babysitting="babysitting",
+     Cooking="cooking",
+     Computers="computers",
+     Programming="programming",
+     SelfDevelopment="selfDevelopment",
+     Sustainability="sustainability",
+     Hitchhiking="hitchhiking",
+     Sailing="sailing",
+     Music="music",
+     Movies="movies",
+     Fashion="fashion",
+     History="history",
+     Architecture="architecture"
+}
+
+export type LearningOpportunitiesType = keyof typeof LearningOpportunities;
+
+export interface PlacemarkAttributes{
+     name:string,
+     country:string,
+     area:string,
+     locality:string,
+     postalCode:string
+}
+
+export interface OpportunityLocation{
+     placemark:PlacemarkAttributes,
+     longitude:string,
+     latitude:string
+}
+
+export interface OpportunityDates{
+     startDate:Date,
+     endDate:Date
 }
 
 export interface Opportunity{
@@ -111,18 +142,18 @@ export interface Opportunity{
      jobTitle:string,
      jobDescription:string,
      typeOfHelpNeeded:TypeOfHelpNeeded[],
-     /*opportunityLocation:any,*/
-     // opportunityDates:any,
+     opportunityLocation:OpportunityLocation,
+     opportunityDates:OpportunityDates,
      minimumDays:number;
      maximumDays:number,
      totalWorkingHours:number,
      daysOff:number,
-     // languagesRequired:any,
-     // languagesSpoken:any,
+     languagesRequired:Languages[],
+     languagesSpoken:Languages[],
      accommodation:Accommodation,
      meals:Meal[],
      additionalOfferings:string,
-     // learningOpportunities:any,
+     learningOpportunities:LearningOpportunities[],
      adventuresOffered:string,
      wifi:boolean,
      smokingAllowed:boolean,
