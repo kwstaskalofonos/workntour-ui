@@ -17,10 +17,10 @@ const SecuredSiteRouter: React.FunctionComponent = () =>{
             <InterCom/>
             <Header/>
                 <div className="container is-fluid mt-4">
-                    {userRole===Role.COMPANY.valueOf() &&
+                    {userRole===Role.COMPANY_HOST.valueOf() &&
                         <CompanyRouter/>
                     }
-                    {userRole===Role.INDIVIDUAL.valueOf() &&
+                    {userRole===Role.INDIVIDUAL_HOST.valueOf() &&
                         <IndividualRouter/>
                     }
                     {userRole===Role.TRAVELER.valueOf() &&

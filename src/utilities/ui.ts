@@ -20,20 +20,20 @@ export function constructDate(day:string,month:string,year:string){
  }
 
 export function isHost(){
-    return (hasCookie()&&(getCookie("role") === Role.COMPANY.valueOf()||
-        getCookie("role") === Role.INDIVIDUAL.valueOf()));
+    return (hasCookie()&&(getCookie("role") === Role.COMPANY_HOST.valueOf()||
+        getCookie("role") === Role.INDIVIDUAL_HOST.valueOf()));
 }
 
 export function getUserDisplayName(){
     let name='';
     if(hasCookie()&&hasCookie('role')){
         switch (getCookie('role')){
-            case Role.COMPANY.valueOf():{
+            case Role.COMPANY_HOST.valueOf():{
                 let profile:CompanyHostProfile = JSON.parse(getCookie('profile'));
                 name = profile.companyName;
                 break;
             }
-            case Role.INDIVIDUAL.valueOf():{
+            case Role.INDIVIDUAL_HOST.valueOf():{
                 let profile:IndividualHostProfile = JSON.parse(getCookie('profile'));
                 name = profile.name
                 break;

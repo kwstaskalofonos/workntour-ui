@@ -94,13 +94,13 @@ export const retrieveUserProfile = ():Promise<void>=>{
                 retrieveTravelerProfile();
                 break;
             }
-            case Role.COMPANY.valueOf():{
+            case Role.COMPANY_HOST.valueOf():{
                 console.log("COMPANY");
                 // @ts-ignore
                 retrieveCompanyProfile();
                 break;
             }
-            case Role.INDIVIDUAL.valueOf():{
+            case Role.INDIVIDUAL_HOST.valueOf():{
                 console.log("INDIVIDUAL");
                 // @ts-ignore
                 retrieveIndividualProfile();

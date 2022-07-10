@@ -130,8 +130,8 @@ export interface OpportunityLocation{
 }
 
 export interface OpportunityDates{
-     startDate:Date,
-     endDate:Date
+     startDate:string,
+     endDate?:string
 }
 
 export interface Opportunity{
@@ -139,20 +139,21 @@ export interface Opportunity{
      memberId:string,
      role:Role,
      opportunityCategory:OpportunityCategory,
+     imageUrls:string[],
      jobTitle:string,
      jobDescription:string,
      typeOfHelpNeeded:TypeOfHelpNeeded[],
      opportunityLocation:OpportunityLocation,
-     opportunityDates:OpportunityDates,
+     opportunityDates:OpportunityDates[],
      minimumDays:number;
      maximumDays:number,
      totalWorkingHours:number,
-     daysOff:number,
+     daysOff:number|0,
      languagesRequired:Languages[],
      languagesSpoken:Languages[],
-     accommodation:Accommodation,
+     accommodationProvided:Accommodation,
      meals:Meal[],
-     additionalOfferings:string,
+     additionalOfferings:string[],
      learningOpportunities:LearningOpportunities[],
      adventuresOffered:string,
      wifi:boolean,

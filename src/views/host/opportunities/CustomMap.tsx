@@ -33,15 +33,6 @@ const CustomMap:React.FunctionComponent<Props> = ({ setOpportunityLocation}) =>{
 
     const onLocationChanged = () =>{
         if(searchBox){
-            //searchBox.getPlaces()[0].address_components[1]+searchBox.getPlaces()[0].address_components[0] Name
-            //searchBox.getPlaces()[0].address_components[3] administrative area
-            //searchBox.getPlaces()[0].address_components[4] Country
-            //searchBox.getPlaces()[0].address_components[5] postal code
-            //searchBox.getPlaces()[0].address_components[2] locality
-
-            //searchBox.getPlaces()[0].geometry.location.lat()
-            //searchBox.getPlaces()[0].geometry.location.lng()
-
             // @ts-ignore
             let tmp:PlacemarkAttributes={name:searchBox.getPlaces()[0].address_components[1].long_name+" "+searchBox.getPlaces()[0].address_components[0].long_name};
             // @ts-ignore

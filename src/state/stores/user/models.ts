@@ -7,6 +7,8 @@ export interface Profile{
     userType:Role
 }
 
+export type RoleType = keyof typeof Role;
+
 export interface RegistrationDto{
     role:string,
     name:string,
@@ -78,6 +80,6 @@ export interface TravelerProfile{
 
 export enum Role{
     TRAVELER="TRAVELER",
-    INDIVIDUAL="INDIVIDUAL_HOST",
-    COMPANY="COMPANY_HOST"
+    INDIVIDUAL_HOST="INDIVIDUAL_HOST",
+    COMPANY_HOST="COMPANY_HOST"
 }

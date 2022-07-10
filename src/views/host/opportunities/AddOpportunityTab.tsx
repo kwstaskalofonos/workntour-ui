@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {useForm} from "react-hook-form";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCloudUpload} from "@fortawesome/free-solid-svg-icons/faCloudUpload";
@@ -7,23 +7,30 @@ import {
     Languages, LanguagesType,
     LearningOpportunities, LearningOpportunitiesType,
     Meal, MealType, Opportunity,
-    OpportunityCategory, OpportunityCategoryType, OpportunityLocation,
+    OpportunityCategory, OpportunityCategoryType, OpportunityDates, OpportunityLocation,
     TypeOfHelpNeeded, TypeOfHelpNeededType
 } from "@src/state/stores/opportunity/models";
 import CustomSelectMultiple from "@src/views/common/CustomSelectMultiple";
 import CustomMap from "@src/views/host/opportunities/CustomMap";
+import CustomDateRangeInput from "@src/views/common/CustomDateRangeInput";
+import {createOpportunity} from "@src/state/stores/opportunity/operations";
+import {getCookie} from "@src/utilities/cookies";
+import {Role, RoleType} from "@src/state/stores/user/models";
 
 const AddOpportunityTab:React.FunctionComponent = () =>{
 
     const form = useForm();
-    const {register,handleSubmit,getValues,formState: { errors }} = form;
-
+    const {register,handleSubmit,reset,getValues,formState: { errors }} = form;
+    const [isLoading,setIsLoading] = useState<boolean>(false);
     const [selectedHelps,setSelectedHelps] = useState<TypeOfHelpNeeded[]>([]);
     const [languagesRequired,setLanguagesRequired] = useState<Languages[]>([]);
     const [languagesSpoken,setLanguagesSpoken] = useState<Languages[]>([]);
     const [selectedMeals,setSelectedMeals] = useState<Meal[]>([]);
     const [selectedLearningOpps,setSelectedLearningOpps] = useState<LearningOpportunities[]>([]);
     const [opportunityLocation,setOpportunityLocation] = useState<OpportunityLocation>();
+    const [opportunityDateRange,setOpportunityDateRange] = useState<OpportunityDates>();
+
+
 
     const renderCategories = () =>{
         let array:any[]=[];
@@ -86,15 +93,29 @@ const AddOpportunityTab:React.FunctionComponent = () =>{
     }
 
     const onSubmit = (data:Opportunity) =>{
+        data.memberId = getCookie();
+        //data.role = Role[getCookie('role') as RoleType];
+        data.role = Role.COMPANY_HOST;
+        data.imageUrls=[];
+        data.additionalOfferings=[];
         data.typeOfHelpNeeded = selectedHelps;
         data.languagesRequired = languagesRequired;
         data.languagesSpoken = languagesSpoken;
+        data.minimumDays=Number(data.minimumDays);
+        data.maximumDays=Number(data.maximumDays);
+        data.totalWorkingHours=Number(data.totalWorkingHours);
         data.meals = selectedMeals;
         data.learningOpportunities = selectedLearningOpps;
+        if(opportunityDateRange){
+            data.opportunityDates=[];
+            data.opportunityDates.push(opportunityDateRange);
+        }
         if(opportunityLocation){
             data.opportunityLocation = opportunityLocation;
         }
-        console.log(data);
+        setIsLoading(true);
+        createOpportunity(data,setIsLoading)
+            .then(()=>reset());
     }
 
     return(
@@ -175,11 +196,10 @@ const AddOpportunityTab:React.FunctionComponent = () =>{
                 </div>
                 <div className="column is-1"/>
                 <div className="column is-4">
-                    {/*Opportunity Dates*/}
+                    {/*Available Dates*/}
                     <div className="field">
                         <label className="label has-text-primary has-text-weight-medium">6.Available Dates*</label>
-                        <input className="input border-linear" type="text"
-                               placeholder="Select Opportunity Category"/>
+                        <CustomDateRangeInput setDateRange={setOpportunityDateRange}/>
                     </div>
                     {/*Total working hours*/}
                     <div className="field">
@@ -216,7 +236,7 @@ const AddOpportunityTab:React.FunctionComponent = () =>{
                         <div className="control">
                             <div className="select is-fullwidth">
                                 <select className={"border-linear has-text-primary"}
-                                        {...register("accommodation",{required:true})}>
+                                        {...register("accommodationProvided",{required:true})}>
                                     {renderAccommodation()}
                                 </select>
                             </div>
@@ -241,32 +261,6 @@ const AddOpportunityTab:React.FunctionComponent = () =>{
                                               register={register} options={renderLearningOpportunities()} enumType={LearningOpportunities}
                                               selectedValues={selectedLearningOpps} setSelectedValues={setSelectedLearningOpps}/>
                     </div>
-                    {/*Days Off*/}
-                    <div className="field">
-                        <label className="label has-text-primary has-text-weight-medium">Days Off*</label>
-                        <input className="input border-linear has-text-primary"
-                               {...register("daysOff",{min:0})} type="number"
-                               placeholder="Select Opportunity Category"/>
-                        {errors.daysOff &&
-                            <p className={"help is-danger"}>
-                                Days off should be positive number.</p>}
-                    </div>
-                    {/*Additional Offerings*/}
-                    {/*<div className="field">*/}
-                    {/*    <label className="label has-text-primary has-text-weight-medium">Additional Offerings*</label>*/}
-                    {/*    <input className="input border-linear" type="text"*/}
-                    {/*           placeholder="Select Opportunity Category"/>*/}
-                    {/*</div>*/}
-                    {/*Adventures Offered*/}
-                    <div className="field">
-                        <label className="label has-text-primary has-text-weight-medium">Adventures Offered*</label>
-                        <textarea className="textarea border-linear has-text-primary"
-                                  {...register("adventuresOffered",{maxLength:100})}
-                                  placeholder="Type Adventures offered"/>
-                        {errors.adventuresOffered &&
-                            <p className={"help is-danger"}>
-                                Adventures description exceeds limit.</p>}
-                    </div>
 
                     <div className="field is-grouped is-grouped-centered mb-6">
                         {/*Smoking Allowed*/}
@@ -285,22 +279,15 @@ const AddOpportunityTab:React.FunctionComponent = () =>{
                                 <input type="checkbox" {...register("petsAllowed")}/>&nbsp;Pets allowed</label>
                         </div>
                     </div>
-                    <div className="field is-grouped is-grouped-centered mt-6">
-                        <p className="control">
-                            <a className="button is-primary" type={"button"} onClick={handleSubmit(onSubmit)}>
+                    <div className="field mt-6">
+                        <p className="control is-fullwidth">
+                            <a className={"button is-primary is-fullwidth "+((isLoading)?"is-loading":'')}
+                               type={"button"} onClick={handleSubmit(onSubmit)}>
                                 Submit
-                            </a>
-                        </p>
-                        <p className="control">
-                            <a className="button is-light">
-                                Cancel
                             </a>
                         </p>
                     </div>
                 </div>
-                {/*<div className="column is-4">*/}
-
-                {/*</div>*/}
             </div>
         </form>
     )
