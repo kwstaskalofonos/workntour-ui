@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 // @ts-ignore
 import op1 from "@src/assets/opportunities/opportunity_1.jpg";
 // @ts-ignore
@@ -7,31 +7,49 @@ import op2 from "@src/assets/opportunities/opportunity_2.jpg";
 import op3 from "@src/assets/opportunities/opportunity_3.jpg";
 // @ts-ignore
 import op4 from "@src/assets/opportunities/opportunity_4.jpg";
-import Opportunity from "@src/views/host/opportunities/Opportunity";
+import OpportunityCard from "@src/views/host/opportunities/OpportunityCard";
+import {Opportunity} from "@src/state/stores/opportunity/models";
+import {getOpportunities} from "@src/state/stores/opportunity/operations";
 
 const OpportunitiesTab:React.FunctionComponent = () =>{
 
+    const [isLoading,setIsLoading] = useState<boolean>(true);
+    const [batch,setBatch] = useState<Opportunity[]>([]);
+
+    useEffect(()=>{
+        getOpportunities(setIsLoading)
+            .then((response)=>{
+                //@ts-ignore
+                setBatch(response.data);
+            })
+    },[])
+
     const renderOpportunities = () =>{
         let array:any[]=[];
+        for(const opp of batch){
+            array.push(<div className={"column is-4"}>
+                <OpportunityCard key={"opportunity-row"+1} img={op1} opportunity={opp}/></div> )
+        }
+        return array;
+    }
 
-        array.push(<div className={"column is-4"}>
-            <Opportunity key={"opportunity-row"+1} img={op1}/></div> )
-        array.push(<div className={"column is-4"}>
-            <Opportunity key={"opportunity-row"+2} img={op2}/></div> )
-        array.push(<div className={"column is-4"}>
-            <Opportunity key={"opportunity-row"+3} img={op3}/></div> )
-        array.push(<div className={"column is-4"}>
-            <Opportunity key={"opportunity-row"+4} img={op4}/></div> )
-        array.push(<div className={"column is-4"}>
-            <Opportunity key={"opportunity-row"+5} img={op1}/></div> )
-        array.push(<div className={"column is-4"}>
-            <Opportunity key={"opportunity-row"+6} img={op4}/></div> )
+    const loadingOpportunities = () =>{
+        let array:any[]=[];
+
+        for(let i=1; i<22; i++){
+            array.push(<div key={"loading-row-"+i} className={"column is-4"}>
+                <progress className="progress is-large is-info" max="100">60%
+                </progress></div> )
+        }
+
         return array;
     }
 
     return(
         <div className="columns is-multiline">
-            {renderOpportunities()}
+            {isLoading ?
+                loadingOpportunities():renderOpportunities()
+            }
         </div>
     )
 };

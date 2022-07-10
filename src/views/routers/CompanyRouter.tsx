@@ -7,7 +7,7 @@ const CompanyRouter: React.FunctionComponent = () =>{
 
     return(
          <Routes>
-             <Route path="/" element={<h1>Comp1</h1>}/>
+             <Route path="/" element={<Opportunities/>}/>
              <Route path="opportunities" element={<Opportunities/>}/>
          </Routes>
     )

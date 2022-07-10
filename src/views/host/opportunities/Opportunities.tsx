@@ -7,7 +7,7 @@ import AddOpportunityTab from "@src/views/host/opportunities/AddOpportunityTab";
 
 const Opportunities:React.FunctionComponent = () =>{
 
-    const [selectedTab,setSelectedTab] = useState<string>("ADD_OPPORTUNITIY");
+    const [selectedTab,setSelectedTab] = useState<string>("OPPORTUNITIES");
 
     return(
         <div className="">

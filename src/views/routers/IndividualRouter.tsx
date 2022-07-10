@@ -1,11 +1,13 @@
 import React from "react";
 import {Route, Routes} from "react-router-dom";
+import Opportunities from "@src/views/host/opportunities/Opportunities";
 
 const IndividualRouter: React.FunctionComponent = () =>{
 
     return(
         <Routes>
-            <Route path="/" element={<h1>Comp Individual</h1>}/>
+            <Route path="/" element={<Opportunities/>}/>
+            <Route path="opportunities" element={<Opportunities/>}/>
         </Routes>
     )
 };

@@ -41,6 +41,5 @@
 .opportunities{
     background-image: url("./hosts/hostBackground.png");
     background-repeat: no-repeat;
-    background-position: center 35%;
-    background-size: cover;
+    background-size: contain;
 }

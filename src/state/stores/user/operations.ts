@@ -89,19 +89,16 @@ export const retrieveUserProfile = ():Promise<void>=>{
     return new Promise<void>(()=>{
         switch (getCookie('role')){
             case Role.TRAVELER.valueOf():{
-                console.log("TRAVELER");
                 // @ts-ignore
                 retrieveTravelerProfile();
                 break;
             }
             case Role.COMPANY_HOST.valueOf():{
-                console.log("COMPANY");
                 // @ts-ignore
                 retrieveCompanyProfile();
                 break;
             }
             case Role.INDIVIDUAL_HOST.valueOf():{
-                console.log("INDIVIDUAL");
                 // @ts-ignore
                 retrieveIndividualProfile();
                 break;

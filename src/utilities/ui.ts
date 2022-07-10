@@ -47,3 +47,10 @@ export function getUserDisplayName(){
     }
     return name;
 }
+
+export function getDateFromString(date:string|undefined){
+    if(date){
+        return new Date(date).toDateString();
+    }
+    return null;
+}

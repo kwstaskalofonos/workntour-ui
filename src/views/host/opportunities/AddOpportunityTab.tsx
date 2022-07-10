@@ -16,6 +16,7 @@ import CustomDateRangeInput from "@src/views/common/CustomDateRangeInput";
 import {createOpportunity} from "@src/state/stores/opportunity/operations";
 import {getCookie} from "@src/utilities/cookies";
 import {Role, RoleType} from "@src/state/stores/user/models";
+import {toast} from "react-toastify";
 
 const AddOpportunityTab:React.FunctionComponent = () =>{
 
@@ -94,8 +95,7 @@ const AddOpportunityTab:React.FunctionComponent = () =>{
 
     const onSubmit = (data:Opportunity) =>{
         data.memberId = getCookie();
-        //data.role = Role[getCookie('role') as RoleType];
-        data.role = Role.COMPANY_HOST;
+        data.role = Role[getCookie('role') as RoleType];
         data.imageUrls=[];
         data.additionalOfferings=[];
         data.typeOfHelpNeeded = selectedHelps;
@@ -115,12 +115,15 @@ const AddOpportunityTab:React.FunctionComponent = () =>{
         }
         setIsLoading(true);
         createOpportunity(data,setIsLoading)
-            .then(()=>reset());
+            .then(()=>{
+                toast.success("Opportunity created!",{position:toast.POSITION.TOP_RIGHT})
+                reset(form);
+            });
     }
 
     return(
         <form>
-            <div className="columns is-centered">
+            <div className="columns is-centered opportunities">
                 <div className="column is-4">
                     {/*Category*/}
                     <div className="field">

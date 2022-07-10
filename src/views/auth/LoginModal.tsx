@@ -2,7 +2,7 @@ import React, {forwardRef, useImperativeHandle, useState} from 'react';
 import {useForm} from "react-hook-form";
 import {faEyeSlash} from "@fortawesome/free-solid-svg-icons/faEyeSlash";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {LoginForm, Role} from "@src/state/stores/user/models";
+import {LoginForm} from "@src/state/stores/user/models";
 import {GenericResponse, login} from "@src/utilities/fetch";
 import {toast} from "react-toastify";
 import {setCookie} from "@src/utilities/cookies";

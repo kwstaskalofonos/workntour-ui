@@ -160,4 +160,3 @@ export interface Opportunity{
      smokingAllowed:boolean,
      petsAllowed:boolean
 }
-
