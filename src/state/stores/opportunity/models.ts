@@ -160,3 +160,21 @@ export interface Opportunity{
      smokingAllowed:boolean,
      petsAllowed:boolean
 }
+
+export interface CustomLocation{
+     streetNumber:string,
+     route:string,
+     locality:string,
+     administrativeArea:string,
+     country:string,
+     postalCode:string
+}
+
+export enum LocationFields{
+     street_number="street_number",
+     route = "route",
+     locality="locality",
+     administrative_area="administrative_area",
+     country="country",
+     postal_code="postal_code"
+}

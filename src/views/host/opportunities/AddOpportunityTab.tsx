@@ -117,7 +117,13 @@ const AddOpportunityTab:React.FunctionComponent = () =>{
         createOpportunity(data,setIsLoading)
             .then(()=>{
                 toast.success("Opportunity created!",{position:toast.POSITION.TOP_RIGHT})
-                reset(form);
+                form.reset();
+                setSelectedHelps([]);
+                setLanguagesRequired([]);
+                setLanguagesSpoken([]);
+                setSelectedMeals([]);
+                setSelectedLearningOpps([]);
+                setOpportunityDateRange(undefined);
             });
     }
 

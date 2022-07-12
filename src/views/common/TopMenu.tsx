@@ -88,7 +88,7 @@ const TopMenu: React.FunctionComponent = () =>{
                 </div>
             </nav>
             <SelectRegistrationModal ref={registrationModalHandler}/>
-            <LoginModal ref={loginModalHandler}/>
+            <LoginModal ref={loginModalHandler} test={"sfs"}/>
         </React.Fragment>
     )
 };
