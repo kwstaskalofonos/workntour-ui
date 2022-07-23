@@ -139,6 +139,7 @@ export interface Opportunity{
      memberId:string,
      role:Role,
      opportunityCategory:OpportunityCategory,
+     images:any[],
      imageUrls:string[],
      jobTitle:string,
      jobDescription:string,

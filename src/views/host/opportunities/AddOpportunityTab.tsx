@@ -17,6 +17,7 @@ import {createOpportunity} from "@src/state/stores/opportunity/operations";
 import {getCookie} from "@src/utilities/cookies";
 import {Role, RoleType} from "@src/state/stores/user/models";
 import {toast} from "react-toastify";
+import ImageUploader from "@src/views/common/ImageUploader";
 
 const AddOpportunityTab:React.FunctionComponent = () =>{
 
@@ -30,7 +31,7 @@ const AddOpportunityTab:React.FunctionComponent = () =>{
     const [selectedLearningOpps,setSelectedLearningOpps] = useState<LearningOpportunities[]>([]);
     const [opportunityLocation,setOpportunityLocation] = useState<OpportunityLocation>();
     const [opportunityDateRange,setOpportunityDateRange] = useState<OpportunityDates>();
-
+    const [images,setImages] = useState<File[]>([]);
 
 
     const renderCategories = () =>{
@@ -93,6 +94,33 @@ const AddOpportunityTab:React.FunctionComponent = () =>{
         return array;
     }
 
+    const toBase64 = (file:File) => new Promise<string>((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => {
+            if(reader.result)
+                resolve(reader.result.toString());
+        }
+        reader.onerror = error => reject(error);
+    });
+
+    const extractBytesFromImages = () =>{
+        let array:any[] = []
+        let textDecoder = new TextDecoder();
+        for(let image of images){
+            let fileReader = new FileReader();
+            if(fileReader.readyState == 0){
+                fileReader.readAsArrayBuffer(image);
+            }
+            fileReader.onload = function(){
+                // @ts-ignore
+                array.push(textDecoder.decode(new Uint32Array(fileReader.result)));
+            }
+        }
+        return array;
+    }
+
+
     const onSubmit = (data:Opportunity) =>{
         data.memberId = getCookie();
         data.role = Role[getCookie('role') as RoleType];
@@ -113,6 +141,11 @@ const AddOpportunityTab:React.FunctionComponent = () =>{
         if(opportunityLocation){
             data.opportunityLocation = opportunityLocation;
         }
+        if(!images||images.length==0){
+            toast.error("You have to upload at least one image",{position:toast.POSITION.TOP_RIGHT});
+            return;
+        }
+        data.images=extractBytesFromImages();
         setIsLoading(true);
         createOpportunity(data,setIsLoading)
             .then(()=>{
@@ -125,7 +158,19 @@ const AddOpportunityTab:React.FunctionComponent = () =>{
                 setSelectedLearningOpps([]);
                 setOpportunityDateRange(undefined);
             });
+        // createOpportunity(data,setIsLoading,images)
+        //     .then(()=>{
+        //         toast.success("Opportunity created!",{position:toast.POSITION.TOP_RIGHT})
+        //         form.reset();
+        //         setSelectedHelps([]);
+        //         setLanguagesRequired([]);
+        //         setLanguagesSpoken([]);
+        //         setSelectedMeals([]);
+        //         setSelectedLearningOpps([]);
+        //         setOpportunityDateRange(undefined);
+        //     });
     }
+
 
     return(
         <form>
@@ -175,19 +220,7 @@ const AddOpportunityTab:React.FunctionComponent = () =>{
                          you! It is important to include photos of your property, the accommodation that you will be providing to travelers and anything else
                          that will make your opportunity attractive to travelers.<br/>Please do not include pictures that show the name of your Business or Property,
                         as they will be removed.</p>
-                        <div className="file is-large is-boxed is-fullwidth">
-                            <label className="file-label border-linear-radius">
-                                <input className="file-input" type="file" name="resume" multiple={true}/>
-                                <span className="file-cta">
-                                      <FontAwesomeIcon className={"has-text-primary"} icon={faCloudUpload}/>
-                                      <span className="file-label has-text-primary has-text-centered is-size-5 has-text-weight-semibold">
-                                        Click to upload your images</span>
-                                        <p className="file-label has-text-primary has-text-centered is-size-6 has-text-weight-light">
-                                        SVG,PNG,JPG or GIF (max. 800x400px)
-                                      </p>
-                                    </span>
-                            </label>
-                        </div>
+                        <ImageUploader images={images} setImages={setImages}/>
                     </div>
                     {/*Type of help*/}
                     <div className="field">

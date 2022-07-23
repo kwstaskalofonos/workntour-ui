@@ -47,6 +47,18 @@ export async function post<T>(uri: string,data:any): Promise<T | any>{
     )
 }
 
+export async function postMultipart<T>(uri: string,data:any,files:File[]): Promise<T | any>{
+    return new Promise((resolve,reject)=>fetch(Constants.getApiUrl()+uri,multipartHeaders(data,files))
+        .then(parseResponse)
+        .then((response:GenericResponse)=>{
+            if(response.ok){
+                return resolve(response.data);
+            }
+            return reject(response.error);
+        }).catch((error)=>reject(networkErrorResponse(error)))
+    )
+}
+
 export function login<T>(email:string,password:string):Promise<T | any>{
     return new Promise((resolve, reject)=>fetch(Constants.getApiUrl()+"login",headers('POST',null,email,password))
         .then(parseResponse)
@@ -119,6 +131,27 @@ function headers(method:string,data?:any,email?:string,password?:string):Request
         body:JSON.stringify(data),
         headers:customHeaders,
         method:method,
+        mode:'cors',
+    }
+}
+
+function multipartHeaders(data:any,files:File[]):RequestInit{
+    // const customHeaders = new Headers({'content-type':'multipart/form-data',
+    //     'accept':'application/json'});
+    const customHeaders = new Headers();
+    // const customHeaders = new Headers({'content-type':'false'});
+    if(hasCookie('workntour')){
+        customHeaders.set('memberId',getCookie('workntour'))}
+    let formData = new FormData();
+    formData.append("newOpportunity",data);
+    let i=0;
+    for(let file of files){
+        formData.append("images",file,file.name);
+    }
+    return {
+        body:formData,
+        headers:customHeaders,
+        method:'POST',
         mode:'cors',
     }
 }
