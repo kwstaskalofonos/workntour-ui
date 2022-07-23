@@ -38,3 +38,15 @@ export const getOpportunities = (setIsLoading:any):Promise<GenericResponse>=>{
         }).finally(()=>setIsLoading(false))
     )
 };
+
+export const getOpportunity = (opportunityId:string):Promise<GenericResponse>=>{
+    return new Promise<GenericResponse>((resolve, reject)=>
+        get('retrieveOpportunityBy/'+opportunityId)
+            .then((response:GenericResponse)=>{
+                resolve(response);
+            }).catch((error)=>{
+            toast.error(error,{position:toast.POSITION.TOP_RIGHT});
+            reject(error);
+        }).finally()
+    )
+};

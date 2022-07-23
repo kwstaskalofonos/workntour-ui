@@ -7,8 +7,9 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 
 const API_URL = {
-    production:"",
-    development:"http://localhost:8080"
+    production:"https://work-n-tour.herokuapp.com",
+    //development:"http://localhost:8080",
+    development:"https://work-n-tour.herokuapp.com"
 }
 
 const COOKIE_DOMAIN = {

@@ -48,9 +48,12 @@ export function getUserDisplayName(){
     return name;
 }
 
+//return Date like Aug 01, 2022
 export function getDateFromString(date:string|undefined){
     if(date){
-        return new Date(date).toDateString();
+        let splitDate = new Date(date).toDateString().trim().split(/\s+/);
+        let formattedDate = splitDate[1]+" "+splitDate[2]+", "+splitDate[3];
+        return formattedDate;
     }
     return null;
 }

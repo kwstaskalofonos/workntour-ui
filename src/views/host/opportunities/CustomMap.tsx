@@ -1,7 +1,6 @@
 import React, {useState} from "react";
 import {GoogleMap, Marker, useJsApiLoader, StandaloneSearchBox, LoadScript, InfoWindow} from '@react-google-maps/api'
 import {CustomLocation, OpportunityLocation, PlacemarkAttributes} from "@src/state/stores/opportunity/models";
-import { getGeocode } from "use-places-autocomplete";
 
 
 interface Props{
@@ -120,20 +119,9 @@ const CustomMap:React.FunctionComponent<Props> = ({ setOpportunityLocation}) =>{
 
     const onLocationChanged = () =>{
         if(searchBox){
-            // @ts-ignore
-            // let tmp:PlacemarkAttributes={name:searchBox.getPlaces()[0].address_components[1].long_name+" "+searchBox.getPlaces()[0].address_components[0].long_name};
 
             // @ts-ignore
             let customLocation:CustomLocation = extractFields(searchBox.getPlaces()[0].address_components);
-
-            // // @ts-ignore
-            // tmp.area=searchBox.getPlaces()[0].address_components[3].long_name;
-            // // @ts-ignore
-            // tmp.country = searchBox.getPlaces()[0].address_components[4].long_name;
-            // // @ts-ignore
-            // tmp.locality = searchBox.getPlaces()[0].address_components[2].long_name;
-            // // @ts-ignore
-            // tmp.postalCode = searchBox.getPlaces()[0].address_components[5].long_name;
 
             // @ts-ignore
             let oppLocation:OpportunityLocation = {latitude:searchBox.getPlaces()[0].geometry.location.lat()};

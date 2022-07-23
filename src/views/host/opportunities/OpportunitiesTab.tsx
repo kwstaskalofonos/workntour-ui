@@ -10,6 +10,7 @@ import op4 from "@src/assets/opportunities/opportunity_4.jpg";
 import OpportunityCard from "@src/views/host/opportunities/OpportunityCard";
 import {Opportunity} from "@src/state/stores/opportunity/models";
 import {getOpportunities} from "@src/state/stores/opportunity/operations";
+import LoadingOpportunity from "@src/views/common/LoadingOpportunity";
 
 const OpportunitiesTab:React.FunctionComponent = () =>{
 
@@ -38,8 +39,7 @@ const OpportunitiesTab:React.FunctionComponent = () =>{
 
         for(let i=1; i<22; i++){
             array.push(<div key={"loading-row-"+i} className={"column is-4"}>
-                <progress className="progress is-large is-info" max="100">60%
-                </progress></div> )
+                <LoadingOpportunity/></div> )
         }
 
         return array;

@@ -9,6 +9,7 @@ $primary-light:hsla(0, 0%, 90%,0.2);
 $input-focus-box-shadow-color:hsla(0,0%,96%,0);
 $input-focus-box-shadow-color:tran;
 $checkbox-block-background:#8970FA;
+$progress-border-radius:0px;
 
 @import "/node_modules/bulma/bulma.sass";
 @import"/node_modules/react-datepicker/dist/react-datepicker.css";

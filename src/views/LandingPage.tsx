@@ -13,7 +13,7 @@ export const LandingPage: React.FunctionComponent = () =>{
 
 
     useEffect(()=>{
-        console.log("__API_URL__ : "+Constants.getApiUrl())
+        console.log("__API_URL__ : "+Constants.getApiUrl());
     },[])
 
     return(

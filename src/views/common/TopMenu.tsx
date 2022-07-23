@@ -48,7 +48,7 @@ const TopMenu: React.FunctionComponent = () =>{
                             </React.Fragment>
                         }
                         {isHost() &&
-                            <a className="navbar-item" href={'opportunities'}>Opportunities</a>
+                            <a className="navbar-item" href={'/'}>Opportunities</a>
                         }
                         <a className="navbar-item">Contact Us</a>
                         {!isAuthenticated ?
@@ -88,7 +88,7 @@ const TopMenu: React.FunctionComponent = () =>{
                 </div>
             </nav>
             <SelectRegistrationModal ref={registrationModalHandler}/>
-            <LoginModal ref={loginModalHandler} test={"sfs"}/>
+            <LoginModal ref={loginModalHandler}/>
         </React.Fragment>
     )
 };

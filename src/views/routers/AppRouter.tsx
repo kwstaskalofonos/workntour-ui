@@ -13,6 +13,7 @@ import {retrieveUserProfile} from "@src/state/stores/user/operations";
 import {getCookie, hasCookie} from "@src/utilities/cookies";
 import LandingPage from "@src/views/LandingPage";
 import SecuredSiteRouter from "@src/views/routers/SecureSiteRouter";
+import Opportunity from "@src/views/host/opportunities/Opportunity";
 
 const AppRouter :React.FunctionComponent = () =>{
 
