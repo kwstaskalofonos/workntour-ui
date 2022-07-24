@@ -50,7 +50,7 @@ export const retrieveTravelerProfile = ():Promise<GenericResponse>=>{
     return new Promise<GenericResponse>((resolve,reject)=>{
         get('retrieveProfile/traveler')
             .then((response:GenericResponse)=>{
-                setCookie(JSON.stringify(response.data),15,'profile');
+                setCookie(JSON.stringify(response),15,'profile');
                 resolve(response);
             }).catch((error)=>{
             toast.error(error,{position:toast.POSITION.TOP_RIGHT});
@@ -63,7 +63,7 @@ export const retrieveIndividualProfile = ():Promise<GenericResponse>=>{
     return new Promise<GenericResponse>((resolve,reject)=>{
         get('retrieveProfile/individualHost')
             .then((response:GenericResponse)=>{
-                setCookie(JSON.stringify(response.data),15,'profile');
+                setCookie(JSON.stringify(response),15,'profile');
                 resolve(response);
             }).catch((error)=>{
             toast.error(error,{position:toast.POSITION.TOP_RIGHT});
@@ -76,7 +76,8 @@ export const retrieveCompanyProfile = ():Promise<GenericResponse>=>{
     return new Promise<GenericResponse>((resolve,reject)=>{
         get('retrieveProfile/companyHost')
             .then((response:GenericResponse)=>{
-                setCookie(JSON.stringify(response.data),15,'profile');
+                console.log(response);
+                setCookie(JSON.stringify(response),15,'profile');
                 resolve(response);
             }).catch((error)=>{
             toast.error(error,{position:toast.POSITION.TOP_RIGHT});
