@@ -111,7 +111,7 @@ const CustomMap:React.FunctionComponent<Props> = ({ setOpportunityLocation}) =>{
                     formatLocation(customLocation);
                     let oppPlaceMark:PlacemarkAttributes={name:customLocation?.route+" "+customLocation?.streetNumber,postalCode:customLocation?.postalCode,
                     locality:customLocation?.locality,country:customLocation?.country,area:customLocation?.administrativeArea}
-                    let oppLocation:OpportunityLocation={placemark:oppPlaceMark,longitude:latLng?.lng().toString(),latitude:latLng?.lng().toString()};
+                    let oppLocation:OpportunityLocation={placemark:oppPlaceMark,longitude:latLng?.lng().toString(),latitude:latLng?.lat().toString()};
                     setOpportunityLocation(oppLocation);
                 })
         }

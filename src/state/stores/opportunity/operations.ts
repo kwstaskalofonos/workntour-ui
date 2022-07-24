@@ -1,5 +1,5 @@
 import {Opportunity} from "@src/state/stores/opportunity/models";
-import {GenericResponse, get, post, postMultipart} from "@src/utilities/fetch";
+import {del, GenericResponse, get, post, postMultipart} from "@src/utilities/fetch";
 import {toast} from "react-toastify";
 
 
@@ -15,6 +15,18 @@ export const createOpportunity = (form:Opportunity,setIsLoading:any):Promise<Opp
     )
 };
 
+export const deleteOpportunity = (id:string):Promise<Opportunity>=>{
+    return new Promise<Opportunity>((resolve,reject)=>
+        del('deleteOpportunityBy/'+id)
+            .then((response:Opportunity)=>{
+                resolve(response);
+            }).catch((error)=>{
+            toast.error(error,{position:toast.POSITION.TOP_RIGHT});
+            reject(error);
+        }).finally()
+    )
+};
+
 // export const createOpportunity = (form:Opportunity,setIsLoading:any,files:File[]):Promise<Opportunity>=>{
 //     return new Promise<Opportunity>((resolve,reject)=>
 //         postMultipart('createNewOpportunityWeb',form,files)
@@ -27,10 +39,10 @@ export const createOpportunity = (form:Opportunity,setIsLoading:any):Promise<Opp
 //     )
 // };
 
-export const getOpportunities = (setIsLoading:any):Promise<GenericResponse>=>{
-    return new Promise<GenericResponse>((resolve, reject)=>
+export const getOpportunities = (setIsLoading:any):Promise<Opportunity[]>=>{
+    return new Promise<Opportunity[]>((resolve, reject)=>
         get('retrieveAllOpportunityByMemberId')
-            .then((response:GenericResponse)=>{
+            .then((response:Opportunity[])=>{
                 resolve(response);
             }).catch((error)=>{
             toast.error(error,{position:toast.POSITION.TOP_RIGHT});

@@ -47,6 +47,18 @@ export async function post<T>(uri: string,data:any): Promise<T | any>{
     )
 }
 
+export async function del<T>(uri: string,data?:any): Promise<T | any>{
+    return new Promise((resolve,reject)=>fetch(Constants.getApiUrl()+uri,headers('DELETE',data))
+        .then(parseResponse)
+        .then((response:GenericResponse)=>{
+            if(response.ok){
+                return resolve(response.data);
+            }
+            return reject(response.error);
+        }).catch((error)=>reject(networkErrorResponse(error)))
+    )
+}
+
 export async function postMultipart<T>(uri: string,data:any,files:File[]): Promise<T | any>{
     return new Promise((resolve,reject)=>fetch(Constants.getApiUrl()+uri,multipartHeaders(data,files))
         .then(parseResponse)
@@ -94,7 +106,7 @@ function parseResponse(response:Response): Promise<GenericResponse>{
                 if((response.status === 201)||(response.status === 200)){
                     resolve({
                         status:response.status,
-                        data:json,
+                        data:json.data,
                         ok:response.ok,
                     })
                 }else if (response.status === 400){

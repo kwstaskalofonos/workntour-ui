@@ -2,15 +2,16 @@ import React, {useEffect, useState} from "react";
 import {Opportunity, OpportunityCategory} from "@src/state/stores/opportunity/models";
 import {getDateFromString} from "@src/utilities/ui";
 import CustomPagination from "@src/views/common/CustomPagination";
-import {getOpportunity} from "@src/state/stores/opportunity/operations";
+import {deleteOpportunity, getOpportunity} from "@src/state/stores/opportunity/operations";
 import {useNavigate} from "react-router";
 
 interface Props{
     img:any,
-    opportunity:Opportunity
+    opportunity:Opportunity,
+    setOpportunityToDelete:any
 }
 
-const OpportunityCard:React.FunctionComponent<Props> = ({img,opportunity}) =>{
+const OpportunityCard:React.FunctionComponent<Props> = ({img,opportunity,setOpportunityToDelete}) =>{
 
     const [selectedPage,setSelectedPage] = useState<number>(0);
     const navigate = useNavigate();
@@ -35,8 +36,8 @@ const OpportunityCard:React.FunctionComponent<Props> = ({img,opportunity}) =>{
     }
 
     return(
-        <div className="card" style={{cursor:'pointer'}} onClick={goToOpportunity}>
-            <div className="card-image">
+        <div className="card">
+            <div className="card-image" style={{cursor:'pointer'}} onClick={goToOpportunity}>
                 <figure className="image is-2by1" >
                     <img src={(opportunity.imageUrls&&opportunity.imageUrls[selectedPage])&&opportunity.imageUrls[selectedPage]}
                     style={{borderBottomRightRadius:'0.25rem',borderBottomLeftRadius:'0.25rem'}}/>
@@ -62,7 +63,8 @@ const OpportunityCard:React.FunctionComponent<Props> = ({img,opportunity}) =>{
             <div className="card">
                 <footer className="card-footer">
                     {/*<a href="#" className="card-footer-item has-text-primary has-text-weight-semibold">Edit</a>*/}
-                    <a className="card-footer-item  has-text-danger has-text-weight-semibold">Delete</a>
+                    <a className="card-footer-item  has-text-danger has-text-weight-semibold"
+                    onClick={()=>setOpportunityToDelete(opportunity)}>Delete</a>
                 </footer>
             </div>
         </div>
