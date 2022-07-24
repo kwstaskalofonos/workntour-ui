@@ -3,7 +3,10 @@ var express = require('express');
 
 var app = express();
 
-app.use(express.static(path.join(__dirname, 'dist')));
+// app.use(express.static(path.join(__dirname, 'dist')));
+app.get('/',function(req, res){//get,put,post,delete
+    res.sendFile(__dirname + '/dist/index.html');
+});
 app.set('port', process.env.PORT || 8080);
 
 var server = app.listen(app.get('port'), function() {
