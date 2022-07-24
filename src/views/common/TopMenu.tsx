@@ -1,4 +1,4 @@
-import React, {useEffect, useRef} from "react";
+import React, {useEffect, useRef, useState} from "react";
 // @ts-ignore
 import logo from "@src/assets/Frame.svg";
 import SelectRegistrationModal, {SelectRegistrationModalHandler} from "@src/views/auth/SelectRegistrationModal";
@@ -14,6 +14,7 @@ const TopMenu: React.FunctionComponent = () =>{
     const loginModalHandler = useRef<LoginModalHandler>();
     const isAuthenticated=hasCookie();
     const isProfileRetrieved=hasCookie('profile');
+    const [isActive,setIsActive] = useState<boolean>(false);
 
     const logout = () =>{
         deleteCookie();
@@ -30,14 +31,15 @@ const TopMenu: React.FunctionComponent = () =>{
                         <img src={logo} width="190" height="28"/>
                     </a>
 
-                    <a role="button" className="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+                    <a role="button" className={"navbar-burger "+(isActive?"is-active":"")} onClick={()=>setIsActive(!isActive)}
+                       aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
                         <span aria-hidden="true"></span>
                         <span aria-hidden="true"></span>
                         <span aria-hidden="true"></span>
                     </a>
                 </div>
 
-                <div id="navbarBasicExample" className="navbar-menu">
+                <div id="navbarBasicExample" className={"navbar-menu "+(isActive?"is-active":"")}>
                     <div className="navbar-end">
                         {!isAuthenticated &&
                             <React.Fragment>

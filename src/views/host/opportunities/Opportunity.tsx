@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {getOpportunity} from "@src/state/stores/opportunity/operations";
+import {deleteOpportunity, getOpportunity} from "@src/state/stores/opportunity/operations";
 import {
     Accommodation, Languages, LearningOpportunities,
     Meal,
@@ -10,19 +10,21 @@ import {useParams} from "react-router";
 import {getDateFromString} from "@src/utilities/ui";
 import {GoogleMap, LoadScript, Marker} from "@react-google-maps/api";
 import cloneDeep from 'lodash/cloneDeep';
+import GenericModal from "@src/views/common/GenericModal";
 
 const Opportunity:React.FunctionComponent = () =>{
 
     const {id} = useParams();
     const [opportunity,setOpportunity] = useState<Opportunity>();
     const [location,setLocation] = useState({lat:0,lng:0});
+    const [isActiveDelModal,setIsActiveDelModal] = useState<boolean>(false);
 
     useEffect(()=>{
         if(id){
             getOpportunity(id)
                 .then((response)=>{
                     //@ts-ignore
-                    setOpportunity(response.data);
+                    setOpportunity(response);
                 })
         }
     },[id])
@@ -134,6 +136,19 @@ const Opportunity:React.FunctionComponent = () =>{
         height: '400px'
     };
 
+    const delOpportunity = () =>{
+        if(opportunity){
+            deleteOpportunity(opportunity?.opportunityId)
+                .then((response)=>{
+                    window.location.replace("/opportunities");
+                });
+        }
+    }
+
+    const onCloseModal = () =>{
+        setIsActiveDelModal(false);
+    }
+
     return(
         <React.Fragment>
             <div className={"columns is-centered"}>
@@ -198,9 +213,15 @@ const Opportunity:React.FunctionComponent = () =>{
                         </div>
                     </div>
                     <hr/>
-                    <button className={"button is-danger is-outlined has-text-weight-semibold is-fullwidth"}>Delete</button>
+                    <button className={"button is-danger is-outlined has-text-weight-semibold is-fullwidth"}
+                    onClick={()=>setIsActiveDelModal(true)}>
+                        Delete</button>
                 </div>
             </div>
+            {isActiveDelModal&&
+                <GenericModal title={"Delete Opportunity"} action={delOpportunity} close={onCloseModal}
+                              bodyMessage={"Are you sure you want to delete this opportunity?"}/>
+            }
         </React.Fragment>
     )
 };
