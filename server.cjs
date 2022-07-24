@@ -5,7 +5,7 @@ var app = express();
 
 // app.use(express.static(path.join(__dirname, 'dist')));
 app.get('/',function(req, res){//get,put,post,delete
-    res.sendFile(__dirname + 'dist/index.html');
+    res.sendFile(__dirname + '/dist');
 });
 app.set('port', process.env.PORT || 8080);
 
