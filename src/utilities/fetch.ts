@@ -72,6 +72,21 @@ export function login<T>(email:string,password:string):Promise<T | any>{
     ))
 }
 
+export function subscribe<T>(email:string,setIsLoading:any):Promise<T | any>{
+    return new Promise((resolve, reject)=>fetch(Constants.getApiUrl()+"earlySubscription",headers('POST',null,email))
+        .then(parseResponse)
+        .then((response:GenericResponse)=>{
+            console.log(response);
+            if(response.ok){
+                setIsLoading(false);
+                return resolve(response.data);
+            }
+            setIsLoading(false);
+            return reject(response.error);
+        }).catch(((error)=>reject(networkErrorResponse(error)))
+        ))
+}
+
 function parseResponse(response:Response): Promise<GenericResponse>{
     return new Promise((resolve,reject)=>{
         response.json()
