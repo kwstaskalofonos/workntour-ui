@@ -51,10 +51,10 @@ export const getOpportunities = (setIsLoading:any):Promise<Opportunity[]>=>{
     )
 };
 
-export const getOpportunity = (opportunityId:string):Promise<GenericResponse>=>{
-    return new Promise<GenericResponse>((resolve, reject)=>
+export const getOpportunity = (opportunityId:string):Promise<Opportunity>=>{
+    return new Promise<Opportunity>((resolve, reject)=>
         get('retrieveOpportunityBy/'+opportunityId)
-            .then((response:GenericResponse)=>{
+            .then((response:Opportunity)=>{
                 resolve(response);
             }).catch((error)=>{
             toast.error(error,{position:toast.POSITION.TOP_RIGHT});
