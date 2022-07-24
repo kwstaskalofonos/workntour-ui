@@ -2,7 +2,7 @@ import React, {forwardRef, useImperativeHandle, useState} from 'react';
 import {useForm} from "react-hook-form";
 import {faEyeSlash} from "@fortawesome/free-solid-svg-icons/faEyeSlash";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {LoginForm} from "@src/state/stores/user/models";
+import {LoginForm, LoginResponse} from "@src/state/stores/user/models";
 import {GenericResponse, login} from "@src/utilities/fetch";
 import {toast} from "react-toastify";
 import {setCookie} from "@src/utilities/cookies";
@@ -38,11 +38,11 @@ const LoginModal:React.FunctionComponent<Props>=
     const onSubmit:any=(data:LoginForm)=>{
        setIsLoading(true);
        login(data.email,data.password)
-           .then((response:GenericResponse)=>{
+           .then((response:LoginResponse)=>{
                // @ts-ignore
-               setCookie(response.data.memberId,15);
+               setCookie(response.memberId,15);
                // @ts-ignore
-               setCookie(response.data.role,15,"role");
+               setCookie(response.role,15,"role");
                setIsLoading(false);
                window.location.replace("/");
            })
