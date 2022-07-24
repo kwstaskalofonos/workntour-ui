@@ -14,7 +14,7 @@ export function hasCookie(key:string = AUTH_TOKEN){
 
 export function setCookie(value:string,days:number | 15, key:string = AUTH_TOKEN){
     if(Cookies.enabled){
-        Cookies.set(key,value,{expires:days*24*60*60,path:_cookie_domain,secure:true});
+        Cookies.set(key,value,{expires:days*24*60*60,path:_cookie_domain});
         //Cookies.set(key,value,{expires:days*24*60*60,domain:_cookie_domain});
     }
 }
