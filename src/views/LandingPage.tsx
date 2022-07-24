@@ -1,9 +1,8 @@
-import React, {useEffect} from "react"
+import React, {useEffect, useState} from "react"
 // @ts-ignore
 import mainSection from "@src/assets/mainBanner.png";
 // @ts-ignore
 import appBanner from "@src/assets/appBanner.png";
-import React, {useEffect, useState} from "react"
 import TopMenu from "./common/TopMenu";
 // @ts-ignore
 import mainSection from "@src/assets/mainBanner.png";
@@ -12,11 +11,9 @@ import appBanner from "@src/assets/Bannerworkntour.png";
 import HostStepsSection from "./common/HostStepsSection";
 import TravelerStepsSection from "../views/common/TravelerStepsSection";
 import {Constants} from "../utilities/constants";
-import TopMenu from "@src/views/common/TopMenu";
 import Footer from "@src/views/common/Footer";
 import Header from "@src/views/common/Header";
 import InterCom from "@src/views/common/InterCom";
-import LandPageTopMenu from "@src/views/common/LandPageTopMenu";
 import {GenericResponse, subscribe} from "@src/utilities/fetch";
 import {toast} from "react-toastify";
 

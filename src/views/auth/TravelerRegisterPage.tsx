@@ -11,7 +11,6 @@ import {useNavigate} from "react-router";
 import Header from "@src/views/common/Header";
 import CustomSelectCountry from "@src/views/common/CustomSelectCountry";
 import Flag from "react-flagkit";
-import {toast} from "react-toastify";
 // @ts-ignore
 import illustration from "@src/assets/signUpAsTrav.svg";
 import CustomDateInput from "@src/views/common/CustomDateInput";
