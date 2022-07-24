@@ -2,9 +2,6 @@ import React, {useEffect, useState} from "react"
 // @ts-ignore
 import mainSection from "@src/assets/mainBanner.png";
 // @ts-ignore
-import appBanner from "@src/assets/appBanner.png";
-import TopMenu from "./common/TopMenu";
-// @ts-ignore
 import mainSection from "@src/assets/mainBanner.png";
 // @ts-ignore
 import appBanner from "@src/assets/Bannerworkntour.png";

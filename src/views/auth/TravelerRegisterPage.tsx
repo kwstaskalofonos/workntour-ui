@@ -1,13 +1,10 @@
 import React, {useEffect, useState} from "react";
 import Footer from "@src/views/common/Footer";
-import ReactDatePicker from "react-datepicker";
 import {faAngleUp} from "@fortawesome/free-solid-svg-icons/faAngleUp";
 import {faAngleDown} from "@fortawesome/free-solid-svg-icons/faAngleDown";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {useForm} from "react-hook-form";
 import {Traveler} from "@src/state/stores/user/models";
-import {registerAsTraveler} from "@src/state/stores/user/operations";
-import {useNavigate} from "react-router";
 import Header from "@src/views/common/Header";
 import CustomSelectCountry from "@src/views/common/CustomSelectCountry";
 import Flag from "react-flagkit";
@@ -16,6 +13,8 @@ import illustration from "@src/assets/signUpAsTrav.svg";
 import CustomDateInput from "@src/views/common/CustomDateInput";
 import {constructDate} from "@src/utilities/ui";
 import InterCom from "@src/views/common/InterCom";
+import {useNavigate} from "react-router";
+import {registerAsTraveler} from "@src/state/stores/user/operations";
 
 const TravelerRegisterPage:React.FunctionComponent = () =>{
 
