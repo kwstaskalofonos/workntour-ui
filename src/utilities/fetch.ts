@@ -159,7 +159,7 @@ function headers(method:string,data?:any,email?:string,password?:string):Request
         headers:customHeaders,
         method:method,
         credentials:"include",
-        mode:'cors',
+        mode:'same-origin',
     }
 }
 
