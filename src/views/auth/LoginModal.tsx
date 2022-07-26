@@ -6,6 +6,7 @@ import {LoginForm, LoginResponse} from "@src/state/stores/user/models";
 import {GenericResponse, login} from "@src/utilities/fetch";
 import {toast} from "react-toastify";
 import {setCookie} from "@src/utilities/cookies";
+import {useNavigate} from "react-router";
 
 export interface Props{
     ref:any
@@ -23,6 +24,7 @@ const LoginModal:React.FunctionComponent<Props>=
     const form = useForm();
     const {register,handleSubmit,getValues} = form;
     const [isLoading,setIsLoading] = useState<boolean>(false);
+    const navigate = useNavigate();
 
    useImperativeHandle(ref,()=>{
        return{
@@ -44,7 +46,8 @@ const LoginModal:React.FunctionComponent<Props>=
                // @ts-ignore
                setCookie(response.role,15,"role");
                setIsLoading(false);
-               window.location.replace("/");
+               //window.location.replace("/");
+               navigate("/");
            })
            .catch((error)=>{
                toast.error(error,{position:toast.POSITION.TOP_RIGHT});

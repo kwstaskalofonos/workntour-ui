@@ -11,6 +11,7 @@ import {getDateFromString} from "@src/utilities/ui";
 import {GoogleMap, LoadScript, Marker} from "@react-google-maps/api";
 import cloneDeep from 'lodash/cloneDeep';
 import GenericModal from "@src/views/common/GenericModal";
+import CustomImageGallery from "@src/views/common/CustomImageGallery";
 
 const Opportunity:React.FunctionComponent = () =>{
 
@@ -44,8 +45,8 @@ const Opportunity:React.FunctionComponent = () =>{
             array.push(<div className={"column is-one-third"}>
                 <figure className={"image is-square"}>
                     <img key={"image-"+index+1} src={value}
-                    style={{borderTopLeftRadius:'3px',borderTopRightRadius:'3px',
-                    borderBottomLeftRadius:'3px',borderBottomRightRadius:'3px'}}/>
+                    style={{borderTopLeftRadius:'1.6rem',borderTopRightRadius:'1.6rem',
+                    borderBottomLeftRadius:'1.6rem',borderBottomRightRadius:'1.6rem'}}/>
                 </figure>
             </div>)
         })
@@ -151,6 +152,9 @@ const Opportunity:React.FunctionComponent = () =>{
 
     return(
         <React.Fragment>
+            {/*<div style={{maxHeight:"200px"}}>*/}
+            {/*    <CustomImageGallery imagesUrls={(opportunity?.imageUrls)&&opportunity?.imageUrls}/>*/}
+            {/*</div>*/}
             <div className={"columns is-centered"}>
                 <div className={"column is-5"}>
                     <p className={"title is-4"}>{opportunity?.jobTitle}</p>

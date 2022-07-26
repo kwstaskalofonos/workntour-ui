@@ -7,12 +7,12 @@ import op2 from "@src/assets/opportunities/opportunity_2.jpg";
 import op3 from "@src/assets/opportunities/opportunity_3.jpg";
 // @ts-ignore
 import op4 from "@src/assets/opportunities/opportunity_4.jpg";
-import OpportunityCard from "@src/views/host/opportunities/OpportunityCard";
 import {Opportunity} from "@src/state/stores/opportunity/models";
 import {deleteOpportunity, getOpportunities} from "@src/state/stores/opportunity/operations";
 import LoadingOpportunity from "@src/views/common/LoadingOpportunity";
 import GenericModal from "@src/views/common/GenericModal";
 import cloneDeep from "lodash/cloneDeep";
+import OpportunityCustomCard from "@src/views/host/opportunities/OpportunityCustomCard";
 
 const OpportunitiesTab:React.FunctionComponent = () =>{
 
@@ -29,20 +29,11 @@ const OpportunitiesTab:React.FunctionComponent = () =>{
             })
     },[])
 
-    const renderOpportunities = () =>{
-        let array:any[]=[];
-        for(const opp of batch){
-            array.push(<div className={"column is-4"}>
-                <OpportunityCard key={"opportunity-row"+1} img={op1} opportunity={opp} setOpportunityToDelete={setOpportunityToDelete}/></div> )
-        }
-        return array;
-    }
-
     const loadingOpportunities = () =>{
         let array:any[]=[];
 
         for(let i=1; i<22; i++){
-            array.push(<div key={"loading-row-"+i} className={"column is-4"}>
+            array.push(<div key={"loading-row-"+i} className={"column is-3"}>
                 <LoadingOpportunity/></div> )
         }
 
@@ -80,8 +71,8 @@ const OpportunitiesTab:React.FunctionComponent = () =>{
         <div className="columns is-multiline">
             {isLoading ?
                 loadingOpportunities()
-                :batch&&batch.map(value => <div className={"column is-4"}>
-                    <OpportunityCard key={"opportunity-row"+1} img={op1} opportunity={value} setOpportunityToDelete={setOpportunityToDelete}/></div>)
+                :batch&&batch.map(value => <div className={"column is-3"}>
+                    <OpportunityCustomCard key={"opportunity-row"+1} img={op1} opportunity={value} setOpportunityToDelete={setOpportunityToDelete}/></div>)
             }
             {isActiveDelModal &&
                 <GenericModal title={"Delete Opportunity"} action={delOpportunity} close={onCloseModal}
