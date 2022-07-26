@@ -4,10 +4,16 @@ var express = require('express');
 var app = express();
 
 // app.use(express.static(path.join(__dirname, 'dist')));
-app.use(express.static(path.join(__dirname, 'dist')));
+// app.use(express.static(path.join(__dirname, 'dist')));
 
 app.get('*', function(req, res) {
     res.sendFile(path.join(__dirname, 'dist', 'index.html'));
+});
+app.use(function(req, res, next) {
+    express.static(path.join(__dirname, 'dist'));
+    res.header('Access-Control-Allow-Origin', req.headers.origin);
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
 });
 // app.get('/home', function(req, res) {
 //     res.sendFile(path.join(__dirname, 'dist', 'index.html'));

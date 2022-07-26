@@ -158,9 +158,7 @@ function headers(method:string,data?:any,email?:string,password?:string):Request
         body:JSON.stringify(data),
         headers:customHeaders,
         method:method,
-        redirect:"follow",
-        credentials:"include",
-        mode:'same',
+        mode:'cors',
     }
 }
 
