@@ -14,6 +14,7 @@ app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept,memberId");
     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
     res.header('Access-Control-Allow-Credentials', true);
+    res.cookie( key, value,{ maxAge: 1000 * 60 * 10, httpOnly: false });
     next();
 });
 // app.get('/home', function(req, res) {
