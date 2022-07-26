@@ -9,10 +9,11 @@ $primary-light:hsla(0, 0%, 90%,0.2);
 $input-focus-box-shadow-color:hsla(0,0%,96%,0);
 $input-focus-box-shadow-color:tran;
 $checkbox-block-background:#8970FA;
-$progress-border-radius:0px;
+$progress-border-radius:1.6rem;
 
 @import "/node_modules/bulma/bulma.sass";
 @import"/node_modules/react-datepicker/dist/react-datepicker.css";
 @import "./custom.css";
 @import "react-toastify/dist/ReactToastify.css";
 @import "/node_modules/bulma-checkradio/dist/css/bulma-checkradio.min.css";
+@import "react-slideshow-image/dist/styles.css";

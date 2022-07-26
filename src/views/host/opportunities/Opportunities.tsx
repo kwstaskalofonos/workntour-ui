@@ -14,13 +14,13 @@ const Opportunities:React.FunctionComponent = () =>{
             <div className={"tabs is-toggle is-toggle-rounded is-centered"}>
                 <ul>
                     <li className={(selectedTab == "OPPORTUNITIES")?"is-active":''}>
-                        <a onClick={()=>setSelectedTab('OPPORTUNITIES')}>
+                        <a onClick={()=>setSelectedTab('OPPORTUNITIES')} className={(selectedTab == "OPPORTUNITIES")?"has-background-primary":""}>
                             <span className="icon is-small"><FontAwesomeIcon icon={faFileAlt}/></span>
                             <span>Opportunities</span>
                         </a>
                     </li>
                     <li className={(selectedTab == "ADD_OPPORTUNITIY")?"is-active":''}>
-                        <a onClick={()=>setSelectedTab('ADD_OPPORTUNITIY')}>
+                        <a onClick={()=>setSelectedTab('ADD_OPPORTUNITIY')} className={(selectedTab == "ADD_OPPORTUNITIY")?"has-background-primary":""}>
                             <span className="icon is-small"><FontAwesomeIcon icon={faAdd}/></span>
                             <span>New Opportunity</span>
                         </a>

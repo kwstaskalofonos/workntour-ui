@@ -79,3 +79,44 @@
         height: 230px;
     }
 }
+
+
+.each-slide-effect > div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-size: cover;
+    height: 315px;
+    border-radius: 1.6rem;
+}
+
+.each-slide-effect span {
+    padding: 20px;
+    font-size: 20px;
+    background: #efefef;
+    text-align: center;
+}
+
+.custom-arrow-left{
+    border-radius: 99px;
+    opacity: 0.0;
+    right: 4px !important;
+    transition: 1.2s;
+}
+
+.custom-arrow-right{
+    border-radius: 99px;
+    opacity: 0.0;
+    left: 4px !important;
+    transition: 1.2s;
+}
+
+.custom-arrow-left:hover{
+    opacity: 1;
+    transition: 1s;
+}
+
+.custom-arrow-right:hover{
+    opacity: 1;
+    transition: 1s;
+}
