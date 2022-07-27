@@ -56,7 +56,7 @@ const OpportunityCustomCard:React.FunctionComponent<Props> = ({img,opportunity,s
                     {slideImages.map((slideImage, index)=> (
                         <div className="each-slide-effect" style={{position:"relative",cursor:'pointer'}}
                              key={index} onClick={goToOpportunity}>
-                            <div style={{'backgroundImage': `url(${slideImage.url})`,backgroundRepeat:"no-repeat"}}>
+                            <div style={{'backgroundImage': `url(${slideImage.url})`,backgroundRepeat:"no-repeat",backgroundPosition:'center'}}>
                             </div>
                             <p
                                className={"is-size-7 has-text-white-bis has-text-weight-semibold"} style={{position:"absolute",bottom:"20px",left:"12px"}}>
