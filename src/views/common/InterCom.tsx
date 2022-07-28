@@ -29,8 +29,8 @@ const InterCom:React.FunctionComponent = () =>{
                             <div className={'ml-5'}>
                                 <p className="title is-3 is-spaced has-text-white has-text-weight-normal pt-5">Say Hi!
                                     &nbsp;&nbsp;<FontAwesomeIcon icon={faMessage} color={'white'}/></p>
-                                <p className="subtitle is-6 has-text-white has-text-weight-normal">Welcome to Work n Tour.
-                                    <br/>This is Work n Tour support.<br/>If you have any problem, contact us</p>
+                                <p className="subtitle is-6 has-text-white has-text-weight-normal">Welcome to Workntour.
+                                    <br/>This is Workntour support.<br/>If you have any problem, contact us</p>
                             </div>
                         </div>
                 </div>

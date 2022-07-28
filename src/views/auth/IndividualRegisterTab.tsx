@@ -78,7 +78,7 @@ const IndividualRegisterTab:React.FunctionComponent = () =>{
                     (, ! @ # ? ]).</p>
             </div>
             <div className="field">
-                <label className="label has-text-primary has-text-weight-medium">Password Confirm*</label>
+                <label className="label has-text-primary has-text-weight-medium">Confirmation*</label>
                 <div className="control">
                     <input className="input border-linear" type="password" placeholder="Confirm your password"
                            {...register("confirmPassword",{required:true,validate:value => value === getValues("password")})}/>

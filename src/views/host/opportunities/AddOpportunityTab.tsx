@@ -39,7 +39,7 @@ const AddOpportunityTab:React.FunctionComponent = () =>{
         array.push(<option key={"category-option-empty"}/>)
         for(const item in OpportunityCategory){
             array.push(<option key={"category-option-"+item}
-                               value={OpportunityCategory[item as OpportunityCategoryType]} label={item}/>)
+                               value={item} label={OpportunityCategory[item as OpportunityCategoryType]}/>)
         }
         return array;
     }
@@ -49,7 +49,7 @@ const AddOpportunityTab:React.FunctionComponent = () =>{
         array.push(<option key={"type-of-help-option-empty"}/>)
         for(const item in TypeOfHelpNeeded){
             array.push(<option key={"type-of-help-option-"+item}
-                               value={TypeOfHelpNeeded[item as TypeOfHelpNeededType]} label={item}/>)
+                               value={item} label={TypeOfHelpNeeded[item as TypeOfHelpNeededType]}/>)
         }
         return array;
     }
@@ -59,7 +59,7 @@ const AddOpportunityTab:React.FunctionComponent = () =>{
         array.push(<option key={"language-option-empty"}/>)
         for(const item in Languages){
             array.push(<option key={"language-option-"+item}
-                               value={Languages[item as LanguagesType]} label={item}/>)
+                               value={item} label={Languages[item as LanguagesType]}/>)
         }
         return array;
     }
@@ -69,7 +69,7 @@ const AddOpportunityTab:React.FunctionComponent = () =>{
         array.push(<option key={"meal-option-empty"}/>)
         for(const item in Meal){
             array.push(<option key={"meal-option-"+item}
-                               value={Meal[item as MealType]} label={item}/>)
+                               value={item} label={Meal[item as MealType]}/>)
         }
         return array;
     }
@@ -79,7 +79,7 @@ const AddOpportunityTab:React.FunctionComponent = () =>{
         array.push(<option key={"learn-opps-option-empty"}/>)
         for(const item in LearningOpportunities){
             array.push(<option key={"learn-opps-option-"+item}
-                               value={LearningOpportunities[item as LearningOpportunitiesType]} label={item}/>)
+                               value={item} label={LearningOpportunities[item as LearningOpportunitiesType]}/>)
         }
         return array;
     }
@@ -89,7 +89,7 @@ const AddOpportunityTab:React.FunctionComponent = () =>{
         array.push(<option key={"accommodation-option-empty"}/>)
         for(const item in Accommodation){
             array.push(<option key={"accommodation-option-"+item}
-                               value={Accommodation[item as AccommodationType]} label={item}/>)
+                               value={item} label={Accommodation[item as AccommodationType]}/>)
         }
         return array;
     }
@@ -158,17 +158,6 @@ const AddOpportunityTab:React.FunctionComponent = () =>{
                 setSelectedLearningOpps([]);
                 setOpportunityDateRange(undefined);
             });
-        // createOpportunity(data,setIsLoading,images)
-        //     .then(()=>{
-        //         toast.success("Opportunity created!",{position:toast.POSITION.TOP_RIGHT})
-        //         form.reset();
-        //         setSelectedHelps([]);
-        //         setLanguagesRequired([]);
-        //         setLanguagesSpoken([]);
-        //         setSelectedMeals([]);
-        //         setSelectedLearningOpps([]);
-        //         setOpportunityDateRange(undefined);
-        //     });
     }
 
 
