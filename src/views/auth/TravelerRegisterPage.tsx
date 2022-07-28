@@ -58,7 +58,7 @@ const TravelerRegisterPage:React.FunctionComponent = () =>{
                         <div className={"column is-3"}>
                             <div className="field mb-5">
                                 <h1 className={"title has-text-weight-bold has-text-primary"}>Hello!</h1>
-                                <h2 className={"subtitle has-text-weight-bold has-text-info"}>Sign up and start you journey!</h2>
+                                <h2 className={"subtitle has-text-weight-bold has-text-info"}>Sign up and start your journey!</h2>
                             </div>
                             <div className="field">
                                 <label className="label has-text-primary has-text-weight-medium">Name*</label>
@@ -108,7 +108,7 @@ const TravelerRegisterPage:React.FunctionComponent = () =>{
                                     (, ! @ # ? ]).</p>
                             </div>
                             <div className="field">
-                                <label className="label has-text-primary has-text-weight-medium">Password Confirm*</label>
+                                <label className="label has-text-primary has-text-weight-medium">Confirmation*</label>
                                 <div className="control">
                                     <input className="input border-linear" type="password" placeholder="Confirm your password"
                                         {...register("confirmPassword",{required:true,validate:value => value === getValues("password")})}/>

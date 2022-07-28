@@ -41,7 +41,7 @@ const CustomSelectMultiple:React.FunctionComponent<Props> = ({field,options,regi
         for(const selected of selectedValues){
             array.push(<React.Fragment key={"selected-prop-"+selected}>
                 <span className="tag is-primary m-1">
-                    {Object.keys(enumType).filter(x => enumType[x] == selected)}</span>
+                    {enumType[selected]}</span>
                 <a className="tag is-delete" onClick={()=>removeFromSelected(selected)}></a>
             </React.Fragment>)
         }

@@ -35,7 +35,7 @@ const CustomDateInput:React.FunctionComponent<Props> = ({day,setDay,month,setMon
 
     return(
         <div className={"field mt-4"}>
-            <label className="label has-text-primary has-text-weight-medium">What is your date of birthday?</label>
+            <label className="label has-text-primary has-text-weight-medium">Date of Birth*</label>
             <div className={"columns is-mobile"}>
                 <div className={"column is-size-3-mobile"}>
                     <div className="control">

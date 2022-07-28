@@ -47,7 +47,7 @@ const SelectRegistrationModal:React.FunctionComponent<Props>
                     <button className="delete" aria-label="close" onClick={()=>setIsActive(false)}></button>
                 </header>
                 <section className="modal-card-body">
-                    <p className={"subtitle"}>Choose your option to sing up</p>
+                    <p className={"subtitle"}>Would you like to sign up as a Travel-Host</p>
                     <div className={"columns is-centered"}>
                         <div className={"column is-4"}>
                             <button className="button is-primary is-fullwidth" onClick={()=>goToTravelerRegPage()}>

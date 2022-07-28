@@ -4,7 +4,7 @@ import {
     Accommodation, Languages, LearningOpportunities,
     Meal,
     Opportunity,
-    TypeOfHelpNeeded
+    TypeOfHelpNeeded, TypeOfHelpNeededType
 } from "@src/state/stores/opportunity/models";
 import {useParams} from "react-router";
 import {getDateFromString} from "@src/utilities/ui";
@@ -67,8 +67,8 @@ const Opportunity:React.FunctionComponent = () =>{
         let counter=1;
         if(opportunity?.typeOfHelpNeeded){
             for(let help of opportunity?.typeOfHelpNeeded){
-                const index = Object.values(TypeOfHelpNeeded).indexOf(help as unknown as TypeOfHelpNeeded);
-                helpNeeded = helpNeeded+Object.keys(TypeOfHelpNeeded)[index]+((counter==opportunity?.typeOfHelpNeeded.length)?"":', ');
+                // @ts-ignore
+                helpNeeded = helpNeeded+TypeOfHelpNeeded[help]+((counter==opportunity?.typeOfHelpNeeded.length)?"":', ');
                 counter = counter+1;
             }
         }
@@ -80,8 +80,8 @@ const Opportunity:React.FunctionComponent = () =>{
         let counter=1;
         if(opportunity?.meals){
             for(let meal of opportunity?.meals){
-                const index = Object.values(Meal).indexOf(meal as unknown as Meal);
-                mealsProvided = mealsProvided+Object.keys(Meal)[index]+((counter==opportunity?.meals.length)?"":', ');
+                // @ts-ignore
+                mealsProvided = mealsProvided+Meal[meal]+((counter==opportunity?.meals.length)?"":', ');
                 counter = counter+1;
             }
         }
@@ -93,8 +93,8 @@ const Opportunity:React.FunctionComponent = () =>{
         let counter=1;
         if(opportunity?.languagesRequired){
             for(let language of opportunity?.languagesRequired){
-                const index = Object.values(Languages).indexOf(language as unknown as Languages);
-                languages = languages+Object.keys(Languages)[index]+((counter==opportunity?.languagesRequired.length)?"":', ');
+                // @ts-ignore
+                languages = languages+Languages[language]+((counter==opportunity?.languagesRequired.length)?"":', ');
                 counter = counter+1;
             }
         }
@@ -106,8 +106,8 @@ const Opportunity:React.FunctionComponent = () =>{
         let counter=1;
         if(opportunity?.languagesSpoken){
             for(let language of opportunity?.languagesSpoken){
-                const index = Object.values(Languages).indexOf(language as unknown as Languages);
-                languages = languages+Object.keys(Languages)[index]+((counter==opportunity?.languagesSpoken.length)?"":', ');
+                // @ts-ignore
+                languages = languages+Languages[language]+((counter==opportunity?.languagesSpoken.length)?"":', ');
                 counter = counter+1;
             }
         }
@@ -119,8 +119,8 @@ const Opportunity:React.FunctionComponent = () =>{
         let counter=1;
         if(opportunity?.learningOpportunities){
             for(let learningOpp of opportunity?.learningOpportunities){
-                const index = Object.values(LearningOpportunities).indexOf(learningOpp as unknown as LearningOpportunities);
-                learningOpps = learningOpps+Object.keys(LearningOpportunities)[index]+((counter==opportunity?.learningOpportunities.length)?"":', ');
+                // @ts-ignore
+                learningOpps = learningOpps+LearningOpportunities[learningOpp]+((counter==opportunity?.learningOpportunities.length)?"":', ');
                 counter = counter+1;
             }
         }
@@ -128,8 +128,10 @@ const Opportunity:React.FunctionComponent = () =>{
     }
 
     const extractAccommodation = () =>{
-        const index = Object.values(Accommodation).indexOf(opportunity?.accommodationProvided as unknown as Accommodation);
-        return Object.keys(Accommodation)[index];
+        if(opportunity&&opportunity.accommodationProvided){
+            // @ts-ignore
+            return Accommodation[opportunity?.accommodationProvided];
+        }
     }
 
     const containerStyle = {

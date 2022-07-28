@@ -1,116 +1,116 @@
 import {Role} from "@src/state/stores/user/models";
 
 export enum OpportunityCategory{
-     Hostel="hostel",
-     Hotel="hotel",
-     GuestHouse="guestHouse",
-     Farm="farm",
-     EcoVillage="ecoVillage",
-     SkiCenter="skiCenter",
-     Camping="camping",
-     Ngo="ngo",
-     LocalCommunity="localCommunity",
-     AnimalShelter="animalShelter",
-     SurfClub="surfClub",
-     Winery="winery",
-     Boat="boat",
-     HomeStay="homeStay",
-     Individual="individual",
-     PrivateProject="privateProject"
+     hostel="Hostel",
+     hotel="Hotel",
+     guestHouse="Guest House",
+     farm="Farm",
+     ecoVillage="Eco Village",
+     skiCenter="Ski Center",
+     camping="Camping",
+     ngo="Ngo",
+     localCommunity="Local Community",
+     animalShelter="Animal Shelter",
+     surfClub="Surf Club",
+     winery="Winery",
+     boat="Boat",
+     homestay="Home Stay",
+     individual="Individual",
+     privateProject="Private Project"
 }
 
 export type OpportunityCategoryType = keyof typeof OpportunityCategory;
 
 export enum TypeOfHelpNeeded{
-     Reception="reception",
-     Cleaning="cleaning",
-     HouseKeeping="houseKeeping",
-     AdministrativeTasks="administrativeTasks",
-     TourGuide="tourGuide",
-     Babysitter="babysitter",
-     Vet="vet",
-     AnimalCare="animalCare",
-     Languages="languages",
-     SportsTeacher="sportsTeacher",
-     Surfing="surfing",
-     PersonalTrainer="personalTrainer",
-     Farming="farming",
-     Painting="painting",
-     Handyman="handyman",
-     SocialMedia="socialMedia",
-     Photography="photography",
-     Videography="videography",
-     WebDevelopment="webDevelopment",
-     Cooking="cooking",
-     Bartending="bartending",
-     Service="service"
+     reception="Reception",
+     cleaning="Cleaning",
+     houseKeeping="House Keeping",
+     administrativeTasks="Administrative Tasks",
+     tourGuide="Tour Guide",
+     babysitter="Babysitter",
+     vet="Vet",
+     animalCare="Animal Care",
+     languages="Languages",
+     sportsTeacher="Sports Teacher",
+     surfing="Surfing",
+     personalTrainer="Personal Trainer",
+     farming="Farming",
+     painting="Painting",
+     handyman="Handyman",
+     socialMedia="Social Media",
+     photography="Photography",
+     videography="Videography",
+     webDevelopment="Web Development",
+     cooking="Cooking",
+     bartending="Bartending",
+     service="Service"
 }
 
 export type TypeOfHelpNeededType = keyof typeof TypeOfHelpNeeded;
 
 export enum Accommodation{
-     PrivateRoom="privateRoom",
-     SharedRoom="sharedRoom",
-     Dorm="dorm",
-     Tent="tent"
+     privateRoom="Private Room",
+     sharedRoom="Shared Room",
+     dorm="Dorm",
+     tent="Tent"
 }
 
 export type AccommodationType = keyof typeof Accommodation;
 
 export enum Meal{
-     Breakfast="breakfast",
-     Lunch="lunch",
-     Dinner="dinner",
-     UseSharedKitchen="useSharedKitchen"
+     breakfast="Breakfast",
+     lunch="Lunch",
+     dinner="Dinner",
+     useSharedKitchen="Use Shared Kitchen"
 }
 
 export type MealType = keyof typeof Meal;
 
 export enum Languages{
-     Greek="greek",
-     English="english",
-     Spanish="spanish",
-     Italian="italian",
-     German="german"
+     greek="Greek",
+     english="English",
+     spanish="Spanish",
+     italian="Italian",
+     german="German"
 }
 
 export type LanguagesType = keyof typeof Languages;
 
 export enum LearningOpportunities{
-     Hospitality="hospitality",
-     Languages="languages",
-     AnimalWelfare="animalWelfare",
-     Volunteering="volunteering",
-     CultureExchange="cultureExchange",
-     CharityWork="charityWork",
-     Farming="farming",
-     Photography="photography",
-     Videography="videography",
-     Technology="technology",
-     NonProfit="nonProfit",
-     Art="art",
-     WaterSports="waterSports",
-     Nature="nature",
-     Writing="writing",
-     Yoga="yoga",
-     Fitness="fitness",
-     Dancing="dancing",
-     Gardening="gardening",
-     Cycling="cycling",
-     Books="books",
-     Babysitting="babysitting",
-     Cooking="cooking",
-     Computers="computers",
-     Programming="programming",
-     SelfDevelopment="selfDevelopment",
-     Sustainability="sustainability",
-     Hitchhiking="hitchhiking",
-     Sailing="sailing",
-     Music="music",
-     Movies="movies",
-     Fashion="fashion",
-     History="history",
-     Architecture="architecture"
+     hospitality="Hospitality",
+     languages="Languages",
+     animalWelfare="Animal Welfare",
+     volunteering="Volunteering",
+     cultureExchange="Culture Exchange",
+     charityWork="Charity Work",
+     farming="Farming",
+     photography="Photography",
+     videography="Videography",
+     technology="Technology",
+     nonProfit="Non Profit",
+     art="Art",
+     waterSports="Water Sports",
+     nature="Nature",
+     writing="Writing",
+     yoga="Yoga",
+     fitness="Fitness",
+     dancing="Dancing",
+     gardening="Gardening",
+     cycling="Cycling",
+     books="Books",
+     babysitting="Babysitting",
+     cooking="Cooking",
+     computers="Computers",
+     programming="Programming",
+     selfDevelopment="Self Development",
+     sustainability="Sustainability",
+     hitchhiking="Hitchhiking",
+     sailing="Sailing",
+     music="Music",
+     movies="Movies",
+     fashion="Fashion",
+     history="History",
+     architecture="Architecture"
 }
 
 export type LearningOpportunitiesType = keyof typeof LearningOpportunities;

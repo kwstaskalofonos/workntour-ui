@@ -58,7 +58,7 @@ const TopMenu: React.FunctionComponent = () =>{
                                 <div className="buttons">
                                     <a className="button is-outlined"
                                        style={{"border":"1px solid #7E6FD8","color":"#7E6FD8"}}
-                                       onClick={()=>loginModalHandler.current?.open()}>Log in</a>
+                                       onClick={()=>loginModalHandler.current?.open()}>Log in to your account</a>
                                     <a className="button is-outlined"
                                        style={{"border":"1px solid #7E6FD8","color":"#7E6FD8"}}
                                        onClick={()=>registrationModalHandler.current?.open()}>Sign Up</a>
