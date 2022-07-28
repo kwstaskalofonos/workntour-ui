@@ -15,8 +15,10 @@ import {toast} from "react-toastify";
 // @ts-ignore
 import illustration from "@src/assets/signUpAsTrav.svg";
 import CustomDateInput from "@src/views/common/CustomDateInput";
-import {constructDate} from "@src/utilities/ui";
+import {constructDate, getNationalities} from "@src/utilities/ui";
 import InterCom from "@src/views/common/InterCom";
+import Select from "react-select";
+import {TypeOfHelpNeeded, TypeOfHelpNeededType} from "@src/state/stores/opportunity/models";
 
 const TravelerRegisterPage:React.FunctionComponent = () =>{
 
@@ -27,6 +29,7 @@ const TravelerRegisterPage:React.FunctionComponent = () =>{
     const navigate = useNavigate();
     const [selected,setSelected] =
         useState<{value:string,label:JSX.Element}>({value:'GR',label:<Flag country="GR" />});
+    const [countryCode,setCountryCode] = useState<string>("30");
 
     const [day,setDay] = useState<string>("");
     const [month,setMonth] = useState<string>("");
@@ -38,7 +41,7 @@ const TravelerRegisterPage:React.FunctionComponent = () =>{
             data.birthday=constructDate(day,month,year);
         }
         data.role='TRAVELER';
-        data.countryCodeMobileNum=selected.value;
+        data.countryCodeMobileNum=countryCode;
         setIsLoading(true);
         registerAsTraveler(data,setIsLoading)
             .then(()=>{
@@ -47,6 +50,16 @@ const TravelerRegisterPage:React.FunctionComponent = () =>{
                     state:{email:data.email}
                 });
             });
+    }
+
+    const renderNationalities = () =>{
+        let array:any[]=[];
+        array.push(<option key={"type-of-help-option-empty"}/>)
+        for(let item of getNationalities()){
+            array.push(<option key={"type-of-help-option-"+item}
+                               value={item.value} label={item.label}/>)
+        }
+        return array;
     }
 
     return(
@@ -133,7 +146,7 @@ const TravelerRegisterPage:React.FunctionComponent = () =>{
                                         <label className="label has-text-primary has-text-weight-medium">Phone Number</label>
                                         <div className="control">
                                             <div className="field has-addons">
-                                                <CustomSelectCountry value={selected} setValue={setSelected}/>
+                                                <CustomSelectCountry value={selected} setValue={setSelected} setCountryCode={setCountryCode}/>
                                                 <p className="control is-expanded">
                                                     <input className="input border-linear-no-left" type="text"
                                                            {...register("mobileNum")} placeholder="+30 694 435 8945"/>
@@ -145,8 +158,14 @@ const TravelerRegisterPage:React.FunctionComponent = () =>{
                                     <div className={"field"}>
                                         <label className="label has-text-primary has-text-weight-medium">Nationality</label>
                                         <div className="control">
-                                            <input className="input border-linear" type="text"
-                                                   {...register("nationality")} placeholder="Enter your nationality"/>
+                                            <div className="select is-fullwidth">
+                                            <select
+                                                {...register("nationality")}
+                                                className={"border-linear has-text-primary"}
+                                                placeholder={"Select your Nationality"}>
+                                                {renderNationalities()}
+                                            </select>
+                                            </div>
                                         </div>
                                     </div>
                                 </React.Fragment>

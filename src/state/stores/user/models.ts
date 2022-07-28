@@ -83,3 +83,4 @@ export enum Role{
     INDIVIDUAL_HOST="INDIVIDUAL_HOST",
     COMPANY_HOST="COMPANY_HOST"
 }
+
