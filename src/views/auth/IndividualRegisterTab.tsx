@@ -10,6 +10,7 @@ import {Individual} from "@src/state/stores/user/models";
 import {constructDate, getNationalities} from "@src/utilities/ui";
 import {registerAsIndividual} from "@src/state/stores/user/operations";
 import {useNavigate} from "react-router";
+import {toast} from "react-toastify";
 
 const IndividualRegisterTab:React.FunctionComponent = () =>{
 
@@ -31,6 +32,10 @@ const IndividualRegisterTab:React.FunctionComponent = () =>{
             data.birthday=constructDate(day,month,year);
         }
         data.countryCodeMobileNum=countryCode;
+        if(data.nationality==""){
+            toast.error("Please select Nationality",{position:toast.POSITION.TOP_RIGHT});
+            return;
+        }
         setIsLoading(true);
         registerAsIndividual(data,setIsLoading)
             .then(()=>{
@@ -43,9 +48,9 @@ const IndividualRegisterTab:React.FunctionComponent = () =>{
 
     const renderNationalities = () =>{
         let array:any[]=[];
-        array.push(<option key={"type-of-help-option-empty"}/>)
+        array.push(<option key={"nationality-option-empty-1"} value={""} label={"Select Nationality"}/>);
         for(let item of getNationalities()){
-            array.push(<option key={"type-of-help-option-"+item}
+            array.push(<option key={"type-of-help-option-"+item.label}
                                value={item.value} label={item.label}/>)
         }
         return array;

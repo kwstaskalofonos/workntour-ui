@@ -40,6 +40,10 @@ const TravelerRegisterPage:React.FunctionComponent = () =>{
         }
         data.role='TRAVELER';
         data.countryCodeMobileNum=countryCode;
+        if(data.nationality==""){
+            toast.error("Please select Nationality",{position:toast.POSITION.TOP_RIGHT});
+            return;
+        }
         setIsLoading(true);
         registerAsTraveler(data,setIsLoading)
             .then(()=>{
@@ -52,9 +56,9 @@ const TravelerRegisterPage:React.FunctionComponent = () =>{
 
     const renderNationalities = () =>{
         let array:any[]=[];
-        array.push(<option key={"type-of-help-option-empty"}/>)
+        array.push(<option key={"nationality-option-empty-1"} value={""} label={"Select Nationality"}/>);
         for(let item of getNationalities()){
-            array.push(<option key={"type-of-help-option-"+item}
+            array.push(<option key={"nationality-option-"+item.label}
                                value={item.value} label={item.label}/>)
         }
         return array;
