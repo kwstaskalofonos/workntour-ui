@@ -7,7 +7,7 @@ import {faAngleUp} from "@fortawesome/free-solid-svg-icons/faAngleUp";
 import {faAngleDown} from "@fortawesome/free-solid-svg-icons/faAngleDown";
 import CustomDateInput from "@src/views/common/CustomDateInput";
 import {Individual} from "@src/state/stores/user/models";
-import {constructDate} from "@src/utilities/ui";
+import {constructDate, getNationalities} from "@src/utilities/ui";
 import {registerAsIndividual} from "@src/state/stores/user/operations";
 import {useNavigate} from "react-router";
 
@@ -24,12 +24,13 @@ const IndividualRegisterTab:React.FunctionComponent = () =>{
     const [day,setDay] = useState<string>("");
     const [month,setMonth] = useState<string>("");
     const [year,setYear] = useState<string>("");
+    const [countryCode,setCountryCode] = useState<string>("30");
 
     const onSubmit:any=(data:Individual)=>{
         if(day&&month&&year){
             data.birthday=constructDate(day,month,year);
         }
-        data.countryCodeMobileNum=selected.value;
+        data.countryCodeMobileNum=countryCode;
         setIsLoading(true);
         registerAsIndividual(data,setIsLoading)
             .then(()=>{
@@ -38,6 +39,16 @@ const IndividualRegisterTab:React.FunctionComponent = () =>{
                     email:data.email
                     }});
             });
+    }
+
+    const renderNationalities = () =>{
+        let array:any[]=[];
+        array.push(<option key={"type-of-help-option-empty"}/>)
+        for(let item of getNationalities()){
+            array.push(<option key={"type-of-help-option-"+item}
+                               value={item.value} label={item.label}/>)
+        }
+        return array;
     }
 
     return(
@@ -101,7 +112,7 @@ const IndividualRegisterTab:React.FunctionComponent = () =>{
                         <label className="label has-text-primary has-text-weight-medium">Phone Number</label>
                         <div className="control">
                             <div className="field has-addons">
-                                <CustomSelectCountry value={selected} setValue={setSelected}/>
+                                <CustomSelectCountry value={selected} setValue={setSelected} setCountryCode={setCountryCode}/>
                                 <p className="control is-expanded">
                                     <input className="input border-linear-no-left" type="text"
                                            {...register("mobileNum")} placeholder="+30 694 435 8945"/>
@@ -113,8 +124,14 @@ const IndividualRegisterTab:React.FunctionComponent = () =>{
                     <div className={"field"}>
                         <label className="label has-text-primary has-text-weight-medium">Nationality</label>
                         <div className="control">
-                            <input className="input border-linear" type="text"
-                                   {...register("nationality")} placeholder="Enter your nationality"/>
+                            <div className="select is-fullwidth">
+                                <select
+                                    {...register("nationality")}
+                                    className={"border-linear has-text-primary"}
+                                    placeholder={"Select your Nationality"}>
+                                    {renderNationalities()}
+                                </select>
+                            </div>
                         </div>
                     </div>
                 </React.Fragment>

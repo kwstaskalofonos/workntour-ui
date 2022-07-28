@@ -1,6 +1,6 @@
 export const countries=[
-    {value:"AD",label:"",code:"376"},
-    {value:"AE",label:"",code:"971"},
+    {value:"AD",label:"Andorra",code:"376"},
+    {value:"AE",label:"United Arab Emirates",code:"971"},
     {value:"AF",label:"",code:"93"},
     {value:"AG",label:"",code:"1-268"},
     {value:"AI",label:"",code:"1-264"},

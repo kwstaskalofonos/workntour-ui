@@ -57,3 +57,16 @@ export function getDateFromString(date:string|undefined){
     }
     return null;
 }
+
+export function getNationalities(){
+    let tmp:any[]=[];
+    tmp.push({value:"Greek",label:"Greek"});
+    tmp.push({value:"British",label:"British"});
+    tmp.push({value:"Italian",label:"Italian"});
+    tmp.push({value:"German",label:"German"});
+    tmp.push({value:"American",label:"American"});
+    tmp.push({value:"Bulgarian",label:"Bulgarian"});
+    tmp.push({value:"Turkish",label:"Turkish"});
+    tmp.push({value:"Spanish",label:"Spanish"});
+    return tmp;
+}
