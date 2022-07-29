@@ -66,7 +66,7 @@ const LoginModal:React.FunctionComponent<Props>=
                     <button className="delete" aria-label="close" onClick={()=>setIsActive(false)}></button>
                 </header>
                 <section className={"modal-card-body"}>
-                    <p className="title is-4 has-text-weight-bold has-text-primary has-text-centered">Login into your account</p>
+                    <p className="title is-4 has-text-weight-bold has-text-primary has-text-centered">Log in to your account</p>
                     <div className={"columns is-centered"}>
                         <div className={"column is-8"}>
                             <form>
