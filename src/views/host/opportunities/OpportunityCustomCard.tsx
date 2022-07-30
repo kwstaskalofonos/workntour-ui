@@ -55,7 +55,7 @@ const OpportunityCustomCard:React.FunctionComponent<Props> = ({img,opportunity,s
                         nextArrow={<span className="icon custom-arrow-left is-medium has-background-white"><FontAwesomeIcon icon={faAngleRight}/></span>}>
                     {slideImages.map((slideImage, index)=> (
                         <div className="each-slide-effect" style={{position:"relative",cursor:'pointer'}}
-                             key={index} onClick={goToOpportunity}>
+                             key={"slide-opportunity-image-"+slideImage.url} onClick={goToOpportunity}>
                             <div style={{'backgroundImage': `url(${slideImage.url})`,backgroundRepeat:"no-repeat",backgroundPosition:'center'}}>
                             </div>
                             <p
@@ -63,6 +63,16 @@ const OpportunityCustomCard:React.FunctionComponent<Props> = ({img,opportunity,s
                                 {opportunity.jobTitle}</p>
                         </div>
                     ))}
+                    {(!opportunity.imageUrls||opportunity.imageUrls.length==0)&&
+                        <div className="each-slide-effect" style={{position:"relative",cursor:'pointer'}}
+                             key={"slide-opportunity-image-default"} onClick={goToOpportunity}>
+                            <div style={{'backgroundImage': `url(${img})`,backgroundRepeat:"no-repeat",backgroundPosition:'center'}}>
+                            </div>
+                            <p
+                                className={"is-size-7 has-text-white-bis has-text-weight-semibold"} style={{position:"absolute",bottom:"20px",left:"12px"}}>
+                                {opportunity.jobTitle}</p>
+                        </div>
+                    }
                 </Slide>
             <p className="is-size-7 has-text-weight-bold">{extractLocationInfo()}</p>
             <p className="is-size-7 has-text-grey-light has-text-weight-bold">{extractCategory()}</p>

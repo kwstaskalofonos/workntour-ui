@@ -179,3 +179,23 @@ export enum LocationFields{
      country="country",
      postal_code="postal_code"
 }
+
+export interface FiltersFields{
+     opportunityCategory:OpportunityCategory,
+     typeOfHelpNeeded:TypeOfHelpNeeded[],
+     minimumDays:number,
+     maximumDays:number,
+     languagesRequired:Languages[],
+     accommodationProvided:Accommodation,
+     meals:Meal[],
+     longitude:number,
+     latitude:number,
+     endDate:string,
+     startDate:string
+}
+
+export interface RefData{
+     value:string,
+     label:string,
+     selected:boolean
+}

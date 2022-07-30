@@ -28,7 +28,8 @@ const TopMenu: React.FunctionComponent = () =>{
             <nav className="navbar" role="navigation" aria-label="main-navigation">
                 <div className="navbar-brand" style={{position:"relative",left:"+4%"}}>
                     <a className="navbar-item" href="/">
-                        <img src={logo} width="190" height="28"/>
+                        {/*<img src={logo} width="190" height="28"/>*/}
+                        <img src={logo}/>
                     </a>
 
                     <a role="button" className={"navbar-burger "+(isActive?"is-active":"")} onClick={()=>setIsActive(!isActive)}
