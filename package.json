@@ -31,6 +31,7 @@
     "react-datepicker": "^4.8.0",
     "react-dom": "^18.1.0",
     "react-dropzone": "^14.2.2",
+    "react-dual-range-slider": "^1.0.4",
     "react-flagkit": "^2.0.4",
     "react-hook-form": "^7.31.3",
     "react-number-format": "^4.9.3",

@@ -19,7 +19,7 @@ const OpportunityCustomCard:React.FunctionComponent<Props> = ({img,opportunity,s
     const navigate = useNavigate();
 
     useEffect(()=>{
-        if(opportunity){
+        if(opportunity&&opportunity.imageUrls.length>0){
             let tmp:any[]=[];
             for(let imageUrl of opportunity.imageUrls){
                 tmp.push({url:imageUrl,caption:""});
@@ -63,16 +63,6 @@ const OpportunityCustomCard:React.FunctionComponent<Props> = ({img,opportunity,s
                                 {opportunity.jobTitle}</p>
                         </div>
                     ))}
-                    {(!opportunity.imageUrls||opportunity.imageUrls.length==0)&&
-                        <div className="each-slide-effect" style={{position:"relative",cursor:'pointer'}}
-                             key={"slide-opportunity-image-default"} onClick={goToOpportunity}>
-                            <div style={{'backgroundImage': `url(${img})`,backgroundRepeat:"no-repeat",backgroundPosition:'center'}}>
-                            </div>
-                            <p
-                                className={"is-size-7 has-text-white-bis has-text-weight-semibold"} style={{position:"absolute",bottom:"20px",left:"12px"}}>
-                                {opportunity.jobTitle}</p>
-                        </div>
-                    }
                 </Slide>
             <p className="is-size-7 has-text-weight-bold">{extractLocationInfo()}</p>
             <p className="is-size-7 has-text-grey-light has-text-weight-bold">{extractCategory()}</p>

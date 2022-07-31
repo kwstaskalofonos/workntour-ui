@@ -29,14 +29,12 @@ const Opportunities:React.FunctionComponent = () =>{
             </div>
                 <section>
                     <div className={"columns"}>
-                        <div className={"column is-1"}/>
-                        <div className={"column is-10"}>
+                        <div className={"column is-12"}>
                             {selectedTab == "OPPORTUNITIES" ?
                                 <OpportunitiesTab/>:
                                 <AddOpportunityTab/>
                             }
                         </div>
-                        <div className={"column is-1"}/>
                     </div>
                 </section>
         </React.Fragment>

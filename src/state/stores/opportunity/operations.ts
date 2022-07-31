@@ -15,6 +15,18 @@ export const createOpportunity = (form:Opportunity,setIsLoading:any):Promise<Opp
     )
 };
 
+export const createOpportunityWeb = (data:FormData,setIsLoading:any):Promise<Opportunity>=>{
+    return new Promise<Opportunity>((resolve,reject)=>
+        postMultipart('createNewOpportunityWeb',data)
+            .then((response:Opportunity)=>{
+                resolve(response);
+            }).catch((error)=>{
+            toast.error(error,{position:toast.POSITION.TOP_RIGHT});
+            reject(error);
+        }).finally(()=>setIsLoading(false))
+    )
+};
+
 export const deleteOpportunity = (id:string):Promise<Opportunity>=>{
     return new Promise<Opportunity>((resolve,reject)=>
         del('deleteOpportunityBy/'+id)

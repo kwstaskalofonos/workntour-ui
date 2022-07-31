@@ -13,7 +13,7 @@ import {
 import CustomSelectMultiple from "@src/views/common/CustomSelectMultiple";
 import CustomMap from "@src/views/host/opportunities/CustomMap";
 import CustomDateRangeInput from "@src/views/common/CustomDateRangeInput";
-import {createOpportunity} from "@src/state/stores/opportunity/operations";
+import {createOpportunity, createOpportunityWeb} from "@src/state/stores/opportunity/operations";
 import {getCookie} from "@src/utilities/cookies";
 import {Role, RoleType} from "@src/state/stores/user/models";
 import {toast} from "react-toastify";
@@ -32,7 +32,6 @@ const AddOpportunityTab:React.FunctionComponent = () =>{
     const [opportunityLocation,setOpportunityLocation] = useState<OpportunityLocation>();
     const [opportunityDateRange,setOpportunityDateRange] = useState<OpportunityDates>();
     const [images,setImages] = useState<File[]>([]);
-
 
     const renderCategories = () =>{
         let array:any[]=[];
@@ -94,31 +93,6 @@ const AddOpportunityTab:React.FunctionComponent = () =>{
         return array;
     }
 
-    const toBase64 = (file:File) => new Promise<string>((resolve, reject) => {
-        const reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onload = () => {
-            if(reader.result)
-                resolve(reader.result.toString());
-        }
-        reader.onerror = error => reject(error);
-    });
-
-    const extractBytesFromImages = () =>{
-        let array:any[] = []
-        let textDecoder = new TextDecoder();
-        for(let image of images){
-            let fileReader = new FileReader();
-            if(fileReader.readyState == 0){
-                fileReader.readAsArrayBuffer(image);
-            }
-            fileReader.onload = function(){
-                // @ts-ignore
-                array.push(textDecoder.decode(new Uint32Array(fileReader.result)));
-            }
-        }
-        return array;
-    }
 
 
     const onSubmit = (data:Opportunity) =>{
@@ -145,9 +119,13 @@ const AddOpportunityTab:React.FunctionComponent = () =>{
             toast.error("You have to upload at least one image",{position:toast.POSITION.TOP_RIGHT});
             return;
         }
-        data.images=extractBytesFromImages();
+        let formData = new FormData();
+        for(let image of images){
+            formData.append('images',image);
+        }
+        formData.append('newOpportunity',new Blob([JSON.stringify(data)],{type:"application/json"}));
         setIsLoading(true);
-        createOpportunity(data,setIsLoading)
+        createOpportunityWeb(formData,setIsLoading)
             .then(()=>{
                 toast.success("Opportunity created!",{position:toast.POSITION.TOP_RIGHT})
                 form.reset();
@@ -156,6 +134,7 @@ const AddOpportunityTab:React.FunctionComponent = () =>{
                 setLanguagesSpoken([]);
                 setSelectedMeals([]);
                 setSelectedLearningOpps([]);
+                setImages([]);
                 setOpportunityDateRange(undefined);
             });
     }

@@ -1,6 +1,7 @@
 import React, {forwardRef, useImperativeHandle, useState} from "react";
 import CustomDateRangeInput from "@src/views/common/CustomDateRangeInput";
 import { RefData,} from "@src/state/stores/opportunity/models";
+import MultirangeSlider from "@src/views/common/MultirangeSlider";
 
 export interface Props{
     active:boolean,
@@ -28,7 +29,7 @@ const FiltersModal:React.FunctionComponent<Props> = ({active,setActive,categorie
         for(let item of categories){
             array.push(<span key={"opportunity-category-"+item.value}
                              className={"tag is-primary m-1 "+(!item.selected?"is-light":"")} onClick={()=>updateCategories(item)}>
-                {item.value}
+                {item.label}
             </span>)
         }
         return array;
@@ -52,7 +53,7 @@ const FiltersModal:React.FunctionComponent<Props> = ({active,setActive,categorie
         for(let item of helps){
             array.push(<span key={"opportunity-help-"+item.value}
                 className={"tag is-primary m-1 "+(!item.selected?"is-light":"")} onClick={()=>updateHelps(item)}>
-                {item.value}
+                {item.label}
             </span>)
         }
         return array;
@@ -72,7 +73,7 @@ const FiltersModal:React.FunctionComponent<Props> = ({active,setActive,categorie
         for(let item of accommodations){
             array.push(<span key={"opportunity-accommodation-"+item.value} onClick={()=>updateAccommodations(item)}
                 className={"tag is-primary m-1 "+(!item.selected?"is-light":"")}>
-                {item.value}
+                {item.label}
             </span>)
         }
         return array;
@@ -96,7 +97,7 @@ const FiltersModal:React.FunctionComponent<Props> = ({active,setActive,categorie
         for(let item of meals){
             array.push(<span key={"opportunity-meal-"+item.value} onClick={()=>updateMeals(item)}
                 className={"tag is-primary m-1 "+(!item.selected?"is-light":"")}>
-                {item.value}
+                {item.label}
             </span>)
         }
         return array;
@@ -116,7 +117,7 @@ const FiltersModal:React.FunctionComponent<Props> = ({active,setActive,categorie
         for(let item of languages){
             array.push(<span key={"opportunity-language-"+item.value} onClick={()=>updateLanguages(item)}
                 className={"tag is-primary m-1 "+(!item.selected?"is-light":"")}>
-                {item.value}
+                {item.label}
             </span>)
         }
         return array;
@@ -149,13 +150,11 @@ const FiltersModal:React.FunctionComponent<Props> = ({active,setActive,categorie
                     </div>
                     <div className="field">
                         <label className="label has-text-weight-medium">Setup minimun & maximum days</label>
-                        <div className={"wrapper"}>
-                            <div className={"slider-container"}>
-                                <div className={"slider-track"}></div>
-                                <input type={"range"} min={"0"} max={"48"} value={"30"} id={"slider-1"}/>
-                                <input type={"range"} min={"0"} max={"48"} value={"30"} id={"slider-2"}/>
-                            </div>
-                        </div>
+                        <MultirangeSlider
+                            min={0}
+                            max={1000}
+                            onChange={()=>console.log("call")}
+                        />
                     </div>
                     <div className="field">
                         <label className="label has-text-weight-medium">Type of help</label>
@@ -187,7 +186,7 @@ const FiltersModal:React.FunctionComponent<Props> = ({active,setActive,categorie
                     </div>
                 </section>
                 <footer className="modal-card-foot is-justify-content-space-between">
-                    <a  onClick={()=>setActive(false)}>Cancel</a>
+                    <a  onClick={()=>setActive(false)}>Clear</a>
                     <button className="button" onClick={()=>setActive(false)}>
                         There are no opportunities</button>
                 </footer>
