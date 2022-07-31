@@ -181,17 +181,35 @@ export enum LocationFields{
 }
 
 export interface FiltersFields{
-     opportunityCategory:OpportunityCategory,
+     opportunityCategory:OpportunityCategory|undefined|null,
      typeOfHelpNeeded:TypeOfHelpNeeded[],
-     minimumDays:number,
-     maximumDays:number,
+     minimumDays:number|0,
+     maximumDays:number|0,
      languagesRequired:Languages[],
-     accommodationProvided:Accommodation,
+     accommodationProvided:Accommodation|undefined,
      meals:Meal[],
-     longitude:number,
-     latitude:number,
-     endDate:string,
-     startDate:string
+     longitude:number|undefined,
+     latitude:number|undefined,
+     endDate:string|undefined,
+     startDate:string|undefined
+}
+
+export interface Optional{
+     value:any
+}
+
+export enum FilterTypes{
+     CATEGORY,
+     TYPE_OF_HELP,
+     MINDAYS,
+     MAXDAYS,
+     LANGUAGE,
+     ACCOMMODATION,
+     MEAL,
+     LONGTITUDE,
+     LATITUDE,
+     END_DATE,
+     START_DATE
 }
 
 export interface RefData{

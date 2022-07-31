@@ -126,7 +126,7 @@ const CustomMap:React.FunctionComponent<Props> = ({ setOpportunityLocation}) =>{
             // @ts-ignore
             let oppLocation:OpportunityLocation = {latitude:searchBox.getPlaces()[0].geometry.location.lat()};
             // @ts-ignore
-            oppLocation.longitude=searchBox.getPlaces()[0].geometry.location.lng()
+            oppLocation.longitude=searchBox.getPlaces()[0].geometry.location.lng();
             let tmp:PlacemarkAttributes={name:customLocation?.route+" "+customLocation?.streetNumber,postalCode:customLocation?.postalCode,
                 locality:customLocation?.locality,country:customLocation?.country,area:customLocation?.administrativeArea}
             oppLocation.placemark = tmp;

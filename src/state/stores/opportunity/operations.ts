@@ -1,4 +1,4 @@
-import {Opportunity} from "@src/state/stores/opportunity/models";
+import {FiltersFields, Opportunity, Optional} from "@src/state/stores/opportunity/models";
 import {del, GenericResponse, get, post, postMultipart} from "@src/utilities/fetch";
 import {toast} from "react-toastify";
 
@@ -74,3 +74,16 @@ export const getOpportunity = (opportunityId:string):Promise<Opportunity>=>{
         }).finally()
     )
 };
+
+export const getOpportunitiesByLocation = (filtersFields:Optional,start:number,offset:number):Promise<Opportunity[]>=>{
+    return new Promise<Opportunity[]>((resolve, reject)=>
+        post('homePage/filters/?start='+start+"&offset="+offset,filtersFields)
+            .then((response:Opportunity[])=>{
+                resolve(response);
+            }).catch((error)=>{
+            toast.error(error,{position:toast.POSITION.TOP_RIGHT});
+            reject(error);
+        }).finally()
+    )
+};
+

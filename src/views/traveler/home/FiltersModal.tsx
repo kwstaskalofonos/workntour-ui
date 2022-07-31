@@ -1,7 +1,13 @@
-import React, {forwardRef, useImperativeHandle, useState} from "react";
-import CustomDateRangeInput from "@src/views/common/CustomDateRangeInput";
-import { RefData,} from "@src/state/stores/opportunity/models";
-import MultirangeSlider from "@src/views/common/MultirangeSlider";
+import React, {useEffect, useState} from "react";
+import {
+    Accommodation, AccommodationType,
+    FiltersFields,
+    FilterTypes, Languages, LanguagesType, Meal, MealType,
+    OpportunityCategory,
+    OpportunityCategoryType,
+    RefData, TypeOfHelpNeeded, TypeOfHelpNeededType,
+} from "@src/state/stores/opportunity/models";
+import cloneDeep from "lodash/cloneDeep";
 
 export interface Props{
     active:boolean,
@@ -15,14 +21,111 @@ export interface Props{
     meals:RefData[],
     setMeals:any,
     languages:RefData[],
-    setLanguages:any
+    setLanguages:any,
+    endDate:Date|undefined,
+    setEndDate:any,
+    startDate:Date|undefined,
+    setStartDate:any,
 }
 
 const FiltersModal:React.FunctionComponent<Props> = ({active,setActive,categories,setCategories,languages,setLanguages,helps,setHelps
-,accommodations,setAccommodations,setMeals,meals}) =>{
+,accommodations,setAccommodations,setMeals,meals,endDate,setEndDate,startDate,setStartDate}) =>{
 
     const [dates,setDates] = useState<any>();
+    const [filters,setFilters] = useState<FiltersFields>();
 
+    useEffect(()=>{
+
+
+
+    },[])
+
+    useEffect(()=>{
+        if(active&&filters){
+            console.log("Call api from Modal");
+            console.log(filters);
+        }
+    },[filters])
+
+    const onFilterChanged = (type:FilterTypes,value:any) =>{
+            let tmp = cloneDeep(filters);
+            switch (type){
+                case FilterTypes.CATEGORY:{
+                    // @ts-ignore
+                    tmp.opportunityCategory = value;
+                    break;
+                }
+                case FilterTypes.TYPE_OF_HELP:{
+                    // @ts-ignore
+                    let idx = tmp.typeOfHelpNeeded.findIndex(help=>help == value);
+                    if(idx>-1){ // @ts-ignore
+                        tmp.typeOfHelpNeeded.splice(idx,1);}
+                    else{
+                        // @ts-ignore
+                        tmp.typeOfHelpNeeded.push(value);
+                    }
+                    break;
+                }
+                case FilterTypes.MINDAYS:{
+                    // @ts-ignore
+                    tmp.minimumDays = value;
+                    break;
+                }
+                case FilterTypes.MAXDAYS:{
+                    // @ts-ignore
+                    tmp.maximumDays = value;
+                    break;
+                }
+                case FilterTypes.LANGUAGE:{
+                    // @ts-ignore
+                    let idx = tmp.languagesRequired.findIndex(lang=>lang == value);
+                    if(idx>-1){ // @ts-ignore
+                        tmp.languagesRequired.splice(idx,1);}
+                    else{
+                        // @ts-ignore
+                        tmp.languagesRequired.push(value);
+                    }
+                    break;
+                }
+                case FilterTypes.ACCOMMODATION:{
+                    // @ts-ignore
+                    tmp.accommodationProvided = value;
+                    break;
+                }
+                case FilterTypes.MEAL:{
+                    // @ts-ignore
+                    let idx = tmp.meals.findIndex(meal=>meal == value);
+                    if(idx>-1){ // @ts-ignore
+                        tmp.meals.splice(idx,1);}
+                    else{
+                        // @ts-ignore
+                        tmp.meals.push(value);
+                    }
+                    break;
+                }
+                case FilterTypes.LONGTITUDE:{
+                    // @ts-ignore
+                    tmp.longitude = value;
+                    break;
+                }
+                case FilterTypes.LATITUDE:{
+                    // @ts-ignore
+                    tmp.latitude = value;
+                    break;
+                }
+                case FilterTypes.END_DATE:{
+                    // @ts-ignore
+                    tmp.endDate = value;
+                    break;
+                }
+                case FilterTypes.START_DATE:{
+                    // @ts-ignore
+                    tmp.startDate = value;
+                    break;
+                }
+            }
+            setFilters(tmp);
+    }
 
     const renderCategories = () =>{
         let array:any[]=[];
@@ -36,6 +139,7 @@ const FiltersModal:React.FunctionComponent<Props> = ({active,setActive,categorie
     }
 
     const updateCategories = (item:RefData) =>{
+        onFilterChanged(FilterTypes.CATEGORY, item.value);
         let tmp = [...categories];
         let idx = categories.findIndex(value => value.value==item.value);
         let idxToRevert = categories.findIndex(value => value.selected);
@@ -60,6 +164,7 @@ const FiltersModal:React.FunctionComponent<Props> = ({active,setActive,categorie
     }
 
     const updateHelps = (item:RefData) =>{
+        onFilterChanged(FilterTypes.TYPE_OF_HELP, item.value);
         let tmp = [...helps];
         let idx = helps.findIndex(value => value.value==item.value);
         if(idx>-1){
@@ -80,6 +185,7 @@ const FiltersModal:React.FunctionComponent<Props> = ({active,setActive,categorie
     }
 
     const updateAccommodations = (item:RefData) =>{
+        onFilterChanged(FilterTypes.ACCOMMODATION, item.value);
         let tmp = [...accommodations];
         let idx = accommodations.findIndex(value => value.value==item.value);
         let idxToRevert = accommodations.findIndex(value => value.selected);
@@ -104,6 +210,7 @@ const FiltersModal:React.FunctionComponent<Props> = ({active,setActive,categorie
     }
 
     const updateMeals = (item:RefData) =>{
+        onFilterChanged(FilterTypes.MEAL, item.value);
         let tmp = [...meals];
         let idx = meals.findIndex(value => value.value==item.value);
         if(idx>-1){
@@ -124,6 +231,7 @@ const FiltersModal:React.FunctionComponent<Props> = ({active,setActive,categorie
     }
 
     const updateLanguages = (item:RefData) =>{
+        onFilterChanged(FilterTypes.LANGUAGE, item.value);
         let tmp = [...languages];
         let idx = languages.findIndex(value => value.value==item.value);
         if(idx>-1){
@@ -150,11 +258,6 @@ const FiltersModal:React.FunctionComponent<Props> = ({active,setActive,categorie
                     </div>
                     <div className="field">
                         <label className="label has-text-weight-medium">Setup minimun & maximum days</label>
-                        <MultirangeSlider
-                            min={0}
-                            max={1000}
-                            onChange={()=>console.log("call")}
-                        />
                     </div>
                     <div className="field">
                         <label className="label has-text-weight-medium">Type of help</label>

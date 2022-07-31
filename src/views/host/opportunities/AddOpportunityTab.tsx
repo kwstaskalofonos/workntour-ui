@@ -173,7 +173,7 @@ const AddOpportunityTab:React.FunctionComponent = () =>{
                     <div className="field">
                         <label className="label has-text-primary has-text-weight-medium">Job Description</label>
                         <textarea className="textarea border-linear has-text-primary"
-                                  {...register("jobDescription",{maxLength:20})}
+                                  {...register("jobDescription",{maxLength:200})}
                                   placeholder="Make it easy for the travelers to understand their role, what is expected from them and their key responsibilities.Indicate the day-to-day activities so that they understand how they will be able to become part of the local lifestyle."/>
                         {errors.jobDescription &&
                             <p className={"help is-danger"}>
