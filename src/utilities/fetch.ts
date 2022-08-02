@@ -1,5 +1,4 @@
 import {Constants} from "@src/utilities/constants";
-import {LoginResponse} from "@src/state/stores/user/models";
 import {toast} from "react-toastify";
 import {getCookie, hasCookie} from "@src/utilities/cookies";
 
@@ -11,7 +10,15 @@ export interface GenericResponse{
         total:number,
         errors:string[]
     },
+    pagination:Pagination|null,
     error?:string
+}
+
+export interface Pagination{
+    self:number,
+    total:number,
+    next:number,
+    prev:number
 }
 
 const networkErrorResponse = (error:any)=>{
@@ -41,6 +48,18 @@ export async function post<T>(uri: string,data:any): Promise<T | any>{
         .then((response:GenericResponse)=>{
             if(response.ok){
                 return resolve(response.data);
+            }
+            return reject(response.error);
+        }).catch((error)=>reject(networkErrorResponse(error)))
+    )
+}
+
+export async function paging<T>(uri: string,data:any): Promise<T | any>{
+    return new Promise((resolve,reject)=>fetch(Constants.getApiUrl()+uri,headers('POST',data))
+        .then(parseResponse)
+        .then((response:GenericResponse)=>{
+            if(response.ok){
+                return resolve(response);
             }
             return reject(response.error);
         }).catch((error)=>reject(networkErrorResponse(error)))
@@ -94,6 +113,7 @@ function parseResponse(response:Response): Promise<GenericResponse>{
                     resolve({
                         status:response.status,
                         data:json.data,
+                        pagination:json.pagination,
                         ok:response.ok,
                     })
                 }else if (response.status === 400){
@@ -101,6 +121,7 @@ function parseResponse(response:Response): Promise<GenericResponse>{
                         status:response.status,
                         data:"",
                         ok:false,
+                        pagination:null,
                         exceptions:json.exceptions,
                         error:json.exceptions.errors[0].title
                     })
@@ -108,6 +129,7 @@ function parseResponse(response:Response): Promise<GenericResponse>{
                     resolve({
                         status:response.status,
                         data:"",
+                        pagination:null,
                         ok:false,
                         exceptions:json.exceptions,
                         error:json.exceptions.errors[0].title
@@ -117,6 +139,7 @@ function parseResponse(response:Response): Promise<GenericResponse>{
                     resolve({
                         status:response.status,
                         data:"",
+                        pagination:null,
                         ok:false,
                         exceptions:json.exceptions,
                         error:json.exceptions.errors[0].title
@@ -125,6 +148,7 @@ function parseResponse(response:Response): Promise<GenericResponse>{
                     resolve({
                         status:response.status,
                         data:"",
+                        pagination:null,
                         ok:false,
                         exceptions:json.exceptions,
                         error:json.exceptions.errors[0].title

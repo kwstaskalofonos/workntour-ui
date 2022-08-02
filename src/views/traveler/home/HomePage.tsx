@@ -7,19 +7,24 @@ import FiltersModal from "@src/views/traveler/home/FiltersModal";
 import {
     Accommodation, AccommodationType, FiltersFields, Languages, LanguagesType, Meal, MealType, Opportunity,
     OpportunityCategory,
-    OpportunityCategoryType, Optional,
+    OpportunityCategoryType,
     TypeOfHelpNeeded,
     TypeOfHelpNeededType
 } from "@src/state/stores/opportunity/models";
 import cloneDeep from "lodash/cloneDeep";
 import {getOpportunitiesByLocation} from "@src/state/stores/opportunity/operations";
 import OpportunityTravelerCard from "@src/views/traveler/home/OpportunityTravelerCard";
+import {Pagination} from "@src/utilities/fetch";
+import Paging from "@src/views/common/Paging";
+import LoadingOpportunity from "@src/views/common/LoadingOpportunity";
 
 const HomePage:React.FunctionComponent = () =>{
 
     // @ts-ignore
     const google  = window.google;
+    const [isLoading,setIsLoading] = useState<boolean>(false);
     const [searchBox,setSearchBox] = useState(null);
+    const [initialized,setInitialized] = useState<boolean>(false);
 
     const [active,setActive] = useState<boolean>(false);
     const [categories,setCategories] = useState<any[]>([]);
@@ -30,8 +35,14 @@ const HomePage:React.FunctionComponent = () =>{
     const [endDate,setEndDate] = useState<Date>();
     const [startDate,setStartDate] = useState<Date>();
     const [filters,setFilters] = useState<FiltersFields>();
+    const [minDays,setMinDays] = useState<number>();
+    const [maxDays,setMaxDays] = useState<number>();
+    const [start,setStart] = useState<number>(0);
+    const [lng,setLng] = useState<number>();
+    const [lat,setLat] = useState<number>();
 
     const [opportunities,setOpportunities] = useState<Opportunity[]>([]);
+    const [paging,setPaging] = useState<Pagination>();
 
     useEffect(()=>{
         let tempCategories = initializeCategories();
@@ -45,38 +56,49 @@ const HomePage:React.FunctionComponent = () =>{
         let selectedLanguage = tempLanguages.filter(value => value.selected).map(value => Languages[value.value as LanguagesType]);
         let selectedAccommodation = tempAccommodations.filter(value => value.selected).map(value => Accommodation[value.value as AccommodationType]);
         let selectedMeals = tempMeals.filter(value => value.selected).map(value => Meal[value.value as MealType]);
-        let maxDays = 23;
-        let minDays = 1;
-        //set end date
-        //set start date
-        //set longtitude
-        //set latitude
         let tmp:FiltersFields = {
             opportunityCategory:selectedCategory[0],
             typeOfHelpNeeded:selectedHelps,
+            // @ts-ignore
             minimumDays:minDays,
+            // @ts-ignore
             maximumDays:maxDays,
             languagesRequired:selectedLanguage,
             accommodationProvided:selectedAccommodation[0],
-            meals:selectedMeals,longitude:12.34244343,latitude:45.1241241,endDate:"",startDate:""};
+            meals:selectedMeals,
+            longitude:lng,
+            latitude:lat,
+            // @ts-ignore
+            endDate:endDate,
+            // @ts-ignore
+            startDate:startDate};
         setFilters(tmp);
+        setInitialized(true);
 
     },[])
 
     useEffect(()=>{
-        console.log(filters);
-        if(!active&&filters?.longitude&&filters.latitude){
-            let optional:Optional = {value:filters};
-            getOpportunitiesByLocation(optional,0,15)
+        if(!active&&initialized){
+            setIsLoading(true);
+            getOpportunitiesByLocation(filters,start,10)
                 .then((response)=>{
-                    setOpportunities(response);
+                    setOpportunities(response.data);
+                    setPaging(response.pagination);
+                    setIsLoading(false);
                 });
         }
-    },[filters])
+    },[filters,start])
 
-    useEffect(()=>{
-        console.log(opportunities);
-    },[opportunities])
+    const loadingOpportunities = () =>{
+        let array:any[]=[];
+
+        for(let i=1; i<11; i++){
+            array.push(<div key={"loading-row-opp-"+i+1} className={"column is-one-fifth-desktop is-6-tablet"}>
+                <LoadingOpportunity/></div> )
+        }
+
+        return array;
+    }
 
     const initializeCategories = () =>{
         let array:any[]=[];
@@ -124,12 +146,25 @@ const HomePage:React.FunctionComponent = () =>{
     }
 
     const onLocationChanged = () =>{
+        console.log(searchBox);
+        setStart(0);
         if(searchBox){
             let tmp = cloneDeep(filters);
             // @ts-ignore
             tmp.longitude = searchBox.getPlaces()[0].geometry.location.lng();
             // @ts-ignore
             tmp.latitude = searchBox.getPlaces()[0].geometry.location.lat();
+            setFilters(tmp);
+        }
+    }
+
+    const onInputChange = (value:string) =>{
+        if(!value){
+            let tmp = cloneDeep(filters);
+            // @ts-ignore
+            tmp.longitude =null;
+            // @ts-ignore
+            tmp.latitude = null;
             setFilters(tmp);
         }
     }
@@ -157,6 +192,7 @@ const HomePage:React.FunctionComponent = () =>{
                                             <input className={"input has-text-primary"}
                                                    type="text"
                                                    placeholder="Search Location"
+                                                   onChange={(event)=>onInputChange(event.currentTarget.value)}
                                                    style={{
                                                        boxSizing: `border-box`,
                                                        border: `1px solid hsl(0deg, 0%, 86%)`,
@@ -193,11 +229,15 @@ const HomePage:React.FunctionComponent = () =>{
             </section>
             <section>
                 <div className="columns is-multiline">
-                    {opportunities&&opportunities.map(value => <div className={"column is-one-fifth-desktop is-6-tablet"}>
+                    {isLoading && loadingOpportunities()}
+                    {!isLoading && opportunities&&opportunities.map(value => <div className={"column is-one-fifth-desktop is-6-tablet"}>
                         <OpportunityTravelerCard opportunity={value}/>
                         </div>
                     )}
                 </div>
+                {!isLoading && paging&&
+                    <Paging pagination={paging} page={start} setPage={setStart}/>
+                }
             </section>
             <FiltersModal active={active} setActive={setActive}
             categories={categories} setCategories={setCategories}
@@ -205,8 +245,7 @@ const HomePage:React.FunctionComponent = () =>{
             helps={helps} setHelps={setHelps}
             languages={languages} setLanguages={setLanguages}
             meals={meals} setMeals={setMeals}
-            endDate={endDate} setEndDate={setEndDate}
-            startDate={startDate} setStartDate={setStartDate}/>
+            filters={filters} setFilters={setFilters}/>
         </React.Fragment>
     )
 };

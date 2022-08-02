@@ -1,4 +1,5 @@
 import {Role} from "@src/state/stores/user/models";
+import {Pagination} from "@src/utilities/fetch";
 
 export enum OpportunityCategory{
      hostel="Hostel",
@@ -14,7 +15,7 @@ export enum OpportunityCategory{
      surfClub="Surf Club",
      winery="Winery",
      boat="Boat",
-     homestay="Home Stay",
+     homeStay="Home Stay",
      individual="Individual",
      privateProject="Private Project"
 }
@@ -182,9 +183,9 @@ export enum LocationFields{
 
 export interface FiltersFields{
      opportunityCategory:OpportunityCategory|undefined|null,
-     typeOfHelpNeeded:TypeOfHelpNeeded[],
-     minimumDays:number|0,
-     maximumDays:number|0,
+     typeOfHelpNeeded:TypeOfHelpNeeded[]|[],
+     minimumDays:number|undefined,
+     maximumDays:number|undefined,
      languagesRequired:Languages[],
      accommodationProvided:Accommodation|undefined,
      meals:Meal[],
@@ -194,8 +195,9 @@ export interface FiltersFields{
      startDate:string|undefined
 }
 
-export interface Optional{
-     value:any
+export interface PagingObjects{
+     data:any[],
+     pagination:Pagination
 }
 
 export enum FilterTypes{

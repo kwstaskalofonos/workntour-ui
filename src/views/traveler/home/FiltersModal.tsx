@@ -1,13 +1,12 @@
 import React, {useEffect, useState} from "react";
 import {
-    Accommodation, AccommodationType,
     FiltersFields,
-    FilterTypes, Languages, LanguagesType, Meal, MealType,
-    OpportunityCategory,
-    OpportunityCategoryType,
-    RefData, TypeOfHelpNeeded, TypeOfHelpNeededType,
+    FilterTypes, OpportunityDates,
+    RefData
 } from "@src/state/stores/opportunity/models";
 import cloneDeep from "lodash/cloneDeep";
+import {getTotalOpportunities} from "@src/state/stores/opportunity/operations";
+import CustomDateRangeInput from "@src/views/common/CustomDateRangeInput";
 
 export interface Props{
     active:boolean,
@@ -22,40 +21,55 @@ export interface Props{
     setMeals:any,
     languages:RefData[],
     setLanguages:any,
-    endDate:Date|undefined,
-    setEndDate:any,
-    startDate:Date|undefined,
-    setStartDate:any,
+    filters:FiltersFields|undefined,
+    setFilters:any
 }
 
 const FiltersModal:React.FunctionComponent<Props> = ({active,setActive,categories,setCategories,languages,setLanguages,helps,setHelps
-,accommodations,setAccommodations,setMeals,meals,endDate,setEndDate,startDate,setStartDate}) =>{
+,accommodations,setAccommodations,setMeals,meals, filters,setFilters}) =>{
 
     const [dates,setDates] = useState<any>();
-    const [filters,setFilters] = useState<FiltersFields>();
+    const [totalResults,setTotalResults] = useState<number>();
+    const [opportunityDateRange,setOpportunityDateRange] = useState<OpportunityDates>();
 
     useEffect(()=>{
-
-
-
-    },[])
-
-    useEffect(()=>{
-        if(active&&filters){
-            console.log("Call api from Modal");
-            console.log(filters);
+        if(active){
+            getTotalOpportunities(filters)
+                .then((response)=>{
+                    setTotalResults(response);
+                })
         }
-    },[filters])
+    },[filters,active])
+
+    useEffect(()=>{
+        let tmp = cloneDeep(filters)||{};
+        // @ts-ignore
+        tmp.startDate = opportunityDateRange?.startDate;
+        // @ts-ignore
+        tmp.endDate = opportunityDateRange?.endDate
+        setFilters(tmp);
+    },[opportunityDateRange])
 
     const onFilterChanged = (type:FilterTypes,value:any) =>{
-            let tmp = cloneDeep(filters);
+            let tmp = cloneDeep(filters)||{};
             switch (type){
                 case FilterTypes.CATEGORY:{
                     // @ts-ignore
-                    tmp.opportunityCategory = value;
+                    if(value==tmp.opportunityCategory){
+                        // @ts-ignore
+                        tmp.opportunityCategory=undefined
+                    }else{
+                        // @ts-ignore
+                        tmp.opportunityCategory = value;
+                    }
                     break;
                 }
                 case FilterTypes.TYPE_OF_HELP:{
+                    // @ts-ignore
+                    if(!tmp.typeOfHelpNeeded){
+                        // @ts-ignore
+                        tmp.typeOfHelpNeeded=[];
+                    }
                     // @ts-ignore
                     let idx = tmp.typeOfHelpNeeded.findIndex(help=>help == value);
                     if(idx>-1){ // @ts-ignore
@@ -89,7 +103,13 @@ const FiltersModal:React.FunctionComponent<Props> = ({active,setActive,categorie
                 }
                 case FilterTypes.ACCOMMODATION:{
                     // @ts-ignore
-                    tmp.accommodationProvided = value;
+                    if(tmp.accommodationProvided==value){
+                        // @ts-ignore
+                        tmp.accommodationProvided=undefined
+                    }else{
+                        // @ts-ignore
+                        tmp.accommodationProvided = value;
+                    }
                     break;
                 }
                 case FilterTypes.MEAL:{
@@ -124,7 +144,9 @@ const FiltersModal:React.FunctionComponent<Props> = ({active,setActive,categorie
                     break;
                 }
             }
-            setFilters(tmp);
+
+            // @ts-ignore
+        setFilters(tmp);
     }
 
     const renderCategories = () =>{
@@ -240,6 +262,42 @@ const FiltersModal:React.FunctionComponent<Props> = ({active,setActive,categorie
         setLanguages(tmp);
     }
 
+    const clearFilters = () =>{
+        if(filters){
+            let tmp = cloneDeep(filters);
+            filters.opportunityCategory = undefined;
+            filters.minimumDays = undefined;
+            filters.maximumDays = undefined;
+            filters.typeOfHelpNeeded = [];
+            filters.accommodationProvided = undefined;
+            filters.languagesRequired = [];
+            filters.startDate = undefined;
+            filters.endDate = undefined;
+
+            let tmpCat = [...categories]
+            tmpCat.forEach(value => value.selected=false);
+            setCategories(tmpCat);
+
+            let tmpHelps = [...helps]
+            tmpHelps.forEach(value => value.selected=false);
+            setHelps(tmpHelps);
+
+            let tmpAccom = [...accommodations]
+            tmpAccom.forEach(value => value.selected=false);
+            setAccommodations(tmpAccom);
+
+            let tmpMeals = [...meals]
+            tmpMeals.forEach(value => value.selected=false);
+            setMeals(tmpMeals);
+
+            let tmpLanguages = [...languages]
+            tmpLanguages.forEach(value => value.selected=false);
+            setLanguages(tmpLanguages);
+
+            setFilters(tmp);
+        }
+    }
+
     return(
         <div className={"modal "+(active?"is-active":'')}>
             <div className="modal-background"></div>
@@ -249,6 +307,10 @@ const FiltersModal:React.FunctionComponent<Props> = ({active,setActive,categorie
                     <button className="delete" aria-label="close" onClick={()=>setActive(false)}></button>
                 </header>
                 <section className="modal-card-body">
+                    <div className="field">
+                        <label className="label has-text-weight-medium">Select Dates</label>
+                        <CustomDateRangeInput setDateRange={setOpportunityDateRange}/>
+                    </div>
                     <div className="field">
                         <label className="label has-text-weight-medium">Category</label>
                         <div className="field is-grouped is-grouped-multiline mt-3 mb-3"
@@ -289,9 +351,9 @@ const FiltersModal:React.FunctionComponent<Props> = ({active,setActive,categorie
                     </div>
                 </section>
                 <footer className="modal-card-foot is-justify-content-space-between">
-                    <a  onClick={()=>setActive(false)}>Clear</a>
-                    <button className="button" onClick={()=>setActive(false)}>
-                        There are no opportunities</button>
+                    <a  onClick={()=>clearFilters()}>Clear</a>
+                    <button className={"button "+((totalResults&&totalResults>0)?"has-text-white has-background-primary":"")} onClick={()=>setActive(false)}>
+                        {(totalResults&&totalResults>0)?"Show "+totalResults+" opportunities":"No results found"}</button>
                 </footer>
             </div>
         </div>
