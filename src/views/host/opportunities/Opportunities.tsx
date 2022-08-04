@@ -10,7 +10,7 @@ const Opportunities:React.FunctionComponent = () =>{
     const [selectedTab,setSelectedTab] = useState<string>("OPPORTUNITIES");
 
     return(
-        <div className="">
+        <React.Fragment>
             <div className={"tabs is-toggle is-toggle-rounded is-centered"}>
                 <ul>
                     <li className={(selectedTab == "OPPORTUNITIES")?"is-active":''}>
@@ -27,11 +27,17 @@ const Opportunities:React.FunctionComponent = () =>{
                     </li>
                 </ul>
             </div>
-            {selectedTab == "OPPORTUNITIES" ?
-                <OpportunitiesTab/>:
-                <AddOpportunityTab/>
-            }
-        </div>
+                <section>
+                    <div className={"columns"}>
+                        <div className={"column is-12"}>
+                            {selectedTab == "OPPORTUNITIES" ?
+                                <OpportunitiesTab/>:
+                                <AddOpportunityTab/>
+                            }
+                        </div>
+                    </div>
+                </section>
+        </React.Fragment>
     )
 };
 

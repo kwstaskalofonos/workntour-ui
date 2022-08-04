@@ -33,7 +33,7 @@ const OpportunitiesTab:React.FunctionComponent = () =>{
         let array:any[]=[];
 
         for(let i=1; i<22; i++){
-            array.push(<div key={"loading-row-"+i} className={"column is-3"}>
+            array.push(<div key={"loading-row-opp-"+i+1} className={"column is-one-fifth-desktop is-6-tablet"}>
                 <LoadingOpportunity/></div> )
         }
 
@@ -71,8 +71,8 @@ const OpportunitiesTab:React.FunctionComponent = () =>{
         <div className="columns is-multiline">
             {isLoading ?
                 loadingOpportunities()
-                :batch&&batch.map(value => <div className={"column is-3"}>
-                    <OpportunityCustomCard key={"opportunity-row"+1} img={op1} opportunity={value} setOpportunityToDelete={setOpportunityToDelete}/></div>)
+                :batch&&batch.map(value => <div className={"column is-one-fifth-desktop is-6-tablet"}>
+                    <OpportunityCustomCard key={"opportunity-row-"+value.opportunityId} img={op1} opportunity={value} setOpportunityToDelete={setOpportunityToDelete}/></div>)
             }
             {isActiveDelModal &&
                 <GenericModal title={"Delete Opportunity"} action={delOpportunity} close={onCloseModal}

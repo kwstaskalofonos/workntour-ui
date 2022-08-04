@@ -1,5 +1,4 @@
 import {Constants} from "@src/utilities/constants";
-import {LoginResponse} from "@src/state/stores/user/models";
 import {toast} from "react-toastify";
 import {getCookie, hasCookie} from "@src/utilities/cookies";
 
@@ -11,7 +10,15 @@ export interface GenericResponse{
         total:number,
         errors:string[]
     },
+    pagination:Pagination|null,
     error?:string
+}
+
+export interface Pagination{
+    self:number,
+    total:number,
+    next:number,
+    prev:number
 }
 
 const networkErrorResponse = (error:any)=>{
@@ -47,6 +54,18 @@ export async function post<T>(uri: string,data:any): Promise<T | any>{
     )
 }
 
+export async function paging<T>(uri: string,data:any): Promise<T | any>{
+    return new Promise((resolve,reject)=>fetch(Constants.getApiUrl()+uri,headers('POST',data))
+        .then(parseResponse)
+        .then((response:GenericResponse)=>{
+            if(response.ok){
+                return resolve(response);
+            }
+            return reject(response.error);
+        }).catch((error)=>reject(networkErrorResponse(error)))
+    )
+}
+
 export async function del<T>(uri: string,data?:any): Promise<T | any>{
     return new Promise((resolve,reject)=>fetch(Constants.getApiUrl()+uri,headers('DELETE',data))
         .then(parseResponse)
@@ -59,15 +78,17 @@ export async function del<T>(uri: string,data?:any): Promise<T | any>{
     )
 }
 
-export async function postMultipart<T>(uri: string,data:any,files:File[]): Promise<T | any>{
-    return new Promise((resolve,reject)=>fetch(Constants.getApiUrl()+uri,multipartHeaders(data,files))
+export async function postMultipart<T>(uri: string,data:FormData): Promise<T | any>{
+    return new Promise((resolve,reject)=>fetch(Constants.getApiUrl()+uri,multipartHeaders(data))
         .then(parseResponse)
         .then((response:GenericResponse)=>{
             if(response.ok){
                 return resolve(response.data);
             }
             return reject(response.error);
-        }).catch((error)=>reject(networkErrorResponse(error)))
+        }).catch((error)=>{
+            reject(networkErrorResponse(error))
+        })
     )
 }
 
@@ -107,6 +128,7 @@ function parseResponse(response:Response): Promise<GenericResponse>{
                     resolve({
                         status:response.status,
                         data:json.data,
+                        pagination:json.pagination,
                         ok:response.ok,
                     })
                 }else if (response.status === 400){
@@ -114,6 +136,7 @@ function parseResponse(response:Response): Promise<GenericResponse>{
                         status:response.status,
                         data:"",
                         ok:false,
+                        pagination:null,
                         exceptions:json.exceptions,
                         error:json.exceptions.errors[0].title
                     })
@@ -121,6 +144,7 @@ function parseResponse(response:Response): Promise<GenericResponse>{
                     resolve({
                         status:response.status,
                         data:"",
+                        pagination:null,
                         ok:false,
                         exceptions:json.exceptions,
                         error:json.exceptions.errors[0].title
@@ -130,6 +154,7 @@ function parseResponse(response:Response): Promise<GenericResponse>{
                     resolve({
                         status:response.status,
                         data:"",
+                        pagination:null,
                         ok:false,
                         exceptions:json.exceptions,
                         error:json.exceptions.errors[0].title
@@ -138,6 +163,7 @@ function parseResponse(response:Response): Promise<GenericResponse>{
                     resolve({
                         status:response.status,
                         data:"",
+                        pagination:null,
                         ok:false,
                         exceptions:json.exceptions,
                         error:json.exceptions.errors[0].title
@@ -162,21 +188,12 @@ function headers(method:string,data?:any,email?:string,password?:string):Request
     }
 }
 
-function multipartHeaders(data:any,files:File[]):RequestInit{
-    // const customHeaders = new Headers({'content-type':'multipart/form-data',
-    //     'accept':'application/json'});
+function multipartHeaders(data:FormData):RequestInit{
     const customHeaders = new Headers();
-    // const customHeaders = new Headers({'content-type':'false'});
     if(hasCookie('workntour')){
         customHeaders.set('memberId',getCookie('workntour'))}
-    let formData = new FormData();
-    formData.append("newOpportunity",data);
-    let i=0;
-    for(let file of files){
-        formData.append("images",file,file.name);
-    }
     return {
-        body:formData,
+        body:data,
         headers:customHeaders,
         method:'POST',
         mode:'cors',

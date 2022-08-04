@@ -32,8 +32,8 @@ const CustomDateRangeInput:React.FunctionComponent<Props> = ({setDateRange}) =>{
 
         setDateRange(dateRange);
 
-        let tmp:OpportunityDates={startDate:formatDate(start.toISOString()),
-        endDate:formatDate(end.toISOString())}
+        let tmp:OpportunityDates={startDate:start&&formatDate(start.toISOString()),
+        endDate:end&&formatDate(end.toISOString())}
 
         setDateRange(tmp);
     }
@@ -47,6 +47,7 @@ const CustomDateRangeInput:React.FunctionComponent<Props> = ({setDateRange}) =>{
             onChange={onChange}
             selectsRange={true}
             inline={true}
+
         />
     )
 };

@@ -1,4 +1,5 @@
 import {Role} from "@src/state/stores/user/models";
+import {Pagination} from "@src/utilities/fetch";
 
 export enum OpportunityCategory{
      hostel="Hostel",
@@ -14,7 +15,7 @@ export enum OpportunityCategory{
      surfClub="Surf Club",
      winery="Winery",
      boat="Boat",
-     homestay="Home Stay",
+     homeStay="Home Stay",
      individual="Individual",
      privateProject="Private Project"
 }
@@ -178,4 +179,49 @@ export enum LocationFields{
      administrative_area="administrative_area",
      country="country",
      postal_code="postal_code"
+}
+
+export interface FiltersFields{
+     opportunityCategory:OpportunityCategory|undefined|null,
+     typeOfHelpNeeded:TypeOfHelpNeeded[]|[],
+     minimumDays:number|undefined,
+     maximumDays:number|undefined,
+     languagesRequired:Languages[],
+     accommodationProvided:Accommodation|undefined,
+     meals:Meal[],
+     longitude:number|undefined,
+     latitude:number|undefined,
+     endDate:string|undefined,
+     startDate:string|undefined
+}
+
+export interface FilterCoordinates{
+     longitude:number,
+     latitude:number,
+     opportunityId:string
+}
+
+export interface PagingObjects{
+     data:any[],
+     pagination:Pagination
+}
+
+export enum FilterTypes{
+     CATEGORY,
+     TYPE_OF_HELP,
+     MINDAYS,
+     MAXDAYS,
+     LANGUAGE,
+     ACCOMMODATION,
+     MEAL,
+     LONGTITUDE,
+     LATITUDE,
+     END_DATE,
+     START_DATE
+}
+
+export interface RefData{
+     value:string,
+     label:string,
+     selected:boolean
 }
