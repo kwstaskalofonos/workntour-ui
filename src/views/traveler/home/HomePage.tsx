@@ -99,7 +99,7 @@ const HomePage:React.FunctionComponent = () =>{
                     setIsLoading(false);
                 });
         }
-    },[filters,start])
+    },[filters,start,active])
 
     const loadingOpportunities = () =>{
         let array:any[]=[];
