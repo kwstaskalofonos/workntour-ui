@@ -1,12 +1,9 @@
 import React, {useEffect, useState} from "react";
-import {
-    FiltersFields,
-    FilterTypes, OpportunityDates,
-    RefData
-} from "@src/state/stores/opportunity/models";
+import {FiltersFields, FilterTypes, OpportunityDates, RefData} from "@src/state/stores/opportunity/models";
 import cloneDeep from "lodash/cloneDeep";
 import {getTotalOpportunities} from "@src/state/stores/opportunity/operations";
 import CustomDateRangeInput from "@src/views/common/CustomDateRangeInput";
+import NumberFormat from "react-number-format";
 
 export interface Props{
     active:boolean,
@@ -28,7 +25,8 @@ export interface Props{
 const FiltersModal:React.FunctionComponent<Props> = ({active,setActive,categories,setCategories,languages,setLanguages,helps,setHelps
 ,accommodations,setAccommodations,setMeals,meals, filters,setFilters}) =>{
 
-    const [dates,setDates] = useState<any>();
+    const [minDays,setMinDays] = useState<number>();
+    const [maxDays,setMaxDays] = useState<number>();
     const [totalResults,setTotalResults] = useState<number>();
     const [opportunityDateRange,setOpportunityDateRange] = useState<OpportunityDates>();
 
@@ -51,28 +49,22 @@ const FiltersModal:React.FunctionComponent<Props> = ({active,setActive,categorie
     },[opportunityDateRange])
 
     const onFilterChanged = (type:FilterTypes,value:any) =>{
-            let tmp = cloneDeep(filters)||{};
+            let tmp = cloneDeep(filters)!;
             switch (type){
                 case FilterTypes.CATEGORY:{
-                    // @ts-ignore
                     if(value==tmp.opportunityCategory){
-                        // @ts-ignore
                         tmp.opportunityCategory=undefined
                     }else{
-                        // @ts-ignore
                         tmp.opportunityCategory = value;
                     }
                     break;
                 }
                 case FilterTypes.TYPE_OF_HELP:{
-                    // @ts-ignore
                     if(!tmp.typeOfHelpNeeded){
-                        // @ts-ignore
                         tmp.typeOfHelpNeeded=[];
                     }
-                    // @ts-ignore
                     let idx = tmp.typeOfHelpNeeded.findIndex(help=>help == value);
-                    if(idx>-1){ // @ts-ignore
+                    if(idx>-1){
                         tmp.typeOfHelpNeeded.splice(idx,1);}
                     else{
                         // @ts-ignore
@@ -81,12 +73,10 @@ const FiltersModal:React.FunctionComponent<Props> = ({active,setActive,categorie
                     break;
                 }
                 case FilterTypes.MINDAYS:{
-                    // @ts-ignore
                     tmp.minimumDays = value;
                     break;
                 }
                 case FilterTypes.MAXDAYS:{
-                    // @ts-ignore
                     tmp.maximumDays = value;
                     break;
                 }
@@ -102,12 +92,9 @@ const FiltersModal:React.FunctionComponent<Props> = ({active,setActive,categorie
                     break;
                 }
                 case FilterTypes.ACCOMMODATION:{
-                    // @ts-ignore
                     if(tmp.accommodationProvided==value){
-                        // @ts-ignore
                         tmp.accommodationProvided=undefined
                     }else{
-                        // @ts-ignore
                         tmp.accommodationProvided = value;
                     }
                     break;
@@ -124,28 +111,31 @@ const FiltersModal:React.FunctionComponent<Props> = ({active,setActive,categorie
                     break;
                 }
                 case FilterTypes.LONGTITUDE:{
-                    // @ts-ignore
                     tmp.longitude = value;
                     break;
                 }
                 case FilterTypes.LATITUDE:{
-                    // @ts-ignore
                     tmp.latitude = value;
                     break;
                 }
                 case FilterTypes.END_DATE:{
-                    // @ts-ignore
                     tmp.endDate = value;
                     break;
                 }
                 case FilterTypes.START_DATE:{
-                    // @ts-ignore
                     tmp.startDate = value;
+                    break;
+                }
+                case FilterTypes.MINDAYS:{
+                    tmp.minimumDays = value;
+                    break;
+                }
+                case FilterTypes.MAXDAYS:{
+                    tmp.maximumDays = value;
                     break;
                 }
             }
 
-            // @ts-ignore
         setFilters(tmp);
     }
 
@@ -262,6 +252,16 @@ const FiltersModal:React.FunctionComponent<Props> = ({active,setActive,categorie
         setLanguages(tmp);
     }
 
+    const updateMinDays = (value:number) =>{
+        setMinDays(value);
+        onFilterChanged(FilterTypes.MINDAYS, value);
+    }
+
+    const updateMaxDays = (value:number) =>{
+        setMaxDays(value);
+        onFilterChanged(FilterTypes.MAXDAYS, value);
+    }
+
     const clearFilters = () =>{
         if(filters){
             let tmp = cloneDeep(filters);
@@ -320,6 +320,19 @@ const FiltersModal:React.FunctionComponent<Props> = ({active,setActive,categorie
                     </div>
                     <div className="field">
                         <label className="label has-text-weight-medium">Setup minimun & maximum days</label>
+                        <div className={"columns"}>
+                            <div className={"column is-3"}>
+                                <NumberFormat value={minDays?minDays:''} onValueChange={(value)=>updateMinDays(Number(value.value))}
+                                              className={"input border-linear"}
+                                                decimalScale={0} allowNegative={false}/>
+                            </div>
+                            <div className={"column is-3"}>
+                                <NumberFormat value={maxDays?maxDays:''} onValueChange={(value)=>updateMaxDays(Number(value.value))}
+                                              className={"input border-linear"}
+                                              decimalScale={0} allowNegative={false}/>
+                            </div>
+
+                        </div>
                     </div>
                     <div className="field">
                         <label className="label has-text-weight-medium">Type of help</label>

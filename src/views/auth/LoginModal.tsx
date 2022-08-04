@@ -104,7 +104,7 @@ const LoginModal:React.FunctionComponent<Props>=
                                 </div>
                                 <div className="field mt-5">
                                     <button className={"button is-primary is-fullwidth "+(isLoading?"is-loading":"")}
-                                            type={"button"} onClick={handleSubmit(onSubmit)}>
+                                            type={"submit"} onClick={handleSubmit(onSubmit)}>
                                         Login</button>
                                 </div>
                                 <div className={"field has-text-centered mt-5"}>

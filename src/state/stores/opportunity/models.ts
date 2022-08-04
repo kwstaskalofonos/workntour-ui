@@ -195,6 +195,12 @@ export interface FiltersFields{
      startDate:string|undefined
 }
 
+export interface FilterCoordinates{
+     longitude:number,
+     latitude:number,
+     opportunityId:string
+}
+
 export interface PagingObjects{
      data:any[],
      pagination:Pagination

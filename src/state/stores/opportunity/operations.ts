@@ -1,4 +1,4 @@
-import {FiltersFields, Opportunity, PagingObjects} from "@src/state/stores/opportunity/models";
+import {FilterCoordinates, FiltersFields, Opportunity, PagingObjects} from "@src/state/stores/opportunity/models";
 import {del, GenericResponse, get, paging, post, postMultipart} from "@src/utilities/fetch";
 import {toast} from "react-toastify";
 
@@ -75,7 +75,7 @@ export const getOpportunity = (opportunityId:string):Promise<Opportunity>=>{
     )
 };
 
-export const getOpportunitiesByLocation = (filtersFields:FiltersFields|undefined,start:number,offset:number):Promise<PagingObjects>=>{
+export const getOpportunitiesByPaging = (filtersFields:FiltersFields|undefined, start:number, offset:number):Promise<PagingObjects>=>{
     return new Promise<PagingObjects>((resolve, reject)=>
         paging('homePage/filters/?start='+start+"&offset="+offset,filtersFields)
             .then((response:PagingObjects)=>{
@@ -92,6 +92,18 @@ export const getTotalOpportunities = (filtersFields:FiltersFields|undefined):Pro
     return new Promise<number>((resolve, reject)=>
         post('homePage/filters/numOfResults/',filtersFields)
             .then((response:number)=>{
+                resolve(response);
+            }).catch((error)=>{
+            toast.error(error,{position:toast.POSITION.TOP_RIGHT});
+            reject(error);
+        }).finally()
+    )
+};
+
+export const getTotalOpportunitiesByLocation = (longitude:number|undefined,latitude:number|undefined):Promise<FilterCoordinates[]>=>{
+    return new Promise<FilterCoordinates[]>((resolve, reject)=>
+        get('homePage/filters/byCoordinates/?longitude='+longitude+"&latitude="+latitude)
+            .then((response:FilterCoordinates[])=>{
                 resolve(response);
             }).catch((error)=>{
             toast.error(error,{position:toast.POSITION.TOP_RIGHT});

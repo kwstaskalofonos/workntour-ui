@@ -5,18 +5,27 @@ import {faSliders} from "@fortawesome/free-solid-svg-icons/faSliders";
 import {faMap} from "@fortawesome/free-solid-svg-icons/faMap";
 import FiltersModal from "@src/views/traveler/home/FiltersModal";
 import {
-    Accommodation, AccommodationType, FiltersFields, Languages, LanguagesType, Meal, MealType, Opportunity,
+    Accommodation,
+    AccommodationType,
+    FilterCoordinates,
+    FiltersFields,
+    Languages,
+    LanguagesType,
+    Meal,
+    MealType,
+    Opportunity,
     OpportunityCategory,
     OpportunityCategoryType,
     TypeOfHelpNeeded,
     TypeOfHelpNeededType
 } from "@src/state/stores/opportunity/models";
 import cloneDeep from "lodash/cloneDeep";
-import {getOpportunitiesByLocation} from "@src/state/stores/opportunity/operations";
+import {getOpportunitiesByPaging, getTotalOpportunitiesByLocation} from "@src/state/stores/opportunity/operations";
 import OpportunityTravelerCard from "@src/views/traveler/home/OpportunityTravelerCard";
 import {Pagination} from "@src/utilities/fetch";
 import Paging from "@src/views/common/Paging";
 import LoadingOpportunity from "@src/views/common/LoadingOpportunity";
+import MapModal from "@src/views/traveler/home/MapModal";
 
 const HomePage:React.FunctionComponent = () =>{
 
@@ -27,6 +36,7 @@ const HomePage:React.FunctionComponent = () =>{
     const [initialized,setInitialized] = useState<boolean>(false);
 
     const [active,setActive] = useState<boolean>(false);
+    const [activeMapModal,setActiveMapModal] = useState<boolean>(false);
     const [categories,setCategories] = useState<any[]>([]);
     const [helps,setHelps] = useState<any[]>([]);
     const [accommodations,setAccommodations] = useState<any[]>([]);
@@ -42,6 +52,8 @@ const HomePage:React.FunctionComponent = () =>{
     const [lat,setLat] = useState<number>();
 
     const [opportunities,setOpportunities] = useState<Opportunity[]>([]);
+    const [mapOpportunities,setMapOpportunities] = useState<FilterCoordinates[]>([]);
+    const [currentLocation,setCurrentLocation] = useState<any>();
     const [paging,setPaging] = useState<Pagination>();
 
     useEffect(()=>{
@@ -80,7 +92,7 @@ const HomePage:React.FunctionComponent = () =>{
     useEffect(()=>{
         if(!active&&initialized){
             setIsLoading(true);
-            getOpportunitiesByLocation(filters,start,10)
+            getOpportunitiesByPaging(filters,start,10)
                 .then((response)=>{
                     setOpportunities(response.data);
                     setPaging(response.pagination);
@@ -146,7 +158,6 @@ const HomePage:React.FunctionComponent = () =>{
     }
 
     const onLocationChanged = () =>{
-        console.log(searchBox);
         setStart(0);
         if(searchBox){
             let tmp = cloneDeep(filters);
@@ -154,6 +165,9 @@ const HomePage:React.FunctionComponent = () =>{
             tmp.longitude = searchBox.getPlaces()[0].geometry.location.lng();
             // @ts-ignore
             tmp.latitude = searchBox.getPlaces()[0].geometry.location.lat();
+            setCurrentLocation({lat:tmp?.latitude,lng:tmp?.longitude});
+            getTotalOpportunitiesByLocation(tmp?.longitude,tmp?.latitude)
+                .then((response)=>setMapOpportunities(response))
             setFilters(tmp);
         }
     }
@@ -215,7 +229,7 @@ const HomePage:React.FunctionComponent = () =>{
                                 </p>
                             </div>
                             <div className={"field ml-1"}>
-                                <a className="button" onClick={()=>setActive(true)}>
+                                <a className="button" onClick={()=>setActiveMapModal(true)}>
                                     <span className={"icon is-small is-right"}>
                                      <FontAwesomeIcon className={"has-text-primary"} icon={faMap}/>
                                     </span>
@@ -246,6 +260,8 @@ const HomePage:React.FunctionComponent = () =>{
             languages={languages} setLanguages={setLanguages}
             meals={meals} setMeals={setMeals}
             filters={filters} setFilters={setFilters}/>
+            <MapModal coordinates={mapOpportunities} setActive={setActiveMapModal}
+                                center={currentLocation} active={activeMapModal}/>
         </React.Fragment>
     )
 };
