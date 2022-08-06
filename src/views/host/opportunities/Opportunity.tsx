@@ -11,6 +11,7 @@ import {getDateFromString} from "@src/utilities/ui";
 import {GoogleMap, LoadScript, Marker} from "@react-google-maps/api";
 import cloneDeep from 'lodash/cloneDeep';
 import GenericModal from "@src/views/common/GenericModal";
+import BookModal from "@src/views/traveler/home/BookModal";
 
 interface Props{
     hostMode:boolean
@@ -22,6 +23,7 @@ const Opportunity:React.FunctionComponent<Props> = ({hostMode}) =>{
     const [opportunity,setOpportunity] = useState<Opportunity>();
     const [location,setLocation] = useState({lat:0,lng:0});
     const [isActiveDelModal,setIsActiveDelModal] = useState<boolean>(false);
+    const [isActiveBookModal,setIsActiveBookModal] = useState<boolean>(false);
 
     useEffect(()=>{
         if(id){
@@ -227,7 +229,7 @@ const Opportunity:React.FunctionComponent<Props> = ({hostMode}) =>{
                                 onClick={()=>setIsActiveDelModal(true)}>
                             Delete</button>:
                         <button className={"button is-primary is-outlined has-text-weight-semibold is-fullwidth"}
-                                >
+                                onClick={()=>setIsActiveBookModal(true)}>
                             Book</button>
                     }
                 </div>
@@ -235,6 +237,10 @@ const Opportunity:React.FunctionComponent<Props> = ({hostMode}) =>{
             {(isActiveDelModal&&hostMode)&&
                 <GenericModal title={"Delete Opportunity"} action={delOpportunity} close={onCloseModal}
                               bodyMessage={"Are you sure you want to delete this opportunity?"}/>
+            }
+            {(isActiveBookModal&&!hostMode&&opportunity)&&
+                <BookModal active={isActiveBookModal} setActive={setIsActiveBookModal}
+                           opportunity={opportunity}/>
             }
         </React.Fragment>
     )

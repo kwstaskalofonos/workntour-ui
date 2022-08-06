@@ -32,19 +32,15 @@ const CustomDateRangeInput:React.FunctionComponent<Props> = ({setDateRange,reset
 
     const onChange = (dates:any) =>{
         const[start,end] = dates;
-        let dateRange:OpportunityDates;
         if(start!=startDate){
             //reset end Date.
             setStartDate(start);
             setEndDate(undefined);
-            dateRange = {startDate:start,endDate:undefined};
         }else{
             setStartDate(start);
             setEndDate(end);
-            dateRange = {startDate:start,endDate:end};
         }
 
-        setDateRange(dateRange);
 
         let tmp:OpportunityDates={startDate:start&&formatDate(start.toISOString()),
         endDate:end&&formatDate(end.toISOString())}
