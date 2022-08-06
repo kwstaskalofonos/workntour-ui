@@ -18,17 +18,24 @@ export interface Props{
     setMeals:any,
     languages:RefData[],
     setLanguages:any,
-    filters:FiltersFields|undefined,
-    setFilters:any
+    initialFilters:FiltersFields|undefined,
+    setInitialFilters:any
 }
 
 const FiltersModal:React.FunctionComponent<Props> = ({active,setActive,categories,setCategories,languages,setLanguages,helps,setHelps
-,accommodations,setAccommodations,setMeals,meals, filters,setFilters}) =>{
+,accommodations,setAccommodations,setMeals,meals, initialFilters,setInitialFilters}) =>{
 
     const [minDays,setMinDays] = useState<number>();
     const [maxDays,setMaxDays] = useState<number>();
     const [totalResults,setTotalResults] = useState<number>();
     const [opportunityDateRange,setOpportunityDateRange] = useState<OpportunityDates>();
+    const [filters,setFilters] = useState<FiltersFields|undefined>(initialFilters)
+
+    useEffect(()=>{
+        if(active){
+            setFilters(initialFilters);
+        }
+    },[active])
 
     useEffect(()=>{
         if(active){
@@ -37,7 +44,7 @@ const FiltersModal:React.FunctionComponent<Props> = ({active,setActive,categorie
                     setTotalResults(response);
                 })
         }
-    },[filters,active])
+    },[filters])
 
     useEffect(()=>{
         let tmp = cloneDeep(filters)||{};
@@ -45,6 +52,7 @@ const FiltersModal:React.FunctionComponent<Props> = ({active,setActive,categorie
         tmp.startDate = opportunityDateRange?.startDate;
         // @ts-ignore
         tmp.endDate = opportunityDateRange?.endDate
+            // @ts-ignore
         setFilters(tmp);
     },[opportunityDateRange])
 
@@ -265,14 +273,18 @@ const FiltersModal:React.FunctionComponent<Props> = ({active,setActive,categorie
     const clearFilters = () =>{
         if(filters){
             let tmp = cloneDeep(filters);
-            filters.opportunityCategory = undefined;
-            filters.minimumDays = undefined;
-            filters.maximumDays = undefined;
-            filters.typeOfHelpNeeded = [];
-            filters.accommodationProvided = undefined;
-            filters.languagesRequired = [];
-            filters.startDate = undefined;
-            filters.endDate = undefined;
+            tmp.opportunityCategory = undefined;
+            tmp.minimumDays = undefined;
+            tmp.maximumDays = undefined;
+            tmp.typeOfHelpNeeded = [];
+            tmp.accommodationProvided = undefined;
+            tmp.languagesRequired = [];
+            tmp.startDate = undefined;
+            tmp.endDate = undefined;
+
+            setFilters(tmp);
+
+            setOpportunityDateRange({endDate:'',startDate:''});
 
             let tmpCat = [...categories]
             tmpCat.forEach(value => value.selected=false);
@@ -294,8 +306,17 @@ const FiltersModal:React.FunctionComponent<Props> = ({active,setActive,categorie
             tmpLanguages.forEach(value => value.selected=false);
             setLanguages(tmpLanguages);
 
-            setFilters(tmp);
         }
+    }
+
+    const closeModal = () =>{
+        clearFilters();
+        setActive(false);
+    }
+
+    const closeAndSubmit = () =>{
+        setInitialFilters(filters);
+        setActive(false);
     }
 
     return(
@@ -304,12 +325,12 @@ const FiltersModal:React.FunctionComponent<Props> = ({active,setActive,categorie
             <div className="modal-card">
                 <header className="modal-card-head">
                     <p className="modal-card-title">Filters</p>
-                    <button className="delete" aria-label="close" onClick={()=>setActive(false)}></button>
+                    <button className="delete" aria-label="close" onClick={()=>closeModal()}></button>
                 </header>
                 <section className="modal-card-body">
                     <div className="field">
                         <label className="label has-text-weight-medium">Select Dates</label>
-                        <CustomDateRangeInput setDateRange={setOpportunityDateRange}/>
+                        <CustomDateRangeInput setDateRange={setOpportunityDateRange} resetEndData={true} isActive={active}/>
                     </div>
                     <div className="field">
                         <label className="label has-text-weight-medium">Category</label>
@@ -365,7 +386,7 @@ const FiltersModal:React.FunctionComponent<Props> = ({active,setActive,categorie
                 </section>
                 <footer className="modal-card-foot is-justify-content-space-between">
                     <a  onClick={()=>clearFilters()}>Clear</a>
-                    <button className={"button "+((totalResults&&totalResults>0)?"has-text-white has-background-primary":"")} onClick={()=>setActive(false)}>
+                    <button className={"button "+((totalResults&&totalResults>0)?"has-text-white has-background-primary":"")} onClick={()=>closeAndSubmit()}>
                         {(totalResults&&totalResults>0)?"Show "+totalResults+" opportunities":"No results found"}</button>
                 </footer>
             </div>

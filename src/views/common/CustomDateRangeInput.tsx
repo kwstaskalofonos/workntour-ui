@@ -1,20 +1,31 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import ReactDatePicker from "react-datepicker";
 import {OpportunityDates} from "@src/state/stores/opportunity/models";
+import Moment from "react-moment";
+import moment from "moment/moment";
 
 interface Props{
-    setDateRange:any
+    setDateRange:any,
+    resetEndData:boolean,
+    isActive?:boolean
 }
 
-const CustomDateRangeInput:React.FunctionComponent<Props> = ({setDateRange}) =>{
+const CustomDateRangeInput:React.FunctionComponent<Props> = ({setDateRange,resetEndData,isActive}) =>{
 
-    const [startDate,setStartDate] = useState<Date>(new Date);
-    const [endDate,setEndDate] = useState<Date>();
+    const [startDate,setStartDate] = useState<Date|undefined>(new Date);
+    const [endDate,setEndDate] = useState<Date|undefined>();
 
     const formatDate = (date:string) =>{
         let idx = date.indexOf('T');
         return date.substring(0,idx);
     }
+
+    useEffect(()=>{
+        if(resetEndData&&isActive){
+            setStartDate(undefined);
+            setEndDate(undefined);
+        }
+    },[isActive])
 
     const onChange = (dates:any) =>{
         const[start,end] = dates;
@@ -47,7 +58,7 @@ const CustomDateRangeInput:React.FunctionComponent<Props> = ({setDateRange}) =>{
             onChange={onChange}
             selectsRange={true}
             inline={true}
-
+            minDate={moment().toDate()}
         />
     )
 };

@@ -209,7 +209,7 @@ const AddOpportunityTab:React.FunctionComponent = () =>{
                     {/*Available Dates*/}
                     <div className="field">
                         <label className="label has-text-primary has-text-weight-medium">6.Available Dates*</label>
-                        <CustomDateRangeInput setDateRange={setOpportunityDateRange}/>
+                        <CustomDateRangeInput setDateRange={setOpportunityDateRange} resetEndData={false}/>
                     </div>
                     {/*Total working hours*/}
                     <div className="field">

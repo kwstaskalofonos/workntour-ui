@@ -4,16 +4,19 @@ import {
     Accommodation, Languages, LearningOpportunities,
     Meal,
     Opportunity,
-    TypeOfHelpNeeded, TypeOfHelpNeededType
+    TypeOfHelpNeeded
 } from "@src/state/stores/opportunity/models";
 import {useParams} from "react-router";
 import {getDateFromString} from "@src/utilities/ui";
 import {GoogleMap, LoadScript, Marker} from "@react-google-maps/api";
 import cloneDeep from 'lodash/cloneDeep';
 import GenericModal from "@src/views/common/GenericModal";
-import CustomImageGallery from "@src/views/common/CustomImageGallery";
 
-const Opportunity:React.FunctionComponent = () =>{
+interface Props{
+    hostMode:boolean
+}
+
+const Opportunity:React.FunctionComponent<Props> = ({hostMode}) =>{
 
     const {id} = useParams();
     const [opportunity,setOpportunity] = useState<Opportunity>();
@@ -219,12 +222,17 @@ const Opportunity:React.FunctionComponent = () =>{
                         </div>
                     </div>
                     <hr/>
-                    <button className={"button is-danger is-outlined has-text-weight-semibold is-fullwidth"}
-                    onClick={()=>setIsActiveDelModal(true)}>
-                        Delete</button>
+                    {hostMode ?
+                        <button className={"button is-danger is-outlined has-text-weight-semibold is-fullwidth"}
+                                onClick={()=>setIsActiveDelModal(true)}>
+                            Delete</button>:
+                        <button className={"button is-primary is-outlined has-text-weight-semibold is-fullwidth"}
+                                >
+                            Book</button>
+                    }
                 </div>
             </div>
-            {isActiveDelModal&&
+            {(isActiveDelModal&&hostMode)&&
                 <GenericModal title={"Delete Opportunity"} action={delOpportunity} close={onCloseModal}
                               bodyMessage={"Are you sure you want to delete this opportunity?"}/>
             }

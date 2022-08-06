@@ -9,7 +9,7 @@ const IndividualRouter: React.FunctionComponent = () =>{
         <Routes>
             <Route path="/" element={<Opportunities/>}/>
             <Route path="opportunities" element={<Opportunities/>}/>
-            <Route path="opportunity/:id" element={<Opportunity/>}/>
+            <Route path="opportunity/:id" element={<Opportunity hostMode={true}/>}/>
         </Routes>
     )
 };

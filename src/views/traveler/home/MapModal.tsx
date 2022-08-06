@@ -1,8 +1,7 @@
 import React from "react";
 import {FilterCoordinates} from "@src/state/stores/opportunity/models";
 import {GoogleMap, LoadScript, Marker} from "@react-google-maps/api";
-import {faHouse} from "@fortawesome/free-solid-svg-icons/faHouse";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {useNavigate} from "react-router";
 
 interface Props{
     active:boolean,
@@ -13,18 +12,22 @@ interface Props{
 
 const MapModal:React.FunctionComponent<Props> = ({active,setActive,coordinates,center}) =>{
 
+    const navigate = useNavigate();
 
     const containerStyle = {
         width: '100%',
         height: '400px'
     };
 
+    const goToOpportunity = (opportunityId:string) =>{
+        navigate('/opportunity/'+opportunityId);
+    }
+
     const renderMarkers = () =>{
         let array:any[]=[];
         for(let coordinate of coordinates){
             let location = {lat:coordinate.latitude,lng:coordinate.longitude};
-            // @ts-ignore
-            array.push(<Marker position={location} icon={<FontAwesomeIcon icon={faHouse}/>}/>)
+            array.push(<Marker position={location} onClick={()=>goToOpportunity(coordinate.opportunityId)}/>)
         }
         return array;
     }
