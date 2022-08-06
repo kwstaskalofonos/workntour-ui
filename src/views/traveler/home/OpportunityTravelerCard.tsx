@@ -2,9 +2,6 @@ import React, {useEffect, useState} from "react";
 import {Opportunity, OpportunityCategory, OpportunityCategoryType} from "@src/state/stores/opportunity/models";
 import {useNavigate} from "react-router";
 import {Slide} from "react-slideshow-image";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faAngleLeft} from "@fortawesome/free-solid-svg-icons/faAngleLeft";
-import {faAngleRight} from "@fortawesome/free-solid-svg-icons/faAngleRight";
 import {getDateFromString} from "@src/utilities/ui";
 
 interface Props{
@@ -41,7 +38,7 @@ const OpportunityTravelerCard:React.FunctionComponent<Props> = ({opportunity}) =
     }
 
     const goToOpportunity = () =>{
-        // navigate('/opportunity/'+opportunity.opportunityId);
+        navigate('/opportunity/'+opportunity.opportunityId);
     }
 
     return(

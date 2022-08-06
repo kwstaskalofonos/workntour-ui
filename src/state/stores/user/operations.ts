@@ -76,7 +76,6 @@ export const retrieveCompanyProfile = ():Promise<GenericResponse>=>{
     return new Promise<GenericResponse>((resolve,reject)=>{
         get('retrieveProfile/companyHost')
             .then((response:GenericResponse)=>{
-                console.log(response);
                 setCookie(JSON.stringify(response),15,'profile');
                 resolve(response);
             }).catch((error)=>{

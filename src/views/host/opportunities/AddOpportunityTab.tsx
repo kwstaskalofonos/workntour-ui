@@ -13,7 +13,7 @@ import {
 import CustomSelectMultiple from "@src/views/common/CustomSelectMultiple";
 import CustomMap from "@src/views/host/opportunities/CustomMap";
 import CustomDateRangeInput from "@src/views/common/CustomDateRangeInput";
-import {createOpportunity, createOpportunityWeb} from "@src/state/stores/opportunity/operations";
+import {createOpportunityWeb} from "@src/state/stores/opportunity/operations";
 import {getCookie} from "@src/utilities/cookies";
 import {Role, RoleType} from "@src/state/stores/user/models";
 import {toast} from "react-toastify";
@@ -32,6 +32,8 @@ const AddOpportunityTab:React.FunctionComponent = () =>{
     const [opportunityLocation,setOpportunityLocation] = useState<OpportunityLocation>();
     const [opportunityDateRange,setOpportunityDateRange] = useState<OpportunityDates>();
     const [images,setImages] = useState<File[]>([]);
+    const [startDate,setStartDate] = useState<Date>();
+    const [endDate,setEndDate] = useState<Date>();
 
     const renderCategories = () =>{
         let array:any[]=[];
@@ -209,7 +211,8 @@ const AddOpportunityTab:React.FunctionComponent = () =>{
                     {/*Available Dates*/}
                     <div className="field">
                         <label className="label has-text-primary has-text-weight-medium">6.Available Dates*</label>
-                        <CustomDateRangeInput setDateRange={setOpportunityDateRange}/>
+                        <CustomDateRangeInput setDateRange={setOpportunityDateRange} resetEndData={false}
+                            startDate={startDate} setStartDate={setStartDate} endDate={endDate} setEndDate={setEndDate}/>
                     </div>
                     {/*Total working hours*/}
                     <div className="field">

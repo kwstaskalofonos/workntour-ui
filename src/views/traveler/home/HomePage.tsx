@@ -99,7 +99,7 @@ const HomePage:React.FunctionComponent = () =>{
                     setIsLoading(false);
                 });
         }
-    },[filters,start,active])
+    },[filters,start])
 
     const loadingOpportunities = () =>{
         let array:any[]=[];
@@ -229,7 +229,7 @@ const HomePage:React.FunctionComponent = () =>{
                                 </p>
                             </div>
                             <div className={"field ml-1"}>
-                                <a className="button" onClick={()=>setActiveMapModal(true)}>
+                                <a className="button is-disabled" onClick={()=>setActiveMapModal(true)}>
                                     <span className={"icon is-small is-right"}>
                                      <FontAwesomeIcon className={"has-text-primary"} icon={faMap}/>
                                     </span>
@@ -259,7 +259,7 @@ const HomePage:React.FunctionComponent = () =>{
             helps={helps} setHelps={setHelps}
             languages={languages} setLanguages={setLanguages}
             meals={meals} setMeals={setMeals}
-            filters={filters} setFilters={setFilters}/>
+            initialFilters={filters} setInitialFilters={setFilters}/>
             <MapModal coordinates={mapOpportunities} setActive={setActiveMapModal}
                                 center={currentLocation} active={activeMapModal}/>
         </React.Fragment>
