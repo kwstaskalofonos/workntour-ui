@@ -7,13 +7,16 @@ import moment from "moment/moment";
 interface Props{
     setDateRange:any,
     resetEndData:boolean,
-    isActive?:boolean
+    isActive?:boolean,
+    startDate?:Date,
+    setStartDate:any,
+    endDate?:Date,
+    setEndDate:any
 }
 
-const CustomDateRangeInput:React.FunctionComponent<Props> = ({setDateRange,resetEndData,isActive}) =>{
+const CustomDateRangeInput:React.FunctionComponent<Props> = ({setDateRange,resetEndData,isActive
+                                                                 ,startDate,setStartDate,endDate,setEndDate}) =>{
 
-    const [startDate,setStartDate] = useState<Date|undefined>(new Date);
-    const [endDate,setEndDate] = useState<Date|undefined>();
 
     const formatDate = (date:string) =>{
         let idx = date.indexOf('T');

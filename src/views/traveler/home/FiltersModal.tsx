@@ -30,10 +30,20 @@ const FiltersModal:React.FunctionComponent<Props> = ({active,setActive,categorie
     const [totalResults,setTotalResults] = useState<number>();
     const [opportunityDateRange,setOpportunityDateRange] = useState<OpportunityDates>();
     const [filters,setFilters] = useState<FiltersFields|undefined>(initialFilters)
+    const [startDate,setStartDate] = useState<Date>();
+    const [endDate,setEndDate] = useState<Date>();
 
     useEffect(()=>{
         if(active){
             setFilters(initialFilters);
+            if(initialFilters?.startDate){
+                // @ts-ignore
+                setStartDate(new Date(initialFilters?.startDate));
+            }
+            if(initialFilters?.endDate){
+                // @ts-ignore
+                setEndDate(new Date(initialFilters?.endDate));
+            }
         }
     },[active])
 
@@ -284,6 +294,9 @@ const FiltersModal:React.FunctionComponent<Props> = ({active,setActive,categorie
 
             setFilters(tmp);
 
+            setStartDate(undefined);
+            setEndDate(undefined);
+
             setOpportunityDateRange({endDate:'',startDate:''});
 
             let tmpCat = [...categories]
@@ -330,7 +343,8 @@ const FiltersModal:React.FunctionComponent<Props> = ({active,setActive,categorie
                 <section className="modal-card-body">
                     <div className="field">
                         <label className="label has-text-weight-medium">Select Dates</label>
-                        <CustomDateRangeInput setDateRange={setOpportunityDateRange} resetEndData={true} isActive={active}/>
+                        <CustomDateRangeInput setDateRange={setOpportunityDateRange} resetEndData={true} isActive={active}
+                            startDate={startDate} setStartDate={setStartDate} endDate={endDate} setEndDate={setEndDate}/>
                     </div>
                     <div className="field">
                         <label className="label has-text-weight-medium">Category</label>
