@@ -18,8 +18,4 @@ steps:
   inputs:
     command: 'install'
     workingDir: '/'
-- task: Npm@1
-  inputs:
-    command: 'custom'
-    workingDir: '/'
-    customCommand: 'run prod'
+
