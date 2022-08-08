@@ -1,26 +1,33 @@
-import { Router, Routes } from "react-router-dom";
 import React from "react";
-import { UserType } from "../../state/stores/user/models";
+import { Role } from "@src/state/stores/user/models";
 import CompanyRouter from "./CompanyRouter";
 import IndividualRouter from "./IndividualRouter";
 import TravelerRouter from "./TravelerRouter";
+import {getCookie} from "@src/utilities/cookies";
+import Header from "@src/views/common/Header";
+import Footer from "@src/views/common/Footer";
+import InterCom from "@src/views/common/InterCom";
 
 const SecuredSiteRouter: React.FunctionComponent = () =>{
 
-    const userType:UserType=UserType.COMPANY;
+    const userRole:string|undefined = getCookie("role");
 
     return(
         <React.Fragment>
-
-            {userType.valueOf()===UserType.COMPANY &&
-                <CompanyRouter/>
-            }
-             {userType.valueOf()==UserType.INIVIDUAL &&
-                <IndividualRouter/>
-            }
-             {userType.valueOf()===UserType.TRAVELER &&
-                <TravelerRouter/>
-            }
+            <InterCom/>
+            <Header/>
+                <div className="container is-fluid mt-4">
+                    {userRole===Role.COMPANY_HOST.valueOf() &&
+                        <CompanyRouter/>
+                    }
+                    {userRole===Role.INDIVIDUAL_HOST.valueOf() &&
+                        <IndividualRouter/>
+                    }
+                    {userRole===Role.TRAVELER.valueOf() &&
+                        <TravelerRouter/>
+                    }
+                </div>
+            <Footer/>
         </React.Fragment>
     )
 };

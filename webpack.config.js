@@ -7,8 +7,19 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 
 const API_URL = {
-    production:"",
-    development:"http://localhost:8080"
+    production:"https://work-n-tour.herokuapp.com",
+    //development:"http://localhost:8080",
+    development:"https://work-n-tour.herokuapp.com"
+}
+
+const COOKIE_DOMAIN = {
+    production: "'https://workntour.com'",
+    development: "'http://127.0.0.1:8083'"
+}
+
+const GOOGLE_MAPS_KEY = {
+    production:"AIzaSyB6loP2yYIkJeQX477L_Tj16tDFKaQ4ar0",
+    development:"AIzaSyB6loP2yYIkJeQX477L_Tj16tDFKaQ4ar0"
 }
 
 export default {
@@ -66,10 +77,11 @@ export default {
               },
               {
                 test: /\.(png|svg|jpg|jpeg|gif)$/i,
-                use: [{
-                    loader: 'file-loader',
-                    options: {}
-                }],
+                type: 'asset/resource'
+                // use: [{
+                //     loader: 'file-loader',
+                //     options: {}
+                // }],
               },
         ],
     },
@@ -85,7 +97,9 @@ export default {
         }),
         new webpack.DefinePlugin({
             __API_URL__:JSON.stringify(API_URL[process.env.NODE_ENV]),
-            __CONTEXT__:JSON.stringify("/workntour")}),
+            __CONTEXT__:JSON.stringify("/"),
+            __COOKIE_DOMAIN__:JSON.stringify(COOKIE_DOMAIN[process.env.NODE_ENV]),
+            __API_KEY__:JSON.stringify(GOOGLE_MAPS_KEY[process.env.NODE_ENV])})
     ],
     devServer:{
         allowedHosts:['*'],

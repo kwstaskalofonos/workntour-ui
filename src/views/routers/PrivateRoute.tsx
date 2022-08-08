@@ -1,22 +1,12 @@
 import React from "react";
-import { Route, RouteProps, Navigate,Outlet } from "react-router-dom"
-import LandingPage from "../LandingPage";
-import Test from "../TestComponents";
-import SecuredSiteRouter from "./SecureSiteRouter";
+import {Navigate, RouteProps} from "react-router-dom"
+import {hasCookie} from "@src/utilities/cookies";
 
-
+// @ts-ignore
 const PrivateRoute: React.FunctionComponent<RouteProps> = ({children,...properties})=>{
 
-    const isAuthenticated=false;
-
-    return(
-        <React.Fragment>
-            {isAuthenticated ?
-                <SecuredSiteRouter/>:
-                <LandingPage/>
-            }
-        </React.Fragment>
-    )
+    const isAuthenticated=hasCookie();
+    return isAuthenticated ? children : <Navigate to={"/home"}/>
 };
 
 export default PrivateRoute;
