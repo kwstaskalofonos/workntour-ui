@@ -10,10 +10,16 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
-
-- script: |
-    npm install
-    cross-env NODE_ENV=production webpack --config webpack.config.js
-  displayName: 'Run a multi-line script'
+- task: NodeTool@0
+  inputs:
+    versionSpec: '16.x'
+  displayName: "Install Node.js"
+- task: Npm@1
+  inputs:
+    command: 'install'
+    workingDir: '/'
+- task: Npm@1
+  inputs:
+    command: 'custom'
+    workingDir: '/'
+    customCommand: 'run prod'
