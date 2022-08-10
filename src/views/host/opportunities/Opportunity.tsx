@@ -12,6 +12,10 @@ import {GoogleMap, LoadScript, Marker} from "@react-google-maps/api";
 import cloneDeep from 'lodash/cloneDeep';
 import GenericModal from "@src/views/common/GenericModal";
 import BookModal from "@src/views/traveler/home/BookModal";
+import {Slide} from "react-slideshow-image";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faAngleLeft} from "@fortawesome/free-solid-svg-icons/faAngleLeft";
+import {faAngleRight} from "@fortawesome/free-solid-svg-icons/faAngleRight";
 
 interface Props{
     hostMode:boolean
@@ -24,6 +28,7 @@ const Opportunity:React.FunctionComponent<Props> = ({hostMode}) =>{
     const [location,setLocation] = useState({lat:0,lng:0});
     const [isActiveDelModal,setIsActiveDelModal] = useState<boolean>(false);
     const [isActiveBookModal,setIsActiveBookModal] = useState<boolean>(false);
+    const [slideImages,setSlideImages] = useState<any[]>([]);
 
     useEffect(()=>{
         if(id){
@@ -31,6 +36,11 @@ const Opportunity:React.FunctionComponent<Props> = ({hostMode}) =>{
                 .then((response)=>{
                     //@ts-ignore
                     setOpportunity(response);
+                    let tmp:any[]=[];
+                    for(let imageUrl of response.imageUrls){
+                        tmp.push({url:imageUrl,caption:""});
+                    }
+                    setSlideImages(tmp);
                 })
         }
     },[id])
@@ -157,18 +167,38 @@ const Opportunity:React.FunctionComponent<Props> = ({hostMode}) =>{
         setIsActiveDelModal(false);
     }
 
+    const renderImageGallery = () =>{
+        return(
+            slideImages.map((slideImage, index)=> (
+                <div className="each-slide-effect" style={{position:"relative",cursor:'pointer'}}
+                     key={"slide-opportunity-image-"+slideImage.url}>
+                    <div style={{'backgroundImage': `url(${slideImage.url})`,backgroundRepeat:"no-repeat",backgroundPosition:'center'}}>
+                    </div>
+                </div>
+            ))
+        )
+    }
+
+    const renderDesktopImages = () =>{
+        return(
+            <div className={"columns is-multiline"}>
+                {renderImages()}
+            </div>
+        )
+    }
+
     return(
         <React.Fragment>
-            {/*<div style={{maxHeight:"200px"}}>*/}
-            {/*    <CustomImageGallery imagesUrls={(opportunity?.imageUrls)&&opportunity?.imageUrls}/>*/}
-            {/*</div>*/}
             <div className={"columns is-centered"}>
                 <div className={"column is-5"}>
-                    <p className={"title is-4"}>{opportunity?.jobTitle}</p>
+                        <Slide autoplay={false} transitionDuration={6} canSwipe={true} indicators={true}
+                               prevArrow={<span className="icon custom-arrow-right is-medium has-background-white"><FontAwesomeIcon icon={faAngleLeft}/></span>}
+                               nextArrow={<span className="icon custom-arrow-left is-medium has-background-white"><FontAwesomeIcon icon={faAngleRight}/></span>}>
+                            {renderImageGallery()}
+                        </Slide>
+
+                    <p className={"title is-4"}>{opportunity?.jobTitle&&opportunity.jobTitle}</p>
                     <p className={"subtitle is-5"}>{constructAddress()}</p>
-                    <div className={"columns is-multiline"}>
-                        {renderImages()}
-                    </div>
                     <hr/>
                     <p className={"has-text-primary is-size-6 has-text-weight-semibold"}>Type of help needed</p>
                     <p className={"has-text-weight-semibold is-size-6"}>{constructHelpNeeded()}</p>

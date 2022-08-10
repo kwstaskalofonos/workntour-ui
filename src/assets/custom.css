@@ -66,27 +66,27 @@
 
 .custom-arrow-left{
     border-radius: 99px;
-    opacity: 0.0;
+    /*opacity: 0.0;*/
     right: 4px !important;
     transition: 1.2s;
 }
 
 .custom-arrow-right{
     border-radius: 99px;
-    opacity: 0.0;
+    /*opacity: 0.0;*/
     left: 4px !important;
     transition: 1.2s;
 }
 
-.custom-arrow-left:hover{
-    opacity: 1;
-    transition: 1s;
-}
+/*.custom-arrow-left:hover{*/
+/*    opacity: 1;*/
+/*    transition: 1s;*/
+/*}*/
 
-.custom-arrow-right:hover{
-    opacity: 1;
-    transition: 1s;
-}
+/*.custom-arrow-right:hover{*/
+/*    opacity: 1;*/
+/*    transition: 1s;*/
+/*}*/
 
 .wrapper{
     position: relative;
