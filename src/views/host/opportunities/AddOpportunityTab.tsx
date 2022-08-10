@@ -50,7 +50,7 @@ const AddOpportunityTab:React.FunctionComponent = () =>{
         array.push(<option key={"type-of-help-option-empty"}/>)
         for(const item in TypeOfHelpNeeded){
             array.push(<option key={"type-of-help-option-"+item}
-                               value={item} label={TypeOfHelpNeeded[item as TypeOfHelpNeededType]}/>)
+                               value={item} label={TypeOfHelpNeeded[item as TypeOfHelpNeededType]}>{TypeOfHelpNeeded[item as TypeOfHelpNeededType]}</option>)
         }
         return array;
     }
@@ -60,7 +60,7 @@ const AddOpportunityTab:React.FunctionComponent = () =>{
         array.push(<option key={"language-option-empty"}/>)
         for(const item in Languages){
             array.push(<option key={"language-option-"+item}
-                               value={item} label={Languages[item as LanguagesType]}/>)
+                               value={item} label={Languages[item as LanguagesType]}>{Languages[item as LanguagesType]}</option>)
         }
         return array;
     }
@@ -70,7 +70,7 @@ const AddOpportunityTab:React.FunctionComponent = () =>{
         array.push(<option key={"meal-option-empty"}/>)
         for(const item in Meal){
             array.push(<option key={"meal-option-"+item}
-                               value={item} label={Meal[item as MealType]}/>)
+                               value={item} label={Meal[item as MealType]}>{Meal[item as MealType]}</option>)
         }
         return array;
     }
@@ -80,7 +80,7 @@ const AddOpportunityTab:React.FunctionComponent = () =>{
         array.push(<option key={"learn-opps-option-empty"}/>)
         for(const item in LearningOpportunities){
             array.push(<option key={"learn-opps-option-"+item}
-                               value={item} label={LearningOpportunities[item as LearningOpportunitiesType]}/>)
+                               value={item} label={LearningOpportunities[item as LearningOpportunitiesType]}>{LearningOpportunities[item as LearningOpportunitiesType]}</option>)
         }
         return array;
     }
@@ -90,7 +90,7 @@ const AddOpportunityTab:React.FunctionComponent = () =>{
         array.push(<option key={"accommodation-option-empty"}/>)
         for(const item in Accommodation){
             array.push(<option key={"accommodation-option-"+item}
-                               value={item} label={Accommodation[item as AccommodationType]}/>)
+                               value={item} label={Accommodation[item as AccommodationType]}>{Accommodation[item as AccommodationType]}</option>)
         }
         return array;
     }
