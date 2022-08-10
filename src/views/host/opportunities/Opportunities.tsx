@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import {faAdd} from "@fortawesome/free-solid-svg-icons/faAdd";
-import {faFileAlt} from "@fortawesome/free-solid-svg-icons/faFileAlt";
+import {faHouse} from "@fortawesome/free-solid-svg-icons/faHouse";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import OpportunitiesTab from "@src/views/host/opportunities/OpportunitiesTab";
 import AddOpportunityTab from "@src/views/host/opportunities/AddOpportunityTab";
@@ -15,7 +15,7 @@ const Opportunities:React.FunctionComponent = () =>{
                 <ul>
                     <li className={(selectedTab == "OPPORTUNITIES")?"is-active":''}>
                         <a onClick={()=>setSelectedTab('OPPORTUNITIES')} className={(selectedTab == "OPPORTUNITIES")?"has-background-primary":""}>
-                            <span className="icon is-small"><FontAwesomeIcon icon={faFileAlt}/></span>
+                            <span className="icon is-small"><FontAwesomeIcon icon={faHouse}/></span>
                             <span>Opportunities</span>
                         </a>
                     </li>
