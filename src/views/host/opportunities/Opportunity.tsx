@@ -192,12 +192,21 @@ const Opportunity:React.FunctionComponent<Props> = ({hostMode}) =>{
         <React.Fragment>
             <div className={"columns is-centered"}>
                 <div className={"column is-5"}>
-                    {isMobile?
-                        <Slide autoplay={false} transitionDuration={6} canSwipe={true} indicators={true}
-                               prevArrow={<span className="icon custom-arrow-right is-medium has-background-white"><FontAwesomeIcon icon={faAngleLeft}/></span>}
-                               nextArrow={<span className="icon custom-arrow-left is-medium has-background-white"><FontAwesomeIcon icon={faAngleRight}/></span>}>
-                            {renderImageGallery()}
-                        </Slide>:renderDesktopImages()}
+                    {renderDesktopImages()}
+                    {/*{isMobile?*/}
+                    {/*    <Slide autoplay={false} transitionDuration={6} canSwipe={true} indicators={true}*/}
+                    {/*           prevArrow={<span className="icon custom-arrow-right is-medium has-background-white"><FontAwesomeIcon icon={faAngleLeft}/></span>}*/}
+                    {/*           nextArrow={<span className="icon custom-arrow-left is-medium has-background-white"><FontAwesomeIcon icon={faAngleRight}/></span>}>*/}
+                    {/*        {*/}
+                    {/*            slideImages.map((slideImage, index)=> (*/}
+                    {/*                <div className="each-slide-effect" style={{position:"relative",cursor:'pointer'}}*/}
+                    {/*                     key={"slide-opportunity-image-"+slideImage.url}>*/}
+                    {/*                    <div style={{'backgroundImage': `url(${slideImage.url})`,backgroundRepeat:"no-repeat",backgroundPosition:'center'}}>*/}
+                    {/*                    </div>*/}
+                    {/*                </div>*/}
+                    {/*            ))*/}
+                    {/*        }*/}
+                    {/*    </Slide>:renderDesktopImages()}*/}
                     <p className={"title is-4"}>{opportunity?.jobTitle&&opportunity.jobTitle}</p>
                     <p className={"subtitle is-5"}>{constructAddress()}</p>
                     <hr/>
