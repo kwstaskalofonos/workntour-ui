@@ -43,7 +43,7 @@ const OpportunityTravelerCard:React.FunctionComponent<Props> = ({opportunity}) =
 
     return(
         <React.Fragment>
-            <Slide autoplay={false} arrows={false}>
+            <Slide autoplay={false} arrows={false} canSwipe={false}>
                 <div className="each-slide-effect" style={{position:"relative",cursor:'pointer'}}
                      key={"slide-opportunity-image-"+opportunity.imageUrls[0]} onClick={goToOpportunity}>
                     <div style={{'backgroundImage': `url(${opportunity.imageUrls[0]})`,backgroundRepeat:"no-repeat",backgroundPosition:'center'}}>

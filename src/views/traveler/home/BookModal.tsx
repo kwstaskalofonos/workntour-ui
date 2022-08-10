@@ -81,7 +81,7 @@ const BookModal:React.FunctionComponent<Props> = ({active,setActive,opportunity}
                 </section>
                 <footer className="modal-card-foot is-justify-content-end">
                     <div className="buttons">
-                            <button className="button" >Cancel</button>
+                            <button className="button" onClick={()=>setActive(false)}>Cancel</button>
                             <button className="button is-primary" onClick={()=>submit()}>Book</button>
                     </div>
                 </footer>
