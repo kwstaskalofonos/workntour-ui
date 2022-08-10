@@ -132,7 +132,6 @@ export const updateUserInfo: ActionCreator<ThunkResult> = (role:string) =>
         return new Promise<void>(()=>{
             switch (role){
                 case Role.TRAVELER.valueOf():{
-                    console.log("traveler");
                     retrieveTravelerProfile()
                         .then((response)=>{
                             dispatch(authenticationSlice.actions.setProfile({profile:response}));

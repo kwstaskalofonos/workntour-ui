@@ -13,8 +13,8 @@ const API_URL = {
 }
 
 const COOKIE_DOMAIN = {
-    production: "'https://workntour.com'",
-    development: "'http://127.0.0.1:8083'"
+    production: ".workntour.com",
+    development: "127.0.0.1"
 }
 
 const GOOGLE_MAPS_KEY = {
@@ -108,7 +108,7 @@ export default {
         headers:{'Access-Control-Allow-Origin':'*'},
         historyApiFallback:true,
         hot:true,
-        host:'127.0.0.1',
+        host:'localhost',
         
     }
 }
