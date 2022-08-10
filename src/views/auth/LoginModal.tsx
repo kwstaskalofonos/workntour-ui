@@ -7,6 +7,8 @@ import {GenericResponse, login} from "@src/utilities/fetch";
 import {toast} from "react-toastify";
 import {setCookie} from "@src/utilities/cookies";
 import {useNavigate} from "react-router";
+import {useAppDispatch} from "@src/state/stores/hooks";
+import {doSetRole} from "@src/state/stores/user/operations";
 
 export interface Props{
     ref:any
@@ -25,6 +27,7 @@ const LoginModal:React.FunctionComponent<Props>=
     const {register,handleSubmit,getValues} = form;
     const [isLoading,setIsLoading] = useState<boolean>(false);
     const navigate = useNavigate();
+    const dispatch = useAppDispatch();
 
    useImperativeHandle(ref,()=>{
        return{
@@ -46,7 +49,7 @@ const LoginModal:React.FunctionComponent<Props>=
                // @ts-ignore
                setCookie(response.role,15,"role");
                setIsLoading(false);
-               //window.location.replace("/");
+               dispatch(doSetRole(response.role));
                navigate("/");
            })
            .catch((error)=>{

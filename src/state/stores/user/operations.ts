@@ -9,6 +9,12 @@ import {
 import {GenericResponse, get, post} from "@src/utilities/fetch";
 import {toast} from "react-toastify";
 import {getCookie, setCookie} from "@src/utilities/cookies";
+import {ThunkAction} from "redux-thunk";
+import {RootState} from "@src/state/store";
+import {ActionCreator} from "@reduxjs/toolkit";
+import {authenticationSlice} from "@src/state/stores/user/reducers";
+
+type ThunkResult = ThunkAction<void, RootState, undefined, any>;
 
 export const registerAsTraveler = (form:Traveler,setIsLoading:any):Promise<Traveler>=>{
     return new Promise<Traveler>((resolve,reject)=>
@@ -46,10 +52,10 @@ export const registerAsCompany = (form:Company,setIsLoading:any):Promise<Company
     )
 };
 
-export const retrieveTravelerProfile = ():Promise<GenericResponse>=>{
-    return new Promise<GenericResponse>((resolve,reject)=>{
+export const retrieveTravelerProfile = ():Promise<TravelerProfile>=>{
+    return new Promise<TravelerProfile>((resolve,reject)=>{
         get('retrieveProfile/traveler')
-            .then((response:GenericResponse)=>{
+            .then((response:TravelerProfile)=>{
                 setCookie(JSON.stringify(response),15,'profile');
                 resolve(response);
             }).catch((error)=>{
@@ -59,10 +65,10 @@ export const retrieveTravelerProfile = ():Promise<GenericResponse>=>{
     })
 }
 
-export const retrieveIndividualProfile = ():Promise<GenericResponse>=>{
-    return new Promise<GenericResponse>((resolve,reject)=>{
+export const retrieveIndividualProfile = ():Promise<IndividualHostProfile>=>{
+    return new Promise<IndividualHostProfile>((resolve,reject)=>{
         get('retrieveProfile/individualHost')
-            .then((response:GenericResponse)=>{
+            .then((response:IndividualHostProfile)=>{
                 setCookie(JSON.stringify(response),15,'profile');
                 resolve(response);
             }).catch((error)=>{
@@ -72,10 +78,10 @@ export const retrieveIndividualProfile = ():Promise<GenericResponse>=>{
     })
 }
 
-export const retrieveCompanyProfile = ():Promise<GenericResponse>=>{
-    return new Promise<GenericResponse>((resolve,reject)=>{
+export const retrieveCompanyProfile = ():Promise<CompanyHostProfile>=>{
+    return new Promise<CompanyHostProfile>((resolve,reject)=>{
         get('retrieveProfile/companyHost')
-            .then((response:GenericResponse)=>{
+            .then((response:CompanyHostProfile)=>{
                 setCookie(JSON.stringify(response),15,'profile');
                 resolve(response);
             }).catch((error)=>{
@@ -106,3 +112,46 @@ export const retrieveUserProfile = ():Promise<void>=>{
         }
     })
 }
+
+export const doSetRole: ActionCreator<ThunkResult> = (role:string) =>
+    (dispatch) =>{
+        return new Promise<void>(()=>{
+            dispatch(authenticationSlice.actions.setRole({role:role}))
+        })
+    }
+
+export const doSetProfile: ActionCreator<ThunkResult> = (profile:TravelerProfile|IndividualHostProfile|CompanyHostProfile) =>
+    (dispatch) =>{
+        return new Promise<void>(()=>{
+            dispatch(authenticationSlice.actions.setProfile({profile:profile}))
+        })
+    }
+
+export const updateUserInfo: ActionCreator<ThunkResult> = (role:string) =>
+    (dispatch) =>{
+        return new Promise<void>(()=>{
+            switch (role){
+                case Role.TRAVELER.valueOf():{
+                    retrieveTravelerProfile()
+                        .then((response)=>{
+                            dispatch(authenticationSlice.actions.setProfile({profile:response}));
+                        });
+                    break;
+                }
+                case Role.COMPANY_HOST.valueOf():{
+                    retrieveCompanyProfile()
+                        .then((response)=>{
+                            dispatch(authenticationSlice.actions.setProfile({profile:response}));
+                        });
+                    break;
+                }
+                case Role.INDIVIDUAL_HOST.valueOf():{
+                    retrieveIndividualProfile()
+                        .then((response)=>{
+                            dispatch(authenticationSlice.actions.setProfile({profile:response}));
+                        });
+                    break;
+                }
+            }
+        })
+    }

@@ -14,16 +14,19 @@ export function hasCookie(key:string = AUTH_TOKEN){
 
 export function setCookie(value:string,days:number | 15, key:string = AUTH_TOKEN){
     if(Cookies.enabled){
-        Cookies.set(key,value,{expires:days*24*60*60,path:_cookie_domain,secure:false});
-        //Cookies.set(key,value,{expires:days*24*60*60,domain:_cookie_domain});
+        //Cookies.set(key,value,{expires:days*24*60*60,path:_cookie_domain});
+        console.log(_cookie_domain);
+        Cookies.set(key,value,{expires:days*24*60*60,domain:_cookie_domain,secure:false});
     }
 }
 
 export function deleteCookie(){
-    Cookies.expire(AUTH_TOKEN,{path:_cookie_domain});
+    //Cookies.expire(AUTH_TOKEN,{path:_cookie_domain});
+    Cookies.expire(AUTH_TOKEN,{domain:_cookie_domain});
 }
 
 export function deleteSpecificCookie(key:string){
-    Cookies.expire(key,{path:_cookie_domain});
+    //Cookies.expire(key,{path:_cookie_domain});
+    Cookies.expire(key,{domain:_cookie_domain});
 }
 

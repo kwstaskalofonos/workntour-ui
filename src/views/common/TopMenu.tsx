@@ -7,13 +7,16 @@ import {deleteCookie, deleteSpecificCookie, hasCookie} from "@src/utilities/cook
 import {faUserCircle} from "@fortawesome/free-solid-svg-icons/faUserCircle";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {getUserDisplayName, isHost} from "@src/utilities/ui";
+import {useAppSelector} from "@src/state/stores/hooks";
+import {CompanyHostProfile, IndividualHostProfile, Role, TravelerProfile} from "@src/state/stores/user/models";
 
 const TopMenu: React.FunctionComponent = () =>{
 
     const registrationModalHandler = useRef<SelectRegistrationModalHandler>();
     const loginModalHandler = useRef<LoginModalHandler>();
     const isAuthenticated=hasCookie();
-    const isProfileRetrieved=hasCookie('profile');
+    const role = useAppSelector((state)=>state.session.authenticationSlice.role);
+    const userProfile = useAppSelector((state)=>state.session.authenticationSlice.profile);
     const [isActive,setIsActive] = useState<boolean>(false);
 
     const logout = () =>{
@@ -21,6 +24,17 @@ const TopMenu: React.FunctionComponent = () =>{
         deleteSpecificCookie("role");
         deleteSpecificCookie("profile");
         window.location.replace("/");
+    }
+
+    const retrieveName = () =>{
+        if(role&&role==Role.COMPANY_HOST.toString()&&userProfile){
+            // @ts-ignore
+            return userProfile.companyName;
+        }
+        if(role&&role!=Role.COMPANY_HOST.toString()&&userProfile){
+            // @ts-ignore
+            return userProfile.name;
+        }
     }
 
     return(
@@ -74,7 +88,7 @@ const TopMenu: React.FunctionComponent = () =>{
 
                                 <div className="navbar-dropdown is-right">
                                     <a className="navbar-item">
-                                        Singed in as {isProfileRetrieved&&getUserDisplayName()}
+                                        Singed in as {retrieveName()}
                                     </a>
                                     <hr className="navbar-divider"/>
                                     <a className="navbar-item">
