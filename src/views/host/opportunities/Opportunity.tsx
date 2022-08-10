@@ -16,6 +16,7 @@ import {Slide} from "react-slideshow-image";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faAngleLeft} from "@fortawesome/free-solid-svg-icons/faAngleLeft";
 import {faAngleRight} from "@fortawesome/free-solid-svg-icons/faAngleRight";
+import {isMobile} from "react-device-detect";
 
 interface Props{
     hostMode:boolean
@@ -191,12 +192,12 @@ const Opportunity:React.FunctionComponent<Props> = ({hostMode}) =>{
         <React.Fragment>
             <div className={"columns is-centered"}>
                 <div className={"column is-5"}>
+                    {isMobile?
                         <Slide autoplay={false} transitionDuration={6} canSwipe={true} indicators={true}
                                prevArrow={<span className="icon custom-arrow-right is-medium has-background-white"><FontAwesomeIcon icon={faAngleLeft}/></span>}
                                nextArrow={<span className="icon custom-arrow-left is-medium has-background-white"><FontAwesomeIcon icon={faAngleRight}/></span>}>
                             {renderImageGallery()}
-                        </Slide>
-
+                        </Slide>:renderDesktopImages()}
                     <p className={"title is-4"}>{opportunity?.jobTitle&&opportunity.jobTitle}</p>
                     <p className={"subtitle is-5"}>{constructAddress()}</p>
                     <hr/>

@@ -1,9 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {Opportunity, OpportunityCategory, OpportunityCategoryType} from "@src/state/stores/opportunity/models";
 import {Slide} from "react-slideshow-image";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faAngleRight} from "@fortawesome/free-solid-svg-icons/faAngleRight";
-import {faAngleLeft} from "@fortawesome/free-solid-svg-icons/faAngleLeft";
 import {getDateFromString} from "@src/utilities/ui";
 import {useNavigate} from "react-router";
 

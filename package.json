@@ -30,6 +30,7 @@
     "lodash": "^4.17.21",
     "moment": "^2.29.4",
     "react-datepicker": "^4.8.0",
+    "react-device-detect": "^2.2.2",
     "react-dom": "^18.1.0",
     "react-dropzone": "^14.2.2",
     "react-dual-range-slider": "^1.0.4",
