@@ -40,7 +40,7 @@ const AddOpportunityTab:React.FunctionComponent = () =>{
         array.push(<option key={"category-option-empty"}/>)
         for(const item in OpportunityCategory){
             array.push(<option key={"category-option-"+item}
-                               value={item} label={OpportunityCategory[item as OpportunityCategoryType]}/>)
+                               value={item} label={OpportunityCategory[item as OpportunityCategoryType]}>{OpportunityCategory[item as OpportunityCategoryType]}</option>)
         }
         return array;
     }
