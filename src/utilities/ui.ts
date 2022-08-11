@@ -3,12 +3,16 @@ import {CompanyHostProfile, IndividualHostProfile, Profile, Role, TravelerProfil
 
 export function constructDate(day:string,month:string,year:string){
 
-     const date = new Date(Number(year),Number(month)-1,Number(day),0,0,0);
+     const date = new Date(Number(year),Number(month)-1,Number(day)+1,0,0,0);
      let dateToSend = date.toISOString();
      let idx = dateToSend.indexOf('T');
      return dateToSend.substring(0,idx);
  }
 
+export function extractYearMonthDay(date:string){
+    let tmp:string[] = date.split("-");
+    return [tmp[0],tmp[1],tmp[2]];
+}
 
  export function isEmail(email:string){
      const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;

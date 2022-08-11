@@ -6,6 +6,18 @@
     border-color: transparent !important;
 }
 
+.border-linear-profile{
+    background: linear-gradient(white,white) padding-box,linear-gradient(90deg,#7E6FD8,#0EE5D0) border-box !important;
+    border-style: solid !important;
+    border-width: 4px !important;
+    border-color: transparent !important;
+}
+
+.background-linear{
+    background: linear-gradient(90deg,#7E6FD8,#0EE5D0);
+    border-radius: 18px !important;
+}
+
 .border-linear-radius{
     background: linear-gradient(white,white) padding-box,linear-gradient(90deg,#7E6FD8,#0EE5D0) border-box !important;
     border-style: solid !important;

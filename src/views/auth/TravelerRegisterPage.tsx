@@ -15,7 +15,7 @@ import {toast} from "react-toastify";
 // @ts-ignore
 import illustration from "@src/assets/signUpAsTrav.svg";
 import CustomDateInput from "@src/views/common/CustomDateInput";
-import {constructDate, getNationalities} from "@src/utilities/ui";
+import {constructDate, getNationalities, isEmail} from "@src/utilities/ui";
 import InterCom from "@src/views/common/InterCom";
 
 const TravelerRegisterPage:React.FunctionComponent = () =>{
@@ -40,6 +40,10 @@ const TravelerRegisterPage:React.FunctionComponent = () =>{
         }
         data.role='TRAVELER';
         data.countryCodeMobileNum=countryCode;
+        if(!isEmail(data.email)){
+            toast.error("Email is not valid",{position:toast.POSITION.TOP_RIGHT});
+            return;
+        }
         if(data.nationality==""){
             toast.error("Please select Nationality",{position:toast.POSITION.TOP_RIGHT});
             return;
@@ -59,7 +63,7 @@ const TravelerRegisterPage:React.FunctionComponent = () =>{
         array.push(<option key={"nationality-option-empty-1"} value={""} label={"Select Nationality"}/>);
         for(let item of getNationalities()){
             array.push(<option key={"nationality-option-"+item.label}
-                               value={item.value} label={item.label}/>)
+                               value={item.value} label={item.label}>{item.label}</option>)
         }
         return array;
     }

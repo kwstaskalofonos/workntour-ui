@@ -7,6 +7,8 @@ import {faCloudUpload} from "@fortawesome/free-solid-svg-icons/faCloudUpload";
 import {Company} from "@src/state/stores/user/models";
 import {registerAsCompany} from "@src/state/stores/user/operations";
 import {useNavigate} from "react-router";
+import {isEmail} from "@src/utilities/ui";
+import {toast} from "react-toastify";
 
 const CompanyRegisterTab:React.FunctionComponent = () =>{
 
@@ -18,6 +20,10 @@ const CompanyRegisterTab:React.FunctionComponent = () =>{
 
     const onSubmit:any=(data:Company)=>{
         setIsLoading(true);
+        if(!isEmail(data.email)){
+            toast.error("Email is not valid",{position:toast.POSITION.TOP_RIGHT});
+            return;
+        }
         registerAsCompany(data,setIsLoading)
             .then(()=>{
                form.reset();

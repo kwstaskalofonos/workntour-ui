@@ -7,7 +7,7 @@ import {faAngleUp} from "@fortawesome/free-solid-svg-icons/faAngleUp";
 import {faAngleDown} from "@fortawesome/free-solid-svg-icons/faAngleDown";
 import CustomDateInput from "@src/views/common/CustomDateInput";
 import {Individual} from "@src/state/stores/user/models";
-import {constructDate, getNationalities} from "@src/utilities/ui";
+import {constructDate, getNationalities, isEmail} from "@src/utilities/ui";
 import {registerAsIndividual} from "@src/state/stores/user/operations";
 import {useNavigate} from "react-router";
 import {toast} from "react-toastify";
@@ -32,6 +32,10 @@ const IndividualRegisterTab:React.FunctionComponent = () =>{
             data.birthday=constructDate(day,month,year);
         }
         data.countryCodeMobileNum=countryCode;
+        if(!isEmail(data.email)){
+            toast.error("Email is not valid",{position:toast.POSITION.TOP_RIGHT});
+            return;
+        }
         if(data.nationality==""){
             toast.error("Please select Nationality",{position:toast.POSITION.TOP_RIGHT});
             return;
@@ -51,7 +55,7 @@ const IndividualRegisterTab:React.FunctionComponent = () =>{
         array.push(<option key={"nationality-option-empty-1"} value={""} label={"Select Nationality"}/>);
         for(let item of getNationalities()){
             array.push(<option key={"type-of-help-option-"+item.label}
-                               value={item.value} label={item.label}/>)
+                               value={item.value} label={item.label}>{item.label}</option>)
         }
         return array;
     }
