@@ -91,7 +91,7 @@ const TopMenu: React.FunctionComponent = () =>{
                                         Singed in as {retrieveName()}
                                     </a>
                                     <hr className="navbar-divider"/>
-                                    <a className="navbar-item">
+                                    <a className="navbar-item" href={"profile"}>
                                         Profile
                                     </a>
                                     <hr className="navbar-divider"/>
