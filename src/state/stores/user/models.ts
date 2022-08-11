@@ -74,11 +74,27 @@ export interface TravelerProfile{
     surname:string,
     email:string,
     sex:string,
+    postalAddress:string,
     mobileNum:string,
+    typeOfTraveler:TypeOfTraveler,
+    countryCodeMobileNum:string,
     nationality:string,
     profileImage:string,
     description:string
 }
+
+export enum TypeOfTraveler{
+    SOLO_TRAVELER="Solo Traveler",
+    COUPLE="Couple",
+    FRIENDS="Friends",
+    CAREER_BREAK="Career Break",
+    GAP_YEAR="Gap Year",
+    STUDENT="Student",
+    FAMILY="Family",
+    DIGITAL_NOMAD="Digital Nomad"
+}
+
+export type TypeOfTravelerType = keyof typeof TypeOfTraveler;
 
 export enum Role{
     TRAVELER="TRAVELER",
