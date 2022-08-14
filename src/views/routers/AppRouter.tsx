@@ -14,7 +14,8 @@ import {getCookie, hasCookie} from "@src/utilities/cookies";
 import LandingPage from "@src/views/LandingPage";
 import SecuredSiteRouter from "@src/views/routers/SecureSiteRouter";
 import {useAppDispatch, useAppSelector} from "@src/state/stores/hooks";
-import {TravelerProfile} from "@src/state/stores/user/models";
+import {CompanyHostProfile, IndividualHostProfile, Role, TravelerProfile} from "@src/state/stores/user/models";
+import {SessionStorage} from "@src/utilities/localStorage";
 
 const AppRouter :React.FunctionComponent = () =>{
 
@@ -30,12 +31,18 @@ const AppRouter :React.FunctionComponent = () =>{
 
     useEffect(()=>{
         if(userRole){
-            if(!hasCookie('profile')){
+            if(!SessionStorage.getItem('profile')){
                 dispatch(updateUserInfo(userRole));
                 return;
             }
-            if(hasCookie('profile')){
-                let profile:TravelerProfile = JSON.parse(getCookie('profile'));
+            if(userRole === Role.TRAVELER.toString()){
+                let profile:TravelerProfile|null = SessionStorage.getItem('profile');
+                dispatch(doSetProfile(profile));
+            }else if(userRole === Role.INDIVIDUAL_HOST.toString()){
+                let profile:IndividualHostProfile|null = SessionStorage.getItem('profile');
+                dispatch(doSetProfile(profile));
+            }else if(userRole === Role.COMPANY_HOST.toString()){
+                let profile:CompanyHostProfile|null = SessionStorage.getItem('profile');
                 dispatch(doSetProfile(profile));
             }
         }

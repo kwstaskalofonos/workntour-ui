@@ -49,8 +49,11 @@ export interface CompanyHostProfile{
     email:string,
     headquartersCounty:string,
     mobileNum:string,
+    countryCodeMobileNum:string,
+    fixedNumber:string,
     profileImage:string,
-    description:string
+    description:string,
+    postalAddress:string
 }
 
 export interface IndividualHostProfile{
@@ -61,9 +64,13 @@ export interface IndividualHostProfile{
     email:string,
     country:string,
     mobileNum:string,
+    countryCodeMobileNum:string,
+    postalAddress:string,
     nationality:string,
     profileImage:string,
-    description:string
+    description:string,
+    fixedNumber:string
+    sex:string
 }
 
 export interface TravelerProfile{
@@ -80,7 +87,8 @@ export interface TravelerProfile{
     countryCodeMobileNum:string,
     nationality:string,
     profileImage:string,
-    description:string
+    description:string,
+    profImage:any
 }
 
 export enum TypeOfTraveler{
