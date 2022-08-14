@@ -9,6 +9,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {getUserDisplayName, isHost} from "@src/utilities/ui";
 import {useAppSelector} from "@src/state/stores/hooks";
 import {CompanyHostProfile, IndividualHostProfile, Role, TravelerProfile} from "@src/state/stores/user/models";
+import {clearRefData, SessionStorage} from "@src/utilities/localStorage";
 
 const TopMenu: React.FunctionComponent = () =>{
 
@@ -21,6 +22,7 @@ const TopMenu: React.FunctionComponent = () =>{
 
     const logout = () =>{
         deleteCookie();
+        clearRefData();
         deleteSpecificCookie("role");
         deleteSpecificCookie("profile");
         window.location.replace("/");

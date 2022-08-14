@@ -6,13 +6,14 @@ import {
     Traveler,
     TravelerProfile
 } from "@src/state/stores/user/models";
-import {GenericResponse, get, post} from "@src/utilities/fetch";
+import {GenericResponse, get, post, postMultipart} from "@src/utilities/fetch";
 import {toast} from "react-toastify";
 import {getCookie, setCookie} from "@src/utilities/cookies";
 import {ThunkAction} from "redux-thunk";
 import {RootState} from "@src/state/store";
 import {ActionCreator} from "@reduxjs/toolkit";
 import {authenticationSlice} from "@src/state/stores/user/reducers";
+import {SessionStorage} from "@src/utilities/localStorage";
 
 type ThunkResult = ThunkAction<void, RootState, undefined, any>;
 
@@ -56,7 +57,7 @@ export const retrieveTravelerProfile = ():Promise<TravelerProfile>=>{
     return new Promise<TravelerProfile>((resolve,reject)=>{
         get('retrieveProfile/traveler')
             .then((response:TravelerProfile)=>{
-                setCookie(JSON.stringify(response),15,'profile');
+                SessionStorage.setItem('profile',response);
                 resolve(response);
             }).catch((error)=>{
             toast.error(error,{position:toast.POSITION.TOP_RIGHT});
@@ -69,7 +70,7 @@ export const retrieveIndividualProfile = ():Promise<IndividualHostProfile>=>{
     return new Promise<IndividualHostProfile>((resolve,reject)=>{
         get('retrieveProfile/individualHost')
             .then((response:IndividualHostProfile)=>{
-                setCookie(JSON.stringify(response),15,'profile');
+                SessionStorage.setItem('profile',response);
                 resolve(response);
             }).catch((error)=>{
             toast.error(error,{position:toast.POSITION.TOP_RIGHT});
@@ -82,7 +83,7 @@ export const retrieveCompanyProfile = ():Promise<CompanyHostProfile>=>{
     return new Promise<CompanyHostProfile>((resolve,reject)=>{
         get('retrieveProfile/companyHost')
             .then((response:CompanyHostProfile)=>{
-                setCookie(JSON.stringify(response),15,'profile');
+                SessionStorage.setItem('profile',response);
                 resolve(response);
             }).catch((error)=>{
             toast.error(error,{position:toast.POSITION.TOP_RIGHT});
@@ -155,3 +156,22 @@ export const updateUserInfo: ActionCreator<ThunkResult> = (role:string) =>
             }
         })
     }
+
+
+export const updateTravelerProfile = (data:FormData,setIsLoading:any):Promise<TravelerProfile>=>{
+    return new Promise<TravelerProfile>((resolve,reject)=>{
+        postMultipart('updateProfile/traveler/web',data)
+            .then((response:TravelerProfile)=>{
+                SessionStorage.setItem('profile',response);
+                resolve(response);
+                setIsLoading(false);
+                toast.success("Profile updated",{position:toast.POSITION.TOP_RIGHT});
+            }).catch((error)=>{
+            toast.error(error,{position:toast.POSITION.TOP_RIGHT});
+            setIsLoading(false);
+            reject(error);
+        })
+    })
+}
+
+
