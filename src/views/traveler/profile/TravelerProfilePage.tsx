@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import ProfileImage from "@src/views/common/ProfileImage";
-import {useAppSelector} from "@src/state/stores/hooks";
+import {useAppDispatch, useAppSelector} from "@src/state/stores/hooks";
 import {Role, TravelerProfile, TypeOfTraveler, TypeOfTravelerType} from "@src/state/stores/user/models";
 import cloneDeep from "lodash/cloneDeep";
 import {extractYearMonthDay, getNationalities} from "@src/utilities/ui";
@@ -14,6 +14,7 @@ import {updateTravelerProfile} from "@src/state/stores/user/operations";
 
 const TravelerProfilePage:React.FunctionComponent = () =>{
 
+    const dispatch = useAppDispatch();
     const userProfile = useAppSelector((state)=> state.session.authenticationSlice.profile as unknown as TravelerProfile);
     const [profile,setProfile] = useState<TravelerProfile>();
     const [day,setDay] = useState<string>("");
@@ -43,7 +44,6 @@ const TravelerProfilePage:React.FunctionComponent = () =>{
             setYear(initialYear);
             setDay(initialDay);
             setMonth(initialMonth);
-            console.log(userProfile.profileImage);
             let tmp:TravelerProfile = {name:userProfile.name,surname:userProfile.surname
             ,description:userProfile.description,profileImage:userProfile.profileImage,email:userProfile.email,
             memberId:userProfile.memberId,role:userProfile.role,mobileNum:userProfile.mobileNum
@@ -146,16 +146,14 @@ const TravelerProfilePage:React.FunctionComponent = () =>{
     }
 
     const onSubmit = () =>{
+
         let formData = new FormData();
         if(file){
             formData.append("profileImage",file);
         }
         formData.append("updatedTravelerProfile",new Blob([JSON.stringify(profile)],{type:"application/json"}));
-        setIsLoading(true)
-        updateTravelerProfile(formData,setIsLoading)
-            .then((response)=>{
-                setProfile(response)
-            });
+        setIsLoading(true);
+        dispatch(updateTravelerProfile(formData,setIsLoading))
     }
 
     return(
@@ -176,14 +174,14 @@ const TravelerProfilePage:React.FunctionComponent = () =>{
                         <div className="field">
                             <label className="label has-text-primary has-text-weight-medium">Name</label>
                             <div className="control">
-                                <input className={"input"}
+                                <input className={"input border-linear-disabled"}
                                        disabled type={"text"} value={profile?profile.name:''}/>
                             </div>
                         </div>
                         <div className="field">
                             <label className="label has-text-primary has-text-weight-medium">Surname</label>
                             <div className="control">
-                                <input className={"input"}
+                                <input className={"input border-linear-disabled"}
                                        disabled type={"text"} value={profile?profile.surname:''}/>
                             </div>
                         </div>
@@ -200,7 +198,7 @@ const TravelerProfilePage:React.FunctionComponent = () =>{
                                 </div>
                             </div>
                         </div>
-                        <CustomDateInput day={day} month={month} year={year}
+                        <CustomDateInput day={day} month={month} year={year} disabled={true}
                                          setDay={setDay} setMonth={setMonth} setYear={setYear}/>
                         <div className="field">
                             <label className="label has-text-primary has-text-weight-medium">Sex*</label>
@@ -218,7 +216,7 @@ const TravelerProfilePage:React.FunctionComponent = () =>{
                         <div className="field">
                             <label className="label has-text-primary has-text-weight-medium">Email</label>
                             <div className="control">
-                                <input className={"input border-linear"}
+                                <input className={"input border-linear-disabled"} disabled={true}
                                        onChange={(event)=>onChangeEmail(event.currentTarget.value)}
                                        type={"text"} value={profile?profile.email:''}/>
                             </div>
