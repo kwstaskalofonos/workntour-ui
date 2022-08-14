@@ -158,20 +158,39 @@ export const updateUserInfo: ActionCreator<ThunkResult> = (role:string) =>
     }
 
 
-export const updateTravelerProfile = (data:FormData,setIsLoading:any):Promise<TravelerProfile>=>{
-    return new Promise<TravelerProfile>((resolve,reject)=>{
-        postMultipart('updateProfile/traveler/web',data)
-            .then((response:TravelerProfile)=>{
-                SessionStorage.setItem('profile',response);
-                resolve(response);
+export const updateTravelerProfile:ActionCreator<ThunkResult>= (data:FormData,setIsLoading:any)=>
+    (dispatch) =>{
+        return new Promise<TravelerProfile>((resolve,reject)=>{
+            postMultipart('updateProfile/traveler/web',data)
+                .then((response:TravelerProfile)=>{
+                    SessionStorage.setItem('profile',response);
+                    dispatch(authenticationSlice.actions.setProfile({profile:response}));
+                    resolve(response);
+                    setIsLoading(false);
+                    toast.success("Profile updated",{position:toast.POSITION.TOP_RIGHT});
+                }).catch((error)=>{
+                toast.error(error,{position:toast.POSITION.TOP_RIGHT});
                 setIsLoading(false);
-                toast.success("Profile updated",{position:toast.POSITION.TOP_RIGHT});
-            }).catch((error)=>{
-            toast.error(error,{position:toast.POSITION.TOP_RIGHT});
-            setIsLoading(false);
-            reject(error);
+                reject(error);
+            })
         })
-    })
-}
+    }
 
+export const updateCompanyProfile:ActionCreator<ThunkResult>= (data:FormData,setIsLoading:any)=>
+    (dispatch) =>{
+        return new Promise<CompanyHostProfile>((resolve,reject)=>{
+            postMultipart('updateProfile/companyHost/web',data)
+                .then((response:CompanyHostProfile)=>{
+                    SessionStorage.setItem('profile',response);
+                    dispatch(authenticationSlice.actions.setProfile({profile:response}));
+                    resolve(response);
+                    setIsLoading(false);
+                    toast.success("Profile updated",{position:toast.POSITION.TOP_RIGHT});
+                }).catch((error)=>{
+                toast.error(error,{position:toast.POSITION.TOP_RIGHT});
+                setIsLoading(false);
+                reject(error);
+            })
+        })
+    }
 

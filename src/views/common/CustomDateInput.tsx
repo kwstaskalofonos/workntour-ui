@@ -6,11 +6,12 @@ export interface Props{
     month:string,
     setMonth:any,
     year:string,
-    setYear:any
+    setYear:any,
+    disabled?:boolean
 }
 
 const CustomDateInput:React.FunctionComponent<Props> = ({day,setDay,month,setMonth,
-                                                        year,setYear}) =>{
+                                                        year,setYear,disabled}) =>{
 
 
     const onDayChange = (value:ChangeEvent<HTMLInputElement>) =>{
@@ -40,7 +41,8 @@ const CustomDateInput:React.FunctionComponent<Props> = ({day,setDay,month,setMon
                 <div className={"column is-size-3-mobile"}>
                     <div className="control">
                         <label className="label is-size-7 has-text-primary has-text-weight-medium">Day</label>
-                        <input className="input border-linear" type="text"
+                        <input className={disabled?"input border-linear-disabled":"input border-linear"}
+                               disabled={disabled&&disabled} type="text"
                             placeholder={"01"} onChange={onDayChange}
                             value={day}/>
                     </div>
@@ -49,7 +51,8 @@ const CustomDateInput:React.FunctionComponent<Props> = ({day,setDay,month,setMon
                 <div className={"column is-size-3-mobile"}>
                     <div className="control">
                         <label className="label is-size-7 has-text-primary has-text-weight-medium">Month</label>
-                        <input className="input border-linear" type="text"
+                        <input className={disabled?"input border-linear-disabled":"input border-linear"} type="text"
+                               disabled={disabled&&disabled}
                             placeholder={"01"} onChange={onMonthChange}
                         value={month}/>
                     </div>
@@ -58,7 +61,8 @@ const CustomDateInput:React.FunctionComponent<Props> = ({day,setDay,month,setMon
                 <div className={"column is-5 is-size-6-mobile"}>
                     <div className="control">
                         <label className="label is-size-7 has-text-primary has-text-weight-medium">Year</label>
-                        <input className="input border-linear" type="text"
+                        <input className={disabled?"input border-linear-disabled":"input border-linear"} type="text"
+                               disabled={disabled&&disabled}
                                placeholder={"1994"} onChange={(value)=>onYearChange(value)}
                         value={year}/>
                     </div>

@@ -6,6 +6,13 @@
     border-color: transparent !important;
 }
 
+.border-linear-disabled{
+    background: linear-gradient(#f2f2f2,#f2f2f2) padding-box,linear-gradient(90deg,#7E6FD8,#0EE5D0) border-box !important;
+    border-style: solid !important;
+    border-width: 1px !important;
+    border-color: transparent !important;
+}
+
 .border-linear-profile{
     background: linear-gradient(white,white) padding-box,linear-gradient(90deg,#7E6FD8,#0EE5D0) border-box !important;
     border-style: solid !important;
