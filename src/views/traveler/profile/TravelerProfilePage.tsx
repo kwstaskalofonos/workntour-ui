@@ -153,7 +153,7 @@ const TravelerProfilePage:React.FunctionComponent = () =>{
         }
         formData.append("updatedTravelerProfile",new Blob([JSON.stringify(profile)],{type:"application/json"}));
         setIsLoading(true);
-        dispatch(updateTravelerProfile(formData,setIsLoading))
+        dispatch(updateTravelerProfile(formData,setIsLoading));
     }
 
     return(

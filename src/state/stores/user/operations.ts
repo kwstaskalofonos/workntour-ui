@@ -194,3 +194,21 @@ export const updateCompanyProfile:ActionCreator<ThunkResult>= (data:FormData,set
         })
     }
 
+export const updateIndividualProfile:ActionCreator<ThunkResult>= (data:FormData,setIsLoading:any)=>
+    (dispatch) =>{
+        return new Promise<IndividualHostProfile>((resolve,reject)=>{
+            postMultipart('updateProfile/individualHost/web',data)
+                .then((response:IndividualHostProfile)=>{
+                    SessionStorage.setItem('profile',response);
+                    dispatch(authenticationSlice.actions.setProfile({profile:response}));
+                    resolve(response);
+                    setIsLoading(false);
+                    toast.success("Profile updated",{position:toast.POSITION.TOP_RIGHT});
+                }).catch((error)=>{
+                toast.error(error,{position:toast.POSITION.TOP_RIGHT});
+                setIsLoading(false);
+                reject(error);
+            })
+        })
+    }
+
