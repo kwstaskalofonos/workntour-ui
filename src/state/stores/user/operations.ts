@@ -57,7 +57,7 @@ export const retrieveTravelerProfile = ():Promise<TravelerProfile>=>{
     return new Promise<TravelerProfile>((resolve,reject)=>{
         get('retrieveProfile/traveler')
             .then((response:TravelerProfile)=>{
-                SessionStorage.setItem('profile',response);
+                SessionStorage.setItem('profile',response,900000);
                 resolve(response);
             }).catch((error)=>{
             toast.error(error,{position:toast.POSITION.TOP_RIGHT});
@@ -70,7 +70,7 @@ export const retrieveIndividualProfile = ():Promise<IndividualHostProfile>=>{
     return new Promise<IndividualHostProfile>((resolve,reject)=>{
         get('retrieveProfile/individualHost')
             .then((response:IndividualHostProfile)=>{
-                SessionStorage.setItem('profile',response);
+                SessionStorage.setItem('profile',response,900000);
                 resolve(response);
             }).catch((error)=>{
             toast.error(error,{position:toast.POSITION.TOP_RIGHT});
@@ -83,7 +83,7 @@ export const retrieveCompanyProfile = ():Promise<CompanyHostProfile>=>{
     return new Promise<CompanyHostProfile>((resolve,reject)=>{
         get('retrieveProfile/companyHost')
             .then((response:CompanyHostProfile)=>{
-                SessionStorage.setItem('profile',response);
+                SessionStorage.setItem('profile',response,900000);
                 resolve(response);
             }).catch((error)=>{
             toast.error(error,{position:toast.POSITION.TOP_RIGHT});
@@ -158,15 +158,16 @@ export const updateUserInfo: ActionCreator<ThunkResult> = (role:string) =>
     }
 
 
-export const updateTravelerProfile:ActionCreator<ThunkResult>= (data:FormData,setIsLoading:any)=>
+export const updateTravelerProfile:ActionCreator<ThunkResult>= (data:FormData,setIsLoading:any,setFile:any)=>
     (dispatch) =>{
         return new Promise<TravelerProfile>((resolve,reject)=>{
             postMultipart('updateProfile/traveler/web',data)
                 .then((response:TravelerProfile)=>{
-                    SessionStorage.setItem('profile',response);
+                    SessionStorage.setItem('profile',response,900000);
                     dispatch(authenticationSlice.actions.setProfile({profile:response}));
                     resolve(response);
                     setIsLoading(false);
+                    setFile();
                     toast.success("Profile updated",{position:toast.POSITION.TOP_RIGHT});
                 }).catch((error)=>{
                 toast.error(error,{position:toast.POSITION.TOP_RIGHT});
@@ -176,15 +177,16 @@ export const updateTravelerProfile:ActionCreator<ThunkResult>= (data:FormData,se
         })
     }
 
-export const updateCompanyProfile:ActionCreator<ThunkResult>= (data:FormData,setIsLoading:any)=>
+export const updateCompanyProfile:ActionCreator<ThunkResult>= (data:FormData,setIsLoading:any,setFile:any)=>
     (dispatch) =>{
         return new Promise<CompanyHostProfile>((resolve,reject)=>{
             postMultipart('updateProfile/companyHost/web',data)
                 .then((response:CompanyHostProfile)=>{
-                    SessionStorage.setItem('profile',response);
+                    SessionStorage.setItem('profile',response,900000);
                     dispatch(authenticationSlice.actions.setProfile({profile:response}));
                     resolve(response);
                     setIsLoading(false);
+                    setFile();
                     toast.success("Profile updated",{position:toast.POSITION.TOP_RIGHT});
                 }).catch((error)=>{
                 toast.error(error,{position:toast.POSITION.TOP_RIGHT});
@@ -194,15 +196,16 @@ export const updateCompanyProfile:ActionCreator<ThunkResult>= (data:FormData,set
         })
     }
 
-export const updateIndividualProfile:ActionCreator<ThunkResult>= (data:FormData,setIsLoading:any)=>
+export const updateIndividualProfile:ActionCreator<ThunkResult>= (data:FormData,setIsLoading:any,setFile:any)=>
     (dispatch) =>{
         return new Promise<IndividualHostProfile>((resolve,reject)=>{
             postMultipart('updateProfile/individualHost/web',data)
                 .then((response:IndividualHostProfile)=>{
-                    SessionStorage.setItem('profile',response);
+                    SessionStorage.setItem('profile',response,900000);
                     dispatch(authenticationSlice.actions.setProfile({profile:response}));
                     resolve(response);
                     setIsLoading(false);
+                    setFile();
                     toast.success("Profile updated",{position:toast.POSITION.TOP_RIGHT});
                 }).catch((error)=>{
                 toast.error(error,{position:toast.POSITION.TOP_RIGHT});

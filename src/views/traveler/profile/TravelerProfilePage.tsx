@@ -11,6 +11,7 @@ import profilePhoto from "@src/assets/travelerProfile.png";
 import Flag from "react-flagkit";
 import {countries} from "@src/utilities/countries";
 import {updateTravelerProfile} from "@src/state/stores/user/operations";
+import {toast} from "react-toastify";
 
 const TravelerProfilePage:React.FunctionComponent = () =>{
 
@@ -27,6 +28,7 @@ const TravelerProfilePage:React.FunctionComponent = () =>{
     const [completion,setCompletion] = useState<number>(0);
     const [initialized,setInitialized] = useState<boolean>(false);
     const [file,setFile] = useState<File>();
+    const [disabled,setDisabled] = useState<boolean>(true);
 
     useEffect(()=>{
         setInitialized(true);
@@ -94,7 +96,7 @@ const TravelerProfilePage:React.FunctionComponent = () =>{
         let array:any[]=[];
         array.push(<option key={"category-option-empty"}/>)
         for(const item in TypeOfTraveler){
-            array.push(<option key={"type-of-traveler-option-"+item} selected={item == profile?.typeOfTraveler}
+            array.push(<option key={"type-of-traveler-option-"+item}
             value={item} label={TypeOfTraveler[item as TypeOfTravelerType]}>{TypeOfTraveler[item as TypeOfTravelerType]}
             </option>)
         }
@@ -145,15 +147,30 @@ const TravelerProfilePage:React.FunctionComponent = () =>{
         setProfile(tmp);
     }
 
-    const onSubmit = () =>{
+    useEffect(()=>{
+        if(profile&&initialized){
+            if(profile.nationality!=userProfile.nationality||profile.sex!=userProfile.sex||
+            profile.typeOfTraveler!=userProfile.typeOfTraveler||profile.postalAddress!=userProfile.postalAddress||
+            countryCode!=userProfile.countryCodeMobileNum||profile.mobileNum!=userProfile.mobileNum|| file){
+                setDisabled(false);
+                return;
+            }
+            setDisabled(true);
+        }
+    },[profile,file])
 
+    const onSubmit = () =>{
+        if(!profile?.sex){
+            toast.error("You must select a sex type");
+            return;
+        }
         let formData = new FormData();
         if(file){
             formData.append("profileImage",file);
         }
         formData.append("updatedTravelerProfile",new Blob([JSON.stringify(profile)],{type:"application/json"}));
         setIsLoading(true);
-        dispatch(updateTravelerProfile(formData,setIsLoading));
+        dispatch(updateTravelerProfile(formData,setIsLoading,setFile));
     }
 
     return(
@@ -203,11 +220,12 @@ const TravelerProfilePage:React.FunctionComponent = () =>{
                         <div className="field">
                             <label className="label has-text-primary has-text-weight-medium">Sex*</label>
                             <div className="select is-fullwidth">
-                                <select className={"border-linear"}
+                                <select className={"border-linear"} value={profile?.sex}
                                         onChange={(event)=>onSelectSex(event.currentTarget.value)}>
-                                    <option value={"FEMALE"} selected={profile?.sex=="FEMALE"}>Female</option>
-                                    <option value={"MALE"} selected={profile?.sex=="MALE"}>Male</option>
-                                    <option value={"OTHER"} selected={profile?.sex=="OTHER"}>Other</option>
+                                    <option value={""}></option>
+                                    <option value={"FEMALE"}>Female</option>
+                                    <option value={"MALE"}>Male</option>
+                                    <option value={"OTHER"}>Other</option>
                                 </select>
                             </div>
                         </div>
@@ -225,7 +243,8 @@ const TravelerProfilePage:React.FunctionComponent = () =>{
                             <label className="label has-text-primary has-text-weight-medium">Type of Traveler</label>
                             <div className="control">
                                 <div className="select is-fullwidth">
-                                    <select className={"border-linear"} onChange={(event)=>onSelectType(event.currentTarget.value)}>
+                                    <select className={"border-linear"} value={profile?.typeOfTraveler}
+                                            onChange={(event)=>onSelectType(event.currentTarget.value)}>
                                         {renderTypeOfTraveler()}
                                     </select>
                                 </div>
@@ -255,10 +274,11 @@ const TravelerProfilePage:React.FunctionComponent = () =>{
                         </div>
                         <div className="field">
                             <p className="control is-fullwidth">
-                                <a className={"button is-primary is-fullwidth "+((isLoading)?"is-loading":'')}
-                                   type={"button"} onClick={onSubmit}>
+                                <button className={"button is-primary is-fullwidth "+((isLoading)?"is-loading":'')}
+                                        disabled={disabled}
+                                        type={"button"} onClick={onSubmit}>
                                     Save
-                                </a>
+                                </button>
                             </p>
                         </div>
                     </div>

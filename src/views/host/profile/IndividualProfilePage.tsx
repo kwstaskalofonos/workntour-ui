@@ -11,6 +11,7 @@ import CustomSelectCountry from "@src/views/common/CustomSelectCountry";
 import {getNationalities} from "@src/utilities/ui";
 import cloneDeep from "lodash/cloneDeep";
 import {updateIndividualProfile} from "@src/state/stores/user/operations";
+import {toast} from "react-toastify";
 
 const IndividualProfilePage:React.FunctionComponent = () =>{
 
@@ -18,7 +19,6 @@ const IndividualProfilePage:React.FunctionComponent = () =>{
     const userProfile = useAppSelector((state)=> state.session.authenticationSlice.profile as unknown as IndividualHostProfile);
     const [countries, setCountries] = useState<any>('');
     const [profile,setProfile] = useState<IndividualHostProfile>();
-    const [selectedCountry,setSelectedCountry] = useState({label:'',value:''});
     const [selected,setSelected] =
         useState<{value:string,label:JSX.Element}>({value:'GR',label:<Flag country="GR" />});
     const [countryCode,setCountryCode] = useState<string>("30");
@@ -26,17 +26,17 @@ const IndividualProfilePage:React.FunctionComponent = () =>{
     const [isLoading,setIsLoading] = useState<boolean>(false);
     const [initialized,setInitialized] = useState<boolean>(false);
     const [file,setFile] = useState<File>();
+    const [disabled,setDisabled] = useState<boolean>(true);
 
     useEffect(()=>{
         setInitialized(true);
         if(userProfile){
             setProfile(userProfile);
-            setSelectedCountry({label:userProfile.country,value:userProfile.country});
             let array:any[] = [];
-            array.push(<option value={""} label={""}/>)
+            array.push(<option key={"country-key-"+1} value={""} label={""}/>);
             countryList().getData().forEach(value => {
-                array.push(<option value={value.label} selected={value.label == userProfile.country}
-                                   label={value.label}>{value.label}</option>)
+                array.push(<option value={value.label} key={"country-key-"+value.label}
+                                   label={value.label}>{value.label}</option>);
             });
             setCountries(array);
             let idx = codes.findIndex(value => value.code == userProfile.countryCodeMobileNum);
@@ -80,13 +80,21 @@ const IndividualProfilePage:React.FunctionComponent = () =>{
     },[countryCode])
 
     const onSubmit = () =>{
+        if(!profile?.country){
+            toast.error("You must select a country");
+            return;
+        }
+        if(!profile?.sex){
+            toast.error("You must select a sex type");
+            return;
+        }
         let formData = new FormData();
         if(file){
             formData.append("profileImage",file);
         }
         formData.append("updatedIndividualHost",new Blob([JSON.stringify(profile)],{type:"application/json"}));
         setIsLoading(true);
-        dispatch(updateIndividualProfile(formData,setIsLoading));
+        dispatch(updateIndividualProfile(formData,setIsLoading,setFile));
     }
 
     const onChangePostal = (value:any) =>{
@@ -135,6 +143,20 @@ const IndividualProfilePage:React.FunctionComponent = () =>{
         return array;
     }
 
+    useEffect(()=>{
+        if(profile&&initialized){
+            if(profile.postalAddress!=userProfile.postalAddress||profile.country!=userProfile.country||
+            profile.mobileNum!=userProfile.mobileNum||countryCode!=userProfile.countryCodeMobileNum||
+            profile.fixedNumber!=userProfile.fixedNumber||profile.nationality!=userProfile.nationality||
+            profile.sex!=userProfile.sex||file){
+
+                setDisabled(false);
+                return;
+            }
+            setDisabled(true);
+        }
+    },[profile,file])
+
     return(
         <div className={"profile"}>
             <div className={"columns is-centered"}>
@@ -169,7 +191,7 @@ const IndividualProfilePage:React.FunctionComponent = () =>{
                             <label className="label has-text-primary has-text-weight-medium">Country</label>
                             <div className="control">
                                 <div className="select is-fullwidth">
-                                    <select className={"border-linear"}
+                                    <select className={"border-linear"} value={profile?.country}
                                     onChange={(e)=>onSelectCountry(e.currentTarget.value)}>
                                         {countries}
                                     </select>
@@ -217,20 +239,22 @@ const IndividualProfilePage:React.FunctionComponent = () =>{
                             <label className="label has-text-primary has-text-weight-medium">Sex*</label>
                             <div className="select is-fullwidth">
                                 <select className={"border-linear"}
+                                        value={profile?.sex}
                                 onChange={(e)=>onSelectSex(e.currentTarget.value)}>
-                                    <option value={""}></option>
-                                    <option value={"FEMALE"} selected={profile?.sex=="FEMALE"}>Female</option>
-                                    <option value={"MALE"} selected={profile?.sex=="MALE"}>Male</option>
-                                    <option value={"OTHER"} selected={profile?.sex=="OTHER"}>Other</option>
+                                    <option key={"sex-key-"+1} value={""}></option>
+                                    <option key={"sex-key-FEMALE"} value={"FEMALE"}>Female</option>
+                                    <option key={"sex-key-MALE"} value={"MALE"}>Male</option>
+                                    <option key={"sex-key-OTHER"} value={"OTHER"}>Other</option>
                                 </select>
                             </div>
                         </div>
                         <div className="field">
                             <p className="control is-fullwidth">
-                                <a className={"button is-primary is-fullwidth "+((isLoading)?"is-loading":'')}
-                                   type={"button"} onClick={onSubmit}>
+                                <button className={"button is-primary is-fullwidth "+((isLoading)?"is-loading":'')}
+                                   disabled={disabled}
+                                        type={"button"} onClick={onSubmit}>
                                     Save
-                                </a>
+                                </button>
                             </p>
                         </div>
                     </div>
