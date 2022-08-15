@@ -10,6 +10,7 @@ import Flag from "react-flagkit";
 import {countries as codes} from "@src/utilities/countries";
 import {updateCompanyProfile, updateTravelerProfile} from "@src/state/stores/user/operations";
 import cloneDeep from "lodash/cloneDeep";
+import {toast} from "react-toastify";
 
 const CompanyProfilePage:React.FunctionComponent = () =>{
 
@@ -17,7 +18,6 @@ const CompanyProfilePage:React.FunctionComponent = () =>{
     const userProfile = useAppSelector((state)=> state.session.authenticationSlice.profile as unknown as CompanyHostProfile);
     const [countries, setCountries] = useState<any>('');
     const [profile,setProfile] = useState<CompanyHostProfile>();
-    const [selectedCountry,setSelectedCountry] = useState({label:'',value:''});
     const [selected,setSelected] =
         useState<{value:string,label:JSX.Element}>({value:'',label:<Flag country="" />});
     const [countryCode,setCountryCode] = useState<string>("30");
@@ -25,16 +25,17 @@ const CompanyProfilePage:React.FunctionComponent = () =>{
     const [isLoading,setIsLoading] = useState<boolean>(false);
     const [initialized,setInitialized] = useState<boolean>(false);
     const [file,setFile] = useState<File>();
+    const [disabled,setDisabled] = useState<boolean>(true);
 
     useEffect(()=>{
         setInitialized(true);
         if(userProfile){
             setProfile(userProfile);
-            setSelectedCountry({label:userProfile.headquartersCounty,value:userProfile.headquartersCounty});
             let array:any=[];
+            array.push(<option key={"country-key-"+1} value={""} label={""}/>);
             countryList().getData().forEach(value => {
-                array.push(<option value={value.label} selected={value.label == userProfile.headquartersCounty}
-                                   label={value.label}>{value.label}</option>)
+                array.push(<option key={"country-key-"+value.label}
+                    value={value.label} label={value.label}>{value.label}</option>)
             });
             setCountries(array);
             let idx = codes.findIndex(value => value.code == userProfile.countryCodeMobileNum);
@@ -70,14 +71,17 @@ const CompanyProfilePage:React.FunctionComponent = () =>{
     },[countryCode])
 
     const onSubmit = () =>{
-
+        if(!profile?.headquartersCounty){
+            toast.error("You must select a country");
+            return;
+        }
         let formData = new FormData();
         if(file){
             formData.append("profileImage",file);
         }
         formData.append("updatedCompanyHostProfile",new Blob([JSON.stringify(profile)],{type:"application/json"}));
         setIsLoading(true);
-        dispatch(updateCompanyProfile(formData,setIsLoading))
+        dispatch(updateCompanyProfile(formData,setIsLoading,setFile))
     }
 
     const onChangePostal = (value:any) =>{
@@ -103,6 +107,18 @@ const CompanyProfilePage:React.FunctionComponent = () =>{
         tmp.fixedNumber = value;
         setProfile(tmp);
     }
+
+    useEffect(()=>{
+        if(profile&&initialized){
+            if(profile.postalAddress!=userProfile.postalAddress||profile.headquartersCounty!=userProfile.headquartersCounty
+            ||countryCode!=userProfile.countryCodeMobileNum||profile.mobileNum!=userProfile.mobileNum||
+            profile.fixedNumber!=userProfile.fixedNumber||file){
+                setDisabled(false);
+                return;
+            }
+            setDisabled(true);
+        }
+    },[profile,file])
 
     return(
         <div className={"profile"}>
@@ -139,6 +155,7 @@ const CompanyProfilePage:React.FunctionComponent = () =>{
                             <div className="control">
                                 <div className="select is-fullwidth">
                                     <select className={"border-linear"}
+                                            value={profile?.headquartersCounty}
                                     onChange={(e)=>onSelectCountry(e.currentTarget.value)}>
                                         {countries}
                                     </select>
@@ -171,10 +188,11 @@ const CompanyProfilePage:React.FunctionComponent = () =>{
                         </div>
                         <div className="field">
                             <p className="control is-fullwidth">
-                                <a className={"button is-primary is-fullwidth "+((isLoading)?"is-loading":'')}
-                                   type={"button"} onClick={onSubmit}>
+                                <button className={"button is-primary is-fullwidth "+((isLoading)?"is-loading":'')}
+                                    disabled={disabled}
+                                        type={"button"} onClick={onSubmit}>
                                     Save
-                                </a>
+                                </button>
                             </p>
                         </div>
                     </div>
