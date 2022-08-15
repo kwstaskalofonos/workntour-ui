@@ -142,7 +142,7 @@ const IndividualProfilePage:React.FunctionComponent = () =>{
                 <div className={"column is-narrow"}>
                     <ProfileImage defaultImage={profilePhoto} role={Role.INDIVIDUAL_HOST}
                      name={userProfile?userProfile.name:''} surname={userProfile?userProfile.surname:''}
-                    completion={completion} setFile={setFile}/>
+                    completion={completion} setFile={setFile} profileImage={profile?.profileImage}/>
                 </div>
                 <div className={"column is-7"}/>
             </div>
