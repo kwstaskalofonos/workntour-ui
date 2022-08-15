@@ -31,7 +31,6 @@ const CompanyProfilePage:React.FunctionComponent = () =>{
         if(userProfile){
             setProfile(userProfile);
             setSelectedCountry({label:userProfile.headquartersCounty,value:userProfile.headquartersCounty});
-
             let array:any=[];
             countryList().getData().forEach(value => {
                 array.push(<option value={value.label} selected={value.label == userProfile.headquartersCounty}
