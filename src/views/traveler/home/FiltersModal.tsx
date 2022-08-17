@@ -1,5 +1,11 @@
 import React, {useEffect, useState} from "react";
-import {FiltersFields, FilterTypes, OpportunityDates, RefData} from "@src/state/stores/opportunity/models";
+import {
+    FiltersFields,
+    FilterTypes,
+    OpportunityDates,
+    RefData,
+    TypeOfHelpNeededType
+} from "@src/state/stores/opportunity/models";
 import cloneDeep from "lodash/cloneDeep";
 import {getTotalOpportunities} from "@src/state/stores/opportunity/operations";
 import CustomDateRangeInput from "@src/views/common/CustomDateRangeInput";
@@ -35,6 +41,7 @@ const FiltersModal:React.FunctionComponent<Props> = ({active,setActive,categorie
 
     useEffect(()=>{
         if(active){
+            configureFilters();
             setFilters(initialFilters);
             if(initialFilters?.startDate){
                 // @ts-ignore
@@ -46,6 +53,52 @@ const FiltersModal:React.FunctionComponent<Props> = ({active,setActive,categorie
             }
         }
     },[active])
+
+    const configureFilters = () =>{
+        if(initialFilters?.opportunityCategory){
+            let tmpCategories = cloneDeep(categories);
+            tmpCategories.forEach(tmpCategory=>{
+                if(initialFilters.opportunityCategory == tmpCategory.value) tmpCategory.selected=true;
+            })
+            setCategories(tmpCategories);
+        }
+
+        if(initialFilters?.typeOfHelpNeeded){
+            let tmpHelps = cloneDeep(helps);
+            tmpHelps.forEach(tmpHelp=>{
+                let idx = initialFilters.typeOfHelpNeeded.findIndex(value => value==tmpHelp.value);
+                if(idx>-1) tmpHelp.selected=true;
+            })
+            setHelps(tmpHelps);
+        }
+
+        if(initialFilters?.accommodationProvided){
+            let tmpAccomodations = cloneDeep(accommodations);
+            tmpAccomodations.forEach(tmpAccom=>{
+                if(initialFilters.accommodationProvided==tmpAccom.value) tmpAccom.selected=true;
+            })
+            setAccommodations(tmpAccomodations);
+        }
+
+        if(initialFilters?.meals){
+            let tmpMeals = cloneDeep(meals);
+            tmpMeals.forEach(meal=>{
+                let idx = initialFilters.meals.findIndex(value => value==meal.value);
+                if(idx>-1) meal.selected=true;
+            })
+            setMeals(tmpMeals);
+        }
+
+        if(initialFilters?.languagesRequired){
+            let tmpLanguages = cloneDeep(languages);
+            tmpLanguages.forEach(language=>{
+                let idx = initialFilters.languagesRequired.findIndex(value => value==language.value);
+                if(idx>-1) language.selected=true;
+            })
+            setLanguages(tmpLanguages);
+        }
+
+    }
 
     useEffect(()=>{
         if(active){
@@ -296,6 +349,8 @@ const FiltersModal:React.FunctionComponent<Props> = ({active,setActive,categorie
 
             setStartDate(undefined);
             setEndDate(undefined);
+            setMaxDays(undefined);
+            setMinDays(undefined);
 
             setOpportunityDateRange({endDate:'',startDate:''});
 
@@ -323,7 +378,26 @@ const FiltersModal:React.FunctionComponent<Props> = ({active,setActive,categorie
     }
 
     const closeModal = () =>{
-        clearFilters();
+        let cat = cloneDeep(categories);
+        cat.forEach(cat=>cat.selected=false);
+        setCategories(cat);
+
+        let tempHelps = cloneDeep(helps);
+        tempHelps.forEach(tempHelp=>tempHelp.selected=false);
+        setHelps(tempHelps);
+
+        let tmpAccom = cloneDeep(accommodations);
+        tmpAccom.forEach(accom=>accom.selected=false);
+        setAccommodations(tmpAccom);
+
+        let tmpMeals = cloneDeep(meals);
+        tmpMeals.forEach(meal=>meal.selected=false);
+        setMeals(tmpMeals);
+
+        let tmpLanguage = cloneDeep(languages);
+        tmpLanguage.forEach(language=>language.selected=false);
+        setLanguages(tmpLanguage);
+
         setActive(false);
     }
 

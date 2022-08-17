@@ -3,6 +3,7 @@ import ReactDatePicker from "react-datepicker";
 import {OpportunityDates} from "@src/state/stores/opportunity/models";
 import Moment from "react-moment";
 import moment from "moment/moment";
+import {constructDate, formatDateISO} from "@src/utilities/ui";
 
 interface Props{
     setDateRange:any,
@@ -41,10 +42,8 @@ const CustomDateRangeInput:React.FunctionComponent<Props> = ({setDateRange,reset
             setEndDate(end);
         }
 
-
-        let tmp:OpportunityDates={startDate:start&&formatDate(start.toISOString()),
-        endDate:end&&formatDate(end.toISOString())}
-
+        let tmp:OpportunityDates={startDate:start&&formatDate(formatDateISO(new Date(start))),
+        endDate:end&&formatDate(formatDateISO(new Date(end)))}
         setDateRange(tmp);
     }
 

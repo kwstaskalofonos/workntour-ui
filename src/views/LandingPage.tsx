@@ -4,17 +4,11 @@ import mainSection from "@src/assets/mainBanner.png";
 // @ts-ignore
 import appBanner from "@src/assets/appBanner.png";
 import {Constants} from "../utilities/constants";
-import TopMenu from "@src/views/common/TopMenu";
 import Footer from "@src/views/common/Footer";
 import Header from "@src/views/common/Header";
 import InterCom from "@src/views/common/InterCom";
 
 export const LandingPage: React.FunctionComponent = () =>{
-
-
-    useEffect(()=>{
-        console.log("__API_URL__ : "+Constants.getApiUrl());
-    },[])
 
     return(
         <React.Fragment>

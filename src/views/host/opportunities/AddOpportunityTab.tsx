@@ -275,23 +275,23 @@ const AddOpportunityTab:React.FunctionComponent = () =>{
                                               selectedValues={selectedLearningOpps} setSelectedValues={setSelectedLearningOpps}/>
                     </div>
 
-                    <div className="field is-grouped is-grouped-centered mb-6">
-                        {/*Smoking Allowed*/}
-                        <div className="control">
-                            <label className="checkbox label has-text-primary has-text-weight-medium">
-                                <input type="checkbox" {...register("smokingAllowed")}/>&nbsp;Smoking Allowed</label>
-                        </div>
-                        {/*Wifi*/}
-                        <div className="control">
-                            <label className="checkbox label has-text-primary has-text-weight-medium">
-                                <input type="checkbox" {...register("wifi")}/>&nbsp;Wifi</label>
-                        </div>
-                        {/*Pets allowed*/}
-                        <div className="control">
-                            <label className="checkbox label has-text-primary has-text-weight-medium">
-                                <input type="checkbox" {...register("petsAllowed")}/>&nbsp;Pets allowed</label>
-                        </div>
-                    </div>
+                    {/*<div className="field is-grouped is-grouped-centered mb-6">*/}
+                    {/*    /!*Smoking Allowed*!/*/}
+                    {/*    <div className="control">*/}
+                    {/*        <label className="checkbox label has-text-primary has-text-weight-medium">*/}
+                    {/*            <input type="checkbox" {...register("smokingAllowed")}/>&nbsp;Smoking Allowed</label>*/}
+                    {/*    </div>*/}
+                    {/*    /!*Wifi*!/*/}
+                    {/*    <div className="control">*/}
+                    {/*        <label className="checkbox label has-text-primary has-text-weight-medium">*/}
+                    {/*            <input type="checkbox" {...register("wifi")}/>&nbsp;Wifi</label>*/}
+                    {/*    </div>*/}
+                    {/*    /!*Pets allowed*!/*/}
+                    {/*    <div className="control">*/}
+                    {/*        <label className="checkbox label has-text-primary has-text-weight-medium">*/}
+                    {/*            <input type="checkbox" {...register("petsAllowed")}/>&nbsp;Pets allowed</label>*/}
+                    {/*    </div>*/}
+                    {/*</div>*/}
                     <div className="field mt-6">
                         <p className="control is-fullwidth">
                             <a className={"button is-primary is-fullwidth "+((isLoading)?"is-loading":'')}

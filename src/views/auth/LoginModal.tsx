@@ -1,4 +1,4 @@
-import React, {forwardRef, useImperativeHandle, useState} from 'react';
+import React, {forwardRef, useEffect, useImperativeHandle, useState} from 'react';
 import {useForm} from "react-hook-form";
 import {faEyeSlash} from "@fortawesome/free-solid-svg-icons/faEyeSlash";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
@@ -20,7 +20,7 @@ export interface LoginModalHandler{
 }
 
 const LoginModal:React.FunctionComponent<Props>=
-    forwardRef<LoginModalHandler>(( props,ref:React.Ref<LoginModalHandler>)=>{
+    forwardRef<LoginModalHandler>(( props:{},ref:React.Ref<LoginModalHandler>)=>{
 
     const [isActive,setIsActive] = useState<boolean>(false);
     const form = useForm();
@@ -28,6 +28,7 @@ const LoginModal:React.FunctionComponent<Props>=
     const [isLoading,setIsLoading] = useState<boolean>(false);
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
+    const [pwdEnabled,setPwdEnabled] = useState<boolean>(true);
 
    useImperativeHandle(ref,()=>{
        return{
@@ -58,6 +59,9 @@ const LoginModal:React.FunctionComponent<Props>=
     }
 
     const openRegisterModal = () =>{
+        // @ts-ignore
+        props.modalHandler.current.open();
+        setIsActive(false);
     }
 
     return(
@@ -83,14 +87,16 @@ const LoginModal:React.FunctionComponent<Props>=
                                 </div>
                                 <div className={"field"}>
                                     <label className="label has-text-primary has-text-weight-medium is-normal">Password</label>
-                                    <p className="control has-icons-right">
-                                        <input className="input border-linear is-normal" type="password"
+                                    <div className="control has-icons-right">
+                                        <input className="input border-linear is-normal" type={pwdEnabled?"password":"text"}
                                                {...register("password",{required:true})}
                                                placeholder="Enter your password"/>
-                                        <span className={"icon is-small is-right"}>
-                                            <FontAwesomeIcon icon={faEyeSlash}/>
+                                        <span className={"icon is-small is-right"}
+                                              style={{pointerEvents:'auto',cursor:'pointer'}}
+                                              onClick={()=>setPwdEnabled(!pwdEnabled)}>
+                                            <FontAwesomeIcon icon={faEyeSlash} id={"togglePassword"}/>
                                         </span>
-                                    </p>
+                                    </div>
                                 </div>
                                 <div className="field is-flex is-justify-content-space-between">
                                     <div className="control">
