@@ -55,6 +55,7 @@ const HomePage:React.FunctionComponent = () =>{
     const [mapOpportunities,setMapOpportunities] = useState<FilterCoordinates[]>([]);
     const [currentLocation,setCurrentLocation] = useState<any>();
     const [paging,setPaging] = useState<Pagination>();
+    const [style,setStyle] = useState<any>();
 
     useEffect(()=>{
         let tempCategories = initializeCategories();
@@ -187,6 +188,20 @@ const HomePage:React.FunctionComponent = () =>{
         setSearchBox(ref);
     }
 
+    const getStyle = () =>{
+        return {pointerEvents:'none',
+                opacity:'0.4'}
+    }
+
+    useEffect(()=>{
+        if(!filters?.longitude&&!filters?.longitude){
+            setStyle({pointerEvents:'none',
+                opacity:'0.4'});
+        }else{
+            setStyle({});
+        }
+    },[filters?.longitude,filters?.latitude])
+
     return(
         <React.Fragment>
             <section>
@@ -229,7 +244,7 @@ const HomePage:React.FunctionComponent = () =>{
                                 </p>
                             </div>
                             <div className={"field ml-1"}>
-                                <a className="button is-disabled" onClick={()=>setActiveMapModal(true)}>
+                                <a className="button is-disabled" style={style} onClick={()=>setActiveMapModal(true)}>
                                     <span className={"icon is-small is-right"}>
                                      <FontAwesomeIcon className={"has-text-primary"} icon={faMap}/>
                                     </span>

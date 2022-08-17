@@ -5,14 +5,14 @@ import mainSection from "@src/assets/mainBanner.png";
 import mainSection from "@src/assets/mainBanner.png";
 // @ts-ignore
 import appBanner from "@src/assets/Bannerworkntour.png";
-import HostStepsSection from "./common/HostStepsSection";
-import TravelerStepsSection from "../views/common/TravelerStepsSection";
 import {Constants} from "../utilities/constants";
 import Footer from "@src/views/common/Footer";
 import Header from "@src/views/common/Header";
 import InterCom from "@src/views/common/InterCom";
 import {GenericResponse, subscribe} from "@src/utilities/fetch";
 import {toast} from "react-toastify";
+import HostStepsSection from "@src/views/common/HostStepsSection";
+import TravelerStepsSection from "@src/views/common/TravelerStepsSection";
 
 export const LandingPage: React.FunctionComponent = () =>{
 
@@ -25,9 +25,6 @@ export const LandingPage: React.FunctionComponent = () =>{
         document.getElementById("description").scrollIntoView({behavior:'smooth'});
     }
 
-    useEffect(()=>{
-        console.log("__API_URL__ : "+Constants.getApiUrl());
-    },[])
     const isEmail = () =>{
         const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         return re.test(email);

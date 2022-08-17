@@ -1,5 +1,6 @@
 import {getCookie, hasCookie} from "@src/utilities/cookies";
 import {CompanyHostProfile, IndividualHostProfile, Profile, Role, TravelerProfile} from "@src/state/stores/user/models";
+import {formatISO} from "date-fns";
 
 export function constructDate(day:string,month:string,year:string){
 
@@ -9,6 +10,10 @@ export function constructDate(day:string,month:string,year:string){
      return dateToSend.substring(0,idx);
  }
 
+export const formatDateISO = (date: Date) => {
+    return formatISO(date, {representation: 'date'}) + 'T00:00:00';
+};
+
 export function extractYearMonthDay(date:string){
     let tmp:string[] = date.split("-");
     return [tmp[0],tmp[1],tmp[2]];
@@ -17,6 +22,11 @@ export function extractYearMonthDay(date:string){
  export function isEmail(email:string){
      const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
      return re.test(email);
+ }
+
+ export function validPassword(pwd:string){
+     const re = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
+     return re.test(pwd);
  }
 
  export function isTraveler(){
