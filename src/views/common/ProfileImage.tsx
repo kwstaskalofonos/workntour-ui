@@ -86,7 +86,7 @@ const ProfileImage:React.FunctionComponent<Props> = ({defaultImage,role,name,sur
                      style={{width:'100%',height:'100%',
                          position:'absolute',top:'-10px',zIndex:'-1',
                          borderRadius:'50%',padding:'2px'}}>
-                    <img className={"is-rounded"} style={{width:'100%',height:'100%',maxWidth:'100%',maxHeight:'100%'}}
+                    <img className={"is-rounded"} style={{width:'100%',height:'100%',objectFit:'cover'}}
                          src={image()}/>
                 </div>
                 <span style={{position:'absolute',left:'15px',top:'96px'}}
