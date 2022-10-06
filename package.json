@@ -1,9 +1,9 @@
 {
   "name": "workntour-ui",
+  "homepage": ".",
   "version": "1.0.0",
   "description": "",
   "type": "module",
-  "homepage": ".",
   "scripts": {
     "dev": "cross-env WEBPACK_IS_DEV_SERVER=true NODE_ENV=development webpack serve --config webpack.config.js",
     "prod": "cross-env NODE_ENV=production webpack --config webpack.config.js",
