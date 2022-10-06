@@ -13,7 +13,8 @@ const API_URL = {
 }
 
 const COOKIE_DOMAIN = {
-    production: ".workntour.com",
+    // production: ".workntour.com",
+    production: ".workntourui.azurewebsites.net",
     development: "127.0.0.1"
 }
 
