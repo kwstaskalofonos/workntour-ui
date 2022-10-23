@@ -33,6 +33,11 @@
     border-radius: 18px !important;
 }
 
+.background-linear-land{
+    background: linear-gradient(90deg,#7E6FD8,#0EE5D0);
+    border-radius: 7px !important;
+}
+
 .border-linear-radius{
     background: linear-gradient(white,white) padding-box,linear-gradient(90deg,#7E6FD8,#0EE5D0) border-box !important;
     border-style: solid !important;
@@ -65,53 +70,24 @@
     border-color: transparent !important;
 }
 
+
 .opportunities{
     background-image: url("./hosts/hostBackground.png");
     background-repeat: no-repeat;
     background-size: contain;
 }
-.main-banner{
-    background-image: url("./Bannerworkntour.png");
-    background-repeat: no-repeat;
-    background-position: center 35%;
-    background-size: cover;
-}
-
-@media screen and (min-width: 2220px) {
-    .main-banner{
-        background-image: url("./Bannerworkntour.png");
-        background-repeat: no-repeat;
-        background-position: center 35%;
-        background-size: cover;
-        height: 755px;
-    }
-}
-
-@media screen and (max-height: 890px) and (max-width: 530px){
-    .main-banner{
-        background-image: url("./Bannerworkntour-smal.png");
-        background-repeat: no-repeat;
-        background-position: center 35%;
-        background-size: cover;
-        height: 150px;
-    }
-}
-
-@media screen and (max-height: 890px) and (max-width: 768px) and (min-width:530px) {
-    .main-banner{
-        background-image: url("./Bannerworkntour-smal.png");
-        background-repeat: no-repeat;
-        background-position: center 35%;
-        background-size: cover;
-        height: 230px;
-    }
-}
-
 
 .profile{
     background-image: url("./travelerBackground.png");
     background-repeat: no-repeat;
     background-size: cover;
+}
+
+.landing-page-background{
+    background-image: url("./newLandingPage/banner-background.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position-y: center;
 }
 
 .each-slide-effect > div {

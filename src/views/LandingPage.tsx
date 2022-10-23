@@ -2,107 +2,165 @@ import React, {useEffect, useState} from "react"
 // @ts-ignore
 import mainSection from "@src/assets/mainBanner.png";
 // @ts-ignore
-import mainSection from "@src/assets/mainBanner.png";
-// @ts-ignore
-import appBanner from "@src/assets/Bannerworkntour.png";
-import {Constants} from "../utilities/constants";
 import Footer from "@src/views/common/Footer";
+// @ts-ignore
+import leftImage from "@src/assets/newLandingPage/left.png";
+// @ts-ignore
+import rightImage from "@src/assets/newLandingPage/right.png";
+// @ts-ignore
+import airplane from "@src/assets/newLandingPage/airplane.png";
+// @ts-ignore
+import plane from "@src/assets/newLandingPage/plane.svg";
+// @ts-ignore
+import media from "@src/assets/newLandingPage/media.svg";
+// @ts-ignore
+import formLogo from "@src/assets/newLandingPage/form.png";
 import Header from "@src/views/common/Header";
 import InterCom from "@src/views/common/InterCom";
+import {isMobile} from 'react-device-detect';
 import {GenericResponse, subscribe} from "@src/utilities/fetch";
 import {toast} from "react-toastify";
 import HostStepsSection from "@src/views/common/HostStepsSection";
 import TravelerStepsSection from "@src/views/common/TravelerStepsSection";
+import TravelerSubscriptionComponent from "@src/views/landing_components/TravelerSubscriptionComponent";
+import HostSubscriptionComponent from "@src/views/landing_components/HostSubscriptionComponent";
 
-export const LandingPage: React.FunctionComponent = () =>{
+export const LandingPage: React.FunctionComponent = () => {
 
-    const [selectedTab,setSelectedTab] = useState<string>("HOSTS");
-    const [email,setEmail] = useState<string>("");
-    const [isLoading,setIsLoading] = useState<boolean>(false);
+    const [selectedTab, setSelectedTab] = useState<string>("HOSTS");
+    const [selectedSubTab, setSelectedSubTab] = useState<string>("HOSTS");
+    const [email, setEmail] = useState<string>("");
+    const [isLoading, setIsLoading] = useState<boolean>(false);
 
-    const scrollToSection = () =>{
+    const scrollToSection = () => {
         // @ts-ignore
-        document.getElementById("description").scrollIntoView({behavior:'smooth'});
+        document.getElementById("description").scrollIntoView({behavior: 'smooth'});
     }
 
-    const isEmail = () =>{
+    const isEmail = () => {
         const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         return re.test(email);
     }
 
-    const doSubscribe = () =>{
-        if(!isEmail()){
-            toast.error("Input is not valid email address.",{position:toast.POSITION.TOP_RIGHT});
+    const doSubscribe = () => {
+        if (!isEmail()) {
+            toast.error("Input is not valid email address.", {position: toast.POSITION.TOP_RIGHT});
             return;
         }
         setIsLoading(true);
-        subscribe(email,setIsLoading).then((response:GenericResponse)=>{
-            toast.success("Subscribed successfully",{position:toast.POSITION.TOP_RIGHT});
+        subscribe(email, setIsLoading).then((response: GenericResponse) => {
+            toast.success("Subscribed successfully", {position: toast.POSITION.TOP_RIGHT});
             setEmail("");
-        }).catch((error)=>{
-            toast.error(error,{position:toast.POSITION.TOP_RIGHT});
+        }).catch((error) => {
+            toast.error(error, {position: toast.POSITION.TOP_RIGHT});
             setEmail("");
         });
     }
 
-    return(
+    return (
         <React.Fragment>
             <InterCom/>
             <Header/>
-            <section className="section" style={{"background":"rgba(185, 179, 223, 0.1)"}}>
-                    <div className="columns is-vcentered is-centered py-6">
-                        <div className="column is-narrow-desktop has-text-center">
-                            <p className="is-size-2 has-text-weight-bold mb-4" style={{"color":"#6455BB"}}>Work. Travel. Connect.</p>
-                            <p className="is-size-4 has-text-weight-medium" style={{"color":"#03D0BC"}}>Workntour promotes development through travel!</p>
-                            <p className="is-size-5 has-text-weight-normal" style={{"color":"#8B9389","opacity":"0.7"}}>The travelers offer to work for a few hours a day in exchange for food</p>
-                            <p className="is-size-5 has-text-weight-normal" style={{"color":"#8B9389","opacity":"0.7"}}>and accommodation, while the hosts make use of their skills and</p>
-                            <p className="is-size-5 has-text-weight-normal mb-6" style={{"color":"#8B9389","opacity":"0.7"}}>time during their stay.</p>
-                            <button className="button is-info has-text-dark" onClick={()=>scrollToSection()}>Learn More</button>
-                        </div>
-                        <div className={"column is-1"}></div>
-                        <div className="column is-narrow">
-                            <img src={mainSection} width="487" height="384.96"/>
+            <section className="section landing-page-background" style={{position: "relative"}}>
+                <div className={"is-flex is-justify-content-center"}>
+                    <div><p className="is-size-3 has-text-weight-bold" style={{"color": "#8870F9"}}>Work. Travel.</p>
+                        <p className="is-size-3 has-text-weight-bold"
+                           style={{"color": "#8870F9"}}>&nbsp;&nbsp;&nbsp;&nbsp;Connect.</p></div>
+                </div>
+                <div className="columns is-vcentered is-centered">
+                    <div className="column has-text-centered">
+                        <p className="is-size-4 has-text-weight-medium" style={{"color": "#383350"}}>Travel the world
+                            for free.</p>
+                        <p className="is-size-4 has-text-weight-medium" style={{"color": "#383350"}}>Meet locals &
+                            collaborate!</p>
+                        <p className="is-size-6 has-text-weight-medium mt-2" style={{"color": "#03D0BC"}}>Exchange your
+                            skills for food and accommodation!</p>
+                        <img className={"mt-5"} src={leftImage} width={270} height={270}/>
+                    </div>
+                    <div className="column has-text-centered">
+                        <img src={rightImage} width={270} height={270}/>
+                        <p className="is-size-4 has-text-weight-medium" style={{"color": "#383350"}}>Find experts from
+                            all over</p>
+                        <p className="is-size-4 has-text-weight-medium" style={{"color": "#383350"}}>the world & share
+                            your culture!</p>
+                        <p className="is-size-6 has-text-weight-medium mt-2" style={{"color": "#7060E1"}}>Receive help
+                            from enthusiastic</p>
+                        <p className="is-size-6 has-text-weight-medium" style={{"color": "#7060E1"}}>travelers,provide
+                            accommodation and</p>
+                        <p className="is-size-6 has-text-weight-medium" style={{"color": "#7060E1"}}>share your
+                            culture!</p>
+                    </div>
+                </div>
+                <div className={"is-flex is-justify-content-center mt-6"}>
+                    <div>
+                        <p className="is-size-5 has-text-weight-bold" style={{"color": "#383350"}}>Are you up for a new
+                            adventure?</p>
+                        <p className={"control"}>
+                            <button className={"button has-text-white is-fullwidth background-linear-land"}>I am in!
+                            </button>
+                        </p>
+                        <div className={"is-flex is-justify-content-center mt-3"}>
+                            <img src={media} width={200} height={200}/>
                         </div>
                     </div>
+                </div>
             </section>
-            <section className="section" id={"description"}  style={{"background":"rgba(182, 255, 251, 0.1)"}}>
+            <section className="section" id={"description"}
+                     style={{"background": "rgba(182, 255, 251, 0.1)"}}>
                 <div className="container has-text-centered">
                     <p className="is-size-3 has-text-weight-bold has-text-dark">How it works</p>
-                        <div className={"is-flex is-justify-content-center mt-6"}>
-                            <a className={"button is-primary "+(selectedTab=="TRAVELERS"?'is-underlined':'is-inverted')} onClick={()=>setSelectedTab("TRAVELERS")}>Travelers</a>
-                            <a className={"button is-primary "+(selectedTab=="HOSTS"?'is-underlined':'is-inverted')} onClick={()=>setSelectedTab("HOSTS")}>Hosts</a>
-                        </div>
+                    <div className={"is-flex is-justify-content-center mt-6"}>
+                        <a className={"button is-primary " + (selectedTab == "TRAVELERS" ? 'is-underlined' : 'is-inverted')}
+                           onClick={() => setSelectedTab("TRAVELERS")}>Travelers</a>
+                        <a className={"button is-primary " + (selectedTab == "HOSTS" ? 'is-underlined' : 'is-inverted')}
+                           onClick={() => setSelectedTab("HOSTS")}>Hosts</a>
+                    </div>
                 </div>
-                {selectedTab == "HOSTS"?
-                    <HostStepsSection/>:<TravelerStepsSection/>
+                {selectedTab == "HOSTS" ?
+                    <HostStepsSection/> : <TravelerStepsSection/>
                 }
             </section>
-            <section className={"hero is-large main-banner"}>
-                <div className={"hero-body"}></div>
-            </section>
-            <section className={"section px-0"}>
-                <div className={"container is-max-desktop has-text-centered mt-5"}>
-                    <p className="is-size-2 has-text-weight-bold">Find out when we launch &</p>
-                    <p className="is-size-2 has-text-weight-bold">get an early bird discount</p>
-                    <h2 className="subtitle mt-3">Get on the waiting list of hosts and travelers</h2>
-                    <div className={"columns"}>
-                        <div className={"column is-half is-offset-one-quarter"}>
-                            <div className="field is-grouped">
-                                <p className="control is-expanded mr-1">
-                                    <input id={"langPageEmail"} className="input" value={email} type="text" placeholder="Please type your email here..."
-                                    onChange={(event)=>setEmail(event.target.value)}/>
-                                </p>
-                                <p className="control">
-                                    <a className={"button is-primary "+(isLoading?"is-loading":"")} onClick={()=>doSubscribe()}>
-                                        Subscribe
-                                    </a>
-                                </p>
+            <section className={"mt-6"}>
+                <div className={"columns is-centered mt-6"}>
+                    <div style={{backgroundColor:'rgba(136, 112, 249, 0.05)',
+                        position:'relative',
+                        borderRadius:'16px',
+                        boxShadow:"3px 3px 22px #888888"}}
+                        className={"column is-three-quarters is-justify-content-center"}>
+                        <img style={{position:'absolute',left:'47%',top:'-5%'}}
+                             src={formLogo} width={90} height={90}/>
+                        <div className={"is-flex is-justify-content-center mt-6"}>
+                            <div><p className="is-size-4 has-text-weight-bold"
+                                    style={{"color": "#383350"}}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                &nbsp;&nbsp;&nbsp;Fill out the form and</p>
+                                <p className="is-size-4 has-text-weight-bold"
+                                   style={{"color": "#383350"}}>
+                                    get a free subscription for 1 year!</p></div>
+                        </div>
+
+                        <div className="container has-text-centered">
+                            <div className={"is-flex is-justify-content-center mt-6"}>
+                                <a className={"button is-primary " + (selectedSubTab == "TRAVELERS" ? 'is-underlined' : 'is-inverted')}
+                                   onClick={() => setSelectedSubTab("TRAVELERS")}>Travelers</a>
+                                <a className={"button is-primary " + (selectedSubTab == "HOSTS" ? 'is-underlined' : 'is-inverted')}
+                                   onClick={() => setSelectedSubTab("HOSTS")}>Hosts</a>
                             </div>
                         </div>
+                        {
+                            selectedSubTab == "HOSTS"?
+                                <HostSubscriptionComponent/>:<TravelerSubscriptionComponent/>
+                        }
+                        <p className={"mt-4 has-text-centered"}>The <strong>Number 1
+                        </strong>Work and Travel Community is launching soon. Stay Tuned!</p>
                     </div>
-                    <hr className={"mt-6"} style={{"border":"1px solid #7E6FD8"}}/>
                 </div>
             </section>
+            <hr className={"mt-6"} style={{"border": "1px solid #7E6FD8"}}/>
+            {/*<section className={"section px-0"}>*/}
+            {/*    <div className={"container is-max-desktop has-text-centered mt-5"}>*/}
+            {/*        */}
+            {/*    </div>*/}
+            {/*</section>*/}
             <Footer/>
         </React.Fragment>
     )

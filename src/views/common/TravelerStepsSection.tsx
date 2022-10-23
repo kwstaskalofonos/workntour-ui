@@ -4,9 +4,9 @@ import bePartOf from "@src/assets/traveler/bePartOf.png";
 // @ts-ignore
 import findYourPref from "@src/assets/traveler/findYourPref.png";
 // @ts-ignore
-import bookYourStay from "@src/assets/traveler/bookYourStay.png";
+import bookYourStay from "@src/assets/newLandingPage/step_3_traveler.png";
 // @ts-ignore
-import review from "@src/assets/traveler/review.png";
+import review from "@src/assets/newLandingPage/step_4_traveler.png";
 import { isMobile } from 'react-device-detect';
 
 const TravelerStepsSection: React.FunctionComponent = () =>{
@@ -20,7 +20,8 @@ const TravelerStepsSection: React.FunctionComponent = () =>{
                         <p className={"is-italic has-text-info has-text-weight-bold"} style={{fontSize:"76px"}}>1.</p>
                         <div className={"ml-4 pt-5"}>
                             <p className={"has-text-primary has-text-weight-bold"} style={{fontSize:"18px"}}>Be part of the Local <br/> Community</p>
-                            <p className={"has-text-weight-semibold"} style={{fontSize:"14px"}}>Create a Profile and plan your Trip</p>
+                            <p className={"has-text-weight-semibold"} style={{fontSize:"14px"}}>Create a Profile and plan your Trip.<br/>
+                            It only takes a second!</p>
                         </div>
                     </div>
                     <div className={"column is-1"}></div>
@@ -35,7 +36,8 @@ const TravelerStepsSection: React.FunctionComponent = () =>{
                         <p className={"is-italic has-text-info has-text-weight-bold"} style={{fontSize:"76px"}}>2.</p>
                         <div className={"ml-4 py-6"}>
                             <p className={"has-text-primary has-text-weight-bold"} style={{fontSize:"18px"}}>Find your preferred Hosts</p>
-                            <p className={"has-text-weight-semibold"} style={{fontSize:"14px"}}>Search Hosts by location</p>
+                            <p className={"has-text-weight-semibold"} style={{fontSize:"14px"}}>Search Hosts by location.<br/>
+                            We can match you based on your profile!</p>
                         </div>
                     </div>
                 </div>
@@ -45,7 +47,8 @@ const TravelerStepsSection: React.FunctionComponent = () =>{
                         <p className={"is-italic has-text-info has-text-weight-bold"} style={{fontSize:"76px"}}>3.</p>
                         <div className={"ml-4 py-6"}>
                             <p className={"has-text-primary has-text-weight-bold"} style={{fontSize:"18px"}}>Book your Stay</p>
-                            <p className={"has-text-weight-semibold"} style={{fontSize:"14px"}}>Let the adventure begin</p>
+                            <p className={"has-text-weight-semibold"} style={{fontSize:"14px"}}>Let the adventure begin<br/>
+                            and live like a local!</p>
                         </div>
                     </div>
                     <div className={"column is-1"}></div>
@@ -59,7 +62,8 @@ const TravelerStepsSection: React.FunctionComponent = () =>{
                         <p className={"is-italic has-text-info has-text-weight-bold"} style={{fontSize:"76px"}}>4.</p>
                         <div className={"ml-4 py-6"}>
                             <p className={"has-text-primary has-text-weight-bold"} style={{fontSize:"18px"}}>Review</p>
-                            <p className={"has-text-weight-semibold"} style={{fontSize:"14px"}}>Give your feedback</p>
+                            <p className={"has-text-weight-semibold"} style={{fontSize:"14px"}}>Give your feedback on your</p>
+                            <p className={"has-text-weight-semibold"} style={{fontSize:"14px"}}>Workntour experience with your host!</p>
                         </div>
                     </div>
                 </div>

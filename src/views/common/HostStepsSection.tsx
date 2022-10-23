@@ -1,10 +1,10 @@
 import React, {useEffect} from "react";
 // @ts-ignore
-import conWithHosts from "@src/assets/hosts/connectWithHosts.png";
+import conWithHosts from "@src/assets/newLandingPage/step_2_host.png";
 // @ts-ignore
 import joinTheCom from "@src/assets/hosts/joinTheCommunity.png";
 // @ts-ignore
-import liveLikeALocal from "@src/assets/hosts/liveLikeALocal.png";
+import liveLikeALocal from "@src/assets/newLandingPage/step_3_host.png";
 // @ts-ignore
 import review from "@src/assets/hosts/review.png";
 import { isMobile } from 'react-device-detect';
@@ -20,7 +20,8 @@ const HostStepsSection: React.FunctionComponent = () =>{
                         <p className={"is-italic has-text-info has-text-weight-bold"} style={{fontSize:"76px"}}>1.</p>
                         <div className={"ml-4 pt-5"}>
                             <p className={"has-text-primary has-text-weight-bold"} style={{fontSize:"18px"}}>Join the community</p>
-                            <p className={"has-text-weight-semibold"} style={{fontSize:"14px"}}>Describe the opportunity <br/>you offer</p>
+                            <p className={"has-text-weight-semibold"} style={{fontSize:"14px"}}>Describe the opportunity you offer and<br/>
+                             we will make it appealing to travelers!</p>
                         </div>
                     </div>
                     <div className={"column is-1"}></div>
@@ -34,7 +35,8 @@ const HostStepsSection: React.FunctionComponent = () =>{
                         <p className={"is-italic has-text-info has-text-weight-bold"} style={{fontSize:"76px"}}>2.</p>
                         <div className={"ml-4 py-6"}>
                             <p className={"has-text-primary has-text-weight-bold"} style={{fontSize:"18px"}}>Connect with Travelers</p>
-                            <p className={"has-text-weight-semibold"} style={{fontSize:"14px"}}>Travelers can directly contact you</p>
+                            <p className={"has-text-weight-semibold"} style={{fontSize:"14px"}}>Travelers will contact you directly and<br/>
+                            you can have a chat or video call before <br/>you confirm the booking!</p>
                         </div>
                     </div>
                 </div>
@@ -44,7 +46,7 @@ const HostStepsSection: React.FunctionComponent = () =>{
                         <p className={"is-italic has-text-info has-text-weight-bold"} style={{fontSize:"76px"}}>3.</p>
                         <div className={"ml-4 py-6"}>
                             <p className={"has-text-primary has-text-weight-bold"} style={{fontSize:"18px"}}>Share your culture</p>
-                            <p className={"has-text-weight-semibold"} style={{fontSize:"14px"}}>Accept the offer</p>
+                            <p className={"has-text-weight-semibold"} style={{fontSize:"14px"}}>Accept the offer and prepare<br/>the room!</p>
                         </div>
                     </div>
                     <div className={"column is-1"}></div>
@@ -58,7 +60,8 @@ const HostStepsSection: React.FunctionComponent = () =>{
                         <p className={"is-italic has-text-info has-text-weight-bold"} style={{fontSize:"76px"}}>4.</p>
                         <div className={"ml-4 py-6"}>
                             <p className={"has-text-primary has-text-weight-bold"} style={{fontSize:"18px"}}>Review</p>
-                            <p className={"has-text-weight-semibold"} style={{fontSize:"14px"}}>Give your feedback</p>
+                            <p className={"has-text-weight-semibold"} style={{fontSize:"14px"}}>Give your feedback on your<br/>
+                            Workntour experience with<br/>your traveler!</p>
                         </div>
                     </div>
                 </div>

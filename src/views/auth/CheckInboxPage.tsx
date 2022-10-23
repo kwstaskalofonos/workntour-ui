@@ -4,7 +4,6 @@ import Footer from "@src/views/common/Footer";
 // @ts-ignore
 import checkInbox from "@src/assets/checkInboxPng.png";
 // @ts-ignore
-import checkInboxSvg from "@src/assets/checkInbox.svg";
 import Header from "@src/views/common/Header";
 import {useLocation} from "react-router";
 
