@@ -24,6 +24,7 @@ import HostStepsSection from "@src/views/common/HostStepsSection";
 import TravelerStepsSection from "@src/views/common/TravelerStepsSection";
 import TravelerSubscriptionComponent from "@src/views/landing_components/TravelerSubscriptionComponent";
 import HostSubscriptionComponent from "@src/views/landing_components/HostSubscriptionComponent";
+import GalleryComponent from "@src/views/landing_components/GalleryComponent";
 
 export const LandingPage: React.FunctionComponent = () => {
 
@@ -106,7 +107,7 @@ export const LandingPage: React.FunctionComponent = () => {
                 </div>
             </section>
             <section className="section" id={"description"}
-                     style={{"background": "rgba(182, 255, 251, 0.1)"}}>
+                     style={{"background": "rgba(182, 255, 251, 0.05)"}}>
                 <div className="container has-text-centered">
                     <p className="is-size-3 has-text-weight-bold has-text-dark">How it works</p>
                     <div className={"is-flex is-justify-content-center mt-6"}>
@@ -155,12 +156,10 @@ export const LandingPage: React.FunctionComponent = () => {
                     </div>
                 </div>
             </section>
+            <section className={"mt-6"}>
+                <GalleryComponent/>
+            </section>
             <hr className={"mt-6"} style={{"border": "1px solid #7E6FD8"}}/>
-            {/*<section className={"section px-0"}>*/}
-            {/*    <div className={"container is-max-desktop has-text-centered mt-5"}>*/}
-            {/*        */}
-            {/*    </div>*/}
-            {/*</section>*/}
             <Footer/>
         </React.Fragment>
     )

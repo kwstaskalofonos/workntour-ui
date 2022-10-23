@@ -59,7 +59,7 @@ const Footer:React.FunctionComponent = () =>{
                         <div>
                             <p>© Copyright Workntour 2022. All Rights Reserved</p>
                         </div>
-                        <div className={"is-flex"}>
+                        <div className={"is-flex-desktop-only"}>
                             <p className={"has-text-weight-bold"}>Supported by&nbsp;&nbsp;</p>
                             <img src={capsuleTlogo} width={90} height={90}/>
                             <img src={msStartups} width={70} height={70}/>
