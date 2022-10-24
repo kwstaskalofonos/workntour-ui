@@ -16,6 +16,7 @@ import SecuredSiteRouter from "@src/views/routers/SecureSiteRouter";
 import {useAppDispatch, useAppSelector} from "@src/state/stores/hooks";
 import {CompanyHostProfile, IndividualHostProfile, Role, TravelerProfile} from "@src/state/stores/user/models";
 import {SessionStorage} from "@src/utilities/localStorage";
+import AboutPage from "@src/views/AboutPage";
 
 const AppRouter :React.FunctionComponent = () =>{
 
@@ -56,6 +57,7 @@ const AppRouter :React.FunctionComponent = () =>{
              <Route path="/check-inbox" element={<CheckInboxPage/>}></Route>
              <Route path="/not-found" element={<ErrorPage/>}></Route>
              <Route path="/home" element={<LandingPage/>}/>
+             <Route path="/about" element={<AboutPage/>}/>
              <Route path="*" element={
                  <PrivateRoute>
                      <SecuredSiteRouter/>

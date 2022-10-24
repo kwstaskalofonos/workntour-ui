@@ -90,6 +90,15 @@
     background-position-y: center;
 }
 
+.about-page-top-background{
+    background-image: url("./newLandingPage/about-background.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position-y: top;
+    background-position-x: 52%;
+    height: 70vh;
+}
+
 .each-slide-effect > div {
     display: flex;
     align-items: center;
