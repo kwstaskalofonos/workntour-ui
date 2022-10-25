@@ -62,7 +62,7 @@ const TopMenu: React.FunctionComponent = () =>{
                             <React.Fragment>
                                 <a className="navbar-item" href="/">Home</a>
                                 <a className="navbar-item" href="/about">About Us</a>
-                                <a className="navbar-item">Blog</a>
+                                <a className="navbar-item" href="/blog">Blog</a>
                             </React.Fragment>
                         }
                         {isHost() &&

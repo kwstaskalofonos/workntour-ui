@@ -106,6 +106,12 @@
     height: 70vh;
 }
 
+.blog-page-banner{
+    background-image: url("./blog/BlogBack.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
 .each-slide-effect > div {
     display: flex;
     align-items: center;

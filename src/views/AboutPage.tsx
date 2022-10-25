@@ -28,6 +28,8 @@ import raf from "@src/assets/newLandingPage/rafail.png";
 import thanasis from "@src/assets/newLandingPage/thanasis.png";
 // @ts-ignore
 import kostas from "@src/assets/newLandingPage/kwstas.png";
+// @ts-ignore
+import chris from "@src/assets/newLandingPage/chris.png";
 import Footer from "@src/views/common/Footer";
 import PersonDescr from "@src/views/PersonDescr";
 
@@ -255,7 +257,7 @@ const AboutPage:React.FunctionComponent = () =>{
                                 </div>
                                 <div className={"column is-4"}/>
                                 <div className={"column is-4"}>
-                                    <PersonDescr key={"member-2"} src={raf} name={"Xristos Petimezas"} position={"Co-founder & CTO"} description={chrisDesc()}/>
+                                    <PersonDescr key={"member-2"} src={chris} name={"Xristos Petimezas"} position={"Co-founder & CTO"} description={chrisDesc()}/>
                                 </div>
                             </div>
                         </div>
