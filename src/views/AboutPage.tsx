@@ -33,6 +33,44 @@ import PersonDescr from "@src/views/PersonDescr";
 
 const AboutPage:React.FunctionComponent = () =>{
 
+
+    const chrisDesc = () =>{
+        return(
+            <p className={"is-size-7 is-flex has-text-centered"}>Christos holds a degree in<br/>
+                Informatics from Athens<br/>University of Economics &<br/>Business. His role on the<br/>
+                workntour team is to set the<br/>technical direction for the product development. Christos<br/>
+                specializes in Mobile App<br/>Development and has<br/>experience working for tech
+                <br/>companies and startups in<br/>Greece</p>
+        )
+    }
+
+    const rafDesc = () =>{
+        return(
+            <p className={"is-size-7 is-flex has-text-centered"}>Rafail holds a Bachelor's degree in Law<br/>
+            from Maastricht University and a Master's Degree<br/>in Maritime from the Erasmus University of <br/>
+            Rotterdam, with specialization in <br/>Yacht Management. At Workntour he <br/>is responsible for setting out the<br/>
+            team's goal and carrying out business<br/>development strategies. Rafail has<br/>already set up a company in Yachting.</p>
+        )
+    }
+
+    const thanDesc = () =>{
+        return(
+            <p className={"is-size-7 is-flex has-text-centered"}>Thanasis holds a degree in Computer Engineering<br/>
+            and Informatics from University of Patras<br/>and follows a Master's degree in Business Administration from<br/>
+            University of Pafos. He has experience as<br/>Software Engineer in Consulting companies.<br/>
+            In Workntout, hae has taken over the backend implementation<br/>of the Web and Mobile application and is responsible for<br/>
+            overseeing the Company's Operation.</p>
+        )
+    }
+
+    const kostasDesc = () =>{
+        return(
+            <p className={"is-size-7 is-flex has-text-centered"}>Konstantinos holds a degree in Computer Science<br/>
+            from Athens University of Economics and Business<br/>He has experience as Full Stack Developer in software companies.
+            <br/>In Workntour he is responsible for the frontend implementation of the Web Application using React.</p>
+        )
+    }
+
     return(
         <React.Fragment>
             <InterCom/>
@@ -213,11 +251,11 @@ const AboutPage:React.FunctionComponent = () =>{
                         <div className={"column is-6"}>
                             <div className={"columns"}>
                                 <div className={"column is-4"}>
-                                    <PersonDescr key={"member-1"} src={raf} name={"Rafail Roumeliotis"} position={"Co-founder & CEO"}/>
+                                    <PersonDescr key={"member-1"} src={raf} name={"Rafail Roumeliotis"} position={"Co-founder & CEO"} description={rafDesc()}/>
                                 </div>
                                 <div className={"column is-4"}/>
                                 <div className={"column is-4"}>
-                                    <PersonDescr key={"member-2"} src={raf} name={"Xristos Petimezas"} position={"Co-founder & CTO"}/>
+                                    <PersonDescr key={"member-2"} src={raf} name={"Xristos Petimezas"} position={"Co-founder & CTO"} description={chrisDesc()}/>
                                 </div>
                             </div>
                         </div>
@@ -227,11 +265,11 @@ const AboutPage:React.FunctionComponent = () =>{
                         <div className={"column is-6"}>
                             <div className={"columns"}>
                                 <div className={"column is-4"}>
-                                    <PersonDescr key={"member-3"} src={thanasis} name={"Thanasis Bethanis"} position={"Co-founder & COO"}/>
+                                    <PersonDescr key={"member-3"} src={thanasis} name={"Thanasis Bethanis"} position={"Co-founder & COO"} description={thanDesc()}/>
                                 </div>
                                 <div className={"column is-4"}/>
                                 <div className={"column is-4"}>
-                                    <PersonDescr key={"member-4"} src={kostas} name={"Konstantinos Kalofonos"} position={"Frontend Developer"}/>
+                                    <PersonDescr key={"member-4"} src={kostas} name={"Konstantinos Kalofonos"} position={"Frontend Developer"} description={kostasDesc()}/>
                                 </div>
                             </div>
                         </div>

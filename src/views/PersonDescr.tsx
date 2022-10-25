@@ -4,9 +4,10 @@ interface Props {
     src: any,
     name: string,
     position: string,
+    description:any
 }
 
-const PersonDescr: React.FunctionComponent<Props> = ({src, name, position}) => {
+const PersonDescr: React.FunctionComponent<Props> = ({src, name, position,description}) => {
 
     const [showDesc, setShowDesc] = useState<boolean>(false);
 
@@ -31,11 +32,7 @@ const PersonDescr: React.FunctionComponent<Props> = ({src, name, position}) => {
             </div>
 
             <div className={"box has-background-primary has-text-white-bis"+ (!showDesc ? " is-hidden" : "")}>
-                <p className={"is-size-7"}>Christos holds a degree in<br/>
-                Informatics from Athens<br/>University of Economics &<br/>Business. His role on the<br/>
-                workntour team is to set the<br/>technical direction for the product development. Christos<br/>
-                specializes in Mobile App<br/>Development and has<br/>experience working for tech
-                <br/>companies and startups in<br/>Greece</p>
+                {description}
             </div>
         </div>
 )
