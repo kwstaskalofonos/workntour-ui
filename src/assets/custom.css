@@ -90,6 +90,13 @@
     background-position-y: center;
 }
 
+.about-page-last-background{
+    background-image: url("./newLandingPage/about-last-back.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position-y: top;
+}
+
 .about-page-top-background{
     background-image: url("./newLandingPage/about-background.png");
     background-repeat: no-repeat;

@@ -1,4 +1,4 @@
-import React, {useEffect, useRef} from 'react'
+import React, {useEffect, useRef, useState} from 'react'
 import InterCom from "@src/views/common/InterCom";
 import Header from "@src/views/common/Header";
 import {isMobile} from 'react-device-detect';
@@ -22,10 +22,16 @@ import about21 from "@src/assets/newLandingPage/about2-1.png";
 import about22 from "@src/assets/newLandingPage/about2-2.png";
 // @ts-ignore
 import about23 from "@src/assets/newLandingPage/about2-3.png";
+// @ts-ignore
+import raf from "@src/assets/newLandingPage/rafail.png";
+// @ts-ignore
+import thanasis from "@src/assets/newLandingPage/thanasis.png";
+// @ts-ignore
+import kostas from "@src/assets/newLandingPage/kwstas.png";
 import Footer from "@src/views/common/Footer";
+import PersonDescr from "@src/views/PersonDescr";
 
 const AboutPage:React.FunctionComponent = () =>{
-
 
     return(
         <React.Fragment>
@@ -114,88 +120,126 @@ const AboutPage:React.FunctionComponent = () =>{
                     </div>
                 </div>
             </section>
-            <section style={{backgroundColor:"rgba(182, 255, 251, 0.14)"}} className={"section"}>
-                <div className={"columns is-centered mt-5"}>
-                    <div className={"column is-two-thirds"}>
-                        <div style={{position:'relative'}}>
-                            <div className={"box"}>
-                                <div className={"columns"}>
-                                    <div className={"column"}>
-                                        <p className={"is-size-2 has-text-weight-semibold"}
-                                        style={{color:"rgba(224, 220, 255, 1)"}}>Why</p>
-                                        <div style={{height:"3px",width:"90px"}}
-                                            className={"background-linear container ml-0"}/>
-                                        <p className={"is-size-6 has-text-weight-semibold mt-3"}>
-                                            Because we believe that exploring the world while sharing<br/>
-                                            your skills and culture with local communities is the ultimate<br/>
-                                            key to happiness!
-                                        </p>
-                                        {isMobile &&
-                                            <img src={about23} width={200} height={100}/>
-                                        }
-                                    </div>
-                                    <div className={"column is-4"}/>
-                                </div>
-                            </div>
-                            {!isMobile &&
-                                <img style={{position:'absolute',left:'70%',top:'-37%'}} src={about23} width={200} height={100}/>
-                            }
-                        </div>
 
-                        <div style={{position:'relative'}}>
-                            <div className={"box"}>
-                                <div className={"columns"}>
-                                    <div className={"column is-5"}/>
-                                    <div className={"column"}>
-                                        <p className={"is-size-2 has-text-weight-semibold"}
-                                           style={{color:"rgba(224, 220, 255, 1)"}}>How</p>
-                                        <div style={{height:"3px",width:"90px"}}
-                                             className={"background-linear container ml-0"}/>
-                                        <p className={"is-size-6 has-text-weight-semibold mt-3"}>
-                                            We connect travelers with local communities so that tourists can<br/>
-                                            offer their skills for a few hours a day, in exchange for<br/>
-                                            accommodation and board.
-                                        </p>
-                                        {isMobile &&
-                                            <img src={about22} width={200} height={100}/>
-                                        }
+            <section style={{backgroundColor:"rgba(182, 255, 251, 0.14)"}}>
+                <section className={"section"}>
+                    <div className={"columns is-centered mt-5"}>
+                        <div className={"column is-two-thirds"}>
+                            <div style={{position:'relative'}}>
+                                <div className={"box"}>
+                                    <div className={"columns"}>
+                                        <div className={"column"}>
+                                            <p className={"is-size-2 has-text-weight-semibold"}
+                                               style={{color:"rgba(224, 220, 255, 1)"}}>Why</p>
+                                            <div style={{height:"3px",width:"90px"}}
+                                                 className={"background-linear container ml-0"}/>
+                                            <p className={"is-size-6 has-text-weight-semibold mt-3"}>
+                                                Because we believe that exploring the world while sharing<br/>
+                                                your skills and culture with local communities is the ultimate<br/>
+                                                key to happiness!
+                                            </p>
+                                            {isMobile &&
+                                                <img src={about23} width={200} height={100}/>
+                                            }
+                                        </div>
+                                        <div className={"column is-4"}/>
                                     </div>
                                 </div>
+                                {!isMobile &&
+                                    <img style={{position:'absolute',left:'70%',top:'-37%'}} src={about23} width={200} height={100}/>
+                                }
                             </div>
-                            {!isMobile &&
-                                <img style={{position:'absolute',left:'2%',top:'7%'}} src={about22} width={200} height={100}/>
-                            }
-                        </div>
 
-                        <div style={{position:'relative'}} className={"mt-6"}>
-                            <div className={"box"}>
-                                <div className={"columns"}>
-                                    <div className={"column"}>
-                                        <p className={"is-size-2 has-text-weight-semibold"}
-                                           style={{color:"rgba(224, 220, 255, 1)"}}>What</p>
-                                        <div style={{height:"3px",width:"90px"}}
-                                             className={"background-linear container ml-0"}/>
-                                        <p className={"is-size-6 has-text-weight-semibold mt-3"}>
-                                            Our online marketplace will allow travelers to contact the hosts of<br/>
-                                            their choice and offer to work for an agreed amount of time per<br/>
-                                            day in exchange for accommodation and board while travelling.
-                                        </p>
-                                        {isMobile &&
-                                            <img src={about21} width={200} height={100}/>
-                                        }
+                            <div style={{position:'relative'}} className={"mt-6"}>
+                                <div className={"box"}>
+                                    <div className={"columns"}>
+                                        <div className={"column is-5"}/>
+                                        <div className={"column"}>
+                                            <p className={"is-size-2 has-text-weight-semibold"}
+                                               style={{color:"rgba(224, 220, 255, 1)"}}>How</p>
+                                            <div style={{height:"3px",width:"90px"}}
+                                                 className={"background-linear container ml-0"}/>
+                                            <p className={"is-size-6 has-text-weight-semibold mt-3"}>
+                                                We connect travelers with local communities so that tourists can<br/>
+                                                offer their skills for a few hours a day, in exchange for<br/>
+                                                accommodation and board.
+                                            </p>
+                                            {isMobile &&
+                                                <img src={about22} width={200} height={100}/>
+                                            }
+                                        </div>
                                     </div>
-                                    <div className={"column is-4"}/>
                                 </div>
+                                {!isMobile &&
+                                    <img style={{position:'absolute',left:'2%',top:'7%'}} src={about22} width={200} height={100}/>
+                                }
                             </div>
-                            {!isMobile &&
-                                <img style={{position:'absolute',left:'70%',top:'-20%'}} src={about21} width={200} height={100}/>
-                            }
-                        </div>
 
+                            <div style={{position:'relative'}} className={"mt-6"}>
+                                <div className={"box"}>
+                                    <div className={"columns"}>
+                                        <div className={"column"}>
+                                            <p className={"is-size-2 has-text-weight-semibold"}
+                                               style={{color:"rgba(224, 220, 255, 1)"}}>What</p>
+                                            <div style={{height:"3px",width:"90px"}}
+                                                 className={"background-linear container ml-0"}/>
+                                            <p className={"is-size-6 has-text-weight-semibold mt-3"}>
+                                                Our online marketplace will allow travelers to contact the hosts of<br/>
+                                                their choice and offer to work for an agreed amount of time per<br/>
+                                                day in exchange for accommodation and board while travelling.
+                                            </p>
+                                            {isMobile &&
+                                                <img src={about21} width={200} height={100}/>
+                                            }
+                                        </div>
+                                        <div className={"column is-4"}/>
+                                    </div>
+                                </div>
+                                {!isMobile &&
+                                    <img style={{position:'absolute',left:'70%',top:'-20%'}} src={about21} width={200} height={100}/>
+                                }
+                            </div>
+
+                        </div>
                     </div>
-                </div>
+                </section>
 
+                <section className={"section is-medium about-page-last-background"}>
+                    <div className={"is-flex is-justify-content-center mt-5"}>
+                        <p className={"has-text-weight-bold is-size-3 pt-6"}>Meet our team</p>
+                    </div>
+
+                    <div className={"columns is-centered mt-4"}>
+                        <div className={"column is-6"}>
+                            <div className={"columns"}>
+                                <div className={"column is-4"}>
+                                    <PersonDescr key={"member-1"} src={raf} name={"Rafail Roumeliotis"} position={"Co-founder & CEO"}/>
+                                </div>
+                                <div className={"column is-4"}/>
+                                <div className={"column is-4"}>
+                                    <PersonDescr key={"member-2"} src={raf} name={"Xristos Petimezas"} position={"Co-founder & CTO"}/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className={"columns is-centered mt-6"}>
+                        <div className={"column is-6"}>
+                            <div className={"columns"}>
+                                <div className={"column is-4"}>
+                                    <PersonDescr key={"member-3"} src={thanasis} name={"Thanasis Bethanis"} position={"Co-founder & COO"}/>
+                                </div>
+                                <div className={"column is-4"}/>
+                                <div className={"column is-4"}>
+                                    <PersonDescr key={"member-4"} src={kostas} name={"Konstantinos Kalofonos"} position={"Frontend Developer"}/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </section>
             </section>
+
             <hr className={"mt-6"} style={{"border": "1px solid #7E6FD8"}}/>
             <Footer/>
         </React.Fragment>
