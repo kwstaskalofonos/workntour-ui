@@ -14,6 +14,7 @@ import ArticleComponent from "@src/views/ArticleComponent";
 import Footer from "@src/views/common/Footer";
 import {logEvent} from "firebase/analytics";
 import {analytics} from "@src/utilities/firebase";
+import {isDevServer} from "../../webpack/env";
 
 const BlogPage:React.FunctionComponent = () =>{
 
@@ -21,9 +22,11 @@ const BlogPage:React.FunctionComponent = () =>{
     const [isLoading,setIsLoading] = useState<boolean>(false);
 
     useEffect(()=>{
-        logEvent(analytics, 'blog_page',{
-            content_type:'string',event_label:"Blog Page",
-        });
+        if(!isDevServer){
+            logEvent(analytics, 'blog_page',{
+                content_type:'string',event_label:"Blog Page",
+            });
+        }
     },[])
 
     const isEmail = () =>{

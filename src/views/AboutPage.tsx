@@ -34,14 +34,17 @@ import Footer from "@src/views/common/Footer";
 import PersonDescr from "@src/views/PersonDescr";
 import {logEvent} from "firebase/analytics";
 import {analytics} from "@src/utilities/firebase";
+import {isDevServer} from "../../webpack/env";
 
 const AboutPage:React.FunctionComponent = () =>{
 
 
     useEffect(()=>{
-        logEvent(analytics, 'about_page',{
-           content_type:'string'
-        });
+        if(!isDevServer){
+            logEvent(analytics, 'about_page',{
+                content_type:'string'
+            });
+        }
     },[])
 
     const chrisDesc = () =>{

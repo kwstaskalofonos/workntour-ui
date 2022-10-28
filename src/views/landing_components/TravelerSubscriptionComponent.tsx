@@ -9,6 +9,8 @@ import {
 } from "@src/state/stores/subscriptions/models";
 import {FilterTypes, TypeOfHelpNeeded, TypeOfHelpNeededType} from "@src/state/stores/opportunity/models";
 import NumberFormat from "react-number-format";
+import {toast} from "react-toastify";
+import {subscribeAsTraveler} from "@src/state/stores/subscriptions/operations";
 
 
 const TravelerSubscriptionComponent: React.FunctionComponent = () => {
@@ -16,11 +18,11 @@ const TravelerSubscriptionComponent: React.FunctionComponent = () => {
     const form = useForm();
     const {register, handleSubmit, getValues, formState: {errors}} = form;
     const [isLoading, setIsLoading] = useState<boolean>(false);
-    const [minDays,setMinDays] = useState<number>();
+    const [monthSub, setMonthSub] = useState<number>();
 
     const renderTypesOfTraveler = () => {
         let array: any[] = [];
-        array.push(<option key={"typeOfTraveler-option-empty"}/>)
+        array.push(<option key={"typeOfTraveler-option-empty"} value={""}>Select Type</option>)
         for (const item in TypeOfTraveler) {
             if (TypeOfTraveler[item as TypeOfTravelerType] !== TypeOfTraveler.FAMILY) {
                 array.push(<option key={"typeOfTraveler-option-" + item}
@@ -33,7 +35,7 @@ const TravelerSubscriptionComponent: React.FunctionComponent = () => {
 
     const renderTypesOfHelp = () => {
         let array: any[] = [];
-        array.push(<option key={"typeOfHelps-option-empty"}/>)
+        array.push(<option key={"typeOfHelps-option-empty"} value={""}>Select the type of help you wish to give</option>)
         for (const item in TypeOfHelpNeeded) {
             array.push(<option key={"typeOfHelps-option-" + item}
                                value={item}
@@ -44,7 +46,7 @@ const TravelerSubscriptionComponent: React.FunctionComponent = () => {
 
     const renderMinDays = () => {
         let array: any[] = [];
-        array.push(<option key={"minNumDays-option-empty"}/>)
+        array.push(<option key={"minNumDays-option-empty"} value={""}>Select the minimum amount of days you would be willing to do workntour</option>)
         for (const item in MinNumOfDays) {
             array.push(<option key={"minNumDays-option-" + item}
                                value={item}
@@ -55,7 +57,7 @@ const TravelerSubscriptionComponent: React.FunctionComponent = () => {
 
     const renderTravCompany = () => {
         let array: any[] = [];
-        array.push(<option key={"travelerCompany-option-empty"}/>)
+        array.push(<option key={"travelerCompany-option-empty"} value={""}>Tell us if you would travel solo or with friends</option>)
         for (const item in TravelerCompany) {
             array.push(<option key={"travelerCompany-option-" + item}
                                value={item}
@@ -64,17 +66,24 @@ const TravelerSubscriptionComponent: React.FunctionComponent = () => {
         return array;
     }
 
-    const updateMinDays = (value:number) =>{
-        setMinDays(value);
+    const updateMonthlySub = (value:number) =>{
+        setMonthSub(value);
     }
 
     const onSubmit = (data: TravelerHomeForm) => {
-
+        if(monthSub){
+            data.subscriptionFee = monthSub;
+        }else{
+            data.subscriptionFee = 0;
+        }
+        setIsLoading(true);
+        subscribeAsTraveler(data,setIsLoading);
     }
 
     return (
         <div className={"columns is-centered"}>
-            <div className={"column is-half"}>
+            <div className={"column is-paddingless"}/>
+            <div className={"column is-half-desktop px-5"}>
                 <form>
                     <div className="field">
                         <label className="label has-text-primary has-text-weight-medium">Type of Traveler*</label>
@@ -97,6 +106,9 @@ const TravelerSubscriptionComponent: React.FunctionComponent = () => {
                                    {...register("name", {required: true})}
                                    placeholder="Enter your name"/>
                         </div>
+                        {errors.name &&
+                            <p className={"help is-danger"}>Name is required</p>
+                        }
                     </div>
                     <div className={"field"}>
                         <label className="label has-text-primary has-text-weight-medium is-normal">Email*</label>
@@ -105,6 +117,9 @@ const TravelerSubscriptionComponent: React.FunctionComponent = () => {
                                    {...register("email", {required: true})}
                                    placeholder="Enter your email"/>
                         </div>
+                        {errors.email &&
+                            <p className={"help is-danger"}>Email is required</p>
+                        }
                     </div>
                     <div className="field">
                         <label className="label has-text-primary has-text-weight-medium">Type of help you wish to
@@ -144,7 +159,7 @@ const TravelerSubscriptionComponent: React.FunctionComponent = () => {
                         <div className={"control"}>
                             <div className={"select is-fullwidth"}>
                                 <select className={"border-linear has-text-primary"}
-                                        {...register("minNumDays", {required: true})}>
+                                        {...register("travelerCompany", {required: true})}>
                                     {renderTravCompany()}
                                 </select>
                             </div>
@@ -156,9 +171,10 @@ const TravelerSubscriptionComponent: React.FunctionComponent = () => {
                     <div className="field">
                         <label className="label has-text-primary has-text-weight-medium">Tell us how much you would be willing to pay for a yearly subscription
                             (In Euros)*</label>
-                        <NumberFormat value={minDays ? minDays : ''}
-                                      onValueChange={(value) => updateMinDays(Number(value.value))}
+                        <NumberFormat value={monthSub ? monthSub : ''}
+                                      onValueChange={(value) => updateMonthlySub(Number(value.value))}
                                       className={"input border-linear"}
+                                      placeholder={"Enter the amount you would wish to pay in order to be able to connect with hosts"}
                                       decimalScale={0} allowNegative={false}/>
 
                     </div>
@@ -172,12 +188,15 @@ const TravelerSubscriptionComponent: React.FunctionComponent = () => {
                                 Job description exceeds limit.</p>}
                     </div>
                     <p className={"control has-text-centered"}>
-                        <button className={"button has-text-white background-linear-land"} type={"button"}>
+                        <button className={"button has-text-white background-linear-land"+(isLoading?" is-loading":"")}
+                                type={"button"}
+                        onClick={handleSubmit(onSubmit)}>
                             Submit
                         </button>
                     </p>
                 </form>
             </div>
+            <div className={"column is-paddingless"}/>
         </div>
     )
 };

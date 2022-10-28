@@ -25,6 +25,9 @@ import TravelerStepsSection from "@src/views/common/TravelerStepsSection";
 import TravelerSubscriptionComponent from "@src/views/landing_components/TravelerSubscriptionComponent";
 import HostSubscriptionComponent from "@src/views/landing_components/HostSubscriptionComponent";
 import GalleryComponent from "@src/views/landing_components/GalleryComponent";
+import {logEvent} from "firebase/analytics";
+import {analytics} from "@src/utilities/firebase";
+import {isDevServer} from "../../webpack/env";
 
 export const LandingPage: React.FunctionComponent = () => {
 
@@ -35,28 +38,16 @@ export const LandingPage: React.FunctionComponent = () => {
 
     const scrollToSection = () => {
         // @ts-ignore
-        document.getElementById("description").scrollIntoView({behavior: 'smooth'});
+        document.getElementById("forms").scrollIntoView({behavior: 'smooth'});
     }
 
-    const isEmail = () => {
-        const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        return re.test(email);
-    }
-
-    const doSubscribe = () => {
-        if (!isEmail()) {
-            toast.error("Input is not valid email address.", {position: toast.POSITION.TOP_RIGHT});
-            return;
+    useEffect(()=>{
+        if(!isDevServer){
+            logEvent(analytics, 'landing_page',{
+                content_type:'string',event_label:"Landing Page",
+            });
         }
-        setIsLoading(true);
-        subscribe(email, setIsLoading).then((response: GenericResponse) => {
-            toast.success("Subscribed successfully", {position: toast.POSITION.TOP_RIGHT});
-            setEmail("");
-        }).catch((error) => {
-            toast.error(error, {position: toast.POSITION.TOP_RIGHT});
-            setEmail("");
-        });
-    }
+    },[])
 
     return (
         <React.Fragment>
@@ -97,7 +88,8 @@ export const LandingPage: React.FunctionComponent = () => {
                         <p className="is-size-5 has-text-weight-bold" style={{"color": "#383350"}}>Are you up for a new
                             adventure?</p>
                         <p className={"control"}>
-                            <button className={"button has-text-white is-fullwidth background-linear-land"}>I am in!
+                            <button className={"button has-text-white is-fullwidth background-linear-land"}
+                            onClick={()=>scrollToSection()}>I am in!
                             </button>
                         </p>
                         <div className={"is-flex is-justify-content-center mt-3"}>
@@ -106,7 +98,7 @@ export const LandingPage: React.FunctionComponent = () => {
                     </div>
                 </div>
             </section>
-            <section className="section" id={"description"}
+            <section className="section"
                      style={{"background": "rgba(182, 255, 251, 0.05)"}}>
                 <div className="container has-text-centered">
                     <p className="is-size-3 has-text-weight-bold has-text-dark">How it works</p>
@@ -121,7 +113,7 @@ export const LandingPage: React.FunctionComponent = () => {
                     <HostStepsSection/> : <TravelerStepsSection/>
                 }
             </section>
-            <section className={"mt-6"}>
+            <section className={"mt-6"} id={"forms"}>
                 <div className={"columns is-centered mt-6"}>
                     <div className={"column is-paddingless"}/>
                     <div style={{backgroundColor:'rgba(136, 112, 249, 0.05)',

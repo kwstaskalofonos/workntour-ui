@@ -14,18 +14,19 @@ import {
     SeasonType,
 } from "@src/state/stores/subscriptions/models";
 import NumberFormat from "react-number-format";
+import {subscribeAsHost} from "@src/state/stores/subscriptions/operations";
 
 const HostSubscriptionComponent: React.FunctionComponent = () => {
 
     const form = useForm();
     const {register, handleSubmit, getValues, formState: {errors}} = form;
     const [isLoading, setIsLoading] = useState<boolean>(false);
-    const [minDays, setMinDays] = useState<number>();
+    const [monthSub, setMonthSub] = useState<number>();
 
 
     const renderTypesOfHost = () => {
         let array: any[] = [];
-        array.push(<option key={"opportunityCategory-option-empty"}/>)
+        array.push(<option key={"opportunityCategory-option-empty"} value={""}>Select Type</option>)
         for (const item in OpportunityCategory) {
             array.push(<option key={"opportunityCategory-option-" + item}
                                value={item}
@@ -36,7 +37,7 @@ const HostSubscriptionComponent: React.FunctionComponent = () => {
 
     const renderTypesOfHelp = () => {
         let array: any[] = [];
-        array.push(<option key={"typeOfHelps-option-empty"}/>)
+        array.push(<option key={"typeOfHelps-option-empty"} value={""}>Select the type of help you will need to receive from a traveler</option>)
         for (const item in TypeOfHelpNeeded) {
             array.push(<option key={"typeOfHelps-option-" + item}
                                value={item}
@@ -47,7 +48,7 @@ const HostSubscriptionComponent: React.FunctionComponent = () => {
 
     const renderMinDays = () => {
         let array: any[] = [];
-        array.push(<option key={"minNumDays-option-empty"}/>)
+        array.push(<option key={"minNumDays-option-empty"} value={""}>Tell us the minimum number of days you would want a traveler to do Workntour</option>)
         for (const item in MinNumOfDays) {
             array.push(<option key={"minNumDays-option-" + item}
                                value={item}
@@ -58,7 +59,7 @@ const HostSubscriptionComponent: React.FunctionComponent = () => {
 
     const renderSeasons = () =>{
         let array: any[] = [];
-        array.push(<option key={"seasons-option-empty"}/>)
+        array.push(<option key={"seasons-option-empty"} value={""}>Select when you would like to host a traveler</option>)
         for (const item in Season) {
             array.push(<option key={"seasons-option-" + item}
                                value={item}
@@ -67,12 +68,18 @@ const HostSubscriptionComponent: React.FunctionComponent = () => {
         return array;
     }
 
-    const updateMinDays = (value:number) =>{
-        setMinDays(value);
+    const updateMonthlySub = (value:number) =>{
+        setMonthSub(value);
     }
 
     const onSubmit = (data: HostHomeForm) => {
-
+        if(monthSub){
+            data.monthlySubscription = monthSub;
+        }else{
+            data.monthlySubscription = 0;
+        }
+        setIsLoading(true);
+        subscribeAsHost(data,setIsLoading);
     }
 
     return (
@@ -85,7 +92,8 @@ const HostSubscriptionComponent: React.FunctionComponent = () => {
                         <div className={"control"}>
                             <div className={"select is-fullwidth"}>
                                 <select className={"border-linear has-text-primary"}
-                                        {...register("opportunityCategory", {required: true})}>
+                                        {...register("typeOfTraveler", {required: true})}
+                                onChange={(event)=>console.log(event.currentTarget.value)}>
                                     {renderTypesOfHost()}
                                 </select>
                             </div>
@@ -101,6 +109,9 @@ const HostSubscriptionComponent: React.FunctionComponent = () => {
                                    {...register("name", {required: true})}
                                    placeholder="Enter your name"/>
                         </div>
+                        {errors.name &&
+                            <p className={"help is-danger"}>Name is required</p>
+                        }
                     </div>
                     <div className={"field"}>
                         <label className="label has-text-primary has-text-weight-medium is-normal">Email*</label>
@@ -109,6 +120,9 @@ const HostSubscriptionComponent: React.FunctionComponent = () => {
                                    {...register("email", {required: true})}
                                    placeholder="Enter your email"/>
                         </div>
+                        {errors.email &&
+                            <p className={"help is-danger"}>Email is required</p>
+                        }
                     </div>
                     <div className="field">
                         <label className="label has-text-primary has-text-weight-medium">Tell us what type of help you need*</label>
@@ -156,9 +170,10 @@ const HostSubscriptionComponent: React.FunctionComponent = () => {
                     <div className="field">
                         <label className="label has-text-primary has-text-weight-medium">Tell us how much you would be willing to pay for a yearly subscription
                             (In Euros)*</label>
-                        <NumberFormat value={minDays ? minDays : ''}
-                                      onValueChange={(value) => updateMinDays(Number(value.value))}
+                        <NumberFormat value={monthSub ? monthSub : ''}
+                                      onValueChange={(value) => updateMonthlySub(Number(value.value))}
                                       className={"input border-linear"}
+                                      placeholder={"Enter the amount you would wish to pay per month in order to be able to connect with travelers"}
                                       decimalScale={0} allowNegative={false}/>
 
                     </div>
@@ -172,7 +187,8 @@ const HostSubscriptionComponent: React.FunctionComponent = () => {
                                 Job description exceeds limit.</p>}
                     </div>
                     <p className={"control has-text-centered"}>
-                        <button className={"button has-text-white background-linear-land"} type={"button"} onClick={handleSubmit(onSubmit)}>
+                        <button className={"button has-text-white background-linear-land"+(isLoading?" is-loading":"")}
+                                type={"button"} onClick={handleSubmit(onSubmit)}>
                             Submit
                         </button>
                     </p>
