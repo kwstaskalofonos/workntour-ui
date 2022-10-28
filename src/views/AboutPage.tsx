@@ -84,11 +84,31 @@ const AboutPage:React.FunctionComponent = () =>{
         )
     }
 
+    const mobileView = () =>{
+        return <React.Fragment>
+            <div className={"column is-4"}>
+                <p style={{color:"#383350"}} className={"is-size-6 mt-5"}>
+                    We help host find affordable assistance is a variety of fields.</p>
+                <p style={{color:"#383350"}} className={"is-size-6 mt-5"}>
+                    We help travelers can cover their needs when traveling for longer periods of time.</p>
+                <p style={{color:"#383350"}} className={"is-size-6 mt-5"}>
+                    We want remote areas and local communities to be able to attract more tourists.</p>
+                <p style={{color:"#383350"}} className={"is-size-6 mt-5"}>
+                    Workntour seeks to encourage personal and professional development by making travel accessible
+                    to all, to promote the Collaborative Economy, the exchange of Cultures and the "Live like a local"
+                    mentality</p>
+            </div>
+            <div className={"column is-4"}>
+                <img src={about2}/>
+            </div>
+        </React.Fragment>
+    }
+
     return(
         <React.Fragment>
             <InterCom/>
             <Header/>
-            <section className={"section about-page-top-background"}>
+            <section className={"section is-medium about-page-top-background pt-1"}>
                 <div className={"columns mt-5"}>
                     <div  className={"column is-2"}/>
                     <div className={"column"}>
@@ -109,11 +129,13 @@ const AboutPage:React.FunctionComponent = () =>{
                         </p>
                     </div>
                 </div>
-                <div className={"columns is-centered"}>
-                    <div className={"column is-three-quarters has-text-centered"}>
+                {!isMobile &&
+                    <div className={"columns is-centered"}>
+                        <div className={"column is-three-quarters has-text-centered"}>
                             <img src={life} width={"55%"} height={10}/>
+                        </div>
                     </div>
-                </div>
+                }
                 <div className={"columns mt-5"}>
                     <div className={"column is-2"}/>
                     <div className={"column"}>
@@ -154,21 +176,26 @@ const AboutPage:React.FunctionComponent = () =>{
                 </div>
 
                 <div className={"columns is-centered is-vcentered"}>
-                    <div className={"column is-4"}>
-                        <img src={about2}/>
-                    </div>
-                    <div className={"column is-4"}>
-                        <p style={{color:"#383350"}} className={"is-size-6 mt-5"}>
-                            We help host find affordable assistance is a variety of fields.</p>
-                        <p style={{color:"#383350"}} className={"is-size-6 mt-5"}>
-                            We help travelers can cover their needs when traveling for longer periods of time.</p>
-                        <p style={{color:"#383350"}} className={"is-size-6 mt-5"}>
-                            We want remote areas and local communities to be able to attract more tourists.</p>
-                        <p style={{color:"#383350"}} className={"is-size-6 mt-5"}>
-                            Workntour seeks to encourage personal and professional development by making travel accessible
-                         to all, to promote the Collaborative Economy, the exchange of Cultures and the "Live like a local"
-                        mentality</p>
-                    </div>
+                    {isMobile ?
+                        mobileView():
+                        <React.Fragment>
+                            <div className={"column is-4"}>
+                                <img src={about2}/>
+                            </div>
+                            <div className={"column is-4"}>
+                                <p style={{color:"#383350"}} className={"is-size-6 mt-5"}>
+                                    We help host find affordable assistance is a variety of fields.</p>
+                                <p style={{color:"#383350"}} className={"is-size-6 mt-5"}>
+                                    We help travelers can cover their needs when traveling for longer periods of time.</p>
+                                <p style={{color:"#383350"}} className={"is-size-6 mt-5"}>
+                                    We want remote areas and local communities to be able to attract more tourists.</p>
+                                <p style={{color:"#383350"}} className={"is-size-6 mt-5"}>
+                                    Workntour seeks to encourage personal and professional development by making travel accessible
+                                    to all, to promote the Collaborative Economy, the exchange of Cultures and the "Live like a local"
+                                    mentality</p>
+                            </div>
+                        </React.Fragment>
+                    }
                 </div>
             </section>
 

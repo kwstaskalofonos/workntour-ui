@@ -138,7 +138,7 @@ const TravelerSubscriptionComponent: React.FunctionComponent = () => {
                     </div>
                     <div className="field">
                         <label className="label has-text-primary has-text-weight-medium">Tell us for how long you would
-                            do Workntour.Select
+                            do Workntour. Select
                             the minimum amount of days*</label>
                         <div className={"control"}>
                             <div className={"select is-fullwidth"}>

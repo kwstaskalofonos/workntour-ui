@@ -18,8 +18,6 @@ import formLogo from "@src/assets/newLandingPage/form.png";
 import Header from "@src/views/common/Header";
 import InterCom from "@src/views/common/InterCom";
 import {isMobile} from 'react-device-detect';
-import {GenericResponse, subscribe} from "@src/utilities/fetch";
-import {toast} from "react-toastify";
 import HostStepsSection from "@src/views/common/HostStepsSection";
 import TravelerStepsSection from "@src/views/common/TravelerStepsSection";
 import TravelerSubscriptionComponent from "@src/views/landing_components/TravelerSubscriptionComponent";
@@ -33,8 +31,6 @@ export const LandingPage: React.FunctionComponent = () => {
 
     const [selectedTab, setSelectedTab] = useState<string>("HOSTS");
     const [selectedSubTab, setSelectedSubTab] = useState<string>("HOSTS");
-    const [email, setEmail] = useState<string>("");
-    const [isLoading, setIsLoading] = useState<boolean>(false);
 
     const scrollToSection = () => {
         // @ts-ignore
@@ -48,6 +44,22 @@ export const LandingPage: React.FunctionComponent = () => {
             });
         }
     },[])
+
+    const mobileView = () =>{
+        return <React.Fragment>
+            <p className="is-size-4 has-text-weight-medium" style={{"color": "#383350"}}>Find experts from
+                all over</p>
+            <p className="is-size-4 has-text-weight-medium" style={{"color": "#383350"}}>the world & share
+                your culture!</p>
+            <p className="is-size-6 has-text-weight-medium mt-2" style={{"color": "#7060E1"}}>Receive help
+                from enthusiastic</p>
+            <p className="is-size-6 has-text-weight-medium" style={{"color": "#7060E1"}}>travelers, provide
+                accommodation and</p>
+            <p className="is-size-6 has-text-weight-medium" style={{"color": "#7060E1"}}>share your
+                culture!</p>
+            <img src={rightImage} width={270} height={270}/>
+        </React.Fragment>
+    }
 
     return (
         <React.Fragment>
@@ -70,17 +82,22 @@ export const LandingPage: React.FunctionComponent = () => {
                         <img className={"mt-5"} src={leftImage} width={270} height={270}/>
                     </div>
                     <div className="column has-text-centered">
-                        <img src={rightImage} width={270} height={270}/>
-                        <p className="is-size-4 has-text-weight-medium" style={{"color": "#383350"}}>Find experts from
-                            all over</p>
-                        <p className="is-size-4 has-text-weight-medium" style={{"color": "#383350"}}>the world & share
-                            your culture!</p>
-                        <p className="is-size-6 has-text-weight-medium mt-2" style={{"color": "#7060E1"}}>Receive help
-                            from enthusiastic</p>
-                        <p className="is-size-6 has-text-weight-medium" style={{"color": "#7060E1"}}>travelers,provide
-                            accommodation and</p>
-                        <p className="is-size-6 has-text-weight-medium" style={{"color": "#7060E1"}}>share your
-                            culture!</p>
+                        {isMobile ?
+                            mobileView():
+                            <React.Fragment>
+                                <img src={rightImage} width={270} height={270}/>
+                                <p className="is-size-4 has-text-weight-medium" style={{"color": "#383350"}}>Find experts from
+                                    all over</p>
+                                <p className="is-size-4 has-text-weight-medium" style={{"color": "#383350"}}>the world & share
+                                    your culture!</p>
+                                <p className="is-size-6 has-text-weight-medium mt-2" style={{"color": "#7060E1"}}>Receive help
+                                    from enthusiastic</p>
+                                <p className="is-size-6 has-text-weight-medium" style={{"color": "#7060E1"}}>travelers, provide
+                                    accommodation and</p>
+                                <p className="is-size-6 has-text-weight-medium" style={{"color": "#7060E1"}}>share your
+                                    culture!</p>
+                            </React.Fragment>
+                        }
                     </div>
                 </div>
                 <div className={"is-flex is-justify-content-center mt-6"}>
@@ -145,7 +162,7 @@ export const LandingPage: React.FunctionComponent = () => {
                                 <HostSubscriptionComponent/>:<TravelerSubscriptionComponent/>
                         }
                         <p className={"mt-4 has-text-centered"}>The <strong>Number 1
-                        </strong>Work and Travel Community is launching soon. Stay Tuned!</p>
+                        </strong> Work and Travel Community is launching soon. Stay Tuned!</p>
                     </div>
                     <div className={"column is-paddingless"}/>
                 </div>
