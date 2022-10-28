@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import InterCom from "@src/views/common/InterCom";
 import Header from "@src/views/common/Header";
 import {toast} from "react-toastify";
@@ -12,11 +12,19 @@ import blog2 from "@src/assets/blog/blog2.png";
 import blog3 from "@src/assets/blog/blog3.png";
 import ArticleComponent from "@src/views/ArticleComponent";
 import Footer from "@src/views/common/Footer";
+import {logEvent} from "firebase/analytics";
+import {analytics} from "@src/utilities/firebase";
 
 const BlogPage:React.FunctionComponent = () =>{
 
     const [email,setEmail] = useState<string>("");
     const [isLoading,setIsLoading] = useState<boolean>(false);
+
+    useEffect(()=>{
+        logEvent(analytics, 'blog_page',{
+            content_type:'string',event_label:"Blog Page",
+        });
+    },[])
 
     const isEmail = () =>{
         const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;

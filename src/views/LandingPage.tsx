@@ -123,11 +123,12 @@ export const LandingPage: React.FunctionComponent = () => {
             </section>
             <section className={"mt-6"}>
                 <div className={"columns is-centered mt-6"}>
+                    <div className={"column is-paddingless"}/>
                     <div style={{backgroundColor:'rgba(136, 112, 249, 0.05)',
                         position:'relative',
                         borderRadius:'16px',
                         boxShadow:"3px 3px 22px #888888"}}
-                        className={"column is-three-quarters is-justify-content-center"}>
+                        className={"column is-7 is-justify-content-center"}>
                         <img style={{position:'absolute',left:'47%',top:'-5%'}}
                              src={formLogo} width={90} height={90}/>
                         <div className={"is-flex is-justify-content-center mt-6"}>
@@ -154,6 +155,7 @@ export const LandingPage: React.FunctionComponent = () => {
                         <p className={"mt-4 has-text-centered"}>The <strong>Number 1
                         </strong>Work and Travel Community is launching soon. Stay Tuned!</p>
                     </div>
+                    <div className={"column is-paddingless"}/>
                 </div>
             </section>
             <section className={"mt-6"}>

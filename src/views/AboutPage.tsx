@@ -32,9 +32,17 @@ import kostas from "@src/assets/newLandingPage/kwstas.png";
 import chris from "@src/assets/newLandingPage/chris.png";
 import Footer from "@src/views/common/Footer";
 import PersonDescr from "@src/views/PersonDescr";
+import {logEvent} from "firebase/analytics";
+import {analytics} from "@src/utilities/firebase";
 
 const AboutPage:React.FunctionComponent = () =>{
 
+
+    useEffect(()=>{
+        logEvent(analytics, 'about_page',{
+           content_type:'string'
+        });
+    },[])
 
     const chrisDesc = () =>{
         return(

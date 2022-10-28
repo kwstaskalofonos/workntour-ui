@@ -68,7 +68,8 @@ const HostSubscriptionComponent: React.FunctionComponent = () => {
 
     return (
         <div className={"columns is-centered"}>
-            <div className={"column is-half"}>
+            <div className={"column is-paddingless"}/>
+            <div className={"column is-half-desktop"}>
                 <form>
                     <div className="field">
                         <label className="label has-text-primary has-text-weight-medium">Type of Host*</label>
@@ -168,6 +169,7 @@ const HostSubscriptionComponent: React.FunctionComponent = () => {
                     </p>
                 </form>
             </div>
+            <div className={"column is-paddingless"}/>
         </div>
     )
 };
