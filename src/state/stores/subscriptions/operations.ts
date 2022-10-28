@@ -17,8 +17,8 @@ export const subscribeAsTraveler = (form:TravelerHomeForm,setIsLoading:any):Prom
                     logEvent(analytics,'traveler_min_days',{value:form.minNumDays});
                     logEvent(analytics,'traveler_travel_as',{value:form.typeOfTraveler});
                     logEvent(analytics,'traveler_fee',{value:form.subscriptionFee});
-                    toast.success("Thank you for the help",{position:toast.POSITION.TOP_RIGHT});
                 }
+                toast.success("Thank you for the help",{position:toast.POSITION.TOP_RIGHT});
             }).catch((error)=>{
             toast.error(error,{position:toast.POSITION.TOP_RIGHT});
             reject(error);
@@ -37,8 +37,8 @@ export const subscribeAsHost = (form:HostHomeForm,setIsLoading:any):Promise<Host
                     logEvent(analytics,'host_min_days',{value:form.minNumDays});
                     logEvent(analytics,'host_preferable_season',{value:form.season});
                     logEvent(analytics,'host_fee',{value:form.monthlySubscription});
-                    toast.success("Thank you for the help",{position:toast.POSITION.TOP_RIGHT});
                 }
+                toast.success("Thank you for the help",{position:toast.POSITION.TOP_RIGHT});
             }).catch((error)=>{
             toast.error(error,{position:toast.POSITION.TOP_RIGHT});
             reject(error);

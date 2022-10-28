@@ -20,6 +20,12 @@ const TravelerSubscriptionComponent: React.FunctionComponent = () => {
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [monthSub, setMonthSub] = useState<number>();
 
+
+    const isEmail = (email:string) =>{
+        const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(email);
+    }
+
     const renderTypesOfTraveler = () => {
         let array: any[] = [];
         array.push(<option key={"typeOfTraveler-option-empty"} value={""}>Select Type</option>)
@@ -71,6 +77,10 @@ const TravelerSubscriptionComponent: React.FunctionComponent = () => {
     }
 
     const onSubmit = (data: TravelerHomeForm) => {
+        if(!isEmail(data.email)){
+            toast.error("No valid mail address.",{position:toast.POSITION.TOP_RIGHT});
+            return;
+        }
         if(monthSub){
             data.subscriptionFee = monthSub;
         }else{

@@ -15,6 +15,7 @@ import {
 } from "@src/state/stores/subscriptions/models";
 import NumberFormat from "react-number-format";
 import {subscribeAsHost} from "@src/state/stores/subscriptions/operations";
+import {toast} from "react-toastify";
 
 const HostSubscriptionComponent: React.FunctionComponent = () => {
 
@@ -22,6 +23,11 @@ const HostSubscriptionComponent: React.FunctionComponent = () => {
     const {register, handleSubmit, getValues, formState: {errors}} = form;
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [monthSub, setMonthSub] = useState<number>();
+
+    const isEmail = (email:string) =>{
+        const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(email);
+    }
 
 
     const renderTypesOfHost = () => {
@@ -73,6 +79,10 @@ const HostSubscriptionComponent: React.FunctionComponent = () => {
     }
 
     const onSubmit = (data: HostHomeForm) => {
+        if(!isEmail(data.email)){
+            toast.error("No valid mail address.",{position:toast.POSITION.TOP_RIGHT});
+            return;
+        }
         if(monthSub){
             data.monthlySubscription = monthSub;
         }else{

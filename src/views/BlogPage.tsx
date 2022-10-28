@@ -68,7 +68,8 @@ const BlogPage:React.FunctionComponent = () =>{
                     <div className={"column is-7"}>
                         <div className="field is-grouped">
                             <p className="control is-expanded mr-1">
-                                <input id={"langPageEmail"} className="input" type="text" placeholder="Please type your email here..."/>
+                                <input id={"langPageEmail"} className="input" type="text" placeholder="Please type your email here..."
+                                onChange={(event)=>setEmail(event.currentTarget.value)}/>
                             </p>
                             <p className="control">
                                 <a className="button is-primary" onClick={()=>doSubscribe()}>
