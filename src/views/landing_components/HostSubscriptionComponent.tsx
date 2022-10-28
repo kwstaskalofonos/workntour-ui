@@ -1,13 +1,18 @@
 import React, {useState} from 'react';
 import {useForm} from "react-hook-form";
-import {TypeOfTraveler, TypeOfTravelerType} from "@src/state/stores/user/models";
 import {
     OpportunityCategory,
     OpportunityCategoryType,
     TypeOfHelpNeeded,
     TypeOfHelpNeededType
 } from "@src/state/stores/opportunity/models";
-import {MinNumOfDays, MinNumOfDaysType, Season, SeasonType} from "@src/state/stores/subscriptions/models";
+import {
+    HostHomeForm,
+    MinNumOfDays,
+    MinNumOfDaysType,
+    Season,
+    SeasonType,
+} from "@src/state/stores/subscriptions/models";
 import NumberFormat from "react-number-format";
 
 const HostSubscriptionComponent: React.FunctionComponent = () => {
@@ -66,10 +71,14 @@ const HostSubscriptionComponent: React.FunctionComponent = () => {
         setMinDays(value);
     }
 
+    const onSubmit = (data: HostHomeForm) => {
+
+    }
+
     return (
         <div className={"columns is-centered"}>
             <div className={"column is-paddingless"}/>
-            <div className={"column is-half-desktop"}>
+            <div className={"column is-half-desktop px-5"}>
                 <form>
                     <div className="field">
                         <label className="label has-text-primary has-text-weight-medium">Type of Host*</label>
@@ -163,7 +172,7 @@ const HostSubscriptionComponent: React.FunctionComponent = () => {
                                 Job description exceeds limit.</p>}
                     </div>
                     <p className={"control has-text-centered"}>
-                        <button className={"button has-text-white background-linear-land"} type={"button"}>
+                        <button className={"button has-text-white background-linear-land"} type={"button"} onClick={handleSubmit(onSubmit)}>
                             Submit
                         </button>
                     </p>
