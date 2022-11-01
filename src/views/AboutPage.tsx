@@ -88,15 +88,15 @@ const AboutPage:React.FunctionComponent = () =>{
         return <React.Fragment>
             <div className={"column is-4"}>
                 <p style={{color:"#383350"}} className={"is-size-6 mt-5"}>
-                    We help host find affordable assistance is a variety of fields.</p>
+                    We help hosts find affordable assistance in a variety of fields.</p>
                 <p style={{color:"#383350"}} className={"is-size-6 mt-5"}>
-                    We help travelers can cover their needs when traveling for longer periods of time.</p>
+                    We help travelers cover their needs when traveling for longer periods of time.</p>
                 <p style={{color:"#383350"}} className={"is-size-6 mt-5"}>
                     We want remote areas and local communities to be able to attract more tourists.</p>
                 <p style={{color:"#383350"}} className={"is-size-6 mt-5"}>
                     Workntour seeks to encourage personal and professional development by making travel accessible
                     to all, to promote the Collaborative Economy, the exchange of Cultures and the "Live like a local"
-                    mentality</p>
+                    mentality.</p>
             </div>
             <div className={"column is-4"}>
                 <img src={about2}/>
@@ -168,7 +168,7 @@ const AboutPage:React.FunctionComponent = () =>{
                             Workntour is an Online Marketplace that aims to
                             <br/>revolutionize Tourism by connecting tourists and local<br/>
                             communities, allowing travelers to offer their time,<br/>
-                            skills and expertise in exchange for accommodation<br/>on board</p>
+                            skills and expertise in exchange for accommodation<br/>on board.</p>
                     </div>
                     <div className={"column is-4"}>
                         <img src={about1}/>
@@ -184,15 +184,15 @@ const AboutPage:React.FunctionComponent = () =>{
                             </div>
                             <div className={"column is-4"}>
                                 <p style={{color:"#383350"}} className={"is-size-6 mt-5"}>
-                                    We help host find affordable assistance is a variety of fields.</p>
+                                    We help hosts find affordable assistance in a variety of fields.</p>
                                 <p style={{color:"#383350"}} className={"is-size-6 mt-5"}>
-                                    We help travelers can cover their needs when traveling for longer periods of time.</p>
+                                    We help travelers cover their needs when traveling for longer periods of time.</p>
                                 <p style={{color:"#383350"}} className={"is-size-6 mt-5"}>
                                     We want remote areas and local communities to be able to attract more tourists.</p>
                                 <p style={{color:"#383350"}} className={"is-size-6 mt-5"}>
                                     Workntour seeks to encourage personal and professional development by making travel accessible
                                     to all, to promote the Collaborative Economy, the exchange of Cultures and the "Live like a local"
-                                    mentality</p>
+                                    mentality.</p>
                             </div>
                         </React.Fragment>
                     }
@@ -262,9 +262,10 @@ const AboutPage:React.FunctionComponent = () =>{
                                             <div style={{height:"3px",width:"90px"}}
                                                  className={"background-linear container ml-0"}/>
                                             <p className={"is-size-6 has-text-weight-semibold mt-3"}>
-                                                Our online marketplace will allow travelers to contact the hosts of<br/>
-                                                their choice and offer to work for an agreed amount of time per<br/>
-                                                day in exchange for accommodation and board while travelling.
+                                                Our online marketplace will allow travelers to contact the hosts of their choice, <br/>
+                                                discuss the specifics of the opportunity offered and the accommodation and food provided, <br/>
+                                                carry out a short video interview through our platform and conduct preliminary training if needed.<br/>
+                                                Our travelers will also be able to book travel insurance and transportation tickets on discount.
                                             </p>
                                             {isMobile &&
                                                 <img src={about21} width={200} height={100}/>

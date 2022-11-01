@@ -102,7 +102,7 @@ const HostSubscriptionComponent: React.FunctionComponent = () => {
                         <div className={"control"}>
                             <div className={"select is-fullwidth"}>
                                 <select className={"border-linear has-text-primary"}
-                                        {...register("typeOfTraveler", {required: true})}>
+                                        {...register("opportunityCategory", {required: true})}>
                                     {renderTypesOfHost()}
                                 </select>
                             </div>
@@ -134,7 +134,7 @@ const HostSubscriptionComponent: React.FunctionComponent = () => {
                         }
                     </div>
                     <div className="field">
-                        <label className="label has-text-primary has-text-weight-medium">Tell us what type of help you need*</label>
+                        <label className="label has-text-primary has-text-weight-medium">What type of help would you need?</label>
                         <div className={"control"}>
                             <div className={"select is-fullwidth"}>
                                 <select className={"border-linear has-text-primary"}
@@ -148,12 +148,11 @@ const HostSubscriptionComponent: React.FunctionComponent = () => {
                         </div>
                     </div>
                     <div className="field">
-                        <label className="label has-text-primary has-text-weight-medium">Tell us the minimum amount of days you would host a traveler to do
-                            Workntour*</label>
+                        <label className="label has-text-primary has-text-weight-medium">What is the minimum amount of days you would host a traveler to do Workntour?</label>
                         <div className={"control"}>
                             <div className={"select is-fullwidth"}>
                                 <select className={"border-linear has-text-primary"}
-                                        {...register("minNumDays", {required: true})}>
+                                        {...register("minNumOfDays", {required: true})}>
                                     {renderMinDays()}
                                 </select>
                             </div>
@@ -163,7 +162,7 @@ const HostSubscriptionComponent: React.FunctionComponent = () => {
                         </div>
                     </div>
                     <div className="field">
-                        <label className="label has-text-primary has-text-weight-medium">Tell us when you would prefer to host a traveler*</label>
+                        <label className="label has-text-primary has-text-weight-medium">When would you prefer to host a traveler?</label>
                         <div className={"control"}>
                             <div className={"select is-fullwidth"}>
                                 <select className={"border-linear has-text-primary"}
@@ -177,8 +176,7 @@ const HostSubscriptionComponent: React.FunctionComponent = () => {
                         </div>
                     </div>
                     <div className="field">
-                        <label className="label has-text-primary has-text-weight-medium">Tell us how much you would be willing to pay for a yearly subscription
-                            (In Euros)*</label>
+                        <label className="label has-text-primary has-text-weight-medium">How much would you be willing to pay for a yearly subscription?</label>
                         <NumberFormat value={monthSub ? monthSub : ''}
                                       onValueChange={(value) => updateMonthlySub(Number(value.value))}
                                       className={"input border-linear"}

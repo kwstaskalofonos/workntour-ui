@@ -6,7 +6,7 @@ export interface TravelerHomeForm{
     name:string,
     email:string,
     typeOfHelpNeeded:TypeOfHelpNeeded,
-    minNumDays:MinNumOfDays,
+    minNumOfDays:MinNumOfDays,
     travelerCompany:TravelerCompany,
     subscriptionFee:number,
     comments:string
@@ -17,7 +17,7 @@ export interface HostHomeForm{
     name:string,
     email:string,
     typeOfHelpNeeded:TypeOfHelpNeeded,
-    minNumDays:MinNumOfDays,
+    minNumOfDays:MinNumOfDays,
     season:Season,
     monthlySubscription:number,
     comments:string
@@ -42,8 +42,8 @@ export type TravelerCompanyType = keyof typeof TravelerCompany;
 
 
 export enum Season{
-    "PRESEASON"="Preseason",
-    "POSTSEASON"="Postseason",
+    "PRESEASON"="Pre-season (February to May)",
+    "POSTSEASON"="Post-season (September to November)",
     "SEASONAL"="Seasonal"
 }
 

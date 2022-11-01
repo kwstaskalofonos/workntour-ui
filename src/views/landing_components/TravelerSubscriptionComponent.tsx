@@ -147,13 +147,11 @@ const TravelerSubscriptionComponent: React.FunctionComponent = () => {
                         </div>
                     </div>
                     <div className="field">
-                        <label className="label has-text-primary has-text-weight-medium">Tell us for how long you would
-                            do Workntour. Select
-                            the minimum amount of days*</label>
+                        <label className="label has-text-primary has-text-weight-medium">For how long would you do Workntour?</label>
                         <div className={"control"}>
                             <div className={"select is-fullwidth"}>
                                 <select className={"border-linear has-text-primary"}
-                                        {...register("minNumDays", {required: true})}>
+                                        {...register("minNumOfDays", {required: true})}>
                                     {renderMinDays()}
                                 </select>
                             </div>
@@ -165,7 +163,7 @@ const TravelerSubscriptionComponent: React.FunctionComponent = () => {
                     <div className="field">
                         <label className="label has-text-primary has-text-weight-medium">Would you prefer to do
                             Workntour Solo
-                            or with Friends or as a couple*</label>
+                            or with others?</label>
                         <div className={"control"}>
                             <div className={"select is-fullwidth"}>
                                 <select className={"border-linear has-text-primary"}
@@ -179,8 +177,7 @@ const TravelerSubscriptionComponent: React.FunctionComponent = () => {
                         </div>
                     </div>
                     <div className="field">
-                        <label className="label has-text-primary has-text-weight-medium">Tell us how much you would be willing to pay for a yearly subscription
-                            (In Euros)*</label>
+                        <label className="label has-text-primary has-text-weight-medium">How much would you be willing to pay for a yearly subscription?</label>
                         <NumberFormat value={monthSub ? monthSub : ''}
                                       onValueChange={(value) => updateMonthlySub(Number(value.value))}
                                       className={"input border-linear"}
