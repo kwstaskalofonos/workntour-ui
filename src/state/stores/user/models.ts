@@ -107,6 +107,7 @@ export type TypeOfTravelerType = keyof typeof TypeOfTraveler;
 export enum Role{
     TRAVELER="TRAVELER",
     INDIVIDUAL_HOST="INDIVIDUAL_HOST",
-    COMPANY_HOST="COMPANY_HOST"
+    COMPANY_HOST="COMPANY_HOST",
+    ADMIN="ADMIN"
 }
 

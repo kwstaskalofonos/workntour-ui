@@ -7,6 +7,7 @@ import {getCookie} from "@src/utilities/cookies";
 import Header from "@src/views/common/Header";
 import Footer from "@src/views/common/Footer";
 import InterCom from "@src/views/common/InterCom";
+import AdminRouter from "@src/views/routers/AdminRouter";
 
 const SecuredSiteRouter: React.FunctionComponent = () =>{
 
@@ -25,6 +26,9 @@ const SecuredSiteRouter: React.FunctionComponent = () =>{
                     }
                     {userRole===Role.TRAVELER.valueOf() &&
                         <TravelerRouter/>
+                    }
+                    {userRole===Role.ADMIN.valueOf() &&
+                        <AdminRouter/>
                     }
                 </div>
             <Footer/>
