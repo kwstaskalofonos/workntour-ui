@@ -87,7 +87,10 @@ const TravelerSubscriptionComponent: React.FunctionComponent = () => {
             data.subscriptionFee = 0;
         }
         setIsLoading(true);
-        subscribeAsTraveler(data,setIsLoading);
+        subscribeAsTraveler(data,setIsLoading)
+            .then((value)=>{
+                form.reset();
+            });
     }
 
     return (

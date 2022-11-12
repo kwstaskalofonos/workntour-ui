@@ -89,7 +89,10 @@ const HostSubscriptionComponent: React.FunctionComponent = () => {
             data.monthlySubscription = 0;
         }
         setIsLoading(true);
-        subscribeAsHost(data,setIsLoading);
+        subscribeAsHost(data,setIsLoading)
+            .then(()=>{
+                form.reset();
+            });
     }
 
     return (
