@@ -85,17 +85,23 @@ export const LandingPage: React.FunctionComponent = () => {
                         {isMobile ?
                             mobileView():
                             <React.Fragment>
-                                <img src={rightImage} width={270} height={270}/>
-                                <p className="is-size-4 has-text-weight-medium" style={{"color": "#383350"}}>Find experts from
-                                    all over</p>
-                                <p className="is-size-4 has-text-weight-medium" style={{"color": "#383350"}}>the world & share
-                                    your culture!</p>
-                                <p className="is-size-6 has-text-weight-medium mt-2" style={{"color": "#7060E1"}}>Receive help
-                                    from enthusiastic</p>
-                                <p className="is-size-6 has-text-weight-medium" style={{"color": "#7060E1"}}>travelers, provide
-                                    accommodation and</p>
-                                <p className="is-size-6 has-text-weight-medium" style={{"color": "#7060E1"}}>share your
-                                    culture!</p>
+                                <div className={"reverseColumnsFlex"}>
+                                    <div className="column">
+                                        <img src={rightImage} width={270} height={270}/>
+                                    </div>
+                                    <div className="column">
+                                        <p className="is-size-4 has-text-weight-medium" style={{"color": "#383350"}}>Find experts from
+                                            all over</p>
+                                        <p className="is-size-4 has-text-weight-medium" style={{"color": "#383350"}}>the world & share
+                                            your culture!</p>
+                                        <p className="is-size-6 has-text-weight-medium mt-2" style={{"color": "#7060E1"}}>Receive help
+                                            from enthusiastic</p>
+                                        <p className="is-size-6 has-text-weight-medium" style={{"color": "#7060E1"}}>travelers, provide
+                                            accommodation and</p>
+                                        <p className="is-size-6 has-text-weight-medium" style={{"color": "#7060E1"}}>share your
+                                            culture!</p>
+                                    </div>
+                                </div>
                             </React.Fragment>
                         }
                     </div>
@@ -170,7 +176,7 @@ export const LandingPage: React.FunctionComponent = () => {
             <section className={"mt-6"}>
                 <GalleryComponent/>
             </section>
-            <hr className={"mt-6"} style={{"border": "1px solid #7E6FD8"}}/>
+            <hr style={{borderImage:"linear-gradient(90deg,#7E6FD8,#0EE5D0) 30", borderWidth: "4px", borderStyle: "solid", }}/>
             <Footer/>
         </React.Fragment>
     )

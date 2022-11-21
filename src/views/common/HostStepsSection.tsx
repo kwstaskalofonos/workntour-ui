@@ -15,7 +15,7 @@ const HostStepsSection: React.FunctionComponent = () =>{
         return (
             <React.Fragment>
                 {/* STEP 1 */}
-                <div className="columns is-vcentered is-centered">
+                <div className="columns is-vcentered is-centered columnsFlex">
                     <div className="column is-narrow is-flex is-align-content-baseline">
                         <p className={"is-italic has-text-info has-text-weight-bold"} style={{fontSize:"76px"}}>1.</p>
                         <div className={"ml-4 pt-5"}>
@@ -28,7 +28,7 @@ const HostStepsSection: React.FunctionComponent = () =>{
                     <div className="column is-narrow has-text-left"><img src={joinTheCom} width={271} height={271}/></div>
                 </div>
                 {/* STEP 2 */}
-                <div className="columns is-vcentered is-centered">
+                <div className="columns is-vcentered is-centered reverseColumnsFlex">
                     <div className="column is-narrow has-text-right"><img src={conWithHosts} width={271} height={271}/></div>
                     <div className={"column is-1"}></div>
                     <div className="column is-narrow is-flex is-align-content-baseline">
@@ -41,7 +41,7 @@ const HostStepsSection: React.FunctionComponent = () =>{
                     </div>
                 </div>
                 {/* STEP 3 */}
-                <div className="columns is-vcentered is-centered">
+                <div className="columns is-vcentered is-centered columnsFlex">
                     <div className="column is-narrow is-flex is-align-content-baseline">
                         <p className={"is-italic has-text-info has-text-weight-bold"} style={{fontSize:"76px"}}>3.</p>
                         <div className={"ml-4 py-6"}>
@@ -53,7 +53,7 @@ const HostStepsSection: React.FunctionComponent = () =>{
                     <div className="column is-narrow has-text-left"><img src={liveLikeALocal} width={271} height={271}/></div>
                 </div>
                 {/* STEP 4 */}
-                <div className="columns is-vcentered is-centered">
+                <div className="columns is-vcentered is-centered reverseColumnsFlex">
                     <div className="column is-narrow has-text-right"><img src={review} width={271} height={271}/></div>
                     <div className={"column is-1"}></div>
                     <div className="column is-narrow is-flex is-align-content-baseline">

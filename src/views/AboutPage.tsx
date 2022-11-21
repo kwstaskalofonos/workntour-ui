@@ -49,38 +49,38 @@ const AboutPage:React.FunctionComponent = () =>{
 
     const chrisDesc = () =>{
         return(
-            <p className={"is-size-7 is-flex has-text-centered"}>Christos holds a degree in<br/>
-                Informatics from Athens<br/>University of Economics &<br/>Business. His role on the<br/>
-                workntour team is to set the<br/>technical direction for the product development. Christos<br/>
-                specializes in Mobile App<br/>Development and has<br/>experience working for tech
-                <br/>companies and startups in<br/>Greece</p>
+            <p className={"is-size-7 p-2 has-text-justify"}>Christos holds a degree in 
+                Informatics from Athens University of Economics & Business. His role on the 
+                workntour team is to set the technical direction for the product development. Christos 
+                specializes in Mobile App Development and has experience working for tech
+                 companies and startups in Greece.</p>
         )
     }
 
     const rafDesc = () =>{
         return(
-            <p className={"is-size-7 is-flex has-text-centered"}>Rafail holds a Bachelor's degree in Law<br/>
-            from Maastricht University and a Master's Degree<br/>in Maritime from the Erasmus University of <br/>
-            Rotterdam, with specialization in <br/>Yacht Management. At Workntour he <br/>is responsible for setting out the<br/>
-            team's goal and carrying out business<br/>development strategies. Rafail has<br/>already set up a company in Yachting.</p>
+            <p className={"is-size-7 p-2 has-text-justify"}>Rafail holds a Bachelor's degree in Law 
+            from Maastricht University and a Master's Degree in Maritime from the Erasmus University of  
+            Rotterdam, with specialization in  Yacht Management. At Workntour he  is responsible for setting out the 
+            team's goal and carrying out business development strategies. Rafail has already set up a company in Yachting.</p>
         )
     }
 
     const thanDesc = () =>{
         return(
-            <p className={"is-size-7 is-flex has-text-centered"}>Thanasis holds a degree in Computer Engineering<br/>
-            and Informatics from University of Patras<br/>and follows a Master's degree in Business Administration from<br/>
-            University of Pafos. He has experience as<br/>Software Engineer in Consulting companies.<br/>
-            In Workntout, hae has taken over the backend implementation<br/>of the Web and Mobile application and is responsible for<br/>
+            <p className={"is-size-7 p-2 has-text-justify"}>Thanasis holds a degree in Computer Engineering 
+            and Informatics from University of Patras and follows a Master's degree in Business Administration from 
+            University of Pafos. He has experience as Software Engineer in Consulting companies. 
+            In Workntout, hae has taken over the backend implementation of the Web and Mobile application and is responsible for 
             overseeing the Company's Operation.</p>
         )
     }
 
     const kostasDesc = () =>{
         return(
-            <p className={"is-size-7 is-flex has-text-centered"}>Konstantinos holds a degree in Computer Science<br/>
-            from Athens University of Economics and Business<br/>He has experience as Full Stack Developer in software companies.
-            <br/>In Workntour he is responsible for the frontend implementation of the Web Application using React.</p>
+            <p className={"is-size-7 p-2 has-text-justify"}>Konstantinos holds a degree in Computer Science 
+            from Athens University of Economics and Business He has experience as Full Stack Developer in software companies.
+             In Workntour he is responsible for the frontend implementation of the Web Application using React.</p>
         )
     }
 
@@ -114,7 +114,7 @@ const AboutPage:React.FunctionComponent = () =>{
                     <div className={"column"}>
                         <p style={{position:'relative'}}
                             className={"has-text-primary is-size-4 has-text-weight-semibold"}>
-                            <strong style={{color:"#534496"}}>L</strong>ove for traveling
+                            Love for traveling
                         <img style={{position:'absolute',top:'13px'}}
                             src={plane} width={20} height={20}/>
                         </p>
@@ -123,7 +123,7 @@ const AboutPage:React.FunctionComponent = () =>{
                     <div className={"column"}>
                         <p style={{position:'relative'}}
                             className={"has-text-info is-size-4 has-text-weight-semibold"}>
-                            <strong style={{color:"#1E7267"}}>I</strong>nnovation seekers
+                            Innovation seekers
                             <img style={{position:'absolute',top:'10px'}}
                                  src={rocket} width={20} height={20}/>
                         </p>
@@ -141,7 +141,7 @@ const AboutPage:React.FunctionComponent = () =>{
                     <div className={"column"}>
                         <p style={{position:'relative'}}
                            className={"has-text-primary is-size-4 has-text-weight-semibold"}>
-                            <strong style={{color:"#534496"}}>F</strong>riendship oriented
+                            Friendship oriented
                             <img style={{position:'absolute',top:'13px'}}
                                  src={woman} width={20} height={20}/>
                             <img style={{position:'absolute',top:'13px', left:"233px"}}
@@ -152,7 +152,7 @@ const AboutPage:React.FunctionComponent = () =>{
                     <div className={"column"}>
                         <p style={{position:'relative'}}
                            className={"has-text-info is-size-4 has-text-weight-semibold"}>
-                            <strong style={{color:"#1E7267"}}>E</strong>xperience driven
+                            Experience driven
                             <img style={{position:'absolute',top:'10px'}}
                                  src={kart} width={20} height={20}/>
                         </p>
@@ -160,27 +160,27 @@ const AboutPage:React.FunctionComponent = () =>{
                 </div>
             </section>
             <section className={"section"}>
-                <div className={"columns is-centered is-vcentered"}>
+                <div className={"columns is-centered is-vcentered columnsFlex"}>
                     <div className={"column is-4"}>
                         <p style={{color:"#383350"}} className={"is-size-3 has-text-weight-semibold"}>
                             What is Workntour</p>
                         <p style={{color:"#383350"}} className={"is-size-6 mt-5"}>
                             Workntour is an Online Marketplace that aims to
-                            <br/>revolutionize Tourism by connecting tourists and local<br/>
-                            communities, allowing travelers to offer their time,<br/>
-                            skills and expertise in exchange for accommodation<br/>on board.</p>
+                             revolutionize Tourism by connecting tourists and local 
+                            communities, allowing travelers to offer their time, 
+                            skills and expertise in exchange for accommodation and board.</p>
                     </div>
                     <div className={"column is-4"}>
-                        <img src={about1}/>
+                        <img src={about1} className="resizeImages"/>
                     </div>
                 </div>
 
-                <div className={"columns is-centered is-vcentered"}>
+                <div className={"columns is-centered is-vcentered" + (isMobile ? "" : "reverseColumnsFlex" )}>
                     {isMobile ?
                         mobileView():
                         <React.Fragment>
                             <div className={"column is-4"}>
-                                <img src={about2}/>
+                                <img src={about2} className="resizeImages"/>
                             </div>
                             <div className={"column is-4"}>
                                 <p style={{color:"#383350"}} className={"is-size-6 mt-5"}>
@@ -212,8 +212,8 @@ const AboutPage:React.FunctionComponent = () =>{
                                             <div style={{height:"3px",width:"90px"}}
                                                  className={"background-linear container ml-0"}/>
                                             <p className={"is-size-6 has-text-weight-semibold mt-3"}>
-                                                Because we believe that exploring the world while sharing<br/>
-                                                your skills and culture with local communities is the ultimate<br/>
+                                                Because we believe that exploring the world while sharing 
+                                                your skills and culture with local communities is the ultimate 
                                                 key to happiness!
                                             </p>
                                             {isMobile &&
@@ -238,8 +238,8 @@ const AboutPage:React.FunctionComponent = () =>{
                                             <div style={{height:"3px",width:"90px"}}
                                                  className={"background-linear container ml-0"}/>
                                             <p className={"is-size-6 has-text-weight-semibold mt-3"}>
-                                                We connect travelers with local communities so that tourists can<br/>
-                                                offer their skills for a few hours a day, in exchange for<br/>
+                                                We connect travelers with local communities so that tourists can 
+                                                offer their skills for a few hours a day, in exchange for 
                                                 accommodation and board.
                                             </p>
                                             {isMobile &&
@@ -262,9 +262,9 @@ const AboutPage:React.FunctionComponent = () =>{
                                             <div style={{height:"3px",width:"90px"}}
                                                  className={"background-linear container ml-0"}/>
                                             <p className={"is-size-6 has-text-weight-semibold mt-3"}>
-                                                Our online marketplace will allow travelers to contact the hosts of their choice, <br/>
-                                                discuss the specifics of the opportunity offered and the accommodation and food provided, <br/>
-                                                carry out a short video interview through our platform and conduct preliminary training if needed.<br/>
+                                                Our online marketplace will allow travelers to contact the hosts of their choice,  
+                                                discuss the specifics of the opportunity offered and the accommodation and food provided,  
+                                                carry out a short video interview through our platform and conduct preliminary training if needed. 
                                                 Our travelers will also be able to book travel insurance and transportation tickets on discount.
                                             </p>
                                             {isMobile &&
@@ -283,39 +283,36 @@ const AboutPage:React.FunctionComponent = () =>{
                     </div>
                 </section>
 
-                <section className={"section is-medium about-page-last-background"}>
+                <section className={"section is-medium about-page-last-background"} >
                     <div className={"is-flex is-justify-content-center mt-5"}>
-                        <p className={"has-text-weight-bold is-size-3 pt-6"}>Meet our team</p>
+                        <p className={"has-text-weight-bold is-size-3 pt-6 m-6"}>Meet our team</p>
                     </div>
-
-                    <div className={"columns is-centered mt-4"}>
-                        <div className={"column is-6"}>
-                            <div className={"columns"}>
-                                <div className={"column is-4"}>
-                                    <PersonDescr key={"member-1"} src={raf} name={"Rafail Roumeliotis"} position={"Co-founder & CEO"} description={rafDesc()}/>
-                                </div>
-                                <div className={"column is-4"}/>
-                                <div className={"column is-4"}>
-                                    <PersonDescr key={"member-2"} src={chris} name={"Xristos Petimezas"} position={"Co-founder & CTO"} description={chrisDesc()}/>
-                                </div>
-                            </div>
+                                
+                    <div className={"columns is-multiline"}>       
+                        <div className={"column is-one-third-tablet is-one-quarter-widescreen"}>
+                            <PersonDescr key={"member-1"} src={raf} name={"Rafail Roumeliotis"} position={"Co-founder & CEO"} description={rafDesc()}/>
                         </div>
-                    </div>
-
-                    <div className={"columns is-centered mt-6"}>
-                        <div className={"column is-6"}>
-                            <div className={"columns"}>
-                                <div className={"column is-4"}>
-                                    <PersonDescr key={"member-3"} src={thanasis} name={"Thanasis Bethanis"} position={"Co-founder & COO"} description={thanDesc()}/>
-                                </div>
-                                <div className={"column is-4"}/>
-                                <div className={"column is-4"}>
-                                    <PersonDescr key={"member-4"} src={kostas} name={"Konstantinos Kalofonos"} position={"Frontend Developer"} description={kostasDesc()}/>
-                                </div>
-                            </div>
+                        <div className={"column is-one-third-tablet is-one-quarter-widescreen"}>
+                            <PersonDescr key={"member-2"} src={chris} name={"Xristos Petimezas"} position={"Co-founder & CTO"} description={chrisDesc()}/>
                         </div>
+                        <div className={"column is-one-third-tablet is-one-quarter-widescreen"}>
+                            <PersonDescr key={"member-3"} src={thanasis} name={"Thanasis Bethanis"} position={"Co-founder & COO"} description={thanDesc()}/>
+                        </div>
+                        <div className={"column is-one-third-tablet is-one-quarter-widescreen"}>
+                            <PersonDescr key={"member-4"} src={kostas} name={"Konstantinos Kalofonos"} position={"Frontend Developer"} description={kostasDesc()}/>
+                        </div>
+                        {/* <div className={"column is-one-third-tablet is-one-quarter-widescreen"}>
+                            <PersonDescr key={"member-2"} src={chris} name={"Dimitris Sitaras"} position={"Frontend Developer"} description={chrisDesc()}/>
+                        </div>
+                        <div className={"column is-one-third-tablet is-one-quarter-widescreen"}>
+                            <PersonDescr key={"member-3"} src={thanasis} name={"Jason"} position={" "} description={thanDesc()}/>
+                        </div>
+                        <div className={"column is-one-third-tablet is-one-quarter-widescreen"}>
+                            <PersonDescr key={"member-4"} src={kostas} name={"Nick"} position={" "} description={kostasDesc()}/>
+                        </div>
+                        <div className={"column"}/>
+                        <div className={"column"}/> */}
                     </div>
-
                 </section>
             </section>
 
