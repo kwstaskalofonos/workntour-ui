@@ -13,37 +13,36 @@ import fifth from "@src/assets/newLandingPage/fifth.png";
 import six from "@src/assets/newLandingPage/sixth.png";
 
 const GalleryComponent: React.FunctionComponent = () => {
-      const imageStyling: object = {height:"100%", objectFit: "cover", borderRadius: "2%"};
 
-      return (
-        <div className={"columns m-6"}>
+    return (
+        <div className={"columns"}>
             <div className={"column"}>
-                <img src={fourth} style={imageStyling}/>
+                <img src={fourth}/>
             </div>
             <div className={"column"}>
                 <div className={"columns"}>
                     <div className={"column"}>
-                        <img src={second} style={imageStyling}/>
+                        <img src={second}/>
                     </div>
                 </div>
                 <div className={"columns"}>
                     <div className={"column"}>
-                        <img src={fifth} style={{height:"110%", objectFit: "cover", borderRadius: "2%"}}/>
+                        <img src={fifth}/>
                     </div>
                 </div>
             </div>
             <div className={"column"}>
-                <img src={first} style={imageStyling}/>
+                <img src={first}/>
             </div>
             <div className={"column"}>
                 <div className={"columns"}>
                     <div className={"column"}>
-                        <img src={third} style={imageStyling}/>
+                        <img src={third}/>
                     </div>
                 </div>
                 <div className={"columns"}>
                     <div className={"column"}>
-                        <img src={six} style={imageStyling}/>
+                        <img src={six}/>
                     </div>
                 </div>
             </div>
