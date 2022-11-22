@@ -8,13 +8,13 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const API_URL = {
     production:"https://workntourbackend.azurewebsites.net",
-    development:"http://localhost:8080",
-    //development:"https://work-n-tour.herokuapp.com"
+    //development:"http://localhost:8080",
+    development:"https://workntourbackend.azurewebsites.net"
 }
 
 const COOKIE_DOMAIN = {
     production: ".workntour.com",
-    development: "127.0.0.1"
+    development: "localhost"
 }
 
 const GOOGLE_MAPS_KEY = {
