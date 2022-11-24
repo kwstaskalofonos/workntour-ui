@@ -71,7 +71,7 @@ const TopMenu: React.FunctionComponent = () =>{
                         {!isAuthenticated ?
                             <div className="navbar-item">
                                 <div className="buttons">
-                                    <a className="button is-primary" style={{pointerEvents:'none'}}
+                                    <a className="button is-primary"
                                        onClick={()=>loginModalHandler.current?.open()}>Log In</a>
                                     <a className="button is-outlined"
                                        style={{"border":"1px solid #7E6FD8","color":"#7E6FD8",pointerEvents:'none'}}
@@ -92,6 +92,10 @@ const TopMenu: React.FunctionComponent = () =>{
                                     <hr className="navbar-divider"/>
                                     <a className="navbar-item" href={"profile"}>
                                         Profile
+                                    </a>
+                                    <hr className="navbar-divider"/>
+                                    <a className="navbar-item" href={"shareArticle"}>
+                                        Share an article
                                     </a>
                                     <hr className="navbar-divider"/>
                                     <a className="navbar-item" onClick={()=>logout()}>

@@ -241,6 +241,20 @@ input[type="range"]::-ms-thumb{
 }
 
 
+.has-bg-img {
+    background: url('./blog/blog2.png') center center;
+    background-size: cover;
+    border-radius: 8px;
+    height: 70vh;
+    margin: auto;
+}
+
+.view-article-section {
+    height: 100%;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
 @media screen and (max-width: 770px) {
   .reverseColumnsFlex {
     display: flex;
@@ -254,4 +268,16 @@ input[type="range"]::-ms-thumb{
     height: 100%;
   }
 
+  .view-article-section {
+      margin-left: 5%;
+      margin-right: 5%;
+  }
+
+  .has-bg-img {
+      height: 50vh;
+  }
+
 }
+
+
+

@@ -1,0 +1,29 @@
+.ql-toolbar {
+    background: linear-gradient(white, white) padding-box, linear-gradient(90deg, #7E6FD8, #0EE5D0) border-box !important;
+    border-style: solid !important;
+    border-width: 1px !important;
+    border-color: transparent !important;
+    border-radius: 8px;
+    margin-bottom: 5px;
+}
+
+.ql-container {
+    min-height: 400px;
+    max-height: 400px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    /* styling */
+    background: linear-gradient(white, white) padding-box, linear-gradient(90deg, #7E6FD8, #0EE5D0) border-box !important;
+    border-style: solid !important;
+    border-width: 1px !important;
+    border-color: transparent !important;
+    border-radius: 8px;
+}
+
+.ql-editor {
+    height: 100%;
+    flex: 1;
+    overflow-y: auto;
+    width: 100%;
+}
