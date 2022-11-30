@@ -5,28 +5,29 @@ import React, {
   useState,
 } from "react";
 import { useForm } from "react-hook-form";
-import { faEyeSlash } from "@fortawesome/free-solid-svg-icons/faEyeSlash";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { LoginForm } from "@src/state/stores/user/models";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router";
-import { useAppDispatch } from "@src/state/stores/hooks";
-import { doSetRole } from "@src/state/stores/user/operations";
+import { createArticle } from "@src/state/stores/opportunity/operations";
 
 import ImageUploader from "@src/views/common/ImageUploader";
 import Editor from "./editor";
+import { Article } from "@src/state/stores/opportunity/models";
 
 export interface ArticleFormModalHandler {
   open: () => void;
   close: () => void;
 }
 
-const PostArticle: React.FunctionComponent<> = () => {
+const PostArticle: React.FunctionComponent = () => {
   const form = useForm();
-  const { handleSubmit, getValues } = form;
+  const {
+    register,
+    handleSubmit,
+    reset,
+    getValues,
+    formState: { errors },
+  } = form;
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [pwdEnabled, setPwdEnabled] = useState<boolean>(true);
-  const [images, setImages] = useState<File[]>([]);
+  const [articleImage, setArticleImage] = useState<File[]>([]);
   const [content, setContent] = useState<string>("");
 
   const handleContentChange = (content: string) => {
@@ -34,8 +35,24 @@ const PostArticle: React.FunctionComponent<> = () => {
     setContent(content);
   };
 
-  const onSubmit: any = (data: LoginForm) => {
+  const onSubmit: any = (data: Article) => {
+    data.content = content;
+    let formData = new FormData();
+    if (articleImage) {
+      formData.append("blogImage", articleImage[0]);
+    }
+    formData.append(
+      "blog",
+      new Blob([JSON.stringify(data)], { type: "application/json" })
+    );
+    console.log(data);
     setIsLoading(true);
+    createArticle(formData, setIsLoading).then(() => {
+      toast.success("Article created!", {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+      form.reset();
+    });
   };
 
   return (
@@ -65,6 +82,7 @@ const PostArticle: React.FunctionComponent<> = () => {
                     className="input border-linear is-normal"
                     type="text"
                     placeholder="p.ex. An Amazing Experience"
+                    {...register("title")}
                   />
                 </div>
               </div>
@@ -82,7 +100,10 @@ const PostArticle: React.FunctionComponent<> = () => {
                   Please do not include pictures that show the name of your
                   Business or Property, as they will be removed.
                 </p>
-                <ImageUploader images={images} setImages={setImages} />
+                <ImageUploader
+                  images={articleImage}
+                  setImages={setArticleImage}
+                />
               </div>
               <div className="field mt-3">
                 <button

@@ -18,6 +18,7 @@ import {CompanyHostProfile, IndividualHostProfile, Role, TravelerProfile} from "
 import {SessionStorage} from "@src/utilities/localStorage";
 import AboutPage from "@src/views/AboutPage";
 import BlogPage from "@src/views/BlogPage";
+import ViewArticle from "../blog/ViewArticle";
 
 const AppRouter :React.FunctionComponent = () =>{
 
@@ -60,6 +61,7 @@ const AppRouter :React.FunctionComponent = () =>{
              <Route path="/home" element={<LandingPage/>}/>
              <Route path="/about" element={<AboutPage/>}/>
              <Route path="/blog" element={<BlogPage/>}/>
+             <Route path="/view/:id" element={<ViewArticle/>}/>
              <Route path="*" element={
                  <PrivateRoute>
                      <SecuredSiteRouter/>

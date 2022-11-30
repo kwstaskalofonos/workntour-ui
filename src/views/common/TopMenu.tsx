@@ -95,7 +95,7 @@ const TopMenu: React.FunctionComponent = () =>{
                                     </a>
                                     <hr className="navbar-divider"/>
                                     <a className="navbar-item" href={"shareArticle"}>
-                                        Share an article
+                                        Create an article
                                     </a>
                                     <hr className="navbar-divider"/>
                                     <a className="navbar-item" onClick={()=>logout()}>

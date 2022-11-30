@@ -228,10 +228,7 @@ export interface RefData{
 
 
 export interface Article{
-     articleId:string,
      title:string,
      content:string,
-     articleImage?:string,
-     date?:string,
-     hour?:string
+     createdAt?:string,
 }

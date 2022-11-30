@@ -112,9 +112,9 @@ export const getTotalOpportunitiesByLocation = (longitude:number|undefined,latit
     )
 };
 
-export const createArticle = (form:Article,setIsLoading:any):Promise<Article>=>{
+export const createArticle = (data:FormData,setIsLoading:any):Promise<Article>=>{
     return new Promise<Article>((resolve,reject)=>
-        post('createNewArticle',form)
+        postMultipart('blog/create',data)
             .then((response:Article)=>{
                 resolve(response);
             }).catch((error)=>{
@@ -127,7 +127,7 @@ export const createArticle = (form:Article,setIsLoading:any):Promise<Article>=>{
 
 export const getArticle = (articleId:string):Promise<Article>=>{
     return new Promise<Article>((resolve, reject)=>
-        get('retrieveOpportunityBy/'+articleId)
+        get('blog/retrieve/' + articleId)
             .then((response:Article)=>{
                 resolve(response);
             }).catch((error)=>{

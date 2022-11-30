@@ -241,11 +241,11 @@ input[type="range"]::-ms-thumb{
 }
 
 
-.has-bg-img {
-    background: url('./blog/blog2.png') center center;
-    background-size: cover;
+.has-img {
+    object-fit: cover;
     border-radius: 8px;
     height: 70vh;
+    width: 100%;
     margin: auto;
 }
 
@@ -273,7 +273,7 @@ input[type="range"]::-ms-thumb{
       margin-right: 5%;
   }
 
-  .has-bg-img {
+  .has-img {
       height: 50vh;
   }
 

@@ -6,6 +6,7 @@ import { getArticle } from "@src/state/stores/opportunity/operations";
 import { Article } from "@src/state/stores/opportunity/models";
 import Footer from "@src/views/common/Footer";
 import { useParams } from "react-router";
+import blog2 from "@src/assets/blog/blog2.png";
 
 
 const ViewArticle: React.FunctionComponent = () => {
@@ -38,16 +39,16 @@ const ViewArticle: React.FunctionComponent = () => {
         <div className="container has-text-centered mb-5">
           {/* {isLoading && "Loading..."} */}
           <h1 className="title has-text-weight-bold has-text-primary">
-            An Awesome Experience
+            {article?.title}
           </h1>
           <h5 className="subtitle is-small has-text-grey-light">
-            Dimitris Sitaras | 5:43
+            Rafahl Roumeliotis | 5:43
           </h5>
         </div>
-        <div className="has-bg-img mb-5" />
+        <img className="has-img mb-5" src={blog2} />
         <div className="container has-text-justified">
           <p className={"is-size-10 has-text-weight-semibold"}>
-            <div dangerouslySetInnerHTML={{ __html: htmlString }} />
+            {/* <div dangerouslySetInnerHTML={{ __html: htmlString }} /> */}
             Nulla in culpa sit nostrud ad ex magna enim culpa esse esse Lorem
             sunt. Aute aliquip enim deserunt cillum pariatur sit magna velit.
             Voluptate elit aliquip pariatur sunt sint aute tempor voluptate
