@@ -4,7 +4,7 @@ import {
     Individual, IndividualHostProfile,
     LoginForm, Role,
     Traveler,
-    TravelerProfile
+    TravelerProfileDTO
 } from "@src/state/stores/user/models";
 import {GenericResponse, get, post, postMultipart} from "@src/utilities/fetch";
 import {toast} from "react-toastify";
@@ -53,10 +53,10 @@ export const registerAsCompany = (form:Company,setIsLoading:any):Promise<Company
     )
 };
 
-export const retrieveTravelerProfile = ():Promise<TravelerProfile>=>{
-    return new Promise<TravelerProfile>((resolve,reject)=>{
-        get('retrieveProfile/traveler')
-            .then((response:TravelerProfile)=>{
+export const retrieveTravelerProfile = ():Promise<TravelerProfileDTO>=>{
+    return new Promise<TravelerProfileDTO>((resolve, reject)=>{
+        get('profile/retrieveProfile/traveler')
+            .then((response:TravelerProfileDTO)=>{
                 SessionStorage.setItem('profile',response,900000);
                 resolve(response);
             }).catch((error)=>{
@@ -121,7 +121,7 @@ export const doSetRole: ActionCreator<ThunkResult> = (role:string) =>
         })
     }
 
-export const doSetProfile: ActionCreator<ThunkResult> = (profile:TravelerProfile|IndividualHostProfile|CompanyHostProfile) =>
+export const doSetProfile: ActionCreator<ThunkResult> = (profile:TravelerProfileDTO|IndividualHostProfile|CompanyHostProfile) =>
     (dispatch) =>{
         return new Promise<void>(()=>{
             dispatch(authenticationSlice.actions.setProfile({profile:profile}))
@@ -160,9 +160,9 @@ export const updateUserInfo: ActionCreator<ThunkResult> = (role:string) =>
 
 export const updateTravelerProfile:ActionCreator<ThunkResult>= (data:FormData,setIsLoading:any,setFile:any)=>
     (dispatch) =>{
-        return new Promise<TravelerProfile>((resolve,reject)=>{
-            postMultipart('updateProfile/traveler/web',data)
-                .then((response:TravelerProfile)=>{
+        return new Promise<TravelerProfileDTO>((resolve, reject)=>{
+            postMultipart('profile/updateProfile/traveler',data,'PUT')
+                .then((response:TravelerProfileDTO)=>{
                     SessionStorage.setItem('profile',response,900000);
                     dispatch(authenticationSlice.actions.setProfile({profile:response}));
                     resolve(response);

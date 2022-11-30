@@ -1,3 +1,10 @@
+import {
+    LanguageProficiency,
+    Languages,
+    LearningOpportunities,
+    TypeOfHelpNeeded
+} from "@src/state/stores/opportunity/models";
+
 export interface Session{
     token:string,
     profile:Profile
@@ -73,23 +80,56 @@ export interface IndividualHostProfile{
     sex:string
 }
 
-export interface TravelerProfile{
-    memberId:string,
+export interface TravelerProfileDTO {
+    memberId?:string,
     role:string,
     name:string,
-    birthday:string,
     surname:string,
     email:string,
+    birthday:string,
+    countryCodeMobileNum:string,
+    mobileNum:string,
+    nationality:string,
+    address:string,
+    city:string,
+    country:string
     sex:string,
     postalAddress:string,
-    mobileNum:string,
-    typeOfTraveler:TypeOfTraveler,
-    countryCodeMobileNum:string,
-    nationality:string,
-    profileImage:string,
     description:string,
-    profImage:any
+    typeOfTraveler:string,
+    profileImage?:any,
+    interests:string[],
+    languages:any,
+    skills:string[]
+    experience:any,
+    specialDietary:string,
+    driverLicense:boolean,
+    imageWeb?:string
 }
+
+export enum SpecialDietary{
+    NONE="None",
+    VEGAN="Vegan",
+    VEGETARIAN="Vegeterian"
+}
+
+export type SpecialDietaryType = keyof typeof SpecialDietary;
+
+export interface Experience{
+    typeOfExperience:TypeOfExperience,
+    position:string,
+    nameOfOrganisation:string,
+    startedOn:string,
+    endedOn:string,
+    description:string
+}
+
+export enum TypeOfExperience{
+    COMPANY="Company",
+    UNIVERSITY="University"
+}
+
+export type TypeOfExperienceType = keyof typeof TypeOfExperience;
 
 export enum TypeOfTraveler{
     SOLO_TRAVELER="Solo Traveler",

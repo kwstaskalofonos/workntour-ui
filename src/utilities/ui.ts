@@ -1,6 +1,7 @@
 import {getCookie, hasCookie} from "@src/utilities/cookies";
-import {CompanyHostProfile, IndividualHostProfile, Profile, Role, TravelerProfile} from "@src/state/stores/user/models";
+import {CompanyHostProfile, IndividualHostProfile, Profile, Role, TravelerProfileDTO} from "@src/state/stores/user/models";
 import {formatISO} from "date-fns";
+import {countries} from "@src/utilities/countries";
 
 export function constructDate(day:string,month:string,year:string){
 
@@ -53,7 +54,7 @@ export function getUserDisplayName(){
                 break;
             }
             case Role.TRAVELER.valueOf():{
-                let profile:TravelerProfile = JSON.parse(getCookie('profile'));
+                let profile:TravelerProfileDTO = JSON.parse(getCookie('profile'));
                 name = profile.name
                 break;
             }
@@ -74,13 +75,10 @@ export function getDateFromString(date:string|undefined){
 
 export function getNationalities(){
     let tmp:any[]=[];
-    tmp.push({value:"Greek",label:"Greek"});
-    tmp.push({value:"British",label:"British"});
-    tmp.push({value:"Italian",label:"Italian"});
-    tmp.push({value:"German",label:"German"});
-    tmp.push({value:"American",label:"American"});
-    tmp.push({value:"Bulgarian",label:"Bulgarian"});
-    tmp.push({value:"Turkish",label:"Turkish"});
-    tmp.push({value:"Spanish",label:"Spanish"});
+    for(var country of countries){
+        if(country.label){
+            tmp.push({value:country.label,label:country.label});
+        }
+    }
     return tmp;
 }

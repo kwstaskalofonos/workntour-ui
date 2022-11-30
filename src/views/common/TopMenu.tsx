@@ -8,7 +8,7 @@ import {faUserCircle} from "@fortawesome/free-solid-svg-icons/faUserCircle";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {getUserDisplayName, isHost} from "@src/utilities/ui";
 import {useAppSelector} from "@src/state/stores/hooks";
-import {CompanyHostProfile, IndividualHostProfile, Role, TravelerProfile} from "@src/state/stores/user/models";
+import {CompanyHostProfile, IndividualHostProfile, Role, TravelerProfileDTO} from "@src/state/stores/user/models";
 import {clearRefData, SessionStorage} from "@src/utilities/localStorage";
 
 const TopMenu: React.FunctionComponent = () =>{

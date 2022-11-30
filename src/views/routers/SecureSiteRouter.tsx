@@ -16,7 +16,7 @@ const SecuredSiteRouter: React.FunctionComponent = () =>{
         <React.Fragment>
             <InterCom/>
             <Header/>
-                <div className="container is-fluid mt-4">
+                <div className="container is-fluid px-0 mt-4">
                     {userRole===Role.COMPANY_HOST.valueOf() &&
                         <CompanyRouter/>
                     }
@@ -27,7 +27,7 @@ const SecuredSiteRouter: React.FunctionComponent = () =>{
                         <TravelerRouter/>
                     }
                 </div>
-            <Footer/>
+            <Footer className={"mt-6"}/>
         </React.Fragment>
     )
 };

@@ -54,6 +54,18 @@ export async function post<T>(uri: string,data:any): Promise<T | any>{
     )
 }
 
+export async function put<T>(uri: string,data:any): Promise<T | any>{
+    return new Promise((resolve,reject)=>fetch(Constants.getApiUrl()+uri,headers('PUT',data))
+        .then(parseResponse)
+        .then((response:GenericResponse)=>{
+            if(response.ok){
+                return resolve(response.data);
+            }
+            return reject(response.error);
+        }).catch((error)=>reject(networkErrorResponse(error)))
+    )
+}
+
 export async function paging<T>(uri: string,data:any): Promise<T | any>{
     return new Promise((resolve,reject)=>fetch(Constants.getApiUrl()+uri,headers('POST',data))
         .then(parseResponse)
@@ -78,8 +90,8 @@ export async function del<T>(uri: string,data?:any): Promise<T | any>{
     )
 }
 
-export async function postMultipart<T>(uri: string,data:FormData): Promise<T | any>{
-    return new Promise((resolve,reject)=>fetch(Constants.getApiUrl()+uri,multipartHeaders(data))
+export async function postMultipart<T>(uri: string,data:FormData,method:string='POST'): Promise<T | any>{
+    return new Promise((resolve,reject)=>fetch(Constants.getApiUrl()+uri,multipartHeaders(data,method))
         .then(parseResponse)
         .then((response:GenericResponse)=>{
             if(response.ok){
@@ -188,14 +200,14 @@ function headers(method:string,data?:any,email?:string,password?:string):Request
     }
 }
 
-function multipartHeaders(data:FormData):RequestInit{
+function multipartHeaders(data:FormData, method:string='POST'):RequestInit{
     const customHeaders = new Headers();
     if(hasCookie('workntour')){
         customHeaders.set('memberId',getCookie('workntour'))}
     return {
         body:data,
         headers:customHeaders,
-        method:'POST',
+        method:method,
         mode:'cors',
     }
 }

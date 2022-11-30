@@ -1,5 +1,5 @@
 import React, {useEffect, useMemo, useState} from "react";
-import {CompanyHostProfile, Role, TravelerProfile} from "@src/state/stores/user/models";
+import {CompanyHostProfile, Role, TravelerProfileDTO} from "@src/state/stores/user/models";
 import ProfileImage from "@src/views/common/ProfileImage";
 // @ts-ignore
 import profilePhoto from "@src/assets/hostProfile.png";

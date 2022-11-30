@@ -255,3 +255,11 @@ input[type="range"]::-ms-thumb{
   }
 
 }
+
+.empty-select option{
+    color: black;
+}
+
+.empty-select{
+    color: rgba(128, 128, 128, 0.6) !important;
+}
