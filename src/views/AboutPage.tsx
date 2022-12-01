@@ -30,6 +30,10 @@ import thanasis from "@src/assets/newLandingPage/thanasis.png";
 import kostas from "@src/assets/newLandingPage/kwstas.png";
 // @ts-ignore
 import chris from "@src/assets/newLandingPage/chris.png";
+// @ts-ignore
+import dimitris from "@src/assets/newLandingPage/dimitris.png";
+// @ts-ignore
+import jason from "@src/assets/newLandingPage/jason.png";
 import Footer from "@src/views/common/Footer";
 import PersonDescr from "@src/views/PersonDescr";
 import {logEvent} from "firebase/analytics";
@@ -49,7 +53,7 @@ const AboutPage:React.FunctionComponent = () =>{
 
     const chrisDesc = () =>{
         return(
-            <p className={"is-size-7 p-2 has-text-justify"}>Christos holds a degree in 
+            <p className={"is-size-7 p-1 has-text-justify"}>Christos holds a degree in 
                 Informatics from Athens University of Economics & Business. His role on the 
                 workntour team is to set the technical direction for the product development. Christos 
                 specializes in Mobile App Development and has experience working for tech
@@ -59,7 +63,7 @@ const AboutPage:React.FunctionComponent = () =>{
 
     const rafDesc = () =>{
         return(
-            <p className={"is-size-7 p-2 has-text-justify"}>Rafail holds a Bachelor's degree in Law 
+            <p className={"is-size-7 p-1 has-text-justify"}>Rafail holds a Bachelor's degree in Law 
             from Maastricht University and a Master's Degree in Maritime from the Erasmus University of  
             Rotterdam, with specialization in  Yacht Management. At Workntour he  is responsible for setting out the 
             team's goal and carrying out business development strategies. Rafail has already set up a company in Yachting.</p>
@@ -68,7 +72,7 @@ const AboutPage:React.FunctionComponent = () =>{
 
     const thanDesc = () =>{
         return(
-            <p className={"is-size-7 p-2 has-text-justify"}>Thanasis holds a degree in Computer Engineering 
+            <p className={"is-size-7 p-1 has-text-justify"}>Thanasis holds a degree in Computer Engineering 
             and Informatics from University of Patras and follows a Master's degree in Business Administration from 
             University of Pafos. He has experience as Software Engineer in Consulting companies. 
             In Workntout, hae has taken over the backend implementation of the Web and Mobile application and is responsible for 
@@ -78,10 +82,35 @@ const AboutPage:React.FunctionComponent = () =>{
 
     const kostasDesc = () =>{
         return(
-            <p className={"is-size-7 p-2 has-text-justify"}>Konstantinos holds a degree in Computer Science 
+            <p className={"is-size-7 p-1 has-text-justify"}>Konstantinos holds a degree in Computer Science 
             from Athens University of Economics and Business He has experience as Full Stack Developer in software companies.
              In Workntour he is responsible for the frontend implementation of the Web Application using React.</p>
         )
+    }
+
+    const dimitrisDesc = () =>{
+        return (
+          <p className={"is-size-7 p-1 has-text-justify"}>
+            Dimitris is an undergraduate student in Computer Science, at the
+            Dept. of Informatics and Telecommunications, NKUA. He has experience
+            as Front End Developer. In Workntour he is responsible for the
+            frontend implementation of the Web Application using React.
+          </p>
+        );
+    }
+
+    const jasonDesc = () =>{
+        return (
+          <p className={"is-size-7 p-1 has-text-justify"}>
+            Jason holds a Bachelor's degree in International Business and a
+            Master's degree in International Business - Strategy and Innovation
+            issued by the Maastricht University. Alongside his role as a
+            Director of Sales and Operations with acos cosmetics ltd., he is
+            responsible for setting up Workntour's strategic orientation. His
+            tasks include but are not limited to Strategic Planning, Strategic
+            Consulting, PR and Communications.
+          </p>
+        );
     }
 
     const mobileView = () =>{
@@ -288,7 +317,7 @@ const AboutPage:React.FunctionComponent = () =>{
                         <p className={"has-text-weight-bold is-size-3 pt-6 m-6"}>Meet our team</p>
                     </div>
                                 
-                    <div className={"columns is-multiline"}>       
+                    <div className={"columns is-multiline is-centered"}>       
                         <div className={"column is-one-third-tablet is-one-quarter-widescreen"}>
                             <PersonDescr key={"member-1"} src={raf} name={"Rafail Roumeliotis"} position={"Co-founder & CEO"} description={rafDesc()}/>
                         </div>
@@ -301,17 +330,12 @@ const AboutPage:React.FunctionComponent = () =>{
                         <div className={"column is-one-third-tablet is-one-quarter-widescreen"}>
                             <PersonDescr key={"member-4"} src={kostas} name={"Konstantinos Kalofonos"} position={"Frontend Developer"} description={kostasDesc()}/>
                         </div>
-                        {/* <div className={"column is-one-third-tablet is-one-quarter-widescreen"}>
-                            <PersonDescr key={"member-2"} src={chris} name={"Dimitris Sitaras"} position={"Frontend Developer"} description={chrisDesc()}/>
+                        <div className={"column  is-one-third-tablet is-one-quarter-widescreen is-centered"}>
+                            <PersonDescr key={"member-4"} src={jason} name={"Jason Kalientzidis"} position={"Strategic Communications"} description={jasonDesc()}/>
                         </div>
-                        <div className={"column is-one-third-tablet is-one-quarter-widescreen"}>
-                            <PersonDescr key={"member-3"} src={thanasis} name={"Jason"} position={" "} description={thanDesc()}/>
+                        <div className={"column is-one-third-tablet is-one-quarter-widescreen is-centered"}>
+                            <PersonDescr key={"member-4"} src={dimitris} name={"Dimitrios Sitaras"} position={"Frontend Developer"} description={dimitrisDesc()}/>
                         </div>
-                        <div className={"column is-one-third-tablet is-one-quarter-widescreen"}>
-                            <PersonDescr key={"member-4"} src={kostas} name={"Nick"} position={" "} description={kostasDesc()}/>
-                        </div>
-                        <div className={"column"}/>
-                        <div className={"column"}/> */}
                     </div>
                 </section>
             </section>
