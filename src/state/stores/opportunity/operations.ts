@@ -136,3 +136,27 @@ export const getArticle = (articleId:string):Promise<Article>=>{
         }).finally()
     )
 };
+
+export const getArticlesByPaging = (filtersFields:FiltersFields|undefined, start:number, offset:number):Promise<PagingObjects>=>{
+    return new Promise<PagingObjects>((resolve, reject)=>
+        paging('homePage/filters/?start='+start+"&offset="+offset,filtersFields)
+            .then((response:PagingObjects)=>{
+                resolve(response);
+            }).catch((error)=>{
+            toast.error(error,{position:toast.POSITION.TOP_RIGHT});
+            reject(error);
+        }).finally()
+    )
+};
+
+export const getTotalArticles = (filtersFields:FiltersFields|undefined):Promise<number>=>{
+    return new Promise<number>((resolve, reject)=>
+        post('homePage/filters/numOfResults/',filtersFields)
+            .then((response:number)=>{
+                resolve(response);
+            }).catch((error)=>{
+            toast.error(error,{position:toast.POSITION.TOP_RIGHT});
+            reject(error);
+        }).finally()
+    )
+};

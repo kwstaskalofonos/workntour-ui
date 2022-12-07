@@ -19,13 +19,7 @@ export interface ArticleFormModalHandler {
 
 const PostArticle: React.FunctionComponent = () => {
   const form = useForm();
-  const {
-    register,
-    handleSubmit,
-    reset,
-    getValues,
-    formState: { errors },
-  } = form;
+  const { register, handleSubmit } = form;
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [articleImage, setArticleImage] = useState<File[]>([]);
   const [content, setContent] = useState<string>("");
@@ -52,20 +46,14 @@ const PostArticle: React.FunctionComponent = () => {
         position: toast.POSITION.TOP_RIGHT,
       });
       form.reset();
+      setContent("");
+      setArticleImage([]);
     });
   };
 
   return (
     <React.Fragment>
-      <section
-        className={"section"}
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          maxHeight: "100vh",
-          overflowX: "auto",
-        }}
-      >
+      <section className="section flex is-flex-direction-column m-4 p-4">
         <p className="title is-4 has-text-weight-bold has-text-primary has-text-centered">
           Share your Experience!
         </p>

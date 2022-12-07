@@ -250,7 +250,6 @@ input[type="range"]::-ms-thumb{
 }
 
 .view-article-section {
-    height: 100%;
     margin-left: 10%;
     margin-right: 10%;
 }

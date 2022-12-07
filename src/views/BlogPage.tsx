@@ -15,11 +15,16 @@ import Footer from "@src/views/common/Footer";
 import {logEvent} from "firebase/analytics";
 import {analytics} from "@src/utilities/firebase";
 import {isDevServer} from "../../webpack/env";
+import Paging from "./common/Paging";
+import { Pagination } from "@src/utilities/fetch";
 
 const BlogPage:React.FunctionComponent = () =>{
 
     const [email,setEmail] = useState<string>("");
     const [isLoading,setIsLoading] = useState<boolean>(false);
+    const [paging, setPaging] = useState<Pagination>();
+    const [start, setStart] = useState<number>(0);
+
 
     useEffect(()=>{
         if(!isDevServer){
@@ -93,6 +98,9 @@ const BlogPage:React.FunctionComponent = () =>{
                         <ArticleComponent src={blog3} date={"19 Jan 2022"} title={"The 5th Cycle of CapsuleT has just started!"}/>
                     </div>
                 </div>
+                {!isLoading && paging&&
+                    <Paging pagination={paging} page={start} setPage={setStart}/>
+                }
             </section>
             <Footer/>
         </React.Fragment>

@@ -19,6 +19,10 @@ const TopMenu: React.FunctionComponent = () =>{
     const role = useAppSelector((state)=>state.session.authenticationSlice.role);
     const userProfile = useAppSelector((state)=>state.session.authenticationSlice.profile);
     const [isActive,setIsActive] = useState<boolean>(false);
+    
+    // for the blog
+    const user = userProfile as unknown as TravelerProfile;
+    // 
 
     const logout = () =>{
         deleteCookie();
@@ -94,9 +98,11 @@ const TopMenu: React.FunctionComponent = () =>{
                                         Profile
                                     </a>
                                     <hr className="navbar-divider"/>
+                                    {user?.email === "traveler.workntour@gmail.com" ? (
                                     <a className="navbar-item" href={"shareArticle"}>
                                         Create an article
                                     </a>
+                                    ) : null}
                                     <hr className="navbar-divider"/>
                                     <a className="navbar-item" onClick={()=>logout()}>
                                         Log out
