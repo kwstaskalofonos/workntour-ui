@@ -85,8 +85,7 @@ const TravelerProfilePage: React.FunctionComponent = () => {
                 skills: userProfile.skills,
                 experience: userProfile.experience,
                 specialDietary: userProfile.specialDietary,
-                driverLicense: userProfile.driverLicense,
-                imageWeb: userProfile.imageWeb
+                driverLicense: userProfile.driverLicense
             }
             setProfile(tmp);
 
