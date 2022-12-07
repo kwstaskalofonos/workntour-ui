@@ -340,7 +340,6 @@ const AboutPage:React.FunctionComponent = () =>{
                 </section>
             </section>
 
-            <hr className={"mt-6"} style={{"border": "1px solid #7E6FD8"}}/>
             <Footer/>
         </React.Fragment>
     )

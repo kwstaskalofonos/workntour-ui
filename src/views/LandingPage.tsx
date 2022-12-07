@@ -176,7 +176,6 @@ export const LandingPage: React.FunctionComponent = () => {
             <section className={"mt-6"}>
                 <GalleryComponent/>
             </section>
-            <hr style={{borderImage:"linear-gradient(90deg,#7E6FD8,#0EE5D0) 30", borderWidth: "4px", borderStyle: "solid", }}/>
             <Footer/>
         </React.Fragment>
     )
