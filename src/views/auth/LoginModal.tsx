@@ -51,6 +51,7 @@ const LoginModal:React.FunctionComponent<Props>=
                setCookie(response.role,15,"role");
                setIsLoading(false);
                dispatch(doSetRole(response.role));
+               setIsActive(false);
                navigate("/");
            })
            .catch((error)=>{

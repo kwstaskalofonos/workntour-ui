@@ -19,6 +19,9 @@ import {SessionStorage} from "@src/utilities/localStorage";
 import AboutPage from "@src/views/AboutPage";
 import BlogPage from "@src/views/BlogPage";
 
+import Footer from "../common/Footer";
+import TopMenu from "../common/TopMenu";
+
 const AppRouter :React.FunctionComponent = () =>{
 
     const dispatch = useAppDispatch();
@@ -50,24 +53,36 @@ const AppRouter :React.FunctionComponent = () =>{
         }
     },[userRole])
 
-    return(
-        <Router>
-           <Routes>
-             <Route path="/registerAsTraveler" element={<TravelerRegisterPage/>}></Route>
-             <Route path="/registerAsHost" element={<HostRegisterPage/>}></Route>
-             <Route path="/check-inbox" element={<CheckInboxPage/>}></Route>
-             <Route path="/not-found" element={<ErrorPage/>}></Route>
-             <Route path="/home" element={<LandingPage/>}/>
-             <Route path="/about" element={<AboutPage/>}/>
-             <Route path="/blog" element={<BlogPage/>}/>
-             <Route path="*" element={
-                 <PrivateRoute>
-                     <SecuredSiteRouter/>
-                 </PrivateRoute>
-             }/>
-           </Routes>
-        </Router>
-    )
+
+    return (
+      <Router>
+        <TopMenu />
+        <div style={{ paddingTop: "60px" }}>
+          <Routes>
+            <Route
+              path="/registerAsTraveler"
+              element={<TravelerRegisterPage />}
+            />
+            <Route path="/registerAsHost" element={<HostRegisterPage />} />
+            <Route path="/check-inbox" element={<CheckInboxPage />} />
+            <Route path="/not-found" element={<ErrorPage />} />
+            <Route path="/home" element={<LandingPage />} />
+            <Route path="/about" element={<AboutPage />} />
+            <Route path="/blog" element={<BlogPage />} />
+            {/* <Route path="/view/:id" element={<ViewArticle />} /> */}
+            <Route
+              path="*"
+              element={
+                <PrivateRoute>
+                  <SecuredSiteRouter />
+                </PrivateRoute>
+              }
+            />
+          </Routes>
+        </div>
+        <Footer />
+      </Router>
+    );
 }
 
 export default AppRouter;

@@ -34,7 +34,6 @@ import chris from "@src/assets/newLandingPage/chris.png";
 import dimitris from "@src/assets/newLandingPage/dimitris.png";
 // @ts-ignore
 import jason from "@src/assets/newLandingPage/jason.png";
-import Footer from "@src/views/common/Footer";
 import PersonDescr from "@src/views/PersonDescr";
 import {logEvent} from "firebase/analytics";
 import {analytics} from "@src/utilities/firebase";
@@ -136,7 +135,6 @@ const AboutPage:React.FunctionComponent = () =>{
     return(
         <React.Fragment>
             <InterCom/>
-            <Header/>
             <section className={"section is-medium about-page-top-background pt-1"}>
                 <div className={"columns mt-5"}>
                     <div  className={"column is-2"}/>
@@ -339,9 +337,6 @@ const AboutPage:React.FunctionComponent = () =>{
                     </div>
                 </section>
             </section>
-
-            <hr className={"mt-6"} style={{"border": "1px solid #7E6FD8"}}/>
-            <Footer/>
         </React.Fragment>
     )
 };

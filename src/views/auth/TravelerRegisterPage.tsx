@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from "react";
-import Footer from "@src/views/common/Footer";
 import ReactDatePicker from "react-datepicker";
 import {faAngleUp} from "@fortawesome/free-solid-svg-icons/faAngleUp";
 import {faAngleDown} from "@fortawesome/free-solid-svg-icons/faAngleDown";
@@ -71,7 +70,6 @@ const TravelerRegisterPage:React.FunctionComponent = () =>{
     return(
         <React.Fragment>
             <InterCom/>
-            <Header/>
             <form>
                 <section className={"section has-background-primary-light"}>
                     <div className={"columns is-centered"}>
@@ -191,7 +189,6 @@ const TravelerRegisterPage:React.FunctionComponent = () =>{
                     </div>
                 </section>
             </form>
-            <Footer/>
         </React.Fragment>
     )
 };
