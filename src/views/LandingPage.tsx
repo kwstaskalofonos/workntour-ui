@@ -2,7 +2,6 @@ import React, {useEffect, useState} from "react"
 // @ts-ignore
 import mainSection from "@src/assets/mainBanner.png";
 // @ts-ignore
-import Footer from "@src/views/common/Footer";
 // @ts-ignore
 import leftImage from "@src/assets/newLandingPage/left.png";
 // @ts-ignore
@@ -64,7 +63,6 @@ export const LandingPage: React.FunctionComponent = () => {
     return (
         <React.Fragment>
             <InterCom/>
-            <Header/>
             <section className="section landing-page-background" style={{position: "relative"}}>
                 <div className={"is-flex is-justify-content-center"}>
                     <div><p className="is-size-3 has-text-weight-bold" style={{"color": "#8870F9"}}>Work. Travel.</p>
@@ -175,7 +173,6 @@ export const LandingPage: React.FunctionComponent = () => {
             <section className={"mt-6"}>
                 <GalleryComponent/>
             </section>
-            <Footer/>
         </React.Fragment>
     )
 };

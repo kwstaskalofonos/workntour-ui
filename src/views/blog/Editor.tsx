@@ -1,6 +1,6 @@
 import React from "react";
 import ReactQuill from "react-quill";
-import './editor.css';
+import './blog.css';
 
 export interface Props {
   content: string;

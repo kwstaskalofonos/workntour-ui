@@ -11,7 +11,6 @@ import blog2 from "@src/assets/blog/blog2.png";
 // @ts-ignore
 import blog3 from "@src/assets/blog/blog3.png";
 import ArticleComponent from "@src/views/ArticleComponent";
-import Footer from "@src/views/common/Footer";
 import {logEvent} from "firebase/analytics";
 import {analytics} from "@src/utilities/firebase";
 import {isDevServer} from "../../webpack/env";
@@ -57,7 +56,6 @@ const BlogPage:React.FunctionComponent = () =>{
     return(
         <React.Fragment>
             <InterCom/>
-            <Header/>
             <section className={"section is-large blog-page-banner pt-6 pb-6"}>
 
                 <div className={"hero-body is-flex is-justify-content-center"}>
@@ -102,7 +100,6 @@ const BlogPage:React.FunctionComponent = () =>{
                     <Paging pagination={paging} page={start} setPage={setStart}/>
                 }
             </section>
-            <Footer/>
         </React.Fragment>
     )
 };

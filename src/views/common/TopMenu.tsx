@@ -45,8 +45,9 @@ const TopMenu: React.FunctionComponent = () =>{
 
     return(
         <React.Fragment>
-            <nav className="navbar" role="navigation" aria-label="main-navigation">
-                <div className="navbar-brand" style={{position:"relative",left:"+4%"}}>
+            <nav className="navbar p-1" role="navigation" aria-label="main-navigation" 
+            style={{boxShadow:"0px 4px 18px rgba(0, 0, 0, 0.15)", position:"fixed", zIndex: 5, width:"100%", height:"60px"  }}>
+                <div className="navbar-brand">
                     <a className="navbar-item" href="/">
                         {/*<img src={logo} width="190" height="28"/>*/}
                         <img src={logo}/>

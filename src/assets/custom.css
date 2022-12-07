@@ -241,19 +241,6 @@ input[type="range"]::-ms-thumb{
 }
 
 
-.has-img {
-    object-fit: cover;
-    border-radius: 8px;
-    height: 70vh;
-    width: 100%;
-    margin: auto;
-}
-
-.view-article-section {
-    margin-left: 10%;
-    margin-right: 10%;
-}
-
 @media screen and (max-width: 770px) {
   .reverseColumnsFlex {
     display: flex;
@@ -266,16 +253,6 @@ input[type="range"]::-ms-thumb{
     flex-direction: column;
     height: 100%;
   }
-
-  .view-article-section {
-      margin-left: 5%;
-      margin-right: 5%;
-  }
-
-  .has-img {
-      height: 50vh;
-  }
-
 }
 
 

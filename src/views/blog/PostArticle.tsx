@@ -53,7 +53,7 @@ const PostArticle: React.FunctionComponent = () => {
 
   return (
     <React.Fragment>
-      <section className="section flex is-flex-direction-column m-4 p-4">
+      <section className="section">
         <p className="title is-4 has-text-weight-bold has-text-primary has-text-centered">
           Share your Experience!
         </p>
