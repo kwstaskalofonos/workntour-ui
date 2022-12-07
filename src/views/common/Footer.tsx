@@ -28,7 +28,7 @@ import {isMobile} from 'react-device-detect';
 const Footer:React.FunctionComponent = () =>{
 
     return(
-        <footer className="footer has-background-white p-0ç">
+        <footer className="footer has-background-white p-0">
             <hr style={{borderImage:"linear-gradient(90deg,#7E6FD8,#0EE5D0) 30", borderWidth: "4px", borderStyle: "solid", marginTop: 0 }}/>
             <div className={"columns is-centered"}>
                 <div className={"column is-three-quarters"}>
