@@ -240,6 +240,8 @@ input[type="range"]::-ms-thumb{
     margin-top: -9px;
 }
 
+/* checkbox for traveller profile */
+
 .checkBoxWithLabel {
     display: flex;
     gap: 5px;
@@ -249,7 +251,7 @@ input[type="range"]::-ms-thumb{
     margin-left: 20px;
 }
 
-input[type="checkbox"] {
+.profileCheckbox {
     -webkit-appearance: none;
     appearance: none;
     background-color: inherit;
@@ -265,7 +267,7 @@ input[type="checkbox"] {
     cursor: pointer;
 }
 
-input[type="checkbox"]::before {
+.profileCheckbox::before {
     /* tick */
     font-family: "Font Awesome 5 Free";
     font-weight: bold;
@@ -284,10 +286,31 @@ input[type="checkbox"]::before {
     transition: 150ms transform ease-in-out;
 }
 
-input[type="checkbox"]:checked::before {
+.profileCheckbox:checked::before {
     transform: scale(1);
 }
 
+/* input with prefix for company profile */
+
+.inputBoxWithPrefix {
+    position: relative;
+    display: table;
+    border-collapse: separate;
+    border-radius: 8px;
+}
+
+.prefix {
+    padding: 6px 12px;
+    font-size: 14px;
+    font-weight: 400;
+    color: #667085;
+    background-color: #F9FAFB;
+    width: 1%;
+    white-space: nowrap;
+    vertical-align: middle;
+    display: table-cell;
+    border-radius: 8px 0px 0px 8px;
+}
 
 @media screen and (max-width: 770px) {
   .reverseColumnsFlex {

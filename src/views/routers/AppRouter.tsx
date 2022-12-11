@@ -14,7 +14,7 @@ import {getCookie, hasCookie} from "@src/utilities/cookies";
 import LandingPage from "@src/views/LandingPage";
 import SecuredSiteRouter from "@src/views/routers/SecureSiteRouter";
 import {useAppDispatch, useAppSelector} from "@src/state/stores/hooks";
-import {CompanyHostProfile, IndividualHostProfile, Role, TravelerProfileDTO} from "@src/state/stores/user/models";
+import {CompanyHostProfileDto, IndividualHostProfile, Role, TravelerProfileDTO} from "@src/state/stores/user/models";
 import {SessionStorage} from "@src/utilities/localStorage";
 import AboutPage from "@src/views/AboutPage";
 import BlogPage from "@src/views/BlogPage";
@@ -44,7 +44,7 @@ const AppRouter :React.FunctionComponent = () =>{
                 let profile:IndividualHostProfile|null = SessionStorage.getItem('profile');
                 dispatch(doSetProfile(profile));
             }else if(userRole === Role.COMPANY_HOST.toString()){
-                let profile:CompanyHostProfile|null = SessionStorage.getItem('profile');
+                let profile:CompanyHostProfileDto|null = SessionStorage.getItem('profile');
                 dispatch(doSetProfile(profile));
             }
         }

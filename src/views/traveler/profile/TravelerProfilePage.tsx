@@ -450,17 +450,17 @@ const TravelerProfilePage: React.FunctionComponent = () => {
                                 <label className="label has-text-primary has-text-weight-medium">Special Dietary Requirements*</label>
                                 <div className={"is-flex"}>
                                     <div className="field checkBoxWithLabel">
-                                        <input id="dietary1" type="checkbox"
+                                        <input className="profileCheckbox" id="dietary1" type="checkbox"
                                                name="dietary1" checked={true}/>
                                         <label htmlFor="dietary1">None</label>
                                     </div>
                                     <div className="field checkBoxWithLabel">
-                                        <input id="dietary2" type="checkbox"
+                                        <input className="profileCheckbox" id="dietary2" type="checkbox"
                                                name="dietary2" />
                                         <label htmlFor="dietary2">Vegan</label>
                                     </div>
                                     <div className="field checkBoxWithLabel">
-                                        <input id="dietary3" type="checkbox"
+                                        <input className="profileCheckbox" id="dietary3" type="checkbox"
                                                name="dietary3" />
                                         <label htmlFor="dietary3">Vegeterian</label>
                                     </div>
@@ -471,12 +471,12 @@ const TravelerProfilePage: React.FunctionComponent = () => {
                                 <label className="label has-text-primary has-text-weight-medium">Driver's License*</label>
                                 <div className={"is-flex"}>
                                     <div className="field checkBoxWithLabel">
-                                        <input id="driver1" type="checkbox"
+                                        <input className="profileCheckbox" id="driver1" type="checkbox"
                                                name="driver1" checked={true}/>
                                         <label htmlFor="driver1">Yes</label>
                                     </div>
                                     <div className="field checkBoxWithLabel">
-                                        <input id="driver2" type="checkbox"
+                                        <input className="profileCheckbox" id="driver2" type="checkbox"
                                                name="driver2" />
                                         <label htmlFor="driver2">No</label>
                                     </div>

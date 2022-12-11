@@ -1,5 +1,5 @@
 import {getCookie, hasCookie} from "@src/utilities/cookies";
-import {CompanyHostProfile, IndividualHostProfile, Profile, Role, TravelerProfileDTO} from "@src/state/stores/user/models";
+import {CompanyHostProfileDto, IndividualHostProfile, Profile, Role, TravelerProfileDTO} from "@src/state/stores/user/models";
 import {formatISO} from "date-fns";
 import {countries} from "@src/utilities/countries";
 
@@ -44,7 +44,7 @@ export function getUserDisplayName(){
     if(hasCookie()&&hasCookie('role')){
         switch (getCookie('role')){
             case Role.COMPANY_HOST.valueOf():{
-                let profile:CompanyHostProfile = JSON.parse(getCookie('profile'));
+                let profile:CompanyHostProfileDto = JSON.parse(getCookie('profile'));
                 name = profile.companyName;
                 break;
             }

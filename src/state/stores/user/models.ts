@@ -50,8 +50,8 @@ export interface LoginForm {
     password: string
 }
 
-export interface CompanyHostProfile {
-    memberId: string,
+export interface CompanyHostProfileDto {
+    memberId?: string,
     role: string,
     companyName: string,
     companyId: string
@@ -60,9 +60,14 @@ export interface CompanyHostProfile {
     mobileNum: string,
     countryCodeMobileNum: string,
     fixedNumber: string,
-    profileImage: string,
+    profileImage?: Image,
     description: string,
-    postalAddress: string
+    address: string,
+    postalAddress: string,
+    vatNumber: string,
+    link: string,
+    city: string,
+    country: string,
 }
 
 export interface IndividualHostProfile {
