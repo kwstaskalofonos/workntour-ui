@@ -24,6 +24,7 @@ import {faTrashCan} from "@fortawesome/free-solid-svg-icons/faTrashCan";
 import LanguagesModal from "@src/views/traveler/profile/LanguagesModal";
 import SkillsModal, {SkillsModalHandler} from "@src/views/traveler/profile/SkillsModal";
 import ExperienceModal from "@src/views/traveler/profile/ExperienceModal";
+import {toast} from "react-toastify";
 
 const TravelerProfilePage: React.FunctionComponent = () => {
 
@@ -197,45 +198,19 @@ const TravelerProfilePage: React.FunctionComponent = () => {
     }, [profile, file])
 
     const onSubmit = () => {
-        // if(!profile?.sex){
-        //     toast.error("You must select a sex type");
-        //     return;
+        if(!profile?.sex){
+            toast.error("You must select a sex type");
+            return;
+        }
+
+        console.log(profile);
+        // let formData = new FormData();
+        // if (file) {
+        //     formData.append("profileImage", file);
         // }
-
-        let updatedProfile: TravelerProfileDTO = {
-            memberId: '5440507f-89aa-4f2f-afb7-d82fd3b7c629',
-            role: Role.TRAVELER,
-            name: "Konstantinos",
-            surname: 'Kalofonos',
-            nationality: "Greek",
-            email: 'konkalof1@gmail.com',
-            birthday: '1994-09-22',
-            countryCodeMobileNum: '30',
-            mobileNum: '6942440807',
-            address: 'Peloponisou 25',
-            city: 'Athens',
-            country: 'Greece',
-            sex: 'MALE',
-            postalAddress: '14564',
-            description: 'A good description',
-            typeOfTraveler: 'SOLO_TRAVELER',
-            interests: ['ANIMAL_WELFARE'],
-            languages: {},
-            skills: ['ADMINISTRATIVE_TASKS'],
-            experience: {},
-            specialDietary: 'NONE',
-            driverLicense: true,
-        }
-
-
-        let formData = new FormData();
-        if (file) {
-            formData.append("profileImage", file);
-        }
-        //formData.append("updatedTravelerProfile",new Blob([JSON.stringify(profile)],{type:"application/json"}));
-        formData.append("updatedTravelerProfile", new Blob([JSON.stringify(updatedProfile)], {type: "application/json"}));
-        setIsLoading(true);
-        dispatch(updateTravelerProfile(formData, setIsLoading, setFile));
+        // formData.append("updatedTravelerProfile",new Blob([JSON.stringify(profile)],{type:"application/json"}));
+        // setIsLoading(true);
+        // dispatch(updateTravelerProfile(formData, setIsLoading, setFile));
     }
 
     return (
@@ -247,7 +222,7 @@ const TravelerProfilePage: React.FunctionComponent = () => {
                         <ProfileImage defaultImage={profilePhoto} role={Role.TRAVELER} setFile={setFile}
                                       name={userProfile ? userProfile.name : ''}
                                       surname={userProfile ? userProfile.surname : ''}
-                                      completion={completion} profileImage={profile?.profileImage}/>
+                                      completion={completion} profileImage={profile?.profileImage?.imageUrl}/>
                     </div>
                     <div className={"column is-7"}/>
                 </div>
