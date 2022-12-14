@@ -46,7 +46,7 @@ const ProfileImage:React.FunctionComponent<Props> = ({defaultImage,role,name,sur
         return defaultImage;
     }
 
-    const onChange = (event:any) =>{
+    const handleChangeImage = (event:any) =>{
         let selected = event.target.files[0];
         let reader = new FileReader();
         let imgTag = document.getElementById("profile");
@@ -81,7 +81,7 @@ const ProfileImage:React.FunctionComponent<Props> = ({defaultImage,role,name,sur
                     style={{position:'relative'}}>
                 <input className={"file-input"} type={"file"} name={"profile"} id={"profile"}
                        style={{width:'100%',height:'100%',zIndex:1}} accept={"image/*"}
-                       onChange={(e)=>onChange(e)}/>
+                       onChange={handleChangeImage}/>
                 <div className={'border-linear-profile'}
                      style={{width:'100%',height:'100%',
                          position:'absolute',top:'-10px',zIndex:'-1',

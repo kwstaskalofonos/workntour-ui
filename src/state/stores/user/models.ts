@@ -61,6 +61,7 @@ export interface CompanyHostProfileDto {
     countryCodeMobileNum: string,
     fixedNumber: string,
     profileImage?: Image,
+    profImage?: Image,
     description: string,
     address: string,
     postalAddress: string,

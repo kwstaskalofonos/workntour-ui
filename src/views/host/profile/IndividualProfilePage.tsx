@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {useAppDispatch, useAppSelector} from "@src/state/stores/hooks";
-import {CompanyHostProfile, IndividualHostProfile, Role} from "@src/state/stores/user/models";
+import {IndividualHostProfile, Role} from "@src/state/stores/user/models";
 import Flag from "react-flagkit";
 import ProfileImage from "@src/views/common/ProfileImage";
 // @ts-ignore
