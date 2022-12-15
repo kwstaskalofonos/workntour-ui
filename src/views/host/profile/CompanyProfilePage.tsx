@@ -37,6 +37,29 @@ const CompanyProfilePage: React.FunctionComponent = () => {
   const [disabled, setDisabled] = useState<boolean>(true);
 
   useEffect(() => {
+    const totalField = 13;
+    let completed = 0;
+    function hasValue(property:any){
+      return property ? 1 : 0
+    }
+    completed += hasValue(profileImageFile);
+    completed += hasValue(profile?.companyName);
+    completed += hasValue(profile?.email);
+    completed += hasValue(profile?.country);
+    completed += hasValue(profile?.city);
+    completed += hasValue(profile?.address);
+    completed += hasValue(profile?.postalAddress);
+    completed += hasValue(profile?.mobileNum);
+    completed += hasValue(profile?.fixedNumber);
+    completed += hasValue(profile?.vatNumber);
+    completed += hasValue(profile?.profImage);
+    completed += hasValue(profile?.link);
+    completed += hasValue(profile?.description);
+
+    setCompletion((completed / totalField) * 100);
+  }, [profile, profileImageFile]);
+
+  useEffect(() => {
     setInitialized(true);
     if (userProfile) {
       console.log(userProfile);
@@ -86,21 +109,6 @@ const CompanyProfilePage: React.FunctionComponent = () => {
         });
         setCountryCode(userProfile.countryCodeMobileNum);
       }
-
-      let completed = 0;
-      if (userProfile.postalAddress) {
-        completed = completed + 25;
-      }
-      if (userProfile.headquartersCounty) {
-        completed = completed + 25;
-      }
-      if (userProfile.mobileNum) {
-        completed = completed + 25;
-      }
-      if (userProfile.fixedNumber) {
-        completed = completed + 25;
-      }
-      setCompletion(completed);
     }
   }, [userProfile]);
 

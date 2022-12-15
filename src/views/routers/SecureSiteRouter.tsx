@@ -21,7 +21,7 @@ const SecuredSiteRouter: React.FunctionComponent = () =>{
                         <CompanyRouter/>
                     }
                     {userRole===Role.INDIVIDUAL_HOST.valueOf() &&
-                        <CompanyRouter/>
+                        <IndividualRouter/>
                     }
                     {userRole===Role.TRAVELER.valueOf() &&
                         <TravelerRouter/>
