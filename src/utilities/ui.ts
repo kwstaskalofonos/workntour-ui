@@ -69,7 +69,7 @@ export function getDateFromString(date:string|undefined){
         let formattedDate = splitDate[1]+" "+splitDate[2]+", "+splitDate[3];
         return formattedDate;
     }
-    return null;
+    return "";
 }
 
 export function getNationalities(){

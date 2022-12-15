@@ -228,7 +228,12 @@ export interface RefData{
 
 
 export interface Article{
+     id: string,
      title:string,
      content:string,
      createdAt?:string,
+     blogPhoto: {
+        imageId: string,
+        imageUrl: string
+      }
 }
