@@ -3,15 +3,15 @@ import {toast} from "react-toastify";
 import {getCookie, hasCookie} from "@src/utilities/cookies";
 
 export interface GenericResponse{
-    ok:boolean,
-    status:number,
+    // ok?:boolean,
+    // status?:number,
     data:string,
     exceptions?:{
         total:number,
         errors:string[]
     },
     pagination:Pagination|null,
-    error?:string
+    // error?:string
 }
 
 export interface Pagination{

@@ -81,7 +81,7 @@ export const retrieveIndividualProfile = ():Promise<IndividualHostProfile>=>{
 
 export const retrieveCompanyProfile = ():Promise<CompanyHostProfileDto>=>{
     return new Promise<CompanyHostProfileDto>((resolve,reject)=>{
-        get('retrieveProfile/companyHost')
+        get('profile/retrieveProfile/companyHost')
             .then((response:CompanyHostProfileDto)=>{
                 SessionStorage.setItem('profile',response,900000);
                 resolve(response);
@@ -180,7 +180,7 @@ export const updateTravelerProfile:ActionCreator<ThunkResult>= (data:FormData,se
 export const updateCompanyProfile:ActionCreator<ThunkResult>= (data:FormData,setIsLoading:any,setFile:any)=>
     (dispatch) =>{
         return new Promise<CompanyHostProfileDto>((resolve,reject)=>{
-            postMultipart('updateProfile/companyHost/web',data)
+            postMultipart('profile/updateProfile/companyHost',data,'PUT')
                 .then((response:CompanyHostProfileDto)=>{
                     SessionStorage.setItem('profile',response,900000);
                     dispatch(authenticationSlice.actions.setProfile({profile:response}));

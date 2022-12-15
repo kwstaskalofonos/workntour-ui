@@ -42,7 +42,7 @@ const CompanyProfilePage: React.FunctionComponent = () => {
     function hasValue(property:any){
       return property ? 1 : 0
     }
-    completed += hasValue(profileImageFile);
+    completed += hasValue(userProfile?.profileImage);
     completed += hasValue(profile?.companyName);
     completed += hasValue(profile?.email);
     completed += hasValue(profile?.country);
@@ -52,7 +52,7 @@ const CompanyProfilePage: React.FunctionComponent = () => {
     completed += hasValue(profile?.mobileNum);
     completed += hasValue(profile?.fixedNumber);
     completed += hasValue(profile?.vatNumber);
-    completed += hasValue(profile?.profImage);
+    completed += hasValue(profile?.authorizedDoc);
     completed += hasValue(profile?.link);
     completed += hasValue(profile?.description);
 
@@ -65,7 +65,6 @@ const CompanyProfilePage: React.FunctionComponent = () => {
       console.log(userProfile);
       setProfile({
         memberId: userProfile.memberId,
-        companyId: userProfile.companyId,
         companyName: userProfile.companyName,
         role: userProfile.role,
         description: userProfile.description,
@@ -77,9 +76,8 @@ const CompanyProfilePage: React.FunctionComponent = () => {
         country: userProfile.country,
         postalAddress: userProfile.postalAddress,
         profileImage: userProfile.profileImage,
-        profImage: userProfile.profImage,
+        authorizedDoc: userProfile.authorizedDoc,
         link: userProfile.link,
-        headquartersCounty: userProfile.headquartersCounty,
         fixedNumber: userProfile.fixedNumber,
         vatNumber: userProfile.vatNumber,
       });
@@ -150,6 +148,8 @@ const CompanyProfilePage: React.FunctionComponent = () => {
       "updatedCompanyHostProfile",
       new Blob([JSON.stringify(profile)], { type: "application/json" })
     );
+    formData.append("profileImage","www")
+    formData.append("authorizedDoc", "www");
     if (profileImageFile) {
       formData.append("profileImage", profileImageFile);
     }
@@ -164,7 +164,6 @@ const CompanyProfilePage: React.FunctionComponent = () => {
     if (profile && initialized) {
       if (
         profile.postalAddress != userProfile.postalAddress ||
-        profile.headquartersCounty != userProfile.headquartersCounty ||
         countryCode != userProfile.countryCodeMobileNum ||
         profile.mobileNum != userProfile.mobileNum ||
         profile.fixedNumber != userProfile.fixedNumber ||

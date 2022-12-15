@@ -122,10 +122,10 @@ const ProfileImage: React.FunctionComponent<Props> = ({
             <path
               className="profileProgressRing-meter"
               d="M5,50a45,45 0 1,0 90,0a45,45 0 1,0 -90,0"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-dashoffset={100 - completion}
-              stroke-dasharray="282.78302001953125"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeDashoffset={282.78302001953125 * ((100 - completion) / 100)}
+              strokeDasharray="282.78302001953125"
             />
           </svg>
           <img

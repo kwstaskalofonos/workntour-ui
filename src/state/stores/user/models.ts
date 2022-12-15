@@ -51,17 +51,13 @@ export interface LoginForm {
 }
 
 export interface CompanyHostProfileDto {
-    memberId?: string,
+    memberId: string,
     role: string,
     companyName: string,
-    companyId: string
     email: string,
-    headquartersCounty: string,
     mobileNum: string,
     countryCodeMobileNum: string,
     fixedNumber: string,
-    profileImage?: Image,
-    profImage?: Image,
     description: string,
     address: string,
     postalAddress: string,
@@ -69,8 +65,15 @@ export interface CompanyHostProfileDto {
     link: string,
     city: string,
     country: string,
+    profileImage: {
+        imageId:string,
+        imageUrl:string,
+    },
+    authorizedDoc: {
+        docId:string,
+        docUrl:string,
+    },
 }
-
 export interface IndividualHostProfile {
     memberId: string,
     role: string,

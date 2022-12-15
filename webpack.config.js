@@ -7,10 +7,10 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 
 const API_URL = {
-    production:"https://workntourbackend.azurewebsites.net",
-    // development:"http://localhost:8080",
-    development:"https://workntourbackend.azurewebsites.net"
-}
+  production: "https://workntourbackenddevelop.azurewebsites.net",
+  // development:"http://localhost:8080",
+  development: "https://workntourbackenddevelop.azurewebsites.net",
+};
 
 const COOKIE_DOMAIN = {
     production: ".workntour.com",
