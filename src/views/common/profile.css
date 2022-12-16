@@ -91,7 +91,7 @@
     stroke-width: 3px;
     stroke: #7E6FD8;
     fill: none;
-    transition: stroke-dashoffset 1s cubic-bezier(0.43, 0.41, 0.22, 0.91);
+    transition: stroke-dashoffset 2s cubic-bezier(0.43, 0.41, 0.22, 0.91);
     transform-origin: center center;
     transform: rotate(-90deg) scaleX(-1);
 }

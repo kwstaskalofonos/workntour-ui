@@ -157,12 +157,12 @@ const ProfileImage: React.FunctionComponent<Props> = ({
         />
       </figure>
       <div className={"pl-5"} style={{ position: "relative" }}>
-        <p className="has-text-primary has-text-weight-semibold is-size-4">
+        <p className="has-text-primary has-text-weight-semibold is-size-4-desktop">
           {name ? name : ""}
         </p>
         {isPerson() && (
           <p
-            className="has-text-primary has-text-weight-semibold is-size-4"
+            className="has-text-primary has-text-weight-semibold is-size-4-desktop"
             style={{ position: "absolute", top: "22px" }}
           >
             {surname ? surname : ""}
@@ -177,7 +177,7 @@ const ProfileImage: React.FunctionComponent<Props> = ({
           </span>
         ) : (
           <span
-            style={{ position: "absolute", top: "62px", marginTop: "-24px" }}
+            // style={{ position: "absolute", top: "62px", marginTop: "-24px" }}
             className="tag is-info has-text-weight-semibold"
           >
             {type}
