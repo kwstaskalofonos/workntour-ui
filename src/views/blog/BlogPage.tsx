@@ -21,8 +21,6 @@ import { FiltersFields, Article } from "@src/state/stores/opportunity/models";
 
 import { useNavigate } from "react-router-dom";
 
-
-
 const BlogPage: React.FunctionComponent = () => {
   const [email, setEmail] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -42,13 +40,13 @@ const BlogPage: React.FunctionComponent = () => {
   }, []);
 
   useEffect(() => {
-      setIsLoading(true);
-      getArticlesByPaging(filters, start, 6).then((response) => {
-        console.log(response)
-        setBlogPosts(response.data);
-        setPaging(response.pagination);
-        setIsLoading(false);
-      });
+    setIsLoading(true);
+    getArticlesByPaging(filters, start, 3).then((response) => {
+      console.log(response);
+      setBlogPosts(response.data);
+      setPaging(response.pagination);
+      setIsLoading(false);
+    });
   }, [filters, start]);
 
   const isEmail = () => {
@@ -80,7 +78,7 @@ const BlogPage: React.FunctionComponent = () => {
 
   return (
     <React.Fragment>
-      <InterCom />
+      {/* <InterCom /> */}
       <section className={"section is-large blog-page-banner pt-6 pb-6"}>
         <div className={"hero-body is-flex is-justify-content-center"}>
           <div>
@@ -120,16 +118,13 @@ const BlogPage: React.FunctionComponent = () => {
           </div>
         </div>
       </section>
-      <section className={"section is-medium pt-6"}>
-        <div className={"columns is-multiline is-centered"}>
+      <section className={"section articlesContainer"}>
+        <div className={"columns is-multiline"}>
           {blogPosts &&
             blogPosts.map((article) => {
               return (
                 <div
-                  className={
-                    "column is-one-third is-flex is-justify-content-center"
-                  }
-                  style={{ cursor: "pointer" }}
+                  className="column is-flex is-justify-content-center articleBox"
                   key={article.id}
                   onClick={() => navigate("/article/" + article.id)}
                 >
@@ -147,7 +142,7 @@ const BlogPage: React.FunctionComponent = () => {
             pagination={paging}
             page={start}
             setPage={setStart}
-            dataPerPage={6}
+            dataPerPage={3}
           />
         )}
       </section>

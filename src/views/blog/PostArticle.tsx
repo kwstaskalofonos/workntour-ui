@@ -71,6 +71,7 @@ const PostArticle: React.FunctionComponent = () => {
                     type="text"
                     placeholder="p.ex. An Amazing Experience"
                     {...register("title")}
+                    maxLength={110}
                   />
                 </div>
               </div>

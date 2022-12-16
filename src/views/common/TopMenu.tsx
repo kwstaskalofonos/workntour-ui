@@ -99,12 +99,27 @@ const TopMenu: React.FunctionComponent = () =>{
                                         Profile
                                     </a>
                                     <hr className="navbar-divider"/>
-                                    {user?.email === "traveler.workntour@gmail.com" ? (
-                                    <a className="navbar-item" href={"shareArticle"}>
-                                        Create an article
+                                    <a className="navbar-item" href={"/"}>
+                                        Home
                                     </a>
-                                    ) : null}
                                     <hr className="navbar-divider"/>
+                                    <a className="navbar-item" href={"/about"}>
+                                        About Us
+                                    </a>
+                                    <hr className="navbar-divider"/>
+                                    <a className="navbar-item" href={"/blog"}>
+                                        Blog
+                                    </a>
+                                    <hr className="navbar-divider"/>
+                                    {user?.email === "traveler.workntour@gmail.com" ? (
+                                    <>
+                                        <a className="navbar-item" href={"shareArticle"}>
+                                            Create an article
+                                        </a>
+                                        <hr className="navbar-divider"/>
+                                    </>
+                                    ) : null}
+                                    
                                     <a className="navbar-item" onClick={()=>logout()}>
                                         Log out
                                     </a>
