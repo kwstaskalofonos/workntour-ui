@@ -43,6 +43,10 @@
 }
 
 .contentContainer {
+    display: block;
+}
+
+.contentContainer-textStyle {
     text-align: justify;
     padding: 20px 40px;
     width: 100%;
@@ -52,13 +56,18 @@
 
 .contentContainer-textStyle>p {
     font-weight: 400;
-    font-size: 18px;
+    font-size: 17px;
     color: #667085;
 }
+
 .contentContainer-textStyle>h2 {
     font-weight: 400;
     font-size: 22px;
     color: #667085;
+}
+
+.contentContainer-textStyle>ul {
+    padding-left: 30px;
 }
 
 .articleImage {
@@ -71,7 +80,7 @@
 
 .authorAndSocialContainer {
     width: 100%;
-    padding: 20px 80px;
+    padding: 20px 0px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -103,7 +112,7 @@
 
 .articleBox {
     min-width: 300px;
-    min-height: 450px;
+    min-height: 430px;
     box-sizing: border-box;
     margin: 10px;
     padding: 5px;
@@ -113,7 +122,7 @@
     transition: transform .2s;
 }
 
-.articleBox:hover{
+.articleBox:hover {
     transform: scale(1.05);
 }
 
@@ -126,8 +135,9 @@
         height: 50vh;
     }
 
-    .contentContainer {
-        padding: 20px 0;
+    .contentContainer-textStyle {
+        text-align: start;
+        padding: 20px 0px;
     }
 }
 

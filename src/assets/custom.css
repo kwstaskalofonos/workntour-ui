@@ -255,5 +255,7 @@ input[type="range"]::-ms-thumb{
   }
 }
 
-
+ ul li {
+    list-style-type: disc;
+}
 
