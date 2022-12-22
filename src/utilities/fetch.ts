@@ -54,8 +54,20 @@ export async function post<T>(uri: string,data:any): Promise<T | any>{
     )
 }
 
-export async function paging<T>(uri: string,data:any): Promise<T | any>{
+export async function pagingPost<T>(uri: string,data:any): Promise<T | any>{
     return new Promise((resolve,reject)=>fetch(Constants.getApiUrl()+uri,headers('POST',data))
+        .then(parseResponse)
+        .then((response:GenericResponse)=>{
+            if(response.ok){
+                return resolve(response);
+            }
+            return reject(response.error);
+        }).catch((error)=>reject(networkErrorResponse(error)))
+    )
+}
+
+export async function pagingGet<T>(uri: string,data:any): Promise<T | any>{
+    return new Promise((resolve,reject)=>fetch(Constants.getApiUrl()+uri,headers('GET',data))
         .then(parseResponse)
         .then((response:GenericResponse)=>{
             if(response.ok){

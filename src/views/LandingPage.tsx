@@ -145,9 +145,8 @@ export const LandingPage: React.FunctionComponent = () => {
                         <img style={{position:'absolute',left:'47%',top:'-5%'}}
                              src={formLogo} width={90} height={90}/>
                         <div className={"is-flex is-justify-content-center mt-6"}>
-                            <div><p className="is-size-4 has-text-weight-bold"
-                                    style={{"color": "#383350"}}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                &nbsp;&nbsp;&nbsp;Fill out the form and</p>
+                            <div><p className="is-size-4 has-text-weight-bold has-text-centered"
+                                    style={{"color": "#383350"}}>Fill out the form and</p>
                                 <p className="is-size-4 has-text-weight-bold"
                                    style={{"color": "#383350"}}>
                                     get a free subscription for 1 year!</p></div>

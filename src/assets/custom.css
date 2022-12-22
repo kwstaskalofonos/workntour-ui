@@ -253,5 +253,9 @@ input[type="range"]::-ms-thumb{
     flex-direction: column;
     height: 100%;
   }
-
 }
+
+ ul li {
+    list-style-type: disc;
+}
+

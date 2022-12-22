@@ -265,7 +265,7 @@ const HomePage:React.FunctionComponent = () =>{
                     )}
                 </div>
                 {!isLoading && paging&&
-                    <Paging pagination={paging} page={start} setPage={setStart}/>
+                    <Paging pagination={paging} page={start} setPage={setStart} dataPerPage={10}/>
                 }
             </section>
             <FiltersModal active={active} setActive={setActive}

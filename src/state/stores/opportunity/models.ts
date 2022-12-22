@@ -225,3 +225,15 @@ export interface RefData{
      label:string,
      selected:boolean
 }
+
+
+export interface Article{
+     id: string,
+     title:string,
+     content:string,
+     createdAt?:string,
+     blogPhoto: {
+        imageId: string,
+        imageUrl: string
+      }
+}

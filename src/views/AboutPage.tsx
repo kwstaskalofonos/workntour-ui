@@ -311,8 +311,8 @@ const AboutPage:React.FunctionComponent = () =>{
                 </section>
 
                 <section className={"section is-medium about-page-last-background"} >
-                    <div className={"is-flex is-justify-content-center mt-5"}>
-                        <p className={"has-text-weight-bold is-size-3 pt-6 m-6"}>Meet our team</p>
+                    <div className={"is-flex is-justify-content-center mt-6 mb-6"}>
+                        <p className={"has-text-weight-bold is-size-3 has-text-center"}>Meet our team</p>
                     </div>
                                 
                     <div className={"columns is-multiline is-centered"}>       

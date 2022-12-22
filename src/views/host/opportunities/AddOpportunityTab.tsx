@@ -34,6 +34,7 @@ const AddOpportunityTab:React.FunctionComponent = () =>{
     const [images,setImages] = useState<File[]>([]);
     const [startDate,setStartDate] = useState<Date>();
     const [endDate,setEndDate] = useState<Date>();
+    const [descContent, setDescContent] = useState("");
 
     const renderCategories = () =>{
         let array:any[]=[];

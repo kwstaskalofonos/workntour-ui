@@ -19,6 +19,10 @@ const TopMenu: React.FunctionComponent = () =>{
     const role = useAppSelector((state)=>state.session.authenticationSlice.role);
     const userProfile = useAppSelector((state)=>state.session.authenticationSlice.profile);
     const [isActive,setIsActive] = useState<boolean>(false);
+    
+    // for the blog
+    const user = userProfile as unknown as TravelerProfile;
+    // 
 
     const logout = () =>{
         deleteCookie();
@@ -72,7 +76,7 @@ const TopMenu: React.FunctionComponent = () =>{
                         {!isAuthenticated ?
                             <div className="navbar-item">
                                 <div className="buttons">
-                                    <a className="button is-primary" style={{pointerEvents:'none'}}
+                                    <a className="button is-primary"
                                        onClick={()=>loginModalHandler.current?.open()}>Log In</a>
                                     <a className="button is-outlined"
                                        style={{"border":"1px solid #7E6FD8","color":"#7E6FD8",pointerEvents:'none'}}
@@ -95,6 +99,27 @@ const TopMenu: React.FunctionComponent = () =>{
                                         Profile
                                     </a>
                                     <hr className="navbar-divider"/>
+                                    <a className="navbar-item" href={"/"}>
+                                        Home
+                                    </a>
+                                    <hr className="navbar-divider"/>
+                                    <a className="navbar-item" href={"/about"}>
+                                        About Us
+                                    </a>
+                                    <hr className="navbar-divider"/>
+                                    <a className="navbar-item" href={"/blog"}>
+                                        Blog
+                                    </a>
+                                    <hr className="navbar-divider"/>
+                                    {user?.email === "traveler.workntour@gmail.com" ? (
+                                    <>
+                                        <a className="navbar-item" href={"shareArticle"}>
+                                            Create an article
+                                        </a>
+                                        <hr className="navbar-divider"/>
+                                    </>
+                                    ) : null}
+                                    
                                     <a className="navbar-item" onClick={()=>logout()}>
                                         Log out
                                     </a>
