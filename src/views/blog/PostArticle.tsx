@@ -9,7 +9,7 @@ import { toast } from "react-toastify";
 import { createArticle } from "@src/state/stores/opportunity/operations";
 
 import ImageUploader from "@src/views/common/ImageUploader";
-import Editor from "./editor";
+import Editor from "./Editor";
 import { Article } from "@src/state/stores/opportunity/models";
 
 export interface ArticleFormModalHandler {
