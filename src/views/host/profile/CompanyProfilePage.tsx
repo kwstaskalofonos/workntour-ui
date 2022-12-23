@@ -104,14 +104,14 @@ const CompanyProfilePage: React.FunctionComponent = () => {
     let selected = event.target.files[0];
     setAuthorizedDoc(selected);
   };
+
   const onSubmit = () => {
     let formData = new FormData();
     formData.append(
       "updatedCompanyHostProfile",
       new Blob([JSON.stringify(profile)], { type: "application/json" })
     );
-    formData.append("profileImage", "www");
-    formData.append("authorizedDoc", "www");
+
     if (profileImageFile) {
       formData.append("profileImage", profileImageFile);
     }
