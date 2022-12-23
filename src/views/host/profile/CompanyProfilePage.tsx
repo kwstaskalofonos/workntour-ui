@@ -23,7 +23,6 @@ const CompanyProfilePage: React.FunctionComponent = () => {
         .profile as unknown as CompanyHostProfileDto
   );
 
-  const [countries, setCountries] = useState<any>("");
   const [profile, setProfile] = useState<CompanyHostProfileDto>();
   const [selected, setSelected] = useState<{
     value: string;
@@ -33,16 +32,17 @@ const CompanyProfilePage: React.FunctionComponent = () => {
   const [completion, setCompletion] = useState<number>(0);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [initialized, setInitialized] = useState<boolean>(false);
+  const [clearImage, setClearImage] = useState<boolean>(false);
   const [profileImageFile, setProfileImageFile] = useState<File>();
-  const [disabled, setDisabled] = useState<boolean>(true);
+  const [authorizedDoc, setAuthorizedDoc] = useState<File>();
 
   useEffect(() => {
     const totalField = 13;
     let completed = 0;
-    function hasValue(property:any){
-      return property ? 1 : 0
+    function hasValue(property: any) {
+      return property ? 1 : 0;
     }
-    completed += hasValue(userProfile?.profileImage);
+    completed += hasValue(profile?.profileImage);
     completed += hasValue(profile?.companyName);
     completed += hasValue(profile?.email);
     completed += hasValue(profile?.country);
@@ -63,24 +63,7 @@ const CompanyProfilePage: React.FunctionComponent = () => {
     setInitialized(true);
     if (userProfile) {
       console.log(userProfile);
-      setProfile({
-        memberId: userProfile.memberId,
-        companyName: userProfile.companyName,
-        role: userProfile.role,
-        description: userProfile.description,
-        email: userProfile.email,
-        countryCodeMobileNum: userProfile.countryCodeMobileNum,
-        mobileNum: userProfile.mobileNum,
-        address: userProfile.address,
-        city: userProfile.city,
-        country: userProfile.country,
-        postalAddress: userProfile.postalAddress,
-        profileImage: userProfile.profileImage,
-        authorizedDoc: userProfile.authorizedDoc,
-        link: userProfile.link,
-        fixedNumber: userProfile.fixedNumber,
-        vatNumber: userProfile.vatNumber,
-      });
+      setProfile({ ...userProfile });
       let array: any = [];
       array.push(<option key={"country-key-" + 1} value={""} label={""} />);
       countryList()
@@ -96,7 +79,6 @@ const CompanyProfilePage: React.FunctionComponent = () => {
             </option>
           );
         });
-      setCountries(array);
       let idx = codes.findIndex(
         (value) => value.code == userProfile.countryCodeMobileNum
       );
@@ -117,6 +99,11 @@ const CompanyProfilePage: React.FunctionComponent = () => {
       setProfile(tmp);
     }
   }, [countryCode]);
+
+  const handleChangeAuthDoc = (event: any) => {
+    let selected = event.target.files[0];
+    setAuthorizedDoc(selected);
+  };
 
   const renderNationalities = () => {
     let array: any[] = [];
@@ -148,40 +135,98 @@ const CompanyProfilePage: React.FunctionComponent = () => {
       "updatedCompanyHostProfile",
       new Blob([JSON.stringify(profile)], { type: "application/json" })
     );
-    formData.append("profileImage","www")
+    formData.append("profileImage", "www");
     formData.append("authorizedDoc", "www");
     if (profileImageFile) {
       formData.append("profileImage", profileImageFile);
     }
+    if (authorizedDoc) {
+      formData.append("authorizedDoc", authorizedDoc);
+    }
 
-    console.log(profileImageFile);
     console.log(profile);
+    console.log(profileImageFile);
+    console.log(authorizedDoc);
     setIsLoading(true);
     dispatch(updateCompanyProfile(formData, setIsLoading, setProfileImageFile));
   };
 
-  useEffect(() => {
-    if (profile && initialized) {
-      if (
-        profile.postalAddress != userProfile.postalAddress ||
-        countryCode != userProfile.countryCodeMobileNum ||
-        profile.mobileNum != userProfile.mobileNum ||
-        profile.fixedNumber != userProfile.fixedNumber ||
-        profileImageFile
-      ) {
-        setDisabled(false);
-        return;
-      }
-      setDisabled(true);
+  const authDocPlaceholder = () => {
+    if (authorizedDoc) {
+      return (
+        <>
+          <p className="file-label has-text-primary has-text-centered is-size-5 has-text-weight-semibold">
+            {authorizedDoc.name}
+          </p>
+          <FontAwesomeIcon
+            className={"has-text-primary"}
+            icon={faCloudUpload}
+          />
+          <span className="file-label has-text-primary has-text-centered is-size-6 has-text-weight-light">
+            Or Click to select a new one
+          </span>
+        </>
+      );
+    } else if (profile?.authorizedDoc) {
+      return (
+        <>
+          <a
+            className="file-label has-text-primary has-text-centered is-size-5 has-text-weight-semibold is-underlined"
+            href={profile?.authorizedDoc?.docUrl}
+            target="_blank"
+          >
+            See Your Document
+          </a>
+          <FontAwesomeIcon
+            className={"has-text-primary"}
+            icon={faCloudUpload}
+          />
+          <p className="file-label has-text-primary has-text-centered is-size-6 has-text-weight-light">
+            Or Click to upload a new one
+          </p>
+        </>
+      );
     }
-  }, [profile, profileImageFile]);
+    return (
+      <>
+        <FontAwesomeIcon className={"has-text-primary"} icon={faCloudUpload} />
+        <p className="file-label has-text-primary has-text-centered is-size-5 has-text-weight-semibold">
+          Click to upload your document
+        </p>
+        <p className="file-label has-text-primary has-text-centered is-size-6 has-text-weight-light">
+          SVG,PNG,JPG or GIF (max. 800x400px)
+        </p>
+      </>
+    );
+  };
+
+  const buttonEnable = () => {
+    return !(
+      profile?.postalAddress != userProfile?.postalAddress ||
+      profile?.mobileNum != userProfile?.mobileNum ||
+      profile?.email != userProfile?.email ||
+      profile?.country != userProfile?.country ||
+      profile?.city != userProfile?.city ||
+      profile?.address != userProfile?.address ||
+      profile?.fixedNumber != userProfile?.fixedNumber ||
+      profile?.vatNumber != userProfile?.vatNumber ||
+      profile?.link != userProfile?.link ||
+      profile?.description != userProfile?.description ||
+      profileImageFile ||
+      authorizedDoc
+    );
+  };
+
+  const handleCancel = () => {
+    setProfile({ ...userProfile });
+    setClearImage(!clearImage);
+    setProfileImageFile(undefined);
+    setAuthorizedDoc(undefined);
+  };
 
   return (
     <div className={"profile"}>
-      <form
-        className="is-flex is-flex-direction-column is-justify-content-center"
-        style={{ padding: "2% 15%" }}
-      >
+      <form className="is-flex is-flex-direction-column is-justify-content-center profileForm">
         <div className={"is-flex"}>
           <ProfileImage
             defaultImage={profilePhoto}
@@ -191,6 +236,7 @@ const CompanyProfilePage: React.FunctionComponent = () => {
             surname={""}
             setFile={setProfileImageFile}
             profileImage={profile?.profileImage?.imageUrl}
+            clearImage={clearImage}
           />
         </div>
         <section>
@@ -394,19 +440,14 @@ const CompanyProfilePage: React.FunctionComponent = () => {
                 </label>
                 <div className="file is-large is-boxed is-fullwidth">
                   <label className="file-label border-linear-radius">
-                    <input className="file-input" type="file" name="resume" />
-                    <span className="file-cta">
-                      <FontAwesomeIcon
-                        className={"has-text-primary"}
-                        icon={faCloudUpload}
-                      />
-                      <span className="file-label has-text-primary has-text-centered is-size-5 has-text-weight-semibold">
-                        Click to upload your file
-                      </span>
-                      <p className="file-label has-text-primary has-text-centered is-size-6 has-text-weight-light">
-                        SVG,PNG,JPG or GIF (max. 800x400px)
-                      </p>
-                    </span>
+                    <input
+                      className="file-input"
+                      type="file"
+                      name="resume"
+                      accept="application/pdf"
+                      onChange={handleChangeAuthDoc}
+                    />
+                    <span className="file-cta">{authDocPlaceholder()}</span>
                   </label>
                 </div>
               </div>
@@ -456,24 +497,39 @@ const CompanyProfilePage: React.FunctionComponent = () => {
                   ></textarea>
                 </div>
               </div>
-              <div className="field">
-                <p className="control is-fullwidth">
-                  <button
-                    className={
-                      "button is-primary is-fullwidth " +
-                      (isLoading ? "is-loading" : "")
-                    }
-                    disabled={disabled}
-                    type={"button"}
-                    onClick={onSubmit}
-                  >
-                    Save
-                  </button>
-                </p>
-              </div>
             </div>
           </div>
         </section>
+        <hr />
+        <div className="submitSection">
+          <div className="field">
+            <p className="control is-fullwidth">
+              <button
+                className={"button is-secondary is-fullwidth "}
+                onClick={handleCancel}
+                disabled={buttonEnable()}
+                type={"button"}
+              >
+                Cancel
+              </button>
+            </p>
+          </div>
+          <div className="field">
+            <p className="control is-fullwidth">
+              <button
+                className={
+                  "button is-primary is-fullwidth " +
+                  (isLoading ? "is-loading" : "")
+                }
+                disabled={buttonEnable()}
+                type={"button"}
+                onClick={onSubmit}
+              >
+                Save Profile
+              </button>
+            </p>
+          </div>
+        </div>
       </form>
     </div>
   );

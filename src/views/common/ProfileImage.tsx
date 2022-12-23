@@ -11,6 +11,7 @@ interface Props {
   completion: number;
   setFile: any;
   profileImage?: string;
+  clearImage?: boolean;
 }
 
 const ProfileImage: React.FunctionComponent<Props> = ({
@@ -21,6 +22,7 @@ const ProfileImage: React.FunctionComponent<Props> = ({
   completion,
   setFile,
   profileImage,
+  clearImage,
 }) => {
   const [imagePath, setImagePath] = useState<any>();
   const [type, setType] = useState<string>("");
@@ -42,15 +44,11 @@ const ProfileImage: React.FunctionComponent<Props> = ({
     }
   }, []);
 
-  const image = () => {
-    if (imagePath) {
-      return imagePath;
-    }
-    if (profileImage) {
-      return profileImage;
-    }
-    return defaultImage;
-  };
+  useEffect(() => {
+    setImagePath(undefined);
+  }, [clearImage]);
+
+  const image = () => imagePath || profileImage || defaultImage;
 
   const handleChangeImage = (event: any) => {
     let selected = event.target.files[0];
@@ -135,7 +133,7 @@ const ProfileImage: React.FunctionComponent<Props> = ({
           />
         </div>
         <span
-          style={{ position: "absolute", left: "15px", top: "96px" }}
+          style={{ position: "absolute", left: "9px", top: "96px" }}
           className="tag has-text-white is-info has-text-weight-semibold background-linear is-normal"
         >
           {completion ? calculateCompletion() + "% Complete" : "100% Complete"}
@@ -156,32 +154,22 @@ const ProfileImage: React.FunctionComponent<Props> = ({
           icon={faPlus}
         />
       </figure>
-      <div className={"pl-5"} style={{ position: "relative" }}>
+      <div
+        className={"ml-5 is-flex is-flex-direction-column"}
+        style={{ position: "relative" }}
+      >
         <p className="has-text-primary has-text-weight-semibold is-size-4-desktop">
           {name ? name : ""}
         </p>
         {isPerson() && (
-          <p
-            className="has-text-primary has-text-weight-semibold is-size-4-desktop"
-            style={{ position: "absolute", top: "22px" }}
-          >
+          <p className="has-text-primary has-text-weight-semibold is-size-4-desktop">
             {surname ? surname : ""}
           </p>
         )}
         {isPerson() ? (
-          <span
-            style={{ position: "absolute", top: "62px" }}
-            className="tag is-info has-text-weight-semibold"
-          >
-            {type}
-          </span>
+          <span className="tag is-info has-text-weight-semibold">{type}</span>
         ) : (
-          <span
-            // style={{ position: "absolute", top: "62px", marginTop: "-24px" }}
-            className="tag is-info has-text-weight-semibold"
-          >
-            {type}
-          </span>
+          <span className="tag is-info has-text-weight-semibold">{type}</span>
         )}
       </div>
     </div>

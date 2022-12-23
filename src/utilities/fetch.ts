@@ -33,11 +33,11 @@ export function get<T>(uri: string):Promise<T | any>{
     return new Promise((resolve, reject)=>fetch(Constants.getApiUrl()+uri,headers('GET'))
         .then(parseResponse)
         .then((response:GenericResponse)=>{
-            if(response.ok){
-                return resolve(response.data);
-            }
+            // if(response.ok){
+            return resolve(response.data);
+            // }
 
-            return reject(response.error);
+            // return reject(response.error);
         }).catch((error)=>reject(networkErrorResponse(error)))
     )
 }
@@ -46,10 +46,10 @@ export async function post<T>(uri: string,data:any): Promise<T | any>{
     return new Promise((resolve,reject)=>fetch(Constants.getApiUrl()+uri,headers('POST',data))
         .then(parseResponse)
         .then((response:GenericResponse)=>{
-            if(response.ok){
+            // if(response.ok){
                 return resolve(response.data);
-            }
-            return reject(response.error);
+            // }
+            // return reject(response.error);
         }).catch((error)=>reject(networkErrorResponse(error)))
     )
 }
@@ -58,10 +58,10 @@ export async function put<T>(uri: string,data:any): Promise<T | any>{
     return new Promise((resolve,reject)=>fetch(Constants.getApiUrl()+uri,headers('PUT',data))
         .then(parseResponse)
         .then((response:GenericResponse)=>{
-            if(response.ok){
+            // if(response.ok){
                 return resolve(response.data);
-            }
-            return reject(response.error);
+            // }
+            // return reject(response.error);
         }).catch((error)=>reject(networkErrorResponse(error)))
     )
 }
@@ -70,10 +70,10 @@ export async function paging<T>(uri: string,data:any): Promise<T | any>{
     return new Promise((resolve,reject)=>fetch(Constants.getApiUrl()+uri,headers('POST',data))
         .then(parseResponse)
         .then((response:GenericResponse)=>{
-            if(response.ok){
+            // if(response.ok){
                 return resolve(response);
-            }
-            return reject(response.error);
+            // }
+            // return reject(response.error);
         }).catch((error)=>reject(networkErrorResponse(error)))
     )
 }
@@ -82,10 +82,10 @@ export async function del<T>(uri: string,data?:any): Promise<T | any>{
     return new Promise((resolve,reject)=>fetch(Constants.getApiUrl()+uri,headers('DELETE',data))
         .then(parseResponse)
         .then((response:GenericResponse)=>{
-            if(response.ok){
+            // if(response.ok){
                 return resolve(response.data);
-            }
-            return reject(response.error);
+            // }
+            // return reject(response.error);
         }).catch((error)=>reject(networkErrorResponse(error)))
     )
 }
@@ -94,10 +94,10 @@ export async function postMultipart<T>(uri: string,data:FormData,method:string='
     return new Promise((resolve,reject)=>fetch(Constants.getApiUrl()+uri,multipartHeaders(data,method))
         .then(parseResponse)
         .then((response:GenericResponse)=>{
-            if(response.ok){
+            // if(response.ok){
                 return resolve(response.data);
-            }
-            return reject(response.error);
+            // }
+            // return reject(response.error);
         }).catch((error)=>{
             reject(networkErrorResponse(error))
         })
@@ -108,11 +108,11 @@ export function login<T>(email:string,password:string):Promise<T | any>{
     return new Promise((resolve, reject)=>fetch(Constants.getApiUrl()+"login",headers('POST',null,email,password))
         .then(parseResponse)
         .then((response:GenericResponse)=>{
-            if(response.ok){
+            // if(response.ok){
                 toast.success("Logged in succesfully",{position:toast.POSITION.TOP_RIGHT});
                 return resolve(response.data);
-            }
-            return reject(response.error);
+            // }
+            // return reject(response.error);
         }).catch(((error)=>reject(networkErrorResponse(error)))
     ))
 }
@@ -121,12 +121,12 @@ export function subscribe<T>(email:string,setIsLoading:any):Promise<T | any>{
     return new Promise((resolve, reject)=>fetch(Constants.getApiUrl()+"earlySubscription",headers('POST',null,email))
         .then(parseResponse)
         .then((response:GenericResponse)=>{
-            if(response.ok){
+            // if(response.ok){
                 setIsLoading(false);
                 return resolve(response.data);
-            }
-            setIsLoading(false);
-            return reject(response.error);
+            // }
+            // setIsLoading(false);
+            // return reject(response.error);
         }).catch(((error)=>reject(networkErrorResponse(error)))
         ))
 }
@@ -137,47 +137,47 @@ function parseResponse(response:Response): Promise<GenericResponse>{
             .then((json:any)=>{
                 if((response.status === 201)||(response.status === 200)){
                     resolve({
-                        status:response.status,
+                        // status:response.status,
                         data:json.data,
                         pagination:json.pagination,
-                        ok:response.ok,
+                        // ok:response.ok,
                     })
                 }else if (response.status === 400){
                     resolve({
-                        status:response.status,
+                        // status:response.status,
                         data:"",
-                        ok:false,
+                        // ok:false,
                         pagination:null,
                         exceptions:json.exceptions,
-                        error:json.exceptions.errors[0].title
+                        // error:json.exceptions.errors[0].title
                     })
                 } else if(response.status === 500){
                     resolve({
-                        status:response.status,
+                        // status:response.status,
                         data:"",
                         pagination:null,
-                        ok:false,
+                        // ok:false,
                         exceptions:json.exceptions,
-                        error:json.exceptions.errors[0].title
+                        // error:json.exceptions.errors[0].title
                     })
                 }
                 else if (response.status === 409){
                     resolve({
-                        status:response.status,
+                        // status:response.status,
                         data:"",
                         pagination:null,
-                        ok:false,
+                        // ok:false,
                         exceptions:json.exceptions,
-                        error:json.exceptions.errors[0].title
+                        // error:json.exceptions.errors[0].title
                     })
                 }else{
                     resolve({
-                        status:response.status,
+                        // status:response.status,
                         data:"",
                         pagination:null,
-                        ok:false,
+                        // ok:false,
                         exceptions:json.exceptions,
-                        error:json.exceptions.errors[0].title
+                        // error:json.exceptions.errors[0].title
                     })
                 }
             })

@@ -1,3 +1,22 @@
+.profileForm {
+    padding: 2% 15%;
+}
+
+.submitSection {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.submitSection>.field+.field {
+    margin-left: 10px;
+}
+
+@media screen and (max-width: 770px) {
+    .submitSection {
+        justify-content: center;
+    }
+}
+
 /* checkbox for traveller profile */
 
 .checkBoxWithLabel {
@@ -69,15 +88,15 @@
     border-radius: 8px 0px 0px 8px;
 }
 
-
+/* profile progress ring over image */
 .profileProgressRing {
     display: inline-flex;
     position: absolute;
     vertical-align: bottom;
     width: 160px;
     height: 160px;
-    left: -15px;
-    top: -15px
+    left: -16px;
+    top: -16px
 }
 
 .profileProgressRing-stroke {
