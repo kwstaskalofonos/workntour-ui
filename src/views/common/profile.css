@@ -1,4 +1,7 @@
 .profileForm {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     padding: 2% 15%;
 }
 

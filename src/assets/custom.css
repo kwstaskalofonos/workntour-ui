@@ -240,6 +240,9 @@ input[type="range"]::-ms-thumb{
     margin-top: -9px;
 }
 
+textarea{
+    height: 140px !important;
+}
 
 
 @media screen and (max-width: 770px) {

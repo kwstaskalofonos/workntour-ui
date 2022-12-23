@@ -1,7 +1,8 @@
 import {getCookie, hasCookie} from "@src/utilities/cookies";
-import {CompanyHostProfileDto, IndividualHostProfile, Profile, Role, TravelerProfileDTO} from "@src/state/stores/user/models";
+import {CompanyHostProfileDto, IndividualHostProfileDto, Profile, Role, TravelerProfileDTO} from "@src/state/stores/user/models";
 import {formatISO} from "date-fns";
 import {countries} from "@src/utilities/countries";
+import React from "react";
 
 export function constructDate(day:string,month:string,year:string){
 
@@ -49,7 +50,7 @@ export function getUserDisplayName(){
                 break;
             }
             case Role.INDIVIDUAL_HOST.valueOf():{
-                let profile:IndividualHostProfile = JSON.parse(getCookie('profile'));
+                let profile:IndividualHostProfileDto = JSON.parse(getCookie('profile'));
                 name = profile.name
                 break;
             }
@@ -82,3 +83,26 @@ export function getNationalities(){
     }
     return tmp;
 }
+
+export function renderNationalities(){
+    let array: any[] = [];
+    array.push(
+      <option
+        key={"nationality-option-empty-1"}
+        value={""}
+        label={"Select Country"}
+      />
+    );
+    for (let item of getNationalities()) {
+      array.push(
+        <option
+          key={"nationality-option-" + item.label}
+          value={item.value}
+          label={item.label}
+        >
+          {item.label}
+        </option>
+      );
+    }
+    return array;
+  };

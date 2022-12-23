@@ -74,21 +74,25 @@ export interface CompanyHostProfileDto {
         docUrl:string,
     },
 }
-export interface IndividualHostProfile {
+export interface IndividualHostProfileDto {
     memberId: string,
     role: string,
     name: string,
     surname: string,
     email: string,
-    country: string,
     mobileNum: string,
     countryCodeMobileNum: string,
-    postalAddress: string,
-    nationality: string,
-    profileImage: string,
+    fixedNumber: string,
     description: string,
-    fixedNumber: string
-    sex: string
+    address: string,
+    postalAddress: string,
+    link: string,
+    city: string,
+    country: string,
+    profileImage: {
+        imageId:string,
+        imageUrl:string,
+    },
 }
 
 export interface TravelerProfileDTO {

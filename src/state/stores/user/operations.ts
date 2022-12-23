@@ -1,7 +1,7 @@
 import {
     Company,
     CompanyHostProfileDto,
-    Individual, IndividualHostProfile,
+    Individual, IndividualHostProfileDto,
     LoginForm, Role,
     Traveler,
     TravelerProfileDTO
@@ -66,10 +66,10 @@ export const retrieveTravelerProfile = ():Promise<TravelerProfileDTO>=>{
     })
 }
 
-export const retrieveIndividualProfile = ():Promise<IndividualHostProfile>=>{
-    return new Promise<IndividualHostProfile>((resolve,reject)=>{
-        get('retrieveProfile/individualHost')
-            .then((response:IndividualHostProfile)=>{
+export const retrieveIndividualProfile = ():Promise<IndividualHostProfileDto>=>{
+    return new Promise<IndividualHostProfileDto>((resolve,reject)=>{
+        get('profile/retrieveProfile/individualHost')
+            .then((response:IndividualHostProfileDto)=>{
                 SessionStorage.setItem('profile',response,900000);
                 resolve(response);
             }).catch((error)=>{
@@ -121,7 +121,7 @@ export const doSetRole: ActionCreator<ThunkResult> = (role:string) =>
         })
     }
 
-export const doSetProfile: ActionCreator<ThunkResult> = (profile:TravelerProfileDTO|IndividualHostProfile|CompanyHostProfileDto) =>
+export const doSetProfile: ActionCreator<ThunkResult> = (profile:TravelerProfileDTO|IndividualHostProfileDto|CompanyHostProfileDto) =>
     (dispatch) =>{
         return new Promise<void>(()=>{
             dispatch(authenticationSlice.actions.setProfile({profile:profile}))
@@ -198,9 +198,9 @@ export const updateCompanyProfile:ActionCreator<ThunkResult>= (data:FormData,set
 
 export const updateIndividualProfile:ActionCreator<ThunkResult>= (data:FormData,setIsLoading:any,setFile:any)=>
     (dispatch) =>{
-        return new Promise<IndividualHostProfile>((resolve,reject)=>{
-            postMultipart('updateProfile/individualHost/web',data)
-                .then((response:IndividualHostProfile)=>{
+        return new Promise<IndividualHostProfileDto>((resolve,reject)=>{
+            postMultipart('profile/updateProfile/individualHost',data,'PUT')
+                .then((response:IndividualHostProfileDto)=>{
                     SessionStorage.setItem('profile',response,900000);
                     dispatch(authenticationSlice.actions.setProfile({profile:response}));
                     resolve(response);

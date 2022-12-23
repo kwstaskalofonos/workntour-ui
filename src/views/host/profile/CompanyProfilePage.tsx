@@ -13,7 +13,7 @@ import cloneDeep from "lodash/cloneDeep";
 import { toast } from "react-toastify";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCloudUpload } from "@fortawesome/free-solid-svg-icons/faCloudUpload";
-import { getNationalities } from "@src/utilities/ui";
+import { renderNationalities } from "@src/utilities/ui";
 
 const CompanyProfilePage: React.FunctionComponent = () => {
   const dispatch = useAppDispatch();
@@ -37,7 +37,7 @@ const CompanyProfilePage: React.FunctionComponent = () => {
   const [authorizedDoc, setAuthorizedDoc] = useState<File>();
 
   useEffect(() => {
-    const totalField = 13;
+    const totalFields = 13;
     let completed = 0;
     function hasValue(property: any) {
       return property ? 1 : 0;
@@ -56,7 +56,7 @@ const CompanyProfilePage: React.FunctionComponent = () => {
     completed += hasValue(profile?.link);
     completed += hasValue(profile?.description);
 
-    setCompletion((completed / totalField) * 100);
+    setCompletion((completed / totalFields) * 100);
   }, [profile, profileImageFile]);
 
   useEffect(() => {
@@ -104,31 +104,6 @@ const CompanyProfilePage: React.FunctionComponent = () => {
     let selected = event.target.files[0];
     setAuthorizedDoc(selected);
   };
-
-  const renderNationalities = () => {
-    let array: any[] = [];
-    array.push(
-      <option
-        key={"nationality-option-empty-1"}
-        value={""}
-        label={"Select Country"}
-        disabled
-      />
-    );
-    for (let item of getNationalities()) {
-      array.push(
-        <option
-          key={"nationality-option-" + item.label}
-          value={item.value}
-          label={item.label}
-        >
-          {item.label}
-        </option>
-      );
-    }
-    return array;
-  };
-
   const onSubmit = () => {
     let formData = new FormData();
     formData.append(
@@ -212,6 +187,7 @@ const CompanyProfilePage: React.FunctionComponent = () => {
       profile?.vatNumber != userProfile?.vatNumber ||
       profile?.link != userProfile?.link ||
       profile?.description != userProfile?.description ||
+      profile?.countryCodeMobileNum != userProfile?.countryCodeMobileNum ||
       profileImageFile ||
       authorizedDoc
     );
@@ -226,7 +202,7 @@ const CompanyProfilePage: React.FunctionComponent = () => {
 
   return (
     <div className={"profile"}>
-      <form className="is-flex is-flex-direction-column is-justify-content-center profileForm">
+      <form className="profileForm">
         <div className={"is-flex"}>
           <ProfileImage
             defaultImage={profilePhoto}
@@ -494,7 +470,7 @@ const CompanyProfilePage: React.FunctionComponent = () => {
                         description: e.target.value,
                       })
                     }
-                  ></textarea>
+                  />
                 </div>
               </div>
             </div>
