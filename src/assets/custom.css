@@ -244,6 +244,10 @@ textarea{
     height: 140px !important;
 }
 
+.selectedTag{
+    background-color: #8870F9;
+}
+
 
 @media screen and (max-width: 770px) {
   .reverseColumnsFlex {

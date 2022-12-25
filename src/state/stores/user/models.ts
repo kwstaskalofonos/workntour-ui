@@ -115,7 +115,7 @@ export interface TravelerProfileDTO {
     profileImage?: Image,
     interests: string[],
     languages: ProfileLanguage[],
-    skills: string[]
+    skills: string[],
     experience: ProfileExperience[],
     specialDietary: string,
     driverLicense: boolean,
@@ -137,9 +137,9 @@ export interface ProfileLanguage {
 }
 
 export enum SpecialDietary {
-    NONE = "None",
-    VEGAN = "Vegan",
-    VEGETARIAN = "Vegeterian"
+    NONE = "NONE",
+    VEGAN = "VEGAN",
+    VEGETARIAN = "VEGETARIAN"
 }
 
 export type SpecialDietaryType = keyof typeof SpecialDietary;
