@@ -1,96 +1,266 @@
-import React from "react";
+import React, { useState } from "react";
+import {
+  TravelerProfileDTO,
+  ProfileExperience,
+  Experience,
+  TypeOfExperience,
+} from "@src/state/stores/user/models";
 
-export interface Props{
-    setActive:any
+import { toast } from "react-toastify";
+
+export interface Props {
+  setActive: any;
+  travelerProfile: TravelerProfileDTO;
+  setTravelerProfile: any;
 }
 
-const ExperienceModal: React.FunctionComponent<Props> = ({setActive}) => {
+const ExperienceModal: React.FunctionComponent<Props> = ({
+  setActive,
+  travelerProfile,
+  setTravelerProfile,
+}) => {
+  const headerStyle = {
+    backgroundColor: "white",
+    borderBottom: "2px solid #8970FA",
+  };
+  const footerStyle = {
+    backgroundColor: "white",
+    borderTop: "none",
+  };
 
-    const headerStyle={
-        backgroundColor:"white",
-        borderBottom:"2px solid #8970FA"
-    }
-    const footerStyle={
-        backgroundColor:"white",
-        borderTop:"none"
-    }
+  const [experienceObj, setExperienceObj] = useState<Experience>({
+    typeOfExperience: TypeOfExperience.COMPANY,
+    position: "",
+    nameOfOrganisation: "",
+    startedOn: "",
+    endedOn: "",
+    description: "",
+  });
 
-    return(
-        <div className={"modal is-active"}>
-            <div className="modal-background"></div>
-            <div className={"modal-card"}>
-                <header className={"modal-card-head"}
-                        style={headerStyle}>
-                    <p className="modal-card-title has-text-weight-semibold has-text-primary">Experience</p>
-                    <button className="delete" aria-label="close" onClick={() => setActive(false)}></button>
-                </header>
-                <section className={"modal-card-body"}>
-                    <div className={"is-flex is-justify-content-center"}>
-                        <div className="field">
-                            <input className="is-checkradio is-circle has-background-info is-info" id="exampleCheckboxDefaultCircle1" type="checkbox"
-                                   name="exampleCheckboxDefaultCircle1" checked={true}/>
-                                <label htmlFor="exampleCheckboxDefaultCircle1">Professional</label>
-                        </div>
-                        <div className="field">
-                            <input className="is-checkradio is-circle has-background-info is-info" id="exampleCheckboxDefaultCircle2" type="checkbox"
-                                   name="exampleCheckboxDefaultCircle2" />
-                            <label htmlFor="exampleCheckboxDefaultCircle2">Education</label>
-                        </div>
-                    </div>
-                    <div className={"field is-horizontal"}>
-                        <div className={"field-body"}>
-                            <div className="field">
-                                <label className="label has-text-primary has-text-weight-medium">Company*</label>
-                                <div className="control">
-                                    <input className={"input border-linear"} placeholder={"Enter your company"}
-                                           type={"text"}/>
-                                </div>
-                            </div>
-                            <div className="field">
-                                <label className="label has-text-primary has-text-weight-medium">Position*</label>
-                                <div className="control">
-                                    <input className={"input border-linear"} placeholder={"Enter your position"}
-                                           type={"text"} />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className={"field is-horizontal"}>
-                        <div className={"field-body"}>
-                            <div className="field">
-                                <label className="label has-text-primary has-text-weight-medium">Start Date*</label>
-                                <div className="control">
-                                    <input className={"input border-linear"} placeholder={"Enter your company"}
-                                           type={"date"} pattern={'yyyy-MM-dd'} lang={"fr-CA"}
-                                           onChange={(event)=>console.log(event.currentTarget.value)}/>
-                                </div>
-                            </div>
-                            <div className="field">
-                                <label className="label has-text-primary has-text-weight-medium">End Date*</label>
-                                <div className="control">
-                                    <input className={"input border-linear"} placeholder={"Enter your position"}
-                                           type={"date"} pattern={'yyyy-MM-dd'}/>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className={"field"}>
-                        <label className="label has-text-primary has-text-weight-medium">Description</label>
-                        <div className={"control"}>
-                                    <textarea className={"textarea border-linear"}></textarea>
-                        </div>
-                    </div>
-                    <p className={"is-size-7 has-text-weight-semibold"}>By adding your background, you will increase your chances of being accepted by a host.</p>
-                </section>
-                <footer className="modal-card-foot is-justify-content-center"
-                        style={footerStyle}>
-                    <button className={"button has-text-white has-background-primary"}>
-                        Add Experience
-                    </button>
-                </footer>
+  let experienceArray: ProfileExperience[] = [];
+  if (travelerProfile.experience) {
+    experienceArray = [...travelerProfile.experience];
+  }
+
+  const handleAddExperience = () => {
+    if (
+      experienceObj.position === "" ||
+      experienceObj.nameOfOrganisation === "" ||
+      experienceObj.startedOn === "" ||
+      experienceObj.endedOn === "" ||
+      experienceObj.description === ""
+    ) {
+      toast.error("Empty Fields");
+      return;
+    }
+    console.log(experienceObj);
+    let temObjToPush: ProfileExperience = {
+      experienceId: "",
+      experience: {
+        ...experienceObj,
+      },
+    };
+    experienceArray.push(temObjToPush);
+
+    setTravelerProfile({
+      ...travelerProfile,
+      experience: experienceArray,
+    });
+
+    console.log(experienceArray);
+
+    setExperienceObj({
+      typeOfExperience: TypeOfExperience.COMPANY,
+      position: "",
+      nameOfOrganisation: "",
+      startedOn: "",
+      endedOn: "",
+      description: "",
+    });
+    setActive(false);
+  };
+
+  return (
+    <div className={"modal is-active"}>
+      <div className="modal-background"></div>
+      <div className={"modal-card"}>
+        <header className={"modal-card-head"} style={headerStyle}>
+          <p className="modal-card-title has-text-weight-semibold has-text-primary">
+            Experience
+          </p>
+          <button
+            className="delete"
+            aria-label="close"
+            onClick={() => setActive(false)}
+          ></button>
+        </header>
+        <section className={"modal-card-body"}>
+          <div className={"is-flex is-justify-content-center"}>
+            <div className="field checkBoxWithLabel">
+              <input
+                id="category1"
+                className="profileCheckbox"
+                type="radio"
+                name="category"
+                value="COMPANY"
+                checked={
+                  experienceObj.typeOfExperience === TypeOfExperience.COMPANY
+                }
+                onChange={(e) =>
+                  setExperienceObj({
+                    ...experienceObj,
+                    typeOfExperience: TypeOfExperience.COMPANY,
+                  })
+                }
+              />
+              <label htmlFor="category1">Professional</label>
             </div>
-        </div>
-    );
-}
+            <div className="field checkBoxWithLabel">
+              <input
+                className="profileCheckbox"
+                id="category2"
+                type="radio"
+                name="category"
+                checked={
+                  experienceObj.typeOfExperience === TypeOfExperience.UNIVERSITY
+                }
+                onChange={(e) =>
+                  setExperienceObj({
+                    ...experienceObj,
+                    typeOfExperience: TypeOfExperience.UNIVERSITY,
+                  })
+                }
+              />
+              <label htmlFor="category2">Education</label>
+            </div>
+          </div>
+          <div className={"field is-horizontal"}>
+            <div className={"field-body"}>
+              <div className="field">
+                <label className="label has-text-primary has-text-weight-medium">
+                  {experienceObj.typeOfExperience === TypeOfExperience.COMPANY
+                    ? "Company*"
+                    : "University*"}
+                </label>
+                <div className="control">
+                  <input
+                    className={"input border-linear"}
+                    placeholder={"Enter your company"}
+                    type={"text"}
+                    value={experienceObj.nameOfOrganisation}
+                    onChange={(e) =>
+                      setExperienceObj({
+                        ...experienceObj,
+                        nameOfOrganisation: e.target.value,
+                      })
+                    }
+                  />
+                </div>
+              </div>
+              <div className="field">
+                <label className="label has-text-primary has-text-weight-medium">
+                  {experienceObj.typeOfExperience === TypeOfExperience.COMPANY
+                    ? "Position*"
+                    : "Field Of Study*"}
+                </label>
+                <div className="control">
+                  <input
+                    className={"input border-linear"}
+                    placeholder={"Enter your position"}
+                    type={"text"}
+                    value={experienceObj.position}
+                    onChange={(e) =>
+                      setExperienceObj({
+                        ...experienceObj,
+                        position: e.target.value,
+                      })
+                    }
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className={"field is-horizontal"}>
+            <div className={"field-body"}>
+              <div className="field">
+                <label className="label has-text-primary has-text-weight-medium">
+                  Start Date*
+                </label>
+                <div className="control">
+                  <input
+                    className={"input border-linear"}
+                    placeholder={"Enter your company"}
+                    type={"date"}
+                    pattern={"yyyy-MM-dd"}
+                    lang={"fr-CA"}
+                    value={experienceObj.startedOn}
+                    onChange={(e) =>
+                      setExperienceObj({
+                        ...experienceObj,
+                        startedOn: e.currentTarget.value,
+                      })
+                    }
+                  />
+                </div>
+              </div>
+              <div className="field">
+                <label className="label has-text-primary has-text-weight-medium">
+                  End Date*
+                </label>
+                <div className="control">
+                  <input
+                    className={"input border-linear"}
+                    placeholder={"Enter your position"}
+                    type={"date"}
+                    pattern={"yyyy-MM-dd"}
+                    value={experienceObj.endedOn}
+                    onChange={(e) =>
+                      setExperienceObj({
+                        ...experienceObj,
+                        endedOn: e.currentTarget.value,
+                      })
+                    }
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className={"field"}>
+            <label className="label has-text-primary has-text-weight-medium">
+              Description
+            </label>
+            <div className={"control"}>
+              <textarea
+                className={"textarea border-linear"}
+                value={experienceObj.description}
+                onChange={(e) =>
+                  setExperienceObj({
+                    ...experienceObj,
+                    description: e.currentTarget.value,
+                  })
+                }
+              />
+            </div>
+          </div>
+          <p className={"is-size-7 has-text-weight-semibold"}>
+            By adding your background, you will increase your chances of being
+            accepted by a host.
+          </p>
+        </section>
+        <footer
+          className="modal-card-foot is-justify-content-center"
+          style={footerStyle}
+        >
+          <button
+            className={"button has-text-white has-background-primary"}
+            onClick={handleAddExperience}
+          >
+            Add Experience
+          </button>
+        </footer>
+      </div>
+    </div>
+  );
+};
 
 export default ExperienceModal;

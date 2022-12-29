@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { TravelerProfileDTO } from "@src/state/stores/user/models";
 import { LearningOpportunities } from "@src/state/stores/opportunity/models";
 import { TypeOfHelpNeeded } from "@src/state/stores/opportunity/models";
-
+import { lowerCaseAndCapitalizeFirstLetter } from "@src/utilities/ui";
 export interface Props {
   setActive: any;
   travelerProfile: TravelerProfileDTO;
@@ -73,10 +73,9 @@ const MultipleChoicesModal: React.FunctionComponent<Props> = ({
               [kindOfContent]: tempArray,
             });
           }
-          console.log(tempArray);
         }}
       >
-        {option.toLowerCase().replace("_", " ")}
+        {lowerCaseAndCapitalizeFirstLetter(option)}
       </span>
     ));
     return optionsArray;

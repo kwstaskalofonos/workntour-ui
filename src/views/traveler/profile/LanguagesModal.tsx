@@ -1,93 +1,183 @@
-import React, {forwardRef, useImperativeHandle, useState} from 'react';
+import React, { useState } from "react";
 import {
-    LanguageProficiency,
-    LanguageProficiencyType,
-    Languages,
-    LanguagesType
+  LanguageProficiency,
+  LanguageProficiencyType,
+  Languages,
+  LanguagesType,
 } from "@src/state/stores/opportunity/models";
-import {faCheck} from "@fortawesome/free-solid-svg-icons/faCheck";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {
+  TravelerProfileDTO,
+  ProfileLanguage,
+} from "@src/state/stores/user/models";
+
+import { toast } from "react-toastify";
 
 export interface Props {
-    setActive:any
+  setActive: any;
+  travelerProfile: TravelerProfileDTO;
+  setTravelerProfile: any;
 }
 
+const LanguagesModal: React.FunctionComponent<Props> = ({
+  setActive,
+  travelerProfile,
+  setTravelerProfile,
+}) => {
+  const headerStyle = {
+    backgroundColor: "white",
+    borderBottom: "2px solid #8970FA",
+  };
+  const footerStyle = {
+    backgroundColor: "white",
+    borderTop: "none",
+  };
 
-const LanguagesModal: React.FunctionComponent<Props> = ({setActive}) => {
+  const [languageObj, setLanguageObj] = useState<ProfileLanguage>({
+    languages: undefined,
+    languageProficiency: undefined,
+  });
 
-        const headerStyle={
-            backgroundColor:"white",
-            borderBottom:"2px solid #8970FA"
-        }
-        const footerStyle={
-            backgroundColor:"white",
-            borderTop:"none"
-        }
+  let languagesArray: ProfileLanguage[] = [];
+  if (travelerProfile.language) {
+    languagesArray = [...travelerProfile.language];
+  }
 
-        const renderLanguages = () => {
-            let array: any[] = [];
-            array.push(<option key={"language-option-empty"} value={""} label={"Select language"}/>)
-            for (const language in Languages) {
-                array.push(<option key={"language-option-empty-" + language}
-                                   value={language} label={Languages[language as LanguagesType]}>
-                    {Languages[language as LanguagesType]}
-                </option>)
-            }
-            return array;
-        }
-
-        const renderLevel = () => {
-            let array: any[] = [];
-            array.push(<option key={"language-option-empty"} value={""} label={"Select the level"}/>)
-            for (const level in LanguageProficiency) {
-                array.push(<option key={"language-option-empty-" + level}
-                                   value={level} label={LanguageProficiency[level as LanguageProficiencyType]}>
-                    {LanguageProficiency[level as LanguageProficiencyType]}
-                </option>)
-            }
-            return array;
-        }
-
-        return (
-            <div className={"modal is-active"}>
-                <div className="modal-background"></div>
-                <div className={"modal-card"}>
-                    <header className={"modal-card-head"}
-                            style={headerStyle}>
-                        <p className="modal-card-title has-text-weight-semibold has-text-primary">Languages</p>
-                        <button className="delete" aria-label="close" onClick={() => setActive(false)}></button>
-                    </header>
-                    <section className={"modal-card-body"}>
-                        <div className={"columns"}>
-                            <div className={"column"}>
-                                <div className="field">
-                                    <label className="label has-text-primary has-text-weight-medium">Languages</label>
-                                    <div className={"select is-fullwidth"}>
-                                        <select className={"border-linear empty-select"}>
-                                            {renderLanguages()}
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className={"column"}>
-                                <label className="label has-text-primary has-text-weight-medium">Level</label>
-                                <div className={"select is-fullwidth"}>
-                                    <select className={"border-linear empty-select"}>
-                                        {renderLevel()}
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-                    <footer className="modal-card-foot is-justify-content-center"
-                            style={footerStyle}>
-                        <button className={"button has-text-white has-background-primary"}>
-                            Add Language
-                        </button>
-                    </footer>
-                </div>
-            </div>
-        );
+  const renderLanguages = () => {
+    let array: any[] = [];
+    array.push(
+      <option
+        key={"language-option-empty"}
+        value={""}
+        label={"Select language"}
+        disabled
+      />
+    );
+    for (const language in Languages) {
+      array.push(
+        <option
+          key={"language-option-empty-" + language}
+          value={language}
+          label={Languages[language as LanguagesType]}
+        >
+          {Languages[language as LanguagesType]}
+        </option>
+      );
     }
+    return array;
+  };
+
+  const renderLevel = () => {
+    let array: any[] = [];
+    array.push(
+      <option
+        key={"language-option-empty"}
+        value={""}
+        label={"Select the level"}
+        disabled
+      />
+    );
+    for (const level in LanguageProficiency) {
+      array.push(
+        <option
+          key={"language-option-empty-" + level}
+          value={level}
+          label={LanguageProficiency[level as LanguageProficiencyType]}
+        >
+          {LanguageProficiency[level as LanguageProficiencyType]}
+        </option>
+      );
+    }
+    return array;
+  };
+
+  const handleAddLanguage = () => {
+    if (!languageObj.languages || !languageObj.languageProficiency) {
+      toast.error("Empty Fields");
+      return;
+    }
+    console.log(languageObj);
+    languagesArray.push(languageObj);
+    setTravelerProfile({
+      ...travelerProfile,
+      language: languagesArray,
+    });
+
+    console.log(languagesArray);
+    setActive(false);
+  };
+
+  return (
+    <div className={"modal is-active"}>
+      <div className="modal-background"></div>
+      <div className={"modal-card"}>
+        <header className={"modal-card-head"} style={headerStyle}>
+          <p className="modal-card-title has-text-weight-semibold has-text-primary">
+            Languages
+          </p>
+          <button
+            className="delete"
+            aria-label="close"
+            onClick={() => setActive(false)}
+          ></button>
+        </header>
+        <section className={"modal-card-body"}>
+          <div className={"columns"}>
+            <div className={"column"}>
+              <div className="field">
+                <label className="label has-text-primary has-text-weight-medium">
+                  Languages
+                </label>
+                <div className={"select is-fullwidth"}>
+                  <select
+                    className={"border-linear"}
+                    value={languageObj.languages || ""}
+                    onChange={(e) =>
+                      setLanguageObj({
+                        ...(languageObj as ProfileLanguage),
+                        languages: e.target.value as any,
+                      })
+                    }
+                  >
+                    {renderLanguages()}
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div className={"column"}>
+              <label className="label has-text-primary has-text-weight-medium">
+                Level
+              </label>
+              <div className={"select is-fullwidth"}>
+                <select
+                  className={"border-linear"}
+                  value={languageObj.languageProficiency || ""}
+                  onChange={(e) =>
+                    setLanguageObj({
+                      ...(languageObj as ProfileLanguage),
+                      languageProficiency: e.target.value as any,
+                    })
+                  }
+                >
+                  {renderLevel()}
+                </select>
+              </div>
+            </div>
+          </div>
+        </section>
+        <footer
+          className="modal-card-foot is-justify-content-center"
+          style={footerStyle}
+        >
+          <button
+            className={"button has-text-white has-background-primary"}
+            onClick={handleAddLanguage}
+          >
+            Add Language
+          </button>
+        </footer>
+      </div>
+    </div>
+  );
+};
 
 export default LanguagesModal;

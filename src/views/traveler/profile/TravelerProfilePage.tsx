@@ -1,15 +1,20 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import ProfileImage from "@src/views/common/ProfileImage";
 import { useAppDispatch, useAppSelector } from "@src/state/stores/hooks";
 import {
   Role,
   SpecialDietary,
   TravelerProfileDTO,
+  TypeOfExperience,
   TypeOfTraveler,
   TypeOfTravelerType,
 } from "@src/state/stores/user/models";
 import cloneDeep from "lodash/cloneDeep";
-import { extractYearMonthDay, getNationalities } from "@src/utilities/ui";
+import {
+  extractYearMonthDay,
+  getNationalities,
+  lowerCaseAndCapitalizeFirstLetter,
+} from "@src/utilities/ui";
 import CustomDateInput from "@src/views/common/CustomDateInput";
 import CustomSelectCountry from "@src/views/common/CustomSelectCountry";
 // @ts-ignore
@@ -21,9 +26,6 @@ import { faPlus } from "@fortawesome/free-solid-svg-icons/faPlus";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan } from "@fortawesome/free-solid-svg-icons/faTrashCan";
 import LanguagesModal from "@src/views/traveler/profile/LanguagesModal";
-// import SkillsModal, {
-//   SkillsModalHandler,
-// } from "@src/views/traveler/profile/SkillsModal";
 import ExperienceModal from "@src/views/traveler/profile/ExperienceModal";
 import { toast } from "react-toastify";
 
@@ -31,7 +33,6 @@ import MultipleChoicesModal from "./MultipleChoicesModal";
 
 const TravelerProfilePage: React.FunctionComponent = () => {
   const dispatch = useAppDispatch();
-  // const skillsModalHandler = useRef<SkillsModalHandler>();
   const [activeLanguageModal, setActiveLanguageModal] =
     useState<boolean>(false);
   const [activeExperienceModal, setActiveExperienceModal] =
@@ -57,6 +58,7 @@ const TravelerProfilePage: React.FunctionComponent = () => {
   const [activeInterestsModal, setActiveInterestsModal] =
     useState<boolean>(false);
   const [activeSkillsModal, setActiveSkillsModal] = useState<boolean>(false);
+  const [clearImage, setClearImage] = useState<boolean>(false);
 
   useEffect(() => {
     setInitialized(true);
@@ -172,26 +174,7 @@ const TravelerProfilePage: React.FunctionComponent = () => {
     });
   };
 
-  useEffect(() => {
-    if (profile && initialized) {
-      if (
-        profile.nationality != userProfile.nationality ||
-        profile.sex != userProfile.sex ||
-        profile.typeOfTraveler != userProfile.typeOfTraveler ||
-        profile.postalAddress != userProfile.postalAddress ||
-        countryCode != userProfile.countryCodeMobileNum ||
-        profile.mobileNum != userProfile.mobileNum ||
-        profileImageFile
-      ) {
-        setDisabled(false);
-        return;
-      }
-      setDisabled(true);
-    }
-  }, [profile, profileImageFile]);
-
   const onSubmit = () => {
-
     let formData = new FormData();
     if (profileImageFile) {
       formData.append("profileImage", profileImageFile);
@@ -209,14 +192,116 @@ const TravelerProfilePage: React.FunctionComponent = () => {
 
   const placeholderGenerator = (choicesArr: string[] | undefined) => {
     if (!choicesArr) return "";
-    console.log(choicesArr);
-    let finalPlaceholder: string = choicesArr[0]
-      ?.toLowerCase()
-      .replace("_", " ");
+    let finalPlaceholder: string = lowerCaseAndCapitalizeFirstLetter(
+      choicesArr[0]
+    );
     choicesArr.slice(1).map((choice: string) => {
-      finalPlaceholder += `, ${choice.toLowerCase().replace("_", " ")}`;
+      finalPlaceholder += `, ${lowerCaseAndCapitalizeFirstLetter(choice)}`;
     });
     return finalPlaceholder;
+  };
+
+  const buttonEnable = () => {
+    return !(
+      profile?.postalAddress != userProfile?.postalAddress ||
+      profile?.mobileNum != userProfile?.mobileNum ||
+      profile?.email != userProfile?.email ||
+      profile?.country != userProfile?.country ||
+      profile?.city != userProfile?.city ||
+      profile?.address != userProfile?.address ||
+      profile?.description != userProfile?.description ||
+      profile?.countryCodeMobileNum != userProfile?.countryCodeMobileNum ||
+      profile?.interests != userProfile?.interests ||
+      profile?.language != userProfile?.language ||
+      profile?.skills != userProfile?.skills ||
+      profile?.experience != userProfile?.experience ||
+      profile?.specialDietary != userProfile?.specialDietary ||
+      profile?.driverLicense != userProfile?.driverLicense ||
+      profileImageFile
+    );
+  };
+
+  const handleCancel = () => {
+    setProfile({ ...userProfile });
+    setClearImage(!clearImage);
+    setProfileImageFile(undefined);
+  };
+
+  const renderExperience = (professional: boolean) => {
+    if (!profile?.experience) return <></>;
+
+    let typeOfExperience = professional
+      ? TypeOfExperience.COMPANY
+      : TypeOfExperience.UNIVERSITY;
+
+    return profile?.experience
+      .filter((obj) => {
+        return obj.experience.typeOfExperience === typeOfExperience;
+      })
+      .map((obj, index) => {
+        return (
+          <React.Fragment key={index}>
+            <div className={"is-flex is-justify-content-space-between"}>
+              <div>
+                <p className={"has-text-primary"}>
+                  {obj.experience.nameOfOrganisation},&nbsp;
+                  <span className={"has-text-dark"}>
+                    {obj.experience.position}
+                  </span>
+                </p>
+                <p className={"is-size-7 has-text-grey-light"}>
+                  {obj.experience.startedOn}-{obj.experience.endedOn}
+                </p>
+              </div>
+              <FontAwesomeIcon
+                className={"is-clickable is-right has-text-primary mt-2"}
+                icon={faTrashCan}
+                onClick={() => {
+                  let temp = [...profile?.experience];
+                  temp.splice(index, 1);
+                  setProfile({
+                    ...profile,
+                    experience: temp,
+                  });
+                }}
+              />
+            </div>
+            <hr />
+          </React.Fragment>
+        );
+      });
+  };
+
+  const renderLanguages = () => {
+    return profile?.language.map((lang, index) => {
+      return (
+        <React.Fragment key={index}>
+          <div className={"is-flex is-justify-content-space-between"}>
+            <div>
+              <p className={"has-text-primary"}>
+                {lowerCaseAndCapitalizeFirstLetter(lang.languages)},&nbsp;
+                <span className={"has-text-dark"}>
+                  {lowerCaseAndCapitalizeFirstLetter(lang.languageProficiency)}
+                </span>
+              </p>
+            </div>
+            <FontAwesomeIcon
+              className={"is-clickable is-right has-text-primary mt-2"}
+              icon={faTrashCan}
+              onClick={() => {
+                let temp = [...profile?.language];
+                temp.splice(index, 1);
+                setProfile({
+                  ...profile,
+                  language: temp,
+                });
+              }}
+            />
+          </div>
+          <hr />
+        </React.Fragment>
+      );
+    });
   };
 
   return (
@@ -232,6 +317,7 @@ const TravelerProfilePage: React.FunctionComponent = () => {
               surname={userProfile ? userProfile.surname : ""}
               completion={completion}
               profileImage={profile?.profileImage?.imageUrl}
+              clearImage={clearImage}
             />
           </div>
           <section>
@@ -503,33 +589,7 @@ const TravelerProfilePage: React.FunctionComponent = () => {
                     onClick={() => setActiveLanguageModal(true)}
                   />
                 </div>
-                <div className={"box"}>
-                  <div className={"is-flex is-justify-content-space-between"}>
-                    <div>
-                      <p className={"has-text-primary"}>
-                        Greek,&nbsp;
-                        <span className={"has-text-dark"}>Beginner</span>
-                      </p>
-                    </div>
-                    <FontAwesomeIcon
-                      className={"is-clickable is-right has-text-primary mt-2"}
-                      icon={faTrashCan}
-                    />
-                  </div>
-                  <hr />
-                  <div className={"is-flex is-justify-content-space-between"}>
-                    <div>
-                      <p className={"has-text-primary"}>
-                        French,&nbsp;
-                        <span className={"has-text-dark"}>Intermediate</span>
-                      </p>
-                    </div>
-                    <FontAwesomeIcon
-                      className={"is-right has-text-primary mt-2"}
-                      icon={faTrashCan}
-                    />
-                  </div>
-                </div>
+                <div className={"box"}>{renderLanguages()}</div>
                 {/*Skills*/}
                 <div className={"field"}>
                   <div className={"is-flex is-justify-content-space-between"}>
@@ -564,73 +624,10 @@ const TravelerProfilePage: React.FunctionComponent = () => {
                 <div className={"box"}>
                   <p style={{ color: "rgba(36, 221, 193, 1)" }}>Professional</p>
                   <hr className={"mt-0 mb-2"} />
-                  <div className={"is-flex is-justify-content-space-between"}>
-                    <div>
-                      <p className={"has-text-primary"}>
-                        Microsoft,&nbsp;
-                        <span className={"has-text-dark"}>
-                          Product Designer
-                        </span>
-                      </p>
-                      <p className={"is-size-7 has-text-grey-light"}>
-                        Sep 2014-Aug 2019
-                      </p>
-                    </div>
-                    <FontAwesomeIcon
-                      className={"is-right has-text-primary mt-2"}
-                      icon={faTrashCan}
-                    />
-                  </div>
-                  <hr />
-                  <div className={"is-flex is-justify-content-space-between"}>
-                    <div>
-                      <p className={"has-text-primary"}>
-                        Galaxy Tours,&nbsp;
-                        <span className={"has-text-dark"}>Travel Manager</span>
-                      </p>
-                      <p className={"is-size-7 has-text-grey-light"}>
-                        Sep 2014-Aug 2019
-                      </p>
-                    </div>
-                    <FontAwesomeIcon
-                      className={"is-right has-text-primary mt-2"}
-                      icon={faTrashCan}
-                    />
-                  </div>
-                  <hr />
+                  {renderExperience(true)}
                   <p style={{ color: "rgba(36, 221, 193, 1)" }}>Education</p>
                   <hr className={"mt-0 mb-2"} />
-                  <div className={"is-flex is-justify-content-space-between"}>
-                    <div>
-                      <p className={"has-text-primary"}>
-                        Harvard,&nbsp;
-                        <span className={"has-text-dark"}>Tourism</span>
-                      </p>
-                      <p className={"is-size-7 has-text-grey-light"}>
-                        Sep 2014-Aug 2019
-                      </p>
-                    </div>
-                    <FontAwesomeIcon
-                      className={"is-right has-text-primary mt-2"}
-                      icon={faTrashCan}
-                    />
-                  </div>
-                  <hr />
-                  <div className={"is-flex is-justify-content-space-between"}>
-                    <div>
-                      <p className={"has-text-primary"}>
-                        Athens College University,&nbsp;
-                        <span className={"has-text-dark"}>Business</span>
-                      </p>
-                      <p className={"is-size-7 has-text-grey-light"}>
-                        Sep 2014-Aug 2019
-                      </p>
-                    </div>
-                    <FontAwesomeIcon
-                      className={"is-right has-text-primary mt-2"}
-                      icon={faTrashCan}
-                    />
-                  </div>
+                  {renderExperience(false)}
                 </div>
                 {/*Dietary*/}
                 <div className={"field"}>
@@ -723,25 +720,39 @@ const TravelerProfilePage: React.FunctionComponent = () => {
                     </div>
                   </div>
                 </div>
-
-                <div className="field">
-                  <p className="control is-fullwidth">
-                    <button
-                      className={
-                        "button is-primary is-fullwidth " +
-                        (isLoading ? "is-loading" : "")
-                      }
-                      disabled={disabled}
-                      type={"button"}
-                      onClick={onSubmit}
-                    >
-                      Save
-                    </button>
-                  </p>
-                </div>
               </div>
             </div>
           </section>
+          <hr />
+          <div className="submitSection">
+            <div className="field">
+              <p className="control is-fullwidth">
+                <button
+                  className={"button is-secondary is-fullwidth "}
+                  onClick={handleCancel}
+                  disabled={buttonEnable()}
+                  type={"button"}
+                >
+                  Cancel
+                </button>
+              </p>
+            </div>
+            <div className="field">
+              <p className="control is-fullwidth">
+                <button
+                  className={
+                    "button is-primary is-fullwidth " +
+                    (isLoading ? "is-loading" : "")
+                  }
+                  disabled={buttonEnable()}
+                  type={"button"}
+                  onClick={onSubmit}
+                >
+                  Save Profile
+                </button>
+              </p>
+            </div>
+          </div>
         </form>
       </div>
       {/* {profile && (
@@ -752,7 +763,11 @@ const TravelerProfilePage: React.FunctionComponent = () => {
         />
       )} */}
       {profile && activeLanguageModal && (
-        <LanguagesModal setActive={setActiveLanguageModal} />
+        <LanguagesModal
+          setActive={setActiveLanguageModal}
+          travelerProfile={profile}
+          setTravelerProfile={setProfile}
+        />
       )}
       {profile && activeInterestsModal && (
         <MultipleChoicesModal
@@ -771,7 +786,11 @@ const TravelerProfilePage: React.FunctionComponent = () => {
         />
       )}
       {profile && activeExperienceModal && (
-        <ExperienceModal setActive={setActiveExperienceModal} />
+        <ExperienceModal
+          setActive={setActiveExperienceModal}
+          travelerProfile={profile}
+          setTravelerProfile={setProfile}
+        />
       )}
     </React.Fragment>
   );

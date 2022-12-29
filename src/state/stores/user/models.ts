@@ -114,7 +114,7 @@ export interface TravelerProfileDTO {
     typeOfTraveler: string,
     profileImage?: Image,
     interests: string[],
-    languages: ProfileLanguage[],
+    language: ProfileLanguage[],
     skills: string[],
     experience: ProfileExperience[],
     specialDietary: string,
@@ -127,13 +127,13 @@ export interface Image {
 }
 
 export interface ProfileExperience {
-    experienceId: string,
+    experienceId?: string,
     experience: Experience
 }
 
 export interface ProfileLanguage {
-    languages: Languages,
-    languageProficiency: LanguageProficiency
+    languages?: Languages,
+    languageProficiency?: LanguageProficiency
 }
 
 export enum SpecialDietary {
@@ -154,7 +154,7 @@ export interface Experience {
 }
 
 export enum TypeOfExperience {
-    COMPANY = "Company",
+    COMPANY = "COMPANY",
     UNIVERSITY = "University"
 }
 
