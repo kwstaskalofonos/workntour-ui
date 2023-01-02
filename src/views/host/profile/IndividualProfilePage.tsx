@@ -39,7 +39,7 @@ const IndividualProfilePage: React.FunctionComponent = () => {
     function hasValue(property: any) {
       return property ? 1 : 0;
     }
-    completed += hasValue(profile?.profileImage);
+    completed += hasValue(profileImageFile || profile?.profileImage);
     completed += hasValue(profile?.name);
     completed += hasValue(profile?.surname);
     completed += hasValue(profile?.email);

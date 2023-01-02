@@ -55,7 +55,7 @@ const ExperienceModal: React.FunctionComponent<Props> = ({
     }
     console.log(experienceObj);
     let temObjToPush: ProfileExperience = {
-      experienceId: "",
+      experienceId: Date.now().toString(), // unique ID
       experience: {
         ...experienceObj,
       },

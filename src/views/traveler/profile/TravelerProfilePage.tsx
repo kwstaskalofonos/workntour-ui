@@ -54,15 +54,44 @@ const TravelerProfilePage: React.FunctionComponent = () => {
   const [completion, setCompletion] = useState<number>(0);
   const [initialized, setInitialized] = useState<boolean>(false);
   const [profileImageFile, setProfileImageFile] = useState<File>();
-  const [disabled, setDisabled] = useState<boolean>(true);
   const [activeInterestsModal, setActiveInterestsModal] =
     useState<boolean>(false);
   const [activeSkillsModal, setActiveSkillsModal] = useState<boolean>(false);
   const [clearImage, setClearImage] = useState<boolean>(false);
 
   useEffect(() => {
+    const totalFields = 19;
+    let completed = 1; // driver license prefilled
+    function hasValue(property: any) {
+      return property ? 1 : 0;
+    }
+    completed += hasValue(profileImageFile || profile?.profileImage);
+    completed += hasValue(profile?.name);
+    completed += hasValue(profile?.surname);
+    completed += hasValue(profile?.typeOfTraveler);
+    completed += hasValue(profile?.nationality);
+    completed += hasValue(profile?.birthday);
+    completed += hasValue(profile?.sex);
+    completed += hasValue(profile?.email);
+    completed += hasValue(profile?.city);
+    completed += hasValue(profile?.address);
+    completed += hasValue(profile?.postalAddress);
+    completed += hasValue(profile?.mobileNum);
+    completed += hasValue(profile?.description);
+    completed += hasValue(profile?.interests?.length);
+    completed += hasValue(profile?.language?.length);
+    completed += hasValue(profile?.skills?.length);
+    completed += hasValue(profile?.experience?.length);
+    completed += hasValue(profile?.specialDietary);
+
+    setCompletion((completed / totalFields) * 100);
+  }, [profile, profileImageFile]);
+
+  useEffect(() => {
     setInitialized(true);
     if (userProfile) {
+      console.log(userProfile);
+      setProfile({ ...userProfile });
       if (userProfile.countryCodeMobileNum) {
         let idx = countries.findIndex(
           (value) => value.code == userProfile.countryCodeMobileNum
@@ -82,33 +111,6 @@ const TravelerProfilePage: React.FunctionComponent = () => {
       setYear(initialYear);
       setDay(initialDay);
       setMonth(initialMonth);
-      console.log(userProfile);
-      setProfile({ ...userProfile });
-
-      let completed = 0;
-
-      if (userProfile.nationality) {
-        completed = completed + 14.29;
-      }
-      if (userProfile.birthday) {
-        completed = completed + 14.29;
-      }
-      if (userProfile.sex) {
-        completed = completed + 14.29;
-      }
-      if (userProfile.email) {
-        completed = completed + 14.29;
-      }
-      if (userProfile.typeOfTraveler) {
-        completed = completed + 14.29;
-      }
-      if (userProfile.postalAddress) {
-        completed = completed + 14.29;
-      }
-      if (userProfile.mobileNum) {
-        completed = completed + 14.29;
-      }
-      setCompletion(completed);
     }
   }, [userProfile]);
 
@@ -205,8 +207,9 @@ const TravelerProfilePage: React.FunctionComponent = () => {
     return !(
       profile?.postalAddress != userProfile?.postalAddress ||
       profile?.mobileNum != userProfile?.mobileNum ||
+      profile?.typeOfTraveler != userProfile?.typeOfTraveler ||
       profile?.email != userProfile?.email ||
-      profile?.country != userProfile?.country ||
+      profile?.nationality != userProfile?.nationality ||
       profile?.city != userProfile?.city ||
       profile?.address != userProfile?.address ||
       profile?.description != userProfile?.description ||
@@ -238,9 +241,9 @@ const TravelerProfilePage: React.FunctionComponent = () => {
       .filter((obj) => {
         return obj.experience.typeOfExperience === typeOfExperience;
       })
-      .map((obj, index) => {
+      .map((obj) => {
         return (
-          <React.Fragment key={index}>
+          <React.Fragment key={obj.experienceId}>
             <div className={"is-flex is-justify-content-space-between"}>
               <div>
                 <p className={"has-text-primary"}>
@@ -258,7 +261,7 @@ const TravelerProfilePage: React.FunctionComponent = () => {
                 icon={faTrashCan}
                 onClick={() => {
                   let temp = [...profile?.experience];
-                  temp.splice(index, 1);
+                  temp.splice(temp.indexOf(obj), 1);
                   setProfile({
                     ...profile,
                     experience: temp,
@@ -273,15 +276,15 @@ const TravelerProfilePage: React.FunctionComponent = () => {
   };
 
   const renderLanguages = () => {
-    return profile?.language.map((lang, index) => {
+    return profile?.language?.map((obj) => {
       return (
-        <React.Fragment key={index}>
+        <React.Fragment key={obj.languages}>
           <div className={"is-flex is-justify-content-space-between"}>
             <div>
               <p className={"has-text-primary"}>
-                {lowerCaseAndCapitalizeFirstLetter(lang.languages)},&nbsp;
+                {lowerCaseAndCapitalizeFirstLetter(obj.languages)},&nbsp;
                 <span className={"has-text-dark"}>
-                  {lowerCaseAndCapitalizeFirstLetter(lang.languageProficiency)}
+                  {lowerCaseAndCapitalizeFirstLetter(obj.languageProficiency)}
                 </span>
               </p>
             </div>
@@ -290,7 +293,7 @@ const TravelerProfilePage: React.FunctionComponent = () => {
               icon={faTrashCan}
               onClick={() => {
                 let temp = [...profile?.language];
-                temp.splice(index, 1);
+                temp.splice(temp.indexOf(obj), 1);
                 setProfile({
                   ...profile,
                   language: temp,

@@ -45,7 +45,7 @@ const ProfileImage: React.FunctionComponent<Props> = ({
   }, []);
 
   useEffect(() => {
-    setImagePath(undefined);
+    setImagePath("");
   }, [clearImage]);
 
   const image = () => imagePath || profileImage || defaultImage;

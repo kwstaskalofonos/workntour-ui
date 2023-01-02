@@ -95,6 +95,12 @@ const LanguagesModal: React.FunctionComponent<Props> = ({
       toast.error("Empty Fields");
       return;
     }
+    if (
+      languagesArray.find((lang) => lang.languages === languageObj.languages)
+    ) {
+      toast.error("Language already exists!");
+      return;
+    }
     console.log(languageObj);
     languagesArray.push(languageObj);
     setTravelerProfile({

@@ -155,7 +155,7 @@ export interface Experience {
 
 export enum TypeOfExperience {
     COMPANY = "COMPANY",
-    UNIVERSITY = "University"
+    UNIVERSITY = "UNIVERSITY"
 }
 
 export type TypeOfExperienceType = keyof typeof TypeOfExperience;

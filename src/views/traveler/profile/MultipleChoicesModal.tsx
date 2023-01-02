@@ -58,21 +58,17 @@ const MultipleChoicesModal: React.FunctionComponent<Props> = ({
           newSelected[index] = !newSelected[index];
           setSelected(newSelected);
           if (newSelected[index]) {
-            tempArray.push(option),
-              setTravelerProfile({
-                ...travelerProfile,
-                [kindOfContent]: tempArray,
-              });
+            tempArray.push(option);
           } else {
             tempArray.splice(
               (travelerProfile as any)[kindOfContent]?.indexOf(option),
               1
             );
-            setTravelerProfile({
-              ...travelerProfile,
-              [kindOfContent]: tempArray,
-            });
           }
+          setTravelerProfile({
+            ...travelerProfile,
+            [kindOfContent]: tempArray,
+          });
         }}
       >
         {lowerCaseAndCapitalizeFirstLetter(option)}
