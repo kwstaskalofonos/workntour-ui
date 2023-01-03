@@ -311,7 +311,7 @@ const TravelerProfilePage: React.FunctionComponent = () => {
     <React.Fragment>
       <div className={"profile"}>
         <form className="profileForm">
-          <div className={"is-flex"}>
+          <div className={"profilePicture"}>
             <ProfileImage
               defaultImage={profilePhoto}
               role={Role.TRAVELER}

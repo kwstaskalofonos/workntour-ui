@@ -21,9 +21,12 @@ const MultipleChoicesModal: React.FunctionComponent<Props> = ({
   const [selected, setSelected] = useState<boolean[]>(
     Array<boolean>(Object.keys(currentEnum).length).fill(false)
   );
-  let tempArray: string[] = [];
-  if ((travelerProfile as any)[kindOfContent])
-    tempArray = [...(travelerProfile as any)[kindOfContent]];
+
+  const [choicesArray, setChoicesArray] = useState<string[]>(
+    (travelerProfile as any)[kindOfContent]
+      ? [...(travelerProfile as any)[kindOfContent]]
+      : []
+  );
 
   useEffect(() => {
     function setSelectedChoices(choices: any) {
@@ -55,20 +58,20 @@ const MultipleChoicesModal: React.FunctionComponent<Props> = ({
         }
         onClick={() => {
           let newSelected: boolean[] = { ...selected };
+          let tempChoicesArr: string[] = [...choicesArray];
+
           newSelected[index] = !newSelected[index];
           setSelected(newSelected);
           if (newSelected[index]) {
-            tempArray.push(option);
+            tempChoicesArr.push(option);
           } else {
-            tempArray.splice(
-              (travelerProfile as any)[kindOfContent]?.indexOf(option),
+            tempChoicesArr.splice(
+              choicesArray?.indexOf(option),
               1
             );
           }
-          setTravelerProfile({
-            ...travelerProfile,
-            [kindOfContent]: tempArray,
-          });
+          console.log(tempChoicesArr);
+          setChoicesArray(tempChoicesArr);
         }}
       >
         {lowerCaseAndCapitalizeFirstLetter(option)}
@@ -107,7 +110,7 @@ const MultipleChoicesModal: React.FunctionComponent<Props> = ({
               Choose a minimum of 3.
             </p>
             <p className={"is-size-7 has-text-weight-semibold"}>
-              {tempArray.length}/{Object.values(currentEnum).length}
+              {choicesArray.length}/{Object.values(currentEnum).length}
             </p>
           </div>
           <div
@@ -123,7 +126,13 @@ const MultipleChoicesModal: React.FunctionComponent<Props> = ({
         >
           <button
             className={"button has-text-white has-background-primary"}
-            onClick={() => setActive(false)}
+            onClick={() => {
+              setTravelerProfile({
+                ...travelerProfile,
+                [kindOfContent]: choicesArray,
+              });
+              setActive(false);
+            }}
           >
             Add {kindOfContent}
           </button>

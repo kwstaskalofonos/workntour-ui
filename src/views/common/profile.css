@@ -111,9 +111,22 @@
 
 .profileProgressRing-meter {
     stroke-width: 3px;
-    stroke: #7E6FD8;
+    /* stroke: #7E6FD8; */
     fill: none;
     transition: stroke-dashoffset 3s cubic-bezier(0.43, 0.41, 0.22, 0.91);
     transform-origin: center center;
     transform: rotate(-90deg) scaleX(-1);
+}
+
+.profilePicture {
+    display: flex;
+}
+
+@media screen and (max-width: 770px) {
+    .profilePicture {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
 }

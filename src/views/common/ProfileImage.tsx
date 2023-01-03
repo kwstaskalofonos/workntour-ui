@@ -82,11 +82,8 @@ const ProfileImage: React.FunctionComponent<Props> = ({
   };
 
   return (
-    <div className={"is-flex"}>
-      <figure
-        className={"image is-128x128 mb-5"}
-        style={{ position: "relative" }}
-      >
+    <>
+      <figure className={"image is-128x128 mb-5 profilePicture"}>
         <input
           className={"file-input"}
           type={"file"}
@@ -97,7 +94,7 @@ const ProfileImage: React.FunctionComponent<Props> = ({
           onChange={handleChangeImage}
         />
         <div
-          className={"profile"}
+          className={"profile profilePicture"}
           style={{
             width: "100%",
             height: "100%",
@@ -122,9 +119,21 @@ const ProfileImage: React.FunctionComponent<Props> = ({
               d="M5,50a45,45 0 1,0 90,0a45,45 0 1,0 -90,0"
               strokeLinecap="round"
               strokeLinejoin="round"
+              stroke="url(#cl1)"
               strokeDashoffset={282.78302001953125 * ((100 - completion) / 100)}
               strokeDasharray="282.78302001953125"
             />
+            <linearGradient
+              id="cl1"
+              gradientUnits="objectBoundingBox"
+              x1="0"
+              y1="1"
+              x2="0"
+              y2="0"
+            >
+              <stop stopColor="#0EE5D0" />
+              <stop offset="100%" stopColor="#7E6FD8" />
+            </linearGradient>
           </svg>
           <img
             className={"is-rounded"}
@@ -133,7 +142,12 @@ const ProfileImage: React.FunctionComponent<Props> = ({
           />
         </div>
         <span
-          style={{ position: "absolute", left: "9px", top: "96px" }}
+          style={{
+            position: "absolute",
+            left: "10px",
+            top: "113px",
+            height: "27px",
+          }}
           className="tag has-text-white is-info has-text-weight-semibold background-linear is-normal"
         >
           {completion ? calculateCompletion() + "% Complete" : "100% Complete"}
@@ -155,7 +169,7 @@ const ProfileImage: React.FunctionComponent<Props> = ({
         />
       </figure>
       <div
-        className={"ml-5 is-flex is-flex-direction-column"}
+        className={"ml-5 mr-5 is-flex is-flex-direction-column"}
         style={{ position: "relative" }}
       >
         <p className="has-text-primary has-text-weight-semibold is-size-4-desktop">
@@ -172,7 +186,7 @@ const ProfileImage: React.FunctionComponent<Props> = ({
           <span className="tag is-info has-text-weight-semibold">{type}</span>
         )}
       </div>
-    </div>
+    </>
   );
 };
 
