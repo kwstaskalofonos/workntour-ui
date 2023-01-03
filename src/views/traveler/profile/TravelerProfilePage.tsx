@@ -600,7 +600,7 @@ const TravelerProfilePage: React.FunctionComponent = () => {
                       Skills
                     </label>
                     <FontAwesomeIcon
-                      className={"is-right has-text-primary mt-2"}
+                      className={"is-clickable is-right has-text-primary mt-2"}
                       icon={faPlus}
                       onClick={() => setActiveSkillsModal(true)}
                     />
@@ -613,7 +613,9 @@ const TravelerProfilePage: React.FunctionComponent = () => {
                 </div>
                 {/*Experience*/}
                 <div
-                  className={"field is-flex is-justify-content-space-between"}
+                  className={
+                    "is-clickable field is-flex is-justify-content-space-between"
+                  }
                 >
                   <label className="label has-text-primary has-text-weight-medium">
                     Experience
