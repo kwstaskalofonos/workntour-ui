@@ -140,7 +140,7 @@ const IndividualProfilePage: React.FunctionComponent = () => {
   return (
     <div className={"profile"}>
       <form className="profileForm">
-        <div className={"is-flex"}>
+        <div className={"profilePicture"}>
           <ProfileImage
             defaultImage={profilePhoto}
             role={Role.INDIVIDUAL_HOST}

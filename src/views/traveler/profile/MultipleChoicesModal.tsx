@@ -3,6 +3,9 @@ import { TravelerProfileDTO } from "@src/state/stores/user/models";
 import { LearningOpportunities } from "@src/state/stores/opportunity/models";
 import { TypeOfHelpNeeded } from "@src/state/stores/opportunity/models";
 import { lowerCaseAndCapitalizeFirstLetter } from "@src/utilities/ui";
+import { useAppDispatch } from "@src/state/stores/hooks";
+import { updateTravelerProfile } from "@src/state/stores/user/operations";
+
 export interface Props {
   setActive: any;
   travelerProfile: TravelerProfileDTO;
@@ -27,6 +30,10 @@ const MultipleChoicesModal: React.FunctionComponent<Props> = ({
       ? [...(travelerProfile as any)[kindOfContent]]
       : []
   );
+
+  const dispatch = useAppDispatch();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [profileImageFile, setProfileImageFile] = useState<File>();
 
   useEffect(() => {
     function setSelectedChoices(choices: any) {
@@ -65,10 +72,7 @@ const MultipleChoicesModal: React.FunctionComponent<Props> = ({
           if (newSelected[index]) {
             tempChoicesArr.push(option);
           } else {
-            tempChoicesArr.splice(
-              choicesArray?.indexOf(option),
-              1
-            );
+            tempChoicesArr.splice(choicesArray?.indexOf(option), 1);
           }
           console.log(tempChoicesArr);
           setChoicesArray(tempChoicesArr);
@@ -87,6 +91,26 @@ const MultipleChoicesModal: React.FunctionComponent<Props> = ({
   const footerStyle = {
     backgroundColor: "white",
     borderTop: "none",
+  };
+
+  const onSubmit = () => {
+    let tempProfile: any = { ...travelerProfile };
+    setTravelerProfile({
+      ...travelerProfile,
+      [kindOfContent]: choicesArray,
+    });
+    tempProfile[kindOfContent] = [...choicesArray];
+    let formData = new FormData();
+    formData.append(
+      "updatedTravelerProfile",
+      new Blob([JSON.stringify(tempProfile)], { type: "application/json" })
+    );
+    console.log(tempProfile);
+    setIsLoading(true);
+    dispatch(
+      updateTravelerProfile(formData, setIsLoading, setProfileImageFile)
+    );
+    setActive(false);
   };
 
   return (
@@ -125,14 +149,11 @@ const MultipleChoicesModal: React.FunctionComponent<Props> = ({
           style={footerStyle}
         >
           <button
-            className={"button has-text-white has-background-primary"}
-            onClick={() => {
-              setTravelerProfile({
-                ...travelerProfile,
-                [kindOfContent]: choicesArray,
-              });
-              setActive(false);
-            }}
+            className={
+              "button has-text-white has-background-primary" +
+              (isLoading ? "is-loading" : "")
+            }
+            onClick={onSubmit}
           >
             Add {kindOfContent}
           </button>

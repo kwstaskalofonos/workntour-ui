@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import ProfileImage from "@src/views/common/ProfileImage";
 import { useAppDispatch, useAppSelector } from "@src/state/stores/hooks";
 import {
+  ProfileExperience,
+  ProfileLanguage,
   Role,
   SpecialDietary,
   TravelerProfileDTO,
@@ -30,6 +32,7 @@ import ExperienceModal from "@src/views/traveler/profile/ExperienceModal";
 import { toast } from "react-toastify";
 
 import MultipleChoicesModal from "./MultipleChoicesModal";
+import { property } from "lodash";
 
 const TravelerProfilePage: React.FunctionComponent = () => {
   const dispatch = useAppDispatch();
@@ -174,6 +177,16 @@ const TravelerProfilePage: React.FunctionComponent = () => {
       ...(profile as TravelerProfileDTO),
       specialDietary: e.target.value,
     });
+    handleUpdateProfile(e.target.value, "specialDietary");
+  };
+
+  const handleChangeDriverLicense = (e: any) => {
+    let booleanValue = !!parseInt(e.target.value);
+    setProfile({
+      ...(profile as TravelerProfileDTO),
+      driverLicense: booleanValue,
+    });
+    handleUpdateProfile(booleanValue, "driverLicense");
   };
 
   const onSubmit = () => {
@@ -230,6 +243,30 @@ const TravelerProfilePage: React.FunctionComponent = () => {
     setProfileImageFile(undefined);
   };
 
+  const handleUpdateProfile = (arrayOrValue: any, propertyName: string) => {
+    let tempProfile = { ...profile };
+    if (propertyName === "language" || propertyName === "experience")
+      tempProfile[propertyName] = [...arrayOrValue];
+    else if (
+      propertyName === "specialDietary" ||
+      propertyName === "driverLicense"
+    )
+      tempProfile[propertyName] = arrayOrValue;
+
+    let formData = new FormData();
+    formData.append(
+      "updatedTravelerProfile",
+      new Blob([JSON.stringify(tempProfile)], {
+        type: "application/json",
+      })
+    );
+    console.log(tempProfile);
+    setIsLoading(true);
+    dispatch(
+      updateTravelerProfile(formData, setIsLoading, setProfileImageFile)
+    );
+  };
+
   const renderExperience = (professional: boolean) => {
     if (!profile?.experience) return <></>;
 
@@ -260,12 +297,13 @@ const TravelerProfilePage: React.FunctionComponent = () => {
                 className={"is-clickable is-right has-text-primary mt-2"}
                 icon={faTrashCan}
                 onClick={() => {
-                  let temp = [...profile?.experience];
-                  temp.splice(temp.indexOf(obj), 1);
+                  let tempArr = [...profile?.experience];
+                  tempArr.splice(tempArr.indexOf(obj), 1);
                   setProfile({
                     ...profile,
-                    experience: temp,
+                    experience: tempArr,
                   });
+                  handleUpdateProfile(tempArr, "experience");
                 }}
               />
             </div>
@@ -292,12 +330,13 @@ const TravelerProfilePage: React.FunctionComponent = () => {
               className={"is-clickable is-right has-text-primary mt-2"}
               icon={faTrashCan}
               onClick={() => {
-                let temp = [...profile?.language];
-                temp.splice(temp.indexOf(obj), 1);
+                let tempArr = [...profile?.language];
+                tempArr.splice(tempArr.indexOf(obj), 1);
                 setProfile({
                   ...profile,
-                  language: temp,
+                  language: tempArr,
                 });
+                handleUpdateProfile(tempArr, "language");
               }}
             />
           </div>
@@ -697,12 +736,8 @@ const TravelerProfilePage: React.FunctionComponent = () => {
                         id="driver1"
                         type="radio"
                         name="driver"
-                        onChange={(e) =>
-                          setProfile({
-                            ...(profile as TravelerProfileDTO),
-                            driverLicense: true,
-                          })
-                        }
+                        value={1}
+                        onChange={handleChangeDriverLicense}
                         checked={profile?.driverLicense === true}
                       />
                       <label htmlFor="driver1">Yes</label>
@@ -713,12 +748,8 @@ const TravelerProfilePage: React.FunctionComponent = () => {
                         id="driver2"
                         type="radio"
                         name="driver"
-                        onChange={(e) =>
-                          setProfile({
-                            ...(profile as TravelerProfileDTO),
-                            driverLicense: false,
-                          })
-                        }
+                        value={0}
+                        onChange={handleChangeDriverLicense}
                         checked={profile?.driverLicense === false}
                       />
                       <label htmlFor="driver2">No</label>

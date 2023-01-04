@@ -18,6 +18,10 @@
     .submitSection {
         justify-content: center;
     }
+
+    .profileForm {
+        padding: 2% 5%;
+    }
 }
 
 /* checkbox for traveller profile */
@@ -120,13 +124,73 @@
 
 .profilePicture {
     display: flex;
+    justify-content: space-between;
+    margin-bottom: 50px;
+}
+
+.profilePhoto {
+    display: flex;
+    flex-shrink: 0;
+    width: 50%;
+}
+
+.profileSectionMoto {
+    display: flex;
+    width: 50%;
+}
+
+.profileSectionMoto-text {
+    text-align: left;
+    margin-left: 30px;
+    width: 70%;
+}
+
+.horizontalLine {
+    border: 1px solid #E0E0E0;
+    /* transform: rotate(90deg); */
 }
 
 @media screen and (max-width: 770px) {
     .profilePicture {
-        display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
+        margin-bottom: 0;
     }
+
+    .profilePhoto {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+    }
+
+    .profileSectionMoto {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+    }
+
+    .profileSectionMoto-text {
+        text-align: left;
+        margin: 30px 0;
+        width: 100%;
+    }
+
+    .horizontalLine {
+        display: none;
+    }
+
+
+    .profileUsername {
+        font-size: 30px;
+        text-align: center;
+    }
+
+    .profileMoto {
+        width: 100%;
+        margin: 20px 0px;
+    }
+
 }

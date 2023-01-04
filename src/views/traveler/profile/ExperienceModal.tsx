@@ -7,6 +7,8 @@ import {
 } from "@src/state/stores/user/models";
 
 import { toast } from "react-toastify";
+import { useAppDispatch } from "@src/state/stores/hooks";
+import { updateTravelerProfile } from "@src/state/stores/user/operations";
 
 export interface Props {
   setActive: any;
@@ -37,6 +39,10 @@ const ExperienceModal: React.FunctionComponent<Props> = ({
     description: "",
   });
 
+  const dispatch = useAppDispatch();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [profileImageFile, setProfileImageFile] = useState<File>();
+
   let experienceArray: ProfileExperience[] = [];
   if (travelerProfile.experience) {
     experienceArray = [...travelerProfile.experience];
@@ -47,8 +53,7 @@ const ExperienceModal: React.FunctionComponent<Props> = ({
       experienceObj.position === "" ||
       experienceObj.nameOfOrganisation === "" ||
       experienceObj.startedOn === "" ||
-      experienceObj.endedOn === "" ||
-      experienceObj.description === ""
+      experienceObj.endedOn === ""
     ) {
       toast.error("Empty Fields");
       return;
@@ -61,6 +66,7 @@ const ExperienceModal: React.FunctionComponent<Props> = ({
       },
     };
     experienceArray.push(temObjToPush);
+    let tempProfile: any = { ...travelerProfile };
 
     setTravelerProfile({
       ...travelerProfile,
@@ -69,14 +75,17 @@ const ExperienceModal: React.FunctionComponent<Props> = ({
 
     console.log(experienceArray);
 
-    setExperienceObj({
-      typeOfExperience: TypeOfExperience.COMPANY,
-      position: "",
-      nameOfOrganisation: "",
-      startedOn: "",
-      endedOn: "",
-      description: "",
-    });
+    tempProfile.experience = [...experienceArray];
+    let formData = new FormData();
+    formData.append(
+      "updatedTravelerProfile",
+      new Blob([JSON.stringify(tempProfile)], { type: "application/json" })
+    );
+    console.log(tempProfile);
+    setIsLoading(true);
+    dispatch(
+      updateTravelerProfile(formData, setIsLoading, setProfileImageFile)
+    );
     setActive(false);
   };
 

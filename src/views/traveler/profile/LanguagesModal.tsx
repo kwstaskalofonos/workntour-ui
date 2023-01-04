@@ -11,6 +11,8 @@ import {
 } from "@src/state/stores/user/models";
 
 import { toast } from "react-toastify";
+import { useAppDispatch } from "@src/state/stores/hooks";
+import { updateTravelerProfile } from "@src/state/stores/user/operations";
 
 export interface Props {
   setActive: any;
@@ -41,6 +43,10 @@ const LanguagesModal: React.FunctionComponent<Props> = ({
   if (travelerProfile.language) {
     languagesArray = [...travelerProfile.language];
   }
+
+  const dispatch = useAppDispatch();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [profileImageFile, setProfileImageFile] = useState<File>();
 
   const renderLanguages = () => {
     let array: any[] = [];
@@ -103,12 +109,24 @@ const LanguagesModal: React.FunctionComponent<Props> = ({
     }
     console.log(languageObj);
     languagesArray.push(languageObj);
+    let tempProfile: any = { ...travelerProfile };
     setTravelerProfile({
       ...travelerProfile,
       language: languagesArray,
     });
 
     console.log(languagesArray);
+    tempProfile.language = [...languagesArray];
+    let formData = new FormData();
+    formData.append(
+      "updatedTravelerProfile",
+      new Blob([JSON.stringify(tempProfile)], { type: "application/json" })
+    );
+    console.log(tempProfile);
+    setIsLoading(true);
+    dispatch(
+      updateTravelerProfile(formData, setIsLoading, setProfileImageFile)
+    );
     setActive(false);
   };
 
@@ -175,7 +193,10 @@ const LanguagesModal: React.FunctionComponent<Props> = ({
           style={footerStyle}
         >
           <button
-            className={"button has-text-white has-background-primary"}
+            className={
+              "button has-text-white has-background-primary" +
+              (isLoading ? "is-loading" : "")
+            }
             onClick={handleAddLanguage}
           >
             Add Language
