@@ -1,5 +1,6 @@
 import React, {forwardRef, useImperativeHandle, useState} from "react";
 import {TypeOfHelpNeeded, TypeOfHelpNeededType} from "@src/state/stores/opportunity/models";
+import googleIcon from "@src/assets/GoogleIcon.png";
 
 export interface Props {
     ref: any

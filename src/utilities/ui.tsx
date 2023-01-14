@@ -134,3 +134,42 @@ export function lowerCaseAndCapitalizeFirstLetter(str:string | any) {
       str?.toLocaleLowerCase()?.replace("_", " ")?.slice(1)
     );
 }
+
+function checkPasswordValidation(value:string | any) {
+  const isWhitespace = /^(?=.*\s)/;
+  if (isWhitespace.test(value)) {
+    return "Password must not contain Whitespaces.";
+  }
+
+  const isContainsUppercase = /^(?=.*[A-Z])/;
+  if (!isContainsUppercase.test(value)) {
+    return "At least one Uppercase Character.";
+  }
+
+  const isContainsLowercase = /^(?=.*[a-z])/;
+  if (!isContainsLowercase.test(value)) {
+    return "At least one Lowercase Character.";
+  }
+
+  const isContainsNumber = /^(?=.*[0-9])/;
+  if (!isContainsNumber.test(value)) {
+    return "At least one Digit.";
+  }
+
+  const isContainsSymbol = /^(?=.*[~`!@#$%^&*()--+={}\[\]|\\:;"'<>,.?/_₹])/;
+  if (!isContainsSymbol.test(value)) {
+    return "At least one Special Symbol.";
+  }
+
+  const isValidLength = /^.{8,}$/;
+  if (!isValidLength.test(value)) {
+    return "At least 8 characters long";
+  }
+  return null;
+}
+
+// let predicateUpperCaseChars = NSPredicate(format:"SELF MATCHES %@", ".[A-Z]+.")
+//         // Contains at least one lower case
+//         let predicateLowerCaseChars = NSPredicate(format:"SELF MATCHES %@", ".[a-z]+.")
+//         // Contains at least one digit and a special character
+//         let predicateNumAndSpecialChars = NSPredicate(format:"SELF MATCHES %@", "^(?=.?[0-9])(?=.?[#?!@$%^&<>*~:`-]).{2,}$")
