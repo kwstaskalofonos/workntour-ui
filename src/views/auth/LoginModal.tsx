@@ -26,6 +26,7 @@ export interface Props {
 export interface PropsLoginContent {
   openRegisterModal: any;
   handleForgotPassword: any;
+  setIsActive:any;
 }
 
 export interface LoginModalHandler {
@@ -36,6 +37,7 @@ export interface LoginModalHandler {
 const LoginContent: React.FunctionComponent<PropsLoginContent> = ({
   openRegisterModal,
   handleForgotPassword,
+  setIsActive,
 }) => {
   const { register, handleSubmit, getValues } = useForm();
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -54,6 +56,7 @@ const LoginContent: React.FunctionComponent<PropsLoginContent> = ({
         setIsLoading(false);
         dispatch(doSetRole(response.role));
         navigate("/");
+        setIsActive(false)
       })
       .catch((error) => {
         toast.error(error, { position: toast.POSITION.TOP_RIGHT });
@@ -204,6 +207,7 @@ const LoginModal: React.FunctionComponent<Props> =
                   <LoginContent
                     openRegisterModal={openRegisterModal}
                     handleForgotPassword={handleForgotPassword}
+                    setIsActive={setIsActive}
                   />
                 )}
               </form>

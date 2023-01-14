@@ -1,6 +1,4 @@
 import React, {useState} from "react";
-import Header from "@src/views/common/Header";
-import Footer from "@src/views/common/Footer";
 import IndividualRegisterTab from "@src/views/auth/IndividualRegisterTab";
 import CompanyRegisterTab from "@src/views/auth/CompanyRegisterTab";
 // @ts-ignore
@@ -14,7 +12,6 @@ const HostRegisterPage:React.FunctionComponent = () =>{
     return(
         <React.Fragment>
             <InterCom/>
-            <Header/>
             <section className={"section has-background-primary-light"}>
                 <div className={"columns is-centered"}>
                     <div className={"column is-1"}/>
@@ -62,7 +59,6 @@ const HostRegisterPage:React.FunctionComponent = () =>{
                     </div>
                 </div>
             </section>
-            <Footer/>
         </React.Fragment>
     )
 };
