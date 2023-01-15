@@ -26,7 +26,7 @@ export interface Props {
 export interface PropsLoginContent {
   openRegisterModal: any;
   handleForgotPassword: any;
-  setIsActive:any;
+  setIsActive: any;
 }
 
 export interface LoginModalHandler {
@@ -56,7 +56,7 @@ const LoginContent: React.FunctionComponent<PropsLoginContent> = ({
         setIsLoading(false);
         dispatch(doSetRole(response.role));
         navigate("/");
-        setIsActive(false)
+        setIsActive(false);
       })
       .catch((error) => {
         toast.error(error, { position: toast.POSITION.TOP_RIGHT });
@@ -174,6 +174,11 @@ const LoginModal: React.FunctionComponent<Props> =
         props.modalHandler.current.open();
         setIsActive(false);
       };
+      
+      const handleCloseModal = () =>{
+        setIsActive(false);
+        setDisplayForgotPassword(false);
+      }
 
       return (
         <div
@@ -193,7 +198,7 @@ const LoginModal: React.FunctionComponent<Props> =
               <button
                 className="delete"
                 aria-label="close"
-                onClick={() => setIsActive(false)}
+                onClick={handleCloseModal}
               />
             </header>
             <section className={"modal-card-body"}>

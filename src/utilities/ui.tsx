@@ -125,17 +125,17 @@ export function renderNationalities() {
   return array;
 }
 
-export function lowerCaseAndCapitalizeFirstLetter(str:string | any) {
-    if(!str){
-        return "";
-    }
-    return (
-      str?.charAt(0)?.toUpperCase() +
-      str?.toLocaleLowerCase()?.replace("_", " ")?.slice(1)
-    );
+export function lowerCaseAndCapitalizeFirstLetter(str: string | any) {
+  if (!str) {
+    return "";
+  }
+  return (
+    str?.charAt(0)?.toUpperCase() +
+    str?.toLocaleLowerCase()?.replace("_", " ")?.slice(1)
+  );
 }
 
-function checkPasswordValidation(value:string | any) {
+function checkPasswordValidation(value: string | any) {
   const isWhitespace = /^(?=.*\s)/;
   if (isWhitespace.test(value)) {
     return "Password must not contain Whitespaces.";
@@ -166,6 +166,26 @@ function checkPasswordValidation(value:string | any) {
     return "At least 8 characters long";
   }
   return null;
+}
+
+export function isValidLength(value: string) {
+  const regex = /^.{8,}$/;
+  return regex.test(value);
+}
+
+export function isContainsUppercase(value: string) {
+  const regex = /^(?=.*[A-Z])/;
+  return regex.test(value);
+}
+
+export function isContainsLowercase(value: string) {
+  const regex = /^(?=.*[a-z])/;
+  return regex.test(value);
+}
+export function isContainsSymbolAndNumber(value: string) {
+  const regexSymbol = /^(?=.*[~`!@#$%^&*()--+={}\[\]|\\:;"'<>,.?/_₹])/;
+  const regexNumber = /^(?=.*[0-9])/;
+  return regexSymbol.test(value) && regexNumber.test(value);
 }
 
 // let predicateUpperCaseChars = NSPredicate(format:"SELF MATCHES %@", ".[A-Z]+.")

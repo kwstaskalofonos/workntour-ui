@@ -83,6 +83,7 @@ const AppRouter: React.FunctionComponent = () => {
           <Route path="/check-inbox" element={<CheckInboxPage />} />
           <Route path="/not-found" element={<ErrorPage />} />
           <Route path="/home" element={<LandingPage />} />
+          <Route path="/" element={<LandingPage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/blog" element={<BlogPage />} />
           {/* <Route path="/view/:id" element={<ViewArticle />} /> */}
