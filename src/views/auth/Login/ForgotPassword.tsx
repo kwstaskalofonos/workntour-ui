@@ -7,12 +7,6 @@ import { ForgotPassword } from "@src/state/stores/user/models";
 interface Props {
   handleForgotPassword: any;
   openRegisterModal: any;
-  // setDateRange: any;
-  // isActive?: boolean;
-  // startDate?: Date;
-  // setStartDate: any;
-  // endDate?: Date;
-  // setEndDate: any;
 }
 
 const ForgotPassword: React.FunctionComponent<Props> = ({

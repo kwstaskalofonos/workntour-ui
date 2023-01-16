@@ -28,7 +28,7 @@ import {
 import { SessionStorage } from "@src/utilities/localStorage";
 import AboutPage from "@src/views/AboutPage";
 import BlogPage from "@src/views/BlogPage";
-import ResetPassword from "../auth/ResetPassword";
+import ResetPassword from "../auth/ResetPassword/ResetPassword";
 import Footer from "../common/Footer";
 import TopMenu from "../common/TopMenu";
 

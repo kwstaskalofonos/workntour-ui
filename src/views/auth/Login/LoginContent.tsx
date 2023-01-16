@@ -1,40 +1,25 @@
-import React, {
-  forwardRef,
-  useEffect,
-  useImperativeHandle,
-  useState,
-} from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { faEyeSlash } from "@fortawesome/free-solid-svg-icons/faEyeSlash";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { LoginForm, LoginResponse } from "@src/state/stores/user/models";
-import { GenericResponse, login } from "@src/utilities/fetch";
+import { login } from "@src/utilities/fetch";
 import { toast } from "react-toastify";
 import { setCookie } from "@src/utilities/cookies";
 import { useNavigate } from "react-router";
 import { useAppDispatch } from "@src/state/stores/hooks";
 import { doSetRole } from "@src/state/stores/user/operations";
-import GoogleSignIn from "./GoogleSignIn";
-import AppleSignIn from "./AppleSignIn";
-import ForgotPassword from "./ForgotPassword";
+import GoogleSignIn from "../GoogleSignIn";
+import AppleSignIn from "../AppleSignIn";
 // @ts-ignore
-import { height } from "@fortawesome/free-solid-svg-icons/faAngleUp";
 
 export interface Props {
-  ref: any;
-}
-export interface PropsLoginContent {
   openRegisterModal: any;
   handleForgotPassword: any;
   setIsActive: any;
 }
 
-export interface LoginModalHandler {
-  open: () => void;
-  close: () => void;
-}
-
-const LoginContent: React.FunctionComponent<PropsLoginContent> = ({
+const LoginContent: React.FunctionComponent<Props> = ({
   openRegisterModal,
   handleForgotPassword,
   setIsActive,
@@ -147,91 +132,4 @@ const LoginContent: React.FunctionComponent<PropsLoginContent> = ({
   );
 };
 
-const LoginModal: React.FunctionComponent<Props> =
-  forwardRef<LoginModalHandler>(
-    (props: {}, ref: React.Ref<LoginModalHandler>) => {
-      const [isActive, setIsActive] = useState<boolean>(false);
-      const [displayForgotPassword, setDisplayForgotPassword] =
-        useState<boolean>(false);
-
-      const handleForgotPassword = () => {
-        setDisplayForgotPassword(!displayForgotPassword);
-      };
-
-      useImperativeHandle(ref, () => {
-        return {
-          open: () => {
-            setIsActive(true);
-          },
-          close: () => {
-            setIsActive(false);
-          },
-        };
-      });
-
-      const openRegisterModal = () => {
-        // @ts-ignore
-        props.modalHandler.current.open();
-        setIsActive(false);
-      };
-      
-      const handleCloseModal = () =>{
-        setIsActive(false);
-        setDisplayForgotPassword(false);
-      }
-
-      return (
-        <div
-          className={"modal " + (isActive ? "is-active modal-background" : "")}
-        >
-          <div className="modal-card">
-            <header
-              className={"modal-card-head"}
-              style={{
-                backgroundColor: "white",
-                borderBottom: "1px solid #8970FA",
-              }}
-            >
-              <p className="modal-card-title is-4 has-text-weight-bold has-text-primary is-flex is-justify-content-center">
-                Log in to your account
-              </p>
-              <button
-                className="delete"
-                aria-label="close"
-                onClick={handleCloseModal}
-              />
-            </header>
-            <section className={"modal-card-body"}>
-              <form className="modalLogin">
-                {displayForgotPassword ? (
-                  <ForgotPassword
-                    handleForgotPassword={handleForgotPassword}
-                    openRegisterModal={openRegisterModal}
-                  />
-                ) : (
-                  <LoginContent
-                    openRegisterModal={openRegisterModal}
-                    handleForgotPassword={handleForgotPassword}
-                    setIsActive={setIsActive}
-                  />
-                )}
-              </form>
-            </section>
-            <footer
-              className="modal-card-foot"
-              style={{
-                backgroundColor: "white",
-                border: 0,
-              }}
-            >
-              {/* <button className="button" onClick={() => setIsActive(false)}>
-                Cancel
-              </button> */}
-            </footer>
-          </div>
-        </div>
-      );
-    }
-  );
-
-export default LoginModal;
+export default LoginContent;

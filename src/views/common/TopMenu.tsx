@@ -2,7 +2,7 @@ import React, {useEffect, useRef, useState} from "react";
 // @ts-ignore
 import logo from "@src/assets/Frame.svg";
 import SelectRegistrationModal, {SelectRegistrationModalHandler} from "@src/views/auth/SelectRegistrationModal";
-import LoginModal, {LoginModalHandler} from "@src/views/auth/LoginModal";
+import LoginModal, {LoginModalHandler} from "@src/views/auth/Login/LoginModal";
 import {deleteCookie, deleteSpecificCookie, hasCookie} from "@src/utilities/cookies";
 import {faUserCircle} from "@fortawesome/free-solid-svg-icons/faUserCircle";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
