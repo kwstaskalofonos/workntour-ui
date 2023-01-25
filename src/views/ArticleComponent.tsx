@@ -17,6 +17,7 @@ const ArticleComponent:React.FunctionComponent<Props> = ({src,date,title}) =>{
             width: "100%",
             height: "300px",
             borderRadius: "5px",
+            objectFit:"cover",
           }}
           src={src}
         />

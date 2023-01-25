@@ -19,6 +19,7 @@ import {SessionStorage} from "@src/utilities/localStorage";
 import AboutPage from "@src/views/AboutPage";
 import BlogPage from "@src/views/blog/BlogPage";
 import ViewArticle from "../blog/ViewArticle";
+import ScrollToTop from "../common/ScrollToTop";
 
 import Footer from "../common/Footer";
 import TopMenu from "../common/TopMenu";
@@ -58,29 +59,32 @@ const AppRouter :React.FunctionComponent = () =>{
     return (
       <Router>
         <TopMenu />
-        <div style={{ paddingTop: "60px" }}>
-          <Routes>
-            <Route
-              path="/registerAsTraveler"
-              element={<TravelerRegisterPage />}
-            />
-            <Route path="/registerAsHost" element={<HostRegisterPage />} />
-            <Route path="/check-inbox" element={<CheckInboxPage />} />
-            <Route path="/not-found" element={<ErrorPage />} />
-            <Route path="/home" element={<LandingPage />} />
-            <Route path="/about" element={<AboutPage />} />
-            <Route path="/blog" element={<BlogPage />} />
-            <Route path="/article/:id" element={<ViewArticle />} />
-            <Route
-              path="*"
-              element={
-                <PrivateRoute>
-                  <SecuredSiteRouter />
-                </PrivateRoute>
-              }
-            />
-          </Routes>
-        </div>
+        <ScrollToTop>
+          <div style={{ paddingTop: "60px" }}>
+            <Routes>
+              <Route
+                path="/registerAsTraveler"
+                element={<TravelerRegisterPage />}
+              />
+              <Route path="/registerAsHost" element={<HostRegisterPage />} />
+              <Route path="/check-inbox" element={<CheckInboxPage />} />
+              <Route path="/not-found" element={<ErrorPage />} />
+              <Route path="/home" element={<LandingPage />} />
+              <Route path="/about" element={<AboutPage />} />
+              <Route path="/blog" element={<BlogPage />} />
+
+              <Route path="/article/:id" element={<ViewArticle />} />
+              <Route
+                path="*"
+                element={
+                  <PrivateRoute>
+                    <SecuredSiteRouter />
+                  </PrivateRoute>
+                }
+              />
+            </Routes>
+          </div>
+        </ScrollToTop>
         <Footer />
       </Router>
     );
