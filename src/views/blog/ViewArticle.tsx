@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import { getArticle } from "@src/state/stores/opportunity/operations";
 import { Article } from "@src/state/stores/opportunity/models";
 import { useParams } from "react-router";
+import { SpinnerDotted } from "spinners-react";
 // @ts-ignore
 import person from "@src/assets/blog/PersonBlogThumbnail.png";
 import { getDateFromString } from "@src/utilities/ui";
@@ -29,45 +30,53 @@ const ViewArticle: React.FunctionComponent = () => {
   }, [id]);
 
   return (
-    <section className={"articleContainer"}>
-      <div className="has-text-centered mb-5">
-        {/* {isLoading && "Loading..."} */}
-        <h6 className="is-small has-text-weight-bold has-text-primary">
-          Published on {getDateFromString(article?.createdAt)}
-        </h6>
-        <h1 className="title has-text-weight-bold has-text-black">
-          {article?.title}
-        </h1>
-      </div>
-      <img className="articleImage" src={article?.blogPhoto?.imageUrl} />
-      <div className="contentContainer">
-        <div
-          className="contentContainer-textStyle"
-          dangerouslySetInnerHTML={{ __html: article?.content || "" }}
-        />
-        <hr />
-        <div className="authorAndSocialContainer">
-          <div className="authorAndImageSection">
-            <img src={person} />
-            <div className="authorName">
-              <p className={"is-size-10 has-text-weight-semibold"}>
-                Rafail Roumeliotis
-              </p>
-              <p className={"is-size-10 has-text-weight-light"}>CEO</p>
+    <>
+      <section className={"articleContainer"}>
+        {isLoading ? (
+          <SpinnerDotted size="150" color="#8970FA" />
+        ) : (
+          <>
+            <div className="has-text-centered mb-5">
+              {/* {isLoading && "Loading..."} */}
+              <h6 className="is-small has-text-weight-bold has-text-primary">
+                Published on {getDateFromString(article?.createdAt)}
+              </h6>
+              <h1 className="title has-text-weight-bold has-text-black">
+                {article?.title}
+              </h1>
             </div>
-          </div>
-          <button
-            className="button copyLinkButton"
-            onClick={() => {
-              let url = document.location.href;
-              navigator.clipboard.writeText(url);
-            }}
-          >
-            Copy Link
-          </button>
-        </div>
-      </div>
-    </section>
+            <img className="articleImage" src={article?.blogPhoto?.imageUrl} />
+            <div className="contentContainer">
+              <div
+                className="contentContainer-textStyle"
+                dangerouslySetInnerHTML={{ __html: article?.content || "" }}
+              />
+              <hr />
+              <div className="authorAndSocialContainer">
+                <div className="authorAndImageSection">
+                  <img src={person} />
+                  <div className="authorName">
+                    <p className={"is-size-10 has-text-weight-semibold"}>
+                      Rafail Roumeliotis
+                    </p>
+                    <p className={"is-size-10 has-text-weight-light"}>CEO</p>
+                  </div>
+                </div>
+                <button
+                  className="button copyLinkButton"
+                  onClick={() => {
+                    let url = document.location.href;
+                    navigator.clipboard.writeText(url);
+                  }}
+                >
+                  Copy Link
+                </button>
+              </div>
+            </div>
+          </>
+        )}
+      </section>
+    </>
   );
 };
 

@@ -52,6 +52,7 @@
     "react-slideshow-image": "^4.0.4",
     "react-toastify": "^9.0.1",
     "redux-thunk": "^2.4.1",
+    "spinners-react": "^1.0.7",
     "tsconfig": "^7.0.0",
     "use-places-autocomplete": "^4.0.0"
   },
