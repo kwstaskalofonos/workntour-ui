@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
-import { useParams } from "react-router-dom";
 // @ts-ignore
 import image from "@src/assets/resetPasswordImage.svg";
 // @ts-ignore
@@ -30,7 +29,6 @@ const PasswordUpdatedNotify: React.FunctionComponent = () => {
 };
 
 const ResetPassword: React.FunctionComponent = () => {
-  let { token } = useParams();
   const { register, handleSubmit, getValues } = useForm();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [password, setPassword] = useState<string>("");

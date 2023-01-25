@@ -1,0 +1,13 @@
+.verificationSection {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #FAF9FF;
+    gap:34px;
+}
+
+/* .verificationSection-image{
+    fl
+} */

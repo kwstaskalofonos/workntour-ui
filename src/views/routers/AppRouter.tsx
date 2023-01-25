@@ -8,6 +8,7 @@ import TravelerRegisterPage from "@src/views/auth/TravelerRegisterPage";
 import CheckInboxPage from "@src/views/auth/CheckInboxPage";
 import ErrorPage from "@src/views/common/ErrorPage";
 import HostRegisterPage from "@src/views/auth/HostRegisterPage";
+import Verification from "../auth/Verification";
 // @ts-ignore
 import {
   doSetProfile,
@@ -86,6 +87,7 @@ const AppRouter: React.FunctionComponent = () => {
           <Route path="/" element={<LandingPage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/blog" element={<BlogPage />} />
+          <Route path="/verification" element={<Verification />} />
           {/* <Route path="/view/:id" element={<ViewArticle />} /> */}
           <Route
             path="*"
