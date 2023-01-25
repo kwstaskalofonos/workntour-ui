@@ -4,9 +4,11 @@ import { toast } from "react-toastify";
 import { getArticle } from "@src/state/stores/opportunity/operations";
 import { Article } from "@src/state/stores/opportunity/models";
 import { useParams } from "react-router";
+// @ts-ignore
 import person from "@src/assets/blog/PersonBlogThumbnail.png";
-import "./blog.css";
 import { getDateFromString } from "@src/utilities/ui";
+
+import "./blog.css";
 
 const ViewArticle: React.FunctionComponent = () => {
   const { id } = useParams();
@@ -17,13 +19,12 @@ const ViewArticle: React.FunctionComponent = () => {
   useEffect(() => {
     if (id) {
       setIsLoading(true);
-      getArticle(id)
-        .then((response) => {
-          //@ts-ignore
-          console.log(response)
-          setArticle(response);
-          setIsLoading(false);
-        })
+      getArticle(id).then((response) => {
+        //@ts-ignore
+        console.log(response);
+        setArticle(response);
+        setIsLoading(false);
+      });
     }
   }, [id]);
 
@@ -55,17 +56,15 @@ const ViewArticle: React.FunctionComponent = () => {
               <p className={"is-size-10 has-text-weight-light"}>CEO</p>
             </div>
           </div>
-          <div className="socials">
-            <button
-              className="button copyLinkButton"
-              onClick={() => {
-                let url = document.location.href;
-                navigator.clipboard.writeText(url);
-              }}
-            >
-              Copy Link
-            </button>
-          </div>
+          <button
+            className="button copyLinkButton"
+            onClick={() => {
+              let url = document.location.href;
+              navigator.clipboard.writeText(url);
+            }}
+          >
+            Copy Link
+          </button>
         </div>
       </div>
     </section>

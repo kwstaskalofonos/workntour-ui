@@ -39,7 +39,7 @@
     flex-direction: column;
     align-items: center;
     background-color: #FAF9FF;
-    padding: 50px 200px;
+    padding: 50px 25%;
 }
 
 .contentContainer {
@@ -84,6 +84,10 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+.authorAndSocialContainer img {
+    object-fit: cover;
 }
 
 .authorAndImageSection {
