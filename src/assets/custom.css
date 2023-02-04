@@ -1,61 +1,80 @@
+.MuiOutlinedInput-notchedOutline {
+    position: relative;
+    z-index: -1;
+    background: linear-gradient(white, white) padding-box,
+        linear-gradient(90deg, #7e6fd8, #0ee5d0) border-box !important;
+    border-radius: 7px !important;
+    border-color: transparent !important;
+}
 
-.border-linear{
-    background: linear-gradient(white,white) padding-box,linear-gradient(90deg,#7E6FD8,#0EE5D0) border-box !important;
+.MuiInputLabel-root {
+    position: relative;
+    z-index: -1;
+    background: linear-gradient(white, white) padding-box;
+}
+
+.MuiInputLabel-root.Mui-error {
+    color: #d3302f !important;
+}
+
+
+.border-linear {
+    background: linear-gradient(white, white) padding-box, linear-gradient(90deg, #7E6FD8, #0EE5D0) border-box !important;
     border-style: solid !important;
     border-width: 1px !important;
     border-color: transparent !important;
 }
 
-.border-linear-disabled{
-    background: linear-gradient(#f2f2f2,#f2f2f2) padding-box,linear-gradient(90deg,#7E6FD8,#0EE5D0) border-box !important;
+.border-linear-disabled {
+    background: linear-gradient(#f2f2f2, #f2f2f2) padding-box, linear-gradient(90deg, #7E6FD8, #0EE5D0) border-box !important;
     border-style: solid !important;
     border-width: 1px !important;
     border-color: transparent !important;
 }
 
-.border-linear-profile{
-    background: linear-gradient(white,white) padding-box,linear-gradient(90deg,#7E6FD8,#0EE5D0) border-box !important;
+.border-linear-profile {
+    background: linear-gradient(white, white) padding-box, linear-gradient(90deg, #7E6FD8, #0EE5D0) border-box !important;
     border-style: solid !important;
     border-width: 4px !important;
     border-color: transparent !important;
 }
 
-.border-plus-button{
-    border:2px solid rgba(36, 221, 193, 0.73);
+.border-plus-button {
+    border: 2px solid rgba(36, 221, 193, 0.73);
     border-radius: 50%;
     width: 100%;
     height: 100%;
     background-color: #ECEFF1;
 }
 
-.background-linear{
-    background: linear-gradient(90deg,#7E6FD8,#0EE5D0);
+.background-linear {
+    background: linear-gradient(90deg, #7E6FD8, #0EE5D0);
     border-radius: 18px !important;
 }
 
-.background-linear-land{
-    background: linear-gradient(90deg,#7E6FD8,#0EE5D0);
+.background-linear-land {
+    background: linear-gradient(90deg, #7E6FD8, #0EE5D0);
     border-radius: 7px !important;
 }
 
-.border-linear-radius{
-    background: linear-gradient(white,white) padding-box,linear-gradient(90deg,#7E6FD8,#0EE5D0) border-box !important;
+.border-linear-radius {
+    background: linear-gradient(white, white) padding-box, linear-gradient(90deg, #7E6FD8, #0EE5D0) border-box !important;
     border-style: solid !important;
     border-width: 1px !important;
     border-color: transparent !important;
     border-radius: 8px;
 }
 
-.border-linear-no-left{
-    background: linear-gradient(white,white) padding-box,linear-gradient(90deg,#7E6FD8,#0EE5D0) border-box !important;
+.border-linear-no-left {
+    background: linear-gradient(white, white) padding-box, linear-gradient(90deg, #7E6FD8, #0EE5D0) border-box !important;
     border-style: solid !important;
     border-width: 1px !important;
     border-color: transparent !important;
     border-left-style: none !important;
 }
 
-.border-linear-no-right{
-    background: linear-gradient(white,white) padding-box,linear-gradient(90deg,#7E6FD8,#0EE5D0) border-box !important;
+.border-linear-no-right {
+    background: linear-gradient(white, white) padding-box, linear-gradient(90deg, #7E6FD8, #0EE5D0) border-box !important;
     border-style: solid !important;
     border-width: 1px !important;
     border-color: transparent !important;
@@ -63,41 +82,41 @@
     border-radius: 8px;
 }
 
-.border-linear:focus{
-    background: linear-gradient(white,white) padding-box,linear-gradient(90deg,#7E6FD8,#0EE5D0) border-box !important;
+.border-linear:focus {
+    background: linear-gradient(white, white) padding-box, linear-gradient(90deg, #7E6FD8, #0EE5D0) border-box !important;
     border-style: solid !important;
     border-width: 2px !important;
     border-color: transparent !important;
 }
 
 
-.opportunities{
+.opportunities {
     background-image: url("./hosts/hostBackground.png");
     background-repeat: no-repeat;
     background-size: contain;
 }
 
-.profile{
+.profile {
     background-image: url("./travelerBackground.png");
     background-repeat: no-repeat;
     background-size: cover;
 }
 
-.landing-page-background{
+.landing-page-background {
     background-image: url("./newLandingPage/banner-background.png");
     background-repeat: no-repeat;
     background-size: cover;
     background-position-y: center;
 }
 
-.about-page-last-background{
+.about-page-last-background {
     background-image: url("./newLandingPage/about-last-back.png");
     background-repeat: no-repeat;
     background-size: cover;
     background-position-y: top;
 }
 
-.about-page-top-background{
+.about-page-top-background {
     background-image: url("./newLandingPage/about-background.png");
     background-repeat: no-repeat;
     background-size: cover;
@@ -105,13 +124,13 @@
     background-position-x: 52%;
 }
 
-.blog-page-banner{
+.blog-page-banner {
     background-image: url("./blog/BlogBack.png");
     background-repeat: no-repeat;
     background-size: cover;
 }
 
-.each-slide-effect > div {
+.each-slide-effect>div {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -120,7 +139,7 @@
     border-radius: 1.6rem;
 }
 
-.opportunity-card{
+.opportunity-card {
     max-width: 300px !important;
 }
 
@@ -131,14 +150,14 @@
     text-align: center;
 }
 
-.custom-arrow-left{
+.custom-arrow-left {
     border-radius: 99px;
     /*opacity: 0.0;*/
     right: 4px !important;
     transition: 1.2s;
 }
 
-.custom-arrow-right{
+.custom-arrow-right {
     border-radius: 99px;
     /*opacity: 0.0;*/
     left: 4px !important;
@@ -155,19 +174,19 @@
 /*    transition: 1s;*/
 /*}*/
 
-.wrapper{
+.wrapper {
     position: relative;
     width: 100%;
 }
 
-.slider-container{
+.slider-container {
     position: relative;
     width: 100%;
     height: 100%;
 
 }
 
-input[type="range"]{
+input[type="range"] {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
@@ -181,7 +200,7 @@ input[type="range"]{
     pointer-events: none;
 }
 
-.slider-track{
+.slider-track {
     width: 100%;
     height: 5px;
     background-color: #8970FA;
@@ -192,22 +211,22 @@ input[type="range"]{
     border-radius: 5px;
 }
 
-input[type="range"]::-webkit-slider-runnable-track{
+input[type="range"]::-webkit-slider-runnable-track {
     -webkit-appearance: none;
     height: 5px;
 }
 
-input[type="range"]::-moz-range-track{
+input[type="range"]::-moz-range-track {
     -webkit-appearance: none;
     height: 5px;
 }
 
-input[type="range"]::-ms-track{
+input[type="range"]::-ms-track {
     -webkit-appearance: none;
     height: 5px;
 }
 
-input[type="range"]::-webkit-slider-thumb{
+input[type="range"]::-webkit-slider-thumb {
     -webkit-appearance: none;
     height: 1.3em;
     width: 1.3em;
@@ -218,7 +237,7 @@ input[type="range"]::-webkit-slider-thumb{
     margin-top: -9px;
 }
 
-input[type="range"]::-moz-range-thumb{
+input[type="range"]::-moz-range-thumb {
     -webkit-appearance: none;
     height: 1.7em;
     width: 1em;
@@ -229,7 +248,7 @@ input[type="range"]::-moz-range-thumb{
     margin-top: -9px;
 }
 
-input[type="range"]::-ms-thumb{
+input[type="range"]::-ms-thumb {
     -webkit-appearance: none;
     height: 1.7em;
     width: 1.7em;
@@ -240,36 +259,34 @@ input[type="range"]::-ms-thumb{
     margin-top: -9px;
 }
 
-textarea{
+textarea {
     height: 140px !important;
 }
 
-.selectedTag{
+.selectedTag {
     background-color: #8870F9;
 }
 
 
 @media screen and (max-width: 770px) {
-  .reverseColumnsFlex {
-    display: flex;
-    flex-direction: column-reverse;
-    height: 100%;
-  }
+    .reverseColumnsFlex {
+        display: flex;
+        flex-direction: column-reverse;
+        height: 100%;
+    }
 
-  .columnsFlex {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-  }
+    .columnsFlex {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+    }
 
 }
 
-.empty-select option{
+.empty-select option {
     color: black;
 }
 
-.empty-select{
+.empty-select {
     color: rgba(128, 128, 128, 0.6) !important;
 }
-
-

@@ -1,0 +1,11 @@
+.datesPickerContainer {
+  margin: 0 0 8px;
+  overflow-y: auto;
+  max-height: 170px;
+
+  .datesPickersBox {
+    display: flex;
+    gap: 16px;
+    margin: 16px 0 16px;
+  }  
+}
