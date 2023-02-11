@@ -35,7 +35,7 @@ const Footer: React.FunctionComponent = () => {
           marginTop: 0,
         }}
       />
-      <div className={"columns is-centered"}>
+      <div className={"is-flex is-justify-content-center"}>
         <div className={"column is-three-quarters"}>
           <div
             className={
@@ -89,12 +89,12 @@ const Footer: React.FunctionComponent = () => {
           </div>
         </div>
       </div>
-      <div className={"columns is-centered"}>
+      <div className={"is-flex is-justify-content-center"}>
         <div className={"column is-9"}>
           <hr className={"mt-6"} style={{ border: "1px solid #14C3AD" }} />
         </div>
       </div>
-      <div className={"columns is-centered"}>
+      <div className={"is-flex is-justify-content-center"}>
         <div className={"column is-three-quarters"}>
           <div
             className={

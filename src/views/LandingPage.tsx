@@ -14,7 +14,6 @@ import plane from "@src/assets/newLandingPage/plane.svg";
 import media from "@src/assets/newLandingPage/media.svg";
 // @ts-ignore
 import formLogo from "@src/assets/newLandingPage/form.png";
-import Header from "@src/views/common/Header";
 import InterCom from "@src/views/common/InterCom";
 import { isMobile } from "react-device-detect";
 import HostStepsSection from "@src/views/common/HostStepsSection";
