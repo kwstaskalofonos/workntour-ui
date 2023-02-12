@@ -254,7 +254,7 @@ export const LandingPage: React.FunctionComponent = () => {
               borderRadius: "16px",
               boxShadow: "3px 3px 22px #888888",
             }}
-            className={"column is-7 is-justify-content-center"}
+            className={"column is-6 is-justify-content-center"}
           >
             <div className={"is-flex is-justify-content-center mt-6"}>
               <div>
