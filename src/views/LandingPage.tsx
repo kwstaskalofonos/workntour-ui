@@ -86,7 +86,7 @@ export const LandingPage: React.FunctionComponent = () => {
       <InterCom />
       <section
         className="section landing-page-background"
-        style={{ position: "relative" }}
+        style={{ position: "relative", minHeight: "100vh" }}
       >
         <div className={"is-flex is-justify-content-center"}>
           <div>
@@ -305,9 +305,9 @@ export const LandingPage: React.FunctionComponent = () => {
           </div>
         </div>
       </section>
-      <section className={"mt-6"}>
+      <article className={"mt-6"}>
         <GalleryComponent />
-      </section>
+      </article>
     </React.Fragment>
   );
 };
