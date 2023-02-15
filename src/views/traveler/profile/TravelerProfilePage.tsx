@@ -348,7 +348,7 @@ const TravelerProfilePage: React.FunctionComponent = () => {
 
   return (
     <React.Fragment>
-      <div className={"profile"}>
+      <div className={""} style={{ minHeight: "100vh" }}>
         <form className="profileForm">
           <div className={"profilePicture"}>
             <ProfileImage
