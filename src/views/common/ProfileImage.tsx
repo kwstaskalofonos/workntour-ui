@@ -3,7 +3,7 @@ import { Role } from "@src/state/stores/user/models";
 import { faPlus } from "@fortawesome/free-solid-svg-icons/faPlus";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import styles from "./profile.scss";
+import styles from "./profile.module.scss";
 
 interface Props {
   defaultImage: any;
@@ -194,7 +194,7 @@ const ProfileImage: React.FunctionComponent<Props> = ({
         </div>
       </div>
 
-      <div className="profileSectionMoto">
+      <div className={styles.profileSectionMoto}>
         <div className="horizontalLine" />
         {role === Role.TRAVELER ? (
           <p className={"profileSectionMoto-text"}>
