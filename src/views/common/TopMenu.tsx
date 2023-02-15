@@ -8,7 +8,7 @@ import {faUserCircle} from "@fortawesome/free-solid-svg-icons/faUserCircle";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {getUserDisplayName, isHost} from "@src/utilities/ui";
 import {useAppSelector} from "@src/state/stores/hooks";
-import {CompanyHostProfile, IndividualHostProfile, Role, TravelerProfile} from "@src/state/stores/user/models";
+import {CompanyHostProfileDto, IndividualHostProfileDto, Role, TravelerProfileDTO} from "@src/state/stores/user/models";
 import {clearRefData, SessionStorage} from "@src/utilities/localStorage";
 
 const TopMenu: React.FunctionComponent = () =>{
@@ -72,10 +72,10 @@ const TopMenu: React.FunctionComponent = () =>{
                         {!isAuthenticated ?
                             <div className="navbar-item">
                                 <div className="buttons">
-                                    <a className="button is-primary" style={{pointerEvents:'none'}}
+                                    <a className="button is-primary"
                                        onClick={()=>loginModalHandler.current?.open()}>Log In</a>
                                     <a className="button is-outlined"
-                                       style={{"border":"1px solid #7E6FD8","color":"#7E6FD8",pointerEvents:'none'}}
+                                       style={{"border":"1px solid #7E6FD8","color":"#7E6FD8"}}
                                        onClick={()=>registrationModalHandler.current?.open()}>Sign Up</a>
                                 </div>
                             </div>:

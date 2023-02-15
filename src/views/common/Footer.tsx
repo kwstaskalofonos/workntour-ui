@@ -24,8 +24,11 @@ import pin from "@src/assets/newLandingPage/pin.svg";
 
 import {isMobile} from 'react-device-detect';
 
+export interface Props{
+    className?:string
+}
 
-const Footer:React.FunctionComponent = () =>{
+const Footer:React.FunctionComponent<Props> = ({className}) =>{
 
     return(
         <footer className="footer has-background-white p-0">

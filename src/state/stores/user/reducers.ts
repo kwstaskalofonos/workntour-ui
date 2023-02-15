@@ -1,18 +1,18 @@
 import {createSlice,PayloadAction} from "@reduxjs/toolkit";
 import { combineReducers } from "@reduxjs/toolkit";
-import {CompanyHostProfile, IndividualHostProfile, Profile, Role, TravelerProfile} from "./models";
+import {CompanyHostProfileDto, IndividualHostProfileDto, Profile, Role, TravelerProfileDTO} from "./models";
 
 export interface AuthenticationState{
     token?:string|null,
     role?:string|null,
-    profile?:TravelerProfile|IndividualHostProfile|CompanyHostProfile|null,
+    profile?:TravelerProfileDTO|IndividualHostProfileDto|CompanyHostProfileDto|null,
 }
 
 export const authenticationSlice = createSlice({
     name:'authentication',
     initialState:{token:null,profile:null,role:null},
     reducers:{
-        setProfile:(state:AuthenticationState,action:PayloadAction<{profile:TravelerProfile|IndividualHostProfile|CompanyHostProfile|null}>)=>{
+        setProfile:(state:AuthenticationState,action:PayloadAction<{profile:TravelerProfileDTO|IndividualHostProfileDto|CompanyHostProfileDto|null}>)=>{
             state.profile = action.payload.profile;
         },
         setRole:(state:AuthenticationState,action:PayloadAction<{role:string|null}>)=>{

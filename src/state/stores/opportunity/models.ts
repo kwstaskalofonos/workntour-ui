@@ -23,28 +23,28 @@ export enum OpportunityCategory{
 export type OpportunityCategoryType = keyof typeof OpportunityCategory;
 
 export enum TypeOfHelpNeeded{
-     reception="Reception",
-     cleaning="Cleaning",
-     houseKeeping="House Keeping",
-     administrativeTasks="Administrative Tasks",
-     tourGuide="Tour Guide",
-     babysitter="Babysitter",
-     vet="Vet",
-     animalCare="Animal Care",
-     languages="Languages",
-     sportsTeacher="Sports Teacher",
-     surfing="Surfing",
-     personalTrainer="Personal Trainer",
-     farming="Farming",
-     painting="Painting",
-     handyman="Handyman",
-     socialMedia="Social Media",
-     photography="Photography",
-     videography="Videography",
-     webDevelopment="Web Development",
-     cooking="Cooking",
-     bartending="Bartending",
-     service="Service"
+     RECEPTION="RECEPTION",
+     CLEANING="CLEANING",
+     HOUSE_KEEPING="HOUSE_KEEPING",
+     ADMINISTRATIVE_TASKS="ADMINISTRATIVE_TASKS",
+     TOUR_GUIDE="TOUR_GUIDE",
+     BABYSITTER="BABYSITTER",
+     VET="VET",
+     ANIMAL_CARE="ANIMAL_CARE",
+     LANGUAGES="LANGUAGES",
+     SPORTS_TEACHER="SPORTS_TEACHER",
+     SURFING="SURFING",
+     PERSONAL_TRAINER="PERSONAL_TRAINER",
+     FARMING="FARMING",
+     PAINTING="PAINTING",
+     HANDYMAN="HANDYMAN",
+     SOCIAL_MEDIA="SOCIAL_MEDIA",
+     PHOTOGRAPHY="PHOTOGRAPHY",
+     VIDEOGRAPHY="VIDEOGRAPHY",
+     WEB_DEVELOPMENT="WEB_DEVELOPMENT",
+     COOKING="COOKING",
+     BARTENDING="BARTENDING",
+     SERVICE="SERVICE"
 }
 
 export type TypeOfHelpNeededType = keyof typeof TypeOfHelpNeeded;
@@ -68,50 +68,66 @@ export enum Meal{
 export type MealType = keyof typeof Meal;
 
 export enum Languages{
-     greek="Greek",
-     english="English",
-     spanish="Spanish",
-     italian="Italian",
-     german="German"
+     GREEK="Greek",
+     ENGLISH="English",
+     SPANISH="Spanish",
+     ITALIAN="Italian",
+     GERMAN="German",
+     DUTCH="Dutch",
+     SWEDISH="Swedish",
+     NORWEGIAN="Norwegian",
+     POLISH="Polish",
+     PORTUGUESE="Portuguese",
+     SERBIAN="Serbian",
+     CROATIAN="Croatian",
+     BULGARIAN="Bulgarian"
 }
 
 export type LanguagesType = keyof typeof Languages;
 
+export enum LanguageProficiency{
+     BEGINNER="Beginner",
+     INTERMEDIATE="Intermediate",
+     FLUENT="Fluent"
+}
+
+export type LanguageProficiencyType = keyof typeof LanguageProficiency;
+
 export enum LearningOpportunities{
-     hospitality="Hospitality",
-     languages="Languages",
-     animalWelfare="Animal Welfare",
-     volunteering="Volunteering",
-     cultureExchange="Culture Exchange",
-     charityWork="Charity Work",
-     farming="Farming",
-     photography="Photography",
-     videography="Videography",
-     technology="Technology",
-     nonProfit="Non Profit",
-     art="Art",
-     waterSports="Water Sports",
-     nature="Nature",
-     writing="Writing",
-     yoga="Yoga",
-     fitness="Fitness",
-     dancing="Dancing",
-     gardening="Gardening",
-     cycling="Cycling",
-     books="Books",
-     babysitting="Babysitting",
-     cooking="Cooking",
-     computers="Computers",
-     programming="Programming",
-     selfDevelopment="Self Development",
-     sustainability="Sustainability",
-     hitchhiking="Hitchhiking",
-     sailing="Sailing",
-     music="Music",
-     movies="Movies",
-     fashion="Fashion",
-     history="History",
-     architecture="Architecture"
+     HOSPITALITY="HOSPITALITY",
+     LANGUAGES="LANGUAGES",
+     ANIMAL_WELFARE="ANIMAL_WELFARE",
+     VOLUNTEERING="VOLUNTEERING",
+     CULTURE_EXCHANGE="CULTURE_EXCHANGE",
+     CHARITY_WORK="CHARITY_WORK",
+     FARMING="FARMING",
+     PHOTOGRAPHY="PHOTOGRAPHY",
+     VIDEOGRAPHY="VIDEOGRAPHY",
+     TECHNOLOGY="TECHNOLOGY",
+     NON_PROFIT="NON_PROFIT",
+     ART="ART",
+     WATER_SPORTS="WATER_SPORTS",
+     NATURE="NATURE",
+     WRITING="WRITING",
+     YOGA="YOGA",
+     FITNESS="FITNESS",
+     DANCING="DANCING",
+     GARDENING="GARDENING",
+     CYCLING="CYCLING",
+     BOOKS="BOOKS",
+     BABYSITTING="BABYSITTING",
+     COOKING="COOKING",
+     COMPUTERS="COMPUTERS",
+     PROGRAMMING="PROGRAMMING",
+     SELF_DEVELOPMENT="SELF_DEVELOPMENT",
+     SUSTAINABILITY="SUSTAINABILITY",
+     HITCHHIKING="HITCHHIKING",
+     SAILING="SAILING",
+     MUSIC="MUSIC",
+     MOVIES="MOVIES",
+     FASHION="FASHION",
+     HISTORY="HISTORY",
+     ARCHITECTURE="ARCHITECTURE"
 }
 
 export type LearningOpportunitiesType = keyof typeof LearningOpportunities;

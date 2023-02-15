@@ -240,6 +240,14 @@ input[type="range"]::-ms-thumb{
     margin-top: -9px;
 }
 
+textarea{
+    height: 140px !important;
+}
+
+.selectedTag{
+    background-color: #8870F9;
+}
+
 
 @media screen and (max-width: 770px) {
   .reverseColumnsFlex {
@@ -255,3 +263,13 @@ input[type="range"]::-ms-thumb{
   }
 
 }
+
+.empty-select option{
+    color: black;
+}
+
+.empty-select{
+    color: rgba(128, 128, 128, 0.6) !important;
+}
+
+
