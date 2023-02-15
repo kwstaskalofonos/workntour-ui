@@ -1,6 +1,4 @@
 import React, {useEffect, useState} from "react";
-import TopMenu from "@src/views/common/TopMenu";
-import Footer from "@src/views/common/Footer";
 // @ts-ignore
 import checkInbox from "@src/assets/checkInboxPng.png";
 // @ts-ignore
@@ -22,7 +20,6 @@ const CheckInboxPage:React.FunctionComponent = () =>{
 
     return(
         <React.Fragment>
-            <Header/>
             <section className={"section has-background-primary-light"} style={{minHeight:"82vh"}}>
                 <div className={"columns is-centered"}>
                     <div className={"column is-4"}>
@@ -39,7 +36,6 @@ const CheckInboxPage:React.FunctionComponent = () =>{
                     </div>
                 </div>
             </section>
-            <Footer/>
         </React.Fragment>
     )
 };

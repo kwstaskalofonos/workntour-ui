@@ -15,19 +15,17 @@ const SecuredSiteRouter: React.FunctionComponent = () =>{
     return(
         <React.Fragment>
             <InterCom/>
-            <Header/>
-                <div className="container is-fluid px-0 mt-4">
-                    {userRole===Role.COMPANY_HOST.valueOf() &&
-                        <CompanyRouter/>
-                    }
-                    {userRole===Role.INDIVIDUAL_HOST.valueOf() &&
-                        <IndividualRouter/>
-                    }
-                    {userRole===Role.TRAVELER.valueOf() &&
-                        <TravelerRouter/>
-                    }
-                </div>
-            <Footer className={"mt-6"}/>
+            <div className="container is-fluid mt-4 mb-4">
+                {userRole===Role.COMPANY_HOST.valueOf() &&
+                    <CompanyRouter/>
+                }
+                {userRole===Role.INDIVIDUAL_HOST.valueOf() &&
+                    <IndividualRouter/>
+                }
+                {userRole===Role.TRAVELER.valueOf() &&
+                    <TravelerRouter/>
+                }
+            </div>
         </React.Fragment>
     )
 };
