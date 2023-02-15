@@ -3,25 +3,19 @@ import {Pagination} from "@src/utilities/fetch";
 
 interface Props{
     pagination:Pagination,
+    dataPerPage:number,
     page:number,
     setPage:any
 }
 
-const Paging:React.FunctionComponent<Props> = ({page,setPage,pagination}) =>{
-
-    const [totalButtons,setTotalButtons] = useState<number>();
-
-    useEffect(()=>{
-        calculateTotalButtons();
-    },[pagination])
-
-    const calculateTotalButtons = () =>{
-        let div = pagination.total/10;
-        setTotalButtons(Math.ceil(div));
-    }
+const Paging:React.FunctionComponent<Props> = ({page,setPage,pagination,dataPerPage}) =>{
 
     const renderButtons = () =>{
         let array:any[]=[];
+        let totalButtons =
+          pagination.total % dataPerPage > 0
+            ? Math.floor(pagination.total / dataPerPage) + 1
+            : Math.floor(pagination.total / dataPerPage);
         if(totalButtons){
             for(let i=0; i<totalButtons; i++){
                 array.push(<li key={"pagination-link-"+totalButtons+"-"+i+1}>

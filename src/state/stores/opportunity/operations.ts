@@ -1,5 +1,5 @@
-import {FilterCoordinates, FiltersFields, Opportunity, PagingObjects} from "@src/state/stores/opportunity/models";
-import {del, GenericResponse, get, paging, post, postMultipart} from "@src/utilities/fetch";
+import {FilterCoordinates, FiltersFields, Opportunity, PagingObjects, Article} from "@src/state/stores/opportunity/models";
+import {del, GenericResponse, get, pagingPost,pagingGet, post, postMultipart} from "@src/utilities/fetch";
 import {toast} from "react-toastify";
 
 
@@ -77,7 +77,7 @@ export const getOpportunity = (opportunityId:string):Promise<Opportunity>=>{
 
 export const getOpportunitiesByPaging = (filtersFields:FiltersFields|undefined, start:number, offset:number):Promise<PagingObjects>=>{
     return new Promise<PagingObjects>((resolve, reject)=>
-        paging('homePage/filters/?start='+start+"&offset="+offset,filtersFields)
+        pagingPost('homePage/filters/?start='+start+"&offset="+offset,filtersFields)
             .then((response:PagingObjects)=>{
                 resolve(response);
             }).catch((error)=>{
@@ -104,6 +104,43 @@ export const getTotalOpportunitiesByLocation = (longitude:number|undefined,latit
     return new Promise<FilterCoordinates[]>((resolve, reject)=>
         get('homePage/filters/byCoordinates/?longitude='+longitude+"&latitude="+latitude)
             .then((response:FilterCoordinates[])=>{
+                resolve(response);
+            }).catch((error)=>{
+            toast.error(error,{position:toast.POSITION.TOP_RIGHT});
+            reject(error);
+        }).finally()
+    )
+};
+
+export const createArticle = (data:FormData,setIsLoading:any):Promise<Article>=>{
+    return new Promise<Article>((resolve,reject)=>
+        postMultipart('blog/create',data)
+            .then((response:Article)=>{
+                resolve(response);
+            }).catch((error)=>{
+            toast.error(error,{position:toast.POSITION.TOP_RIGHT});
+            reject(error);
+        }).finally(()=>setIsLoading(false))
+    )
+};
+
+
+export const getArticle = (articleId:string):Promise<Article>=>{
+    return new Promise<Article>((resolve, reject)=>
+        get('blog/retrieve/' + articleId)
+            .then((response:Article)=>{
+                resolve(response);
+            }).catch((error)=>{
+            toast.error(error,{position:toast.POSITION.TOP_RIGHT});
+            reject(error);
+        }).finally()
+    )
+};
+
+export const getArticlesByPaging = (filtersFields:FiltersFields|undefined, start:number, offset:number):Promise<PagingObjects>=>{
+    return new Promise<PagingObjects>((resolve, reject)=>
+        pagingGet('blog/retrieve/all/?start='+start+"&offset="+offset,filtersFields)
+            .then((response:PagingObjects)=>{
                 resolve(response);
             }).catch((error)=>{
             toast.error(error,{position:toast.POSITION.TOP_RIGHT});
