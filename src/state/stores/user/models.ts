@@ -50,36 +50,49 @@ export interface LoginForm {
     password: string
 }
 
-export interface CompanyHostProfile {
+export interface CompanyHostProfileDto {
     memberId: string,
     role: string,
     companyName: string,
-    companyId: string
     email: string,
-    headquartersCounty: string,
     mobileNum: string,
     countryCodeMobileNum: string,
     fixedNumber: string,
-    profileImage: string,
     description: string,
-    postalAddress: string
+    address: string,
+    postalAddress: string,
+    vatNumber: string,
+    link: string,
+    city: string,
+    country: string,
+    profileImage: {
+        imageId:string,
+        imageUrl:string,
+    },
+    authorizedDoc: {
+        docId:string,
+        docUrl:string,
+    },
 }
-
-export interface IndividualHostProfile {
+export interface IndividualHostProfileDto {
     memberId: string,
     role: string,
     name: string,
     surname: string,
     email: string,
-    country: string,
     mobileNum: string,
     countryCodeMobileNum: string,
-    postalAddress: string,
-    nationality: string,
-    profileImage: string,
+    fixedNumber: string,
     description: string,
-    fixedNumber: string
-    sex: string
+    address: string,
+    postalAddress: string,
+    link: string,
+    city: string,
+    country: string,
+    profileImage: {
+        imageId:string,
+        imageUrl:string,
+    },
 }
 
 export interface TravelerProfileDTO {
@@ -101,8 +114,8 @@ export interface TravelerProfileDTO {
     typeOfTraveler: string,
     profileImage?: Image,
     interests: string[],
-    languages: ProfileLanguage[],
-    skills: string[]
+    language: ProfileLanguage[],
+    skills: string[],
     experience: ProfileExperience[],
     specialDietary: string,
     driverLicense: boolean,
@@ -114,19 +127,19 @@ export interface Image {
 }
 
 export interface ProfileExperience {
-    experienceId: string,
+    experienceId?: string,
     experience: Experience
 }
 
 export interface ProfileLanguage {
-    languages: Languages,
-    languageProficiency: LanguageProficiency
+    languages?: Languages,
+    languageProficiency?: LanguageProficiency
 }
 
 export enum SpecialDietary {
-    NONE = "None",
-    VEGAN = "Vegan",
-    VEGETARIAN = "Vegeterian"
+    NONE = "NONE",
+    VEGAN = "VEGAN",
+    VEGETARIAN = "VEGETARIAN"
 }
 
 export type SpecialDietaryType = keyof typeof SpecialDietary;
@@ -141,8 +154,8 @@ export interface Experience {
 }
 
 export enum TypeOfExperience {
-    COMPANY = "Company",
-    UNIVERSITY = "University"
+    COMPANY = "COMPANY",
+    UNIVERSITY = "UNIVERSITY"
 }
 
 export type TypeOfExperienceType = keyof typeof TypeOfExperience;

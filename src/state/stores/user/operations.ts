@@ -1,7 +1,7 @@
 import {
     Company,
-    CompanyHostProfile,
-    Individual, IndividualHostProfile,
+    CompanyHostProfileDto,
+    Individual, IndividualHostProfileDto,
     LoginForm, Role,
     Traveler,
     TravelerProfileDTO
@@ -66,10 +66,10 @@ export const retrieveTravelerProfile = ():Promise<TravelerProfileDTO>=>{
     })
 }
 
-export const retrieveIndividualProfile = ():Promise<IndividualHostProfile>=>{
-    return new Promise<IndividualHostProfile>((resolve,reject)=>{
-        get('retrieveProfile/individualHost')
-            .then((response:IndividualHostProfile)=>{
+export const retrieveIndividualProfile = ():Promise<IndividualHostProfileDto>=>{
+    return new Promise<IndividualHostProfileDto>((resolve,reject)=>{
+        get('profile/retrieveProfile/individualHost')
+            .then((response:IndividualHostProfileDto)=>{
                 SessionStorage.setItem('profile',response,900000);
                 resolve(response);
             }).catch((error)=>{
@@ -79,10 +79,10 @@ export const retrieveIndividualProfile = ():Promise<IndividualHostProfile>=>{
     })
 }
 
-export const retrieveCompanyProfile = ():Promise<CompanyHostProfile>=>{
-    return new Promise<CompanyHostProfile>((resolve,reject)=>{
-        get('retrieveProfile/companyHost')
-            .then((response:CompanyHostProfile)=>{
+export const retrieveCompanyProfile = ():Promise<CompanyHostProfileDto>=>{
+    return new Promise<CompanyHostProfileDto>((resolve,reject)=>{
+        get('profile/retrieveProfile/companyHost')
+            .then((response:CompanyHostProfileDto)=>{
                 SessionStorage.setItem('profile',response,900000);
                 resolve(response);
             }).catch((error)=>{
@@ -121,7 +121,7 @@ export const doSetRole: ActionCreator<ThunkResult> = (role:string) =>
         })
     }
 
-export const doSetProfile: ActionCreator<ThunkResult> = (profile:TravelerProfileDTO|IndividualHostProfile|CompanyHostProfile) =>
+export const doSetProfile: ActionCreator<ThunkResult> = (profile:TravelerProfileDTO|IndividualHostProfileDto|CompanyHostProfileDto) =>
     (dispatch) =>{
         return new Promise<void>(()=>{
             dispatch(authenticationSlice.actions.setProfile({profile:profile}))
@@ -179,9 +179,9 @@ export const updateTravelerProfile:ActionCreator<ThunkResult>= (data:FormData,se
 
 export const updateCompanyProfile:ActionCreator<ThunkResult>= (data:FormData,setIsLoading:any,setFile:any)=>
     (dispatch) =>{
-        return new Promise<CompanyHostProfile>((resolve,reject)=>{
-            postMultipart('updateProfile/companyHost/web',data)
-                .then((response:CompanyHostProfile)=>{
+        return new Promise<CompanyHostProfileDto>((resolve,reject)=>{
+            postMultipart('profile/updateProfile/companyHost',data,'PUT')
+                .then((response:CompanyHostProfileDto)=>{
                     SessionStorage.setItem('profile',response,900000);
                     dispatch(authenticationSlice.actions.setProfile({profile:response}));
                     resolve(response);
@@ -198,9 +198,9 @@ export const updateCompanyProfile:ActionCreator<ThunkResult>= (data:FormData,set
 
 export const updateIndividualProfile:ActionCreator<ThunkResult>= (data:FormData,setIsLoading:any,setFile:any)=>
     (dispatch) =>{
-        return new Promise<IndividualHostProfile>((resolve,reject)=>{
-            postMultipart('updateProfile/individualHost/web',data)
-                .then((response:IndividualHostProfile)=>{
+        return new Promise<IndividualHostProfileDto>((resolve,reject)=>{
+            postMultipart('profile/updateProfile/individualHost',data,'PUT')
+                .then((response:IndividualHostProfileDto)=>{
                     SessionStorage.setItem('profile',response,900000);
                     dispatch(authenticationSlice.actions.setProfile({profile:response}));
                     resolve(response);
