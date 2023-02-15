@@ -53,7 +53,7 @@ const LoginModal: React.FunctionComponent<Props> =
 
       return (
         <div
-          className={"modal " + (isActive ? "is-active modal-background" : "")}
+          className={"modal " + (isActive ? "is-active modal-background p-5" : "")}
           onClick={handleCloseModal}
         >
           <div className="modal-card" onClick={(e) => e.stopPropagation()}>
