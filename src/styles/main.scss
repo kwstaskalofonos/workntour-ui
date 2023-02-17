@@ -1,25 +1,11 @@
+@use './utils/variables.scss' as *;
+@use './utils/functions.scss' as *;
 
-$primary:#8970FA;
-//$primary:#7E6FD8;
-$info: #14C3AD;
-// $info: rgba(36, 221, 193, 0.73);
-$radius:8px;
-$checkbox-background-color:#8970FA;
-$checkbox-border:.4rem solid red;
-$primary-light:	hsl(251, 31%, 94%);
-$input-focus-box-shadow-color:hsla(0,0%,96%,0);
-$input-focus-box-shadow-color:tran;
-$checkbox-block-background:#8970FA;
-$progress-border-radius:1.6rem;
-$tabs-toggle-link-active-border-color:#8970FA;
-$link-active:#8970FA;
-$pagination-current-background-color:#8970FA;
-$pagination-current-border-color:#8970FA;
 
 
 @import "/node_modules/bulma/bulma.sass";
 @import"/node_modules/react-datepicker/dist/react-datepicker.css";
-@import "./custom.css";
+@import "../assets/custom.css";
 @import "../views/common/profile.css";
 @import "../views/auth/ResetPassword/resetPassword.css";
 @import "../views/auth/verification.css";

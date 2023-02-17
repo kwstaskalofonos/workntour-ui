@@ -4,18 +4,20 @@ import logo from "@src/assets/Frame.svg";
 import SelectRegistrationModal, {
   SelectRegistrationModalHandler,
 } from "@src/views/auth/SelectRegistrationModal";
-import LoginModal, { LoginModalHandler } from "@src/views/auth/Login/LoginModal";
+import LoginModal, {
+  LoginModalHandler,
+} from "@src/views/auth/Login/LoginModal";
 import {
   deleteCookie,
   deleteSpecificCookie,
   hasCookie,
 } from "@src/utilities/cookies";
-import { faUserCircle } from "@fortawesome/free-solid-svg-icons/faUserCircle";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { getUserDisplayName, isHost } from "@src/utilities/ui";
 import { useAppSelector } from "@src/state/stores/hooks";
 import { Role, TravelerProfileDTO } from "@src/state/stores/user/models";
 import { clearRefData, SessionStorage } from "@src/utilities/localStorage";
+
+import styles from "./TopMenu.module.scss";
 
 const TopMenu: React.FunctionComponent = () => {
   const registrationModalHandler = useRef<SelectRegistrationModalHandler>();
@@ -27,7 +29,8 @@ const TopMenu: React.FunctionComponent = () => {
   const userProfile = useAppSelector(
     (state) => state.session.authenticationSlice.profile
   );
-  const [isActive, setIsActive] = useState<boolean>(false);
+  const [isNavOpen, setIsNavOpen] = useState<boolean>(false);
+  const [loginDialog, setLoginDialog] = useState<boolean>(false);
 
   // for the blog
   const user = userProfile as unknown as TravelerProfileDTO;
@@ -55,7 +58,7 @@ const TopMenu: React.FunctionComponent = () => {
   return (
     <React.Fragment>
       <nav
-        className="navbar p-1"
+        className={`navbar p-1`}
         role="navigation"
         aria-label="main-navigation"
         style={{
@@ -74,8 +77,8 @@ const TopMenu: React.FunctionComponent = () => {
 
           <a
             role="button"
-            className={"navbar-burger " + (isActive ? "is-active" : "")}
-            onClick={() => setIsActive(!isActive)}
+            className={"navbar-burger " + (isNavOpen ? "is-active" : "")}
+            onClick={() => setIsNavOpen(!isNavOpen)}
             aria-label="menu"
             aria-expanded="false"
             data-target="navbarBasicExample"
@@ -88,7 +91,7 @@ const TopMenu: React.FunctionComponent = () => {
 
         <div
           id="navbarBasicExample"
-          className={"navbar-menu " + (isActive ? "is-active" : "")}
+          className={"navbar-menu " + (isNavOpen ? "is-active" : "")}
         >
           <div className="navbar-end">
             {!isAuthenticated && (
@@ -114,7 +117,10 @@ const TopMenu: React.FunctionComponent = () => {
                 <div className="buttons">
                   <a
                     className="button is-primary"
-                    onClick={() => loginModalHandler.current?.open()}
+                    onClick={() => {
+                      setLoginDialog(true);
+                      setIsNavOpen(false);
+                    }}
                   >
                     Log In
                   </a>
@@ -133,17 +139,10 @@ const TopMenu: React.FunctionComponent = () => {
               </div>
             ) : (
               <div className="navbar-item has-dropdown is-hoverable">
-                <a className="navbar-link">
-                  <span className={"icon"}>
-                    <FontAwesomeIcon
-                      className={"has-text-primary fa-xl"}
-                      icon={faUserCircle}
-                    />
-                  </span>
-                </a>
-
                 <div className="navbar-dropdown is-right">
-                  <a className="navbar-item">Singed in as {retrieveName()}</a>
+                  <p className="navbar-item has-text-weight-semibold has-text-primary">
+                    Singed in as {retrieveName()}
+                  </p>
                   <hr className="navbar-divider" />
                   <a className="navbar-item" href={"profile"}>
                     Profile
@@ -180,10 +179,11 @@ const TopMenu: React.FunctionComponent = () => {
         </div>
       </nav>
       <SelectRegistrationModal ref={registrationModalHandler} />
-      <LoginModal
-        ref={loginModalHandler}
-        {...{ modalHandler: registrationModalHandler }}
-      />
+      {loginDialog && (
+        <LoginModal
+          setLoginDialog={setLoginDialog}
+        />
+      )}
     </React.Fragment>
   );
 };

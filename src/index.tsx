@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import AppRouter from "./views/routers/AppRouter";
-import "./assets/main.scss";
+import "./styles/main.scss";
 import { ToastContainer } from "react-toastify";
 import { store } from "@src/state/store";
 import { Provider } from "react-redux";
