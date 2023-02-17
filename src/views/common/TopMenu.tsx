@@ -4,20 +4,18 @@ import logo from "@src/assets/Frame.svg";
 import SelectRegistrationModal, {
   SelectRegistrationModalHandler,
 } from "@src/views/auth/SelectRegistrationModal";
-import LoginModal, {
-  LoginModalHandler,
-} from "@src/views/auth/Login/LoginModal";
+import LoginModal from "../auth/Login/LoginModal";
 import {
   deleteCookie,
   deleteSpecificCookie,
   hasCookie,
 } from "@src/utilities/cookies";
+import { faUserCircle } from "@fortawesome/free-solid-svg-icons/faUserCircle";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { getUserDisplayName, isHost } from "@src/utilities/ui";
 import { useAppSelector } from "@src/state/stores/hooks";
 import { Role, TravelerProfileDTO } from "@src/state/stores/user/models";
 import { clearRefData, SessionStorage } from "@src/utilities/localStorage";
-
-import styles from "./TopMenu.module.scss";
 
 const TopMenu: React.FunctionComponent = () => {
   const registrationModalHandler = useRef<SelectRegistrationModalHandler>();
@@ -58,7 +56,7 @@ const TopMenu: React.FunctionComponent = () => {
   return (
     <React.Fragment>
       <nav
-        className={`navbar p-1`}
+        className="navbar p-1"
         role="navigation"
         aria-label="main-navigation"
         style={{
@@ -139,10 +137,17 @@ const TopMenu: React.FunctionComponent = () => {
               </div>
             ) : (
               <div className="navbar-item has-dropdown is-hoverable">
+                <a className="navbar-link">
+                  <span className={"icon"}>
+                    <FontAwesomeIcon
+                      className={"has-text-primary fa-xl"}
+                      icon={faUserCircle}
+                    />
+                  </span>
+                </a>
+
                 <div className="navbar-dropdown is-right">
-                  <p className="navbar-item has-text-weight-semibold has-text-primary">
-                    Singed in as {retrieveName()}
-                  </p>
+                  <a className="navbar-item">Singed in as {retrieveName()}</a>
                   <hr className="navbar-divider" />
                   <a className="navbar-item" href={"profile"}>
                     Profile
