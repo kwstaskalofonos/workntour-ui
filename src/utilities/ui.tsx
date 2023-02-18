@@ -125,12 +125,71 @@ export function renderNationalities() {
   return array;
 }
 
-export function lowerCaseAndCapitalizeFirstLetter(str:string | any) {
-    if(!str){
-        return "";
-    }
-    return (
-      str?.charAt(0)?.toUpperCase() +
-      str?.toLocaleLowerCase()?.replace("_", " ")?.slice(1)
-    );
+export function lowerCaseAndCapitalizeFirstLetter(str: string | any) {
+  if (!str) {
+    return "";
+  }
+  return (
+    str?.charAt(0)?.toUpperCase() +
+    str?.toLocaleLowerCase()?.replace("_", " ")?.slice(1)
+  );
 }
+
+function checkPasswordValidation(value: string | any) {
+  const isWhitespace = /^(?=.*\s)/;
+  if (isWhitespace.test(value)) {
+    return "Password must not contain Whitespaces.";
+  }
+
+  const isContainsUppercase = /^(?=.*[A-Z])/;
+  if (!isContainsUppercase.test(value)) {
+    return "At least one Uppercase Character.";
+  }
+
+  const isContainsLowercase = /^(?=.*[a-z])/;
+  if (!isContainsLowercase.test(value)) {
+    return "At least one Lowercase Character.";
+  }
+
+  const isContainsNumber = /^(?=.*[0-9])/;
+  if (!isContainsNumber.test(value)) {
+    return "At least one Digit.";
+  }
+
+  const isContainsSymbol = /^(?=.*[~`!@#$%^&*()--+={}\[\]|\\:;"'<>,.?/_₹])/;
+  if (!isContainsSymbol.test(value)) {
+    return "At least one Special Symbol.";
+  }
+
+  const isValidLength = /^.{8,}$/;
+  if (!isValidLength.test(value)) {
+    return "At least 8 characters long";
+  }
+  return null;
+}
+
+export function isValidLength(value: string) {
+  const regex = /^.{8,}$/;
+  return regex.test(value);
+}
+
+export function isContainsUppercase(value: string) {
+  const regex = /^(?=.*[A-Z])/;
+  return regex.test(value);
+}
+
+export function isContainsLowercase(value: string) {
+  const regex = /^(?=.*[a-z])/;
+  return regex.test(value);
+}
+export function isContainsSymbolAndNumber(value: string) {
+  const regexSymbol = /^(?=.*[~`!@#$%^&*()--+={}\[\]|\\:;"'<>,.?/_₹])/;
+  const regexNumber = /^(?=.*[0-9])/;
+  return regexSymbol.test(value) && regexNumber.test(value);
+}
+
+// let predicateUpperCaseChars = NSPredicate(format:"SELF MATCHES %@", ".[A-Z]+.")
+//         // Contains at least one lower case
+//         let predicateLowerCaseChars = NSPredicate(format:"SELF MATCHES %@", ".[a-z]+.")
+//         // Contains at least one digit and a special character
+//         let predicateNumAndSpecialChars = NSPredicate(format:"SELF MATCHES %@", "^(?=.?[0-9])(?=.?[#?!@$%^&<>*~:`-]).{2,}$")

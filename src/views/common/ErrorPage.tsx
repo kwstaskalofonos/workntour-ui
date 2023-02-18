@@ -1,6 +1,5 @@
 import React from "react";
 import TopMenu from "@src/views/common/TopMenu";
-import Footer from "@src/views/common/Footer";
 
 const ErrorPage:React.FunctionComponent = () =>{
 
@@ -12,7 +11,6 @@ const ErrorPage:React.FunctionComponent = () =>{
                 </div>
             </div>
             <h1>Not Found</h1>
-            <Footer/>
         </React.Fragment>
     )
 };

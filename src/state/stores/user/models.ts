@@ -50,6 +50,10 @@ export interface LoginForm {
     password: string
 }
 
+export interface ForgotPassword {
+    email: string,
+}
+
 export interface CompanyHostProfileDto {
     memberId: string,
     role: string,

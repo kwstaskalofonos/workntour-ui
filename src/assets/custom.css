@@ -275,10 +275,35 @@ textarea {
         height: 100%;
     }
 
+textarea {
+    height: 140px !important;
+}
+
+.selectedTag {
+    background-color: #8870F9;
+}
+
+.modalLogin {
+    display: block;
+    padding: 2% 15%;
+}
+
+
+@media screen and (max-width: 770px) {
+    .reverseColumnsFlex {
+        display: flex;
+        flex-direction: column-reverse;
+        height: 100%;
+    }
+
     .columnsFlex {
         display: flex;
         flex-direction: column;
         height: 100%;
+    }
+
+    .modalLogin {
+        padding: 2% 5%;
     }
 
 }
@@ -290,3 +315,11 @@ textarea {
 .empty-select {
     color: rgba(128, 128, 128, 0.6) !important;
 }
+}
+
+.socialMediaButton {
+    padding: 18px 113px !important;
+    border-radius: 32px !important;
+
+}
+

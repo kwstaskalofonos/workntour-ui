@@ -1,0 +1,77 @@
+@use 'functions' as *;
+
+$primary:#8970FA;
+//$primary:#7E6FD8;
+$info: #14C3AD;
+// $info: rgba(36, 221, 193, 0.73);
+$radius:8px;
+$checkbox-background-color:#8970FA;
+$checkbox-border:.4rem solid red;
+$primary-light:	hsl(251, 31%, 94%);
+$input-focus-box-shadow-color:hsla(0,0%,96%,0);
+$input-focus-box-shadow-color:tran;
+$checkbox-block-background:#8970FA;
+$progress-border-radius:1.6rem;
+$tabs-toggle-link-active-border-color:#8970FA;
+$link-active:#8970FA;
+$pagination-current-background-color:#8970FA;
+$pagination-current-border-color:#8970FA;
+
+// Greyscale
+$black: #1d2125;
+$gray: #84878e;
+$gray-medium: #adaeb1;
+$white: #fff;
+
+$purple-light: #d4d6ed;
+$ena-text: #ffffff;
+
+/* Typography */
+$font-size-xs: rem(12);
+$font-size-s: rem(14);
+$font-size-m: rem(16);
+$font-size-l: rem(18);
+$font-size-xl: rem(20);
+$font-size-2xl: rem(24);
+/*TODO: refactor to rename the rest like 3xl, 4xl, etc..*/
+$font-size-xxl: rem(28);
+$font-size-xxxl: rem(40);
+$font-size-xxxxl: rem(48);
+
+$line-height-xs: rem(16);
+$line-height-s: rem(18);
+$line-height-m: rem(20);
+$line-height-l: rem(22);
+$line-height-xl: rem(24);
+$line-height-xxl: rem(32);
+$line-height-xxxl: rem(44);
+$line-height-xxxxl: rem(52);
+
+$font-regular: 400;
+$font-medium: 500;
+$font-bold: 700;
+
+/* Useful sizes */
+$gutter: rem(16);
+$max-width: rem(1200);
+$header-height: rem(84);
+$sidebar-width: rem(302);
+$single-sidebar-width: rem(406);
+$content-max-width: rem(564);
+
+/* z-indexes */
+$bubble-z-index: 3;
+$header-z-index: 99;
+$overlay-z-index: 100;
+
+/* box-shadow */
+$header-box-shadow: 0 2px 4px 0 rgba($primary, 0.5);
+
+/* media query variables */
+$phone-max: 599px;
+$tablet-portrait-min: 600px;
+$tablet-landscape-min: 900px;
+$desktop-min: 1200px;
+$big-desktop-min: 1800px;
+
+$home-card-height: rem(196);

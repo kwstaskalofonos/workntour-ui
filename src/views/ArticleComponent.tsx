@@ -8,13 +8,30 @@ interface Props{
 
 const ArticleComponent:React.FunctionComponent<Props> = ({src,date,title}) =>{
 
-    return(
-        <div style={{position:'relative'}}>
-            <img src={src} width={270} height={270}/>
-            <p className={"is-size-7 has-text-primary has-text-weight-semibold"}>{date}</p>
-            <p className={"is-size-5 has-text-weight-semibold"}>{title}</p>
-        </div>
-    )
+    return (
+      <div className="is-flex is-flex-direction-column">
+        <img
+          style={{
+            position: "relative",
+            maxWidth: "400px",
+            width: "100%",
+            height: "300px",
+            borderRadius: "5px",
+            objectFit:"cover",
+          }}
+          src={src}
+        />
+        <p className={"is-size-7 has-text-primary has-text-weight-semibold"}>
+          {date}
+        </p>
+        <p
+          className={"is-size-5 has-text-weight-semibold"}
+          style={{ maxWidth: "400px", width: "100%" }}
+        >
+          {title}
+        </p>
+      </div>
+    );
 };
 
 export default ArticleComponent;
