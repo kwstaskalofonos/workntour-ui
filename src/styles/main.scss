@@ -6,7 +6,7 @@
 @import "/node_modules/bulma/bulma.sass";
 @import"/node_modules/react-datepicker/dist/react-datepicker.css";
 @import "../assets/custom.css";
-@import "../views/common/profile.css";
+@import "../views/common/profile.module.scss";
 @import "../views/auth/ResetPassword/resetPassword.css";
 @import "../views/auth/verification.css";
 @import "../views/auth/Login/loginModal.css";
