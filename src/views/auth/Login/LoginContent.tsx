@@ -86,12 +86,6 @@ const LoginContent: React.FunctionComponent<Props> = ({
       </div>
       <div className="field is-flex is-justify-content-space-between">
         <div className="control">
-          <label className="checkbox label is-small has-text-grey-light">
-            <input type="checkbox" />
-            &nbsp;Remember Me
-          </label>
-        </div>
-        <div className="control">
           <label className="label is-small">
             <a
               className={"has-text-primary is-underlined"}

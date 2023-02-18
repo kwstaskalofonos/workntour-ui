@@ -135,9 +135,11 @@ const TopMenu: React.FunctionComponent = () => {
                     style={{
                       border: "1px solid #7E6FD8",
                       color: "#7E6FD8",
-                      pointerEvents: "none",
                     }}
-                    onClick={() => registrationModalHandler.current?.open()}
+                    onClick={() => {
+                      registrationModalHandler.current?.open();
+                      setIsNavOpen(false);
+                    }}
                   >
                     Sign Up
                   </a>
@@ -182,7 +184,12 @@ const TopMenu: React.FunctionComponent = () => {
         </div>
       </nav>
       <SelectRegistrationModal ref={registrationModalHandler} />
-      {loginDialog && <LoginModal setLoginDialog={setLoginDialog} />}
+      {loginDialog && (
+        <LoginModal
+          setLoginDialog={setLoginDialog}
+          registrationModalHandler={registrationModalHandler}
+        />
+      )}
     </React.Fragment>
   );
 };

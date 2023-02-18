@@ -11,6 +11,7 @@ import { height } from "@fortawesome/free-solid-svg-icons/faAngleUp";
 
 export interface Props {
   setLoginDialog: any;
+  registrationModalHandler: any;
 }
 
 export interface LoginModalHandler {
@@ -20,6 +21,7 @@ export interface LoginModalHandler {
 
 const LoginModal: React.FunctionComponent<Props> = ({
   setLoginDialog,
+  registrationModalHandler,
 }) => {
   const [displayForgotPassword, setDisplayForgotPassword] =
     useState<boolean>(false);
@@ -30,7 +32,7 @@ const LoginModal: React.FunctionComponent<Props> = ({
 
   const openRegisterModal = () => {
     // @ts-ignore
-    props.modalHandler.current.open();
+    registrationModalHandler.current?.open();
     setLoginDialog(false);
   };
 

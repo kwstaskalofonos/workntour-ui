@@ -1,8 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { isEmail } from "@src/utilities/ui";
 import { ForgotPassword } from "@src/state/stores/user/models";
+import SelectRegistrationModal, {
+  SelectRegistrationModalHandler,
+} from "@src/views/auth/SelectRegistrationModal";
 
 interface Props {
   handleForgotPassword: any;
@@ -13,6 +16,7 @@ const ForgotPassword: React.FunctionComponent<Props> = ({
   handleForgotPassword,
   openRegisterModal,
 }) => {
+  const registrationModalHandler = useRef<SelectRegistrationModalHandler>();
   const { register, handleSubmit, getValues } = useForm();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   // const onSubmit: any = (data: ForgotPassword) => {
@@ -86,6 +90,7 @@ const ForgotPassword: React.FunctionComponent<Props> = ({
           </label>
         </div>
       </>
+      <SelectRegistrationModal ref={registrationModalHandler} />
       {/* )} */}
     </>
   );
