@@ -20,6 +20,8 @@ import AboutPage from "@src/views/AboutPage";
 import BlogPage from "@src/views/blog/BlogPage";
 import ViewArticle from "../blog/ViewArticle";
 import ScrollToTop from "../common/ScrollToTop";
+import ResetPassword from "../auth/ResetPassword/ResetPassword";
+import Verification from "../auth/Verification";
 
 import Footer from "../common/Footer";
 import TopMenu from "../common/TopMenu";
@@ -72,6 +74,8 @@ const AppRouter :React.FunctionComponent = () =>{
               <Route path="/home" element={<LandingPage />} />
               <Route path="/about" element={<AboutPage />} />
               <Route path="/blog" element={<BlogPage />} />
+              <Route path="/resetPassword/:token" element={<ResetPassword />} />
+              <Route path="/verification" element={<Verification />} />
 
               <Route path="/article/:id" element={<ViewArticle />} />
               <Route

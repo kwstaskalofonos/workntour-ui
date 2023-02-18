@@ -14,8 +14,10 @@ import "./blog.css";
 const ViewArticle: React.FunctionComponent = () => {
   const { id } = useParams();
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [error, setError] = useState<boolean>(false);
   const [article, setArticle] = useState<Article>();
+
+  const htmlString: string =
+    "<p>safjsdjkljfasjj</p><p><strong>fdsafsafasdf</strong></p><p><strong><u>sadfasdfasd</u></strong></p><ul><li><strong><u>asfsadfasdfa</u></strong></li><li><strong><u>asdfsadf</u></strong></li><li><strong><u>asdfasdf</u></strong></li></ul><h1>hahaha</h1><blockquote>asdasdasdas</blockquote>";
 
   useEffect(() => {
     if (id) {

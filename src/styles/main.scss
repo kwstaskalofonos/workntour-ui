@@ -1,0 +1,20 @@
+@use './utils/variables.scss' as *;
+@use './utils/functions.scss' as *;
+
+
+
+@import "/node_modules/bulma/bulma.sass";
+@import"/node_modules/react-datepicker/dist/react-datepicker.css";
+@import "../assets/custom.css";
+@import "../views/common/profile.module.scss";
+@import "../views/auth/ResetPassword/resetPassword.css";
+@import "../views/auth/verification.css";
+@import "../views/auth/Login/loginModal.css";
+@import "../views/common/profile.module.scss";
+@import "react-toastify/dist/ReactToastify.css";
+@import "/node_modules/bulma-checkradio/dist/css/bulma-checkradio.min.css";
+@import "react-slideshow-image/dist/styles.css";
+@import "/node_modules/bulma-slider/dist/css/bulma-slider.min.css";
+@import "/node_modules/bulma-checkradio/dist/css/bulma-checkradio.min.css";
+@import "/node_modules/bulma-checkradio/dist/css/bulma-checkradio.min.css";
+
