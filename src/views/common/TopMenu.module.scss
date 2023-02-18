@@ -1,10 +1,20 @@
-@use '../../styles/utils' as *;
+@use "../../styles/utils" as *;
 
 .navBarContainer {
+  background-color: red;
   position: fixed;
   height: 60px;
   box-shadow: 0px 4px 18px rgba(0, 0, 0, 0.15);
   z-index: 5;
   width: 100%;
+}
 
+.hideElement {
+  display: none !important;
+}
+
+@include desktop-up {
+  .hideElement {
+    display: flex !important;
+  }
 }

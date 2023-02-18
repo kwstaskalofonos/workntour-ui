@@ -17,9 +17,10 @@ import { useAppSelector } from "@src/state/stores/hooks";
 import { Role, TravelerProfileDTO } from "@src/state/stores/user/models";
 import { clearRefData, SessionStorage } from "@src/utilities/localStorage";
 
+import styles from "./TopMenu.module.scss";
+
 const TopMenu: React.FunctionComponent = () => {
   const registrationModalHandler = useRef<SelectRegistrationModalHandler>();
-  const loginModalHandler = useRef<LoginModalHandler>();
   const isAuthenticated = hasCookie();
   const role = useAppSelector(
     (state) => state.session.authenticationSlice.role
@@ -56,7 +57,7 @@ const TopMenu: React.FunctionComponent = () => {
   return (
     <React.Fragment>
       <nav
-        className="navbar p-1"
+        className="navbar"
         role="navigation"
         aria-label="main-navigation"
         style={{
@@ -91,7 +92,7 @@ const TopMenu: React.FunctionComponent = () => {
           id="navbarBasicExample"
           className={"navbar-menu " + (isNavOpen ? "is-active" : "")}
         >
-          <div className="navbar-end">
+          <div className="navbar-start">
             {!isAuthenticated && (
               <React.Fragment>
                 <a className="navbar-item" href="/">
@@ -106,10 +107,17 @@ const TopMenu: React.FunctionComponent = () => {
               </React.Fragment>
             )}
             {isHost() && (
-              <a className="navbar-item" href={"/"}>
-                Opportunities
-              </a>
+              <>
+                <a className="navbar-item" href={"/"}>
+                  Opportunities
+                </a>
+                <a className="navbar-item" href={"/blog"}>
+                  Blog
+                </a>
+              </>
             )}
+          </div>
+          <div className="navbar-end">
             {!isAuthenticated ? (
               <div className="navbar-item">
                 <div className="buttons">
@@ -137,7 +145,7 @@ const TopMenu: React.FunctionComponent = () => {
               </div>
             ) : (
               <div className="navbar-item has-dropdown is-hoverable">
-                <a className="navbar-link">
+                <a className={`navbar-link ${styles.hideElement}`}>
                   <span className={"icon"}>
                     <FontAwesomeIcon
                       className={"has-text-primary fa-xl"}
@@ -147,22 +155,12 @@ const TopMenu: React.FunctionComponent = () => {
                 </a>
 
                 <div className="navbar-dropdown is-right">
-                  <a className="navbar-item">Singed in as {retrieveName()}</a>
+                  <p className="navbar-item has-text-weight-semibold has-text-primary">
+                    Singed in as {retrieveName()}
+                  </p>
                   <hr className="navbar-divider" />
                   <a className="navbar-item" href={"profile"}>
                     Profile
-                  </a>
-                  <hr className="navbar-divider" />
-                  <a className="navbar-item" href={"/"}>
-                    Home
-                  </a>
-                  <hr className="navbar-divider" />
-                  <a className="navbar-item" href={"/about"}>
-                    About Us
-                  </a>
-                  <hr className="navbar-divider" />
-                  <a className="navbar-item" href={"/blog"}>
-                    Blog
                   </a>
                   <hr className="navbar-divider" />
                   {user?.email === "traveler.workntour@gmail.com" ? (
@@ -184,11 +182,7 @@ const TopMenu: React.FunctionComponent = () => {
         </div>
       </nav>
       <SelectRegistrationModal ref={registrationModalHandler} />
-      {loginDialog && (
-        <LoginModal
-          setLoginDialog={setLoginDialog}
-        />
-      )}
+      {loginDialog && <LoginModal setLoginDialog={setLoginDialog} />}
     </React.Fragment>
   );
 };
