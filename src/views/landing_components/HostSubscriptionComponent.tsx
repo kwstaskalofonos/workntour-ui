@@ -138,7 +138,9 @@ const HostSubscriptionComponent: React.FunctionComponent = () => {
     setIsLoading(true);
     subscribeAsHost(data, setIsLoading).then(() => {
       form.reset();
-    });
+      setIsLoading(false);
+    })
+    .catch(()=>{setIsLoading(false);});
   };
 
   return (

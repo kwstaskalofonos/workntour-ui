@@ -149,7 +149,7 @@ function parseResponse(response:Response): Promise<GenericResponse>{
                         ok:false,
                         pagination:null,
                         exceptions:json.exceptions,
-                        error:json.exceptions.errors[0].title
+                        error:json.exceptions?.errors[0].title
                     })
                 } else if(response.status === 500){
                     resolve({
@@ -158,7 +158,7 @@ function parseResponse(response:Response): Promise<GenericResponse>{
                         pagination:null,
                         ok:false,
                         exceptions:json.exceptions,
-                        error:json.exceptions.errors[0].title
+                        error:json.exceptions?.errors[0].title
                     })
                 }
                 else if (response.status === 409){
@@ -168,7 +168,7 @@ function parseResponse(response:Response): Promise<GenericResponse>{
                         pagination:null,
                         ok:false,
                         exceptions:json.exceptions,
-                        error:json.exceptions.errors[0].title
+                        error:json.exceptions?.errors[0].title
                     })
                 }else{
                     resolve({
@@ -177,7 +177,7 @@ function parseResponse(response:Response): Promise<GenericResponse>{
                         pagination:null,
                         ok:false,
                         exceptions:json.exceptions,
-                        error:json.exceptions.errors[0].title
+                        error:json.exceptions?.errors[0].title
                     })
                 }
             })
