@@ -5,15 +5,24 @@ import { SpinnerDotted } from "spinners-react";
 // @ts-ignore
 import image from "@src/assets/emailVerification.svg";
 
+import { validateUserEmail } from "@src/state/stores/user/operations";
+
 function Verification() {
   const [searchParams] = useSearchParams();
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [counter, setCounter] = React.useState(15);
   const navigate = useNavigate();
 
   useEffect(() => {
     if (searchParams.get("emailVerificationToken")) {
       console.log("email");
+      setIsLoading(true);
+      validateUserEmail(searchParams.get("emailVerificationToken")).then(
+        (res) => {
+          console.log(res);
+          setIsLoading(false);
+        }
+      );
     } else if (searchParams.get("forgotPasswordToken")) {
       console.log("forgot");
     }

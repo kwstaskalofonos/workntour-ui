@@ -69,6 +69,7 @@ const LoginModal: React.FunctionComponent<Props> = ({
               <ForgotPassword
                 handleForgotPassword={handleForgotPassword}
                 openRegisterModal={openRegisterModal}
+                closeModal={handleCloseModal}
               />
             ) : (
               <LoginContent

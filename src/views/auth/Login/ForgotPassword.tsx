@@ -1,4 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
+import { useNavigate } from "react-router";
+
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { isEmail } from "@src/utilities/ui";
@@ -6,42 +8,42 @@ import { ForgotPassword } from "@src/state/stores/user/models";
 import SelectRegistrationModal, {
   SelectRegistrationModalHandler,
 } from "@src/views/auth/SelectRegistrationModal";
+import { changeUserPassword } from "@src/state/stores/user/operations";
 
 interface Props {
   handleForgotPassword: any;
   openRegisterModal: any;
+  closeModal: any;
 }
 
 const ForgotPassword: React.FunctionComponent<Props> = ({
   handleForgotPassword,
   openRegisterModal,
+  closeModal,
 }) => {
   const registrationModalHandler = useRef<SelectRegistrationModalHandler>();
   const { register, handleSubmit, getValues } = useForm();
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  // const onSubmit: any = (data: ForgotPassword) => {
-  //  if (!isEmail(data.email)) {
-  //    toast.error("Input is not valid email address.", {
-  //      position: toast.POSITION.TOP_RIGHT,
-  //    });
-  //    return;
-  //  }
-  //   setIsLoading(true);
-  //   login(data.email, data.password)
-  //     .then((response: LoginResponse) => {
-  //       // @ts-ignore
-  //       setCookie(response.memberId, 15);
-  //       // @ts-ignore
-  //       setCookie(response.role, 15, "role");
-  //       setIsLoading(false);
-  //       dispatch(doSetRole(response.role));
-  //       navigate("/");
-  //     })
-  //     .catch((error) => {
-  //       toast.error(error, { position: toast.POSITION.TOP_RIGHT });
-  //     })
-  //     .finally(() => setIsLoading(false));
-  // };
+  const navigate = useNavigate();
+  const onSubmit: any = (data: ForgotPassword) => {
+    if (!isEmail(data.email)) {
+      toast.error("Input is not valid email address.", {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+      return;
+    }
+    setIsLoading(true);
+    changeUserPassword(data.email).then(() => {
+      toast.success("Email sent successfully!", {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+      setIsLoading(false);
+      closeModal();
+      navigate("/check-inbox", {
+        state: { email: data.email, forgotPassword: true },
+      });
+    });
+  };
   return (
     <>
       {/* {displayForgotPassword && ( */}
@@ -54,7 +56,7 @@ const ForgotPassword: React.FunctionComponent<Props> = ({
             <input
               className="input border-linear is-normal"
               type="text"
-              // {...register("email", { required: true })}
+              {...register("email", { required: true })}
               placeholder="Enter your email"
             />
           </div>
@@ -69,7 +71,7 @@ const ForgotPassword: React.FunctionComponent<Props> = ({
               (isLoading ? "is-loading" : "")
             }
             type={"submit"}
-            // onClick={handleSubmit(onSubmit)}
+            onClick={handleSubmit(onSubmit)}
           >
             Reset Password
           </button>
